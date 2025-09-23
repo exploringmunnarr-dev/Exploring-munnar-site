@@ -1,0 +1,70 @@
+Get Around Munnar with Ease                                      => GetAroundSection.jsx
+Discover top attractions along each route to Munnar              => TopAttractionsSection.jsx
+Plan Your Perfect Munnar Trip, Tell us your trip details and 
+-interests, and we’ll generate a personalized itinerary           => TripPlannerSection.jsx
+Find Your Stay Amidst Munnar’s Green Escapes                     => StayOptionsSection.jsx
+Experience Munnar, One Activity at a Time                        => ActivitiesSection.jsx
+Why Travelers Choose Exploring Munnar                            => WhyChooseUsSection.jsx
+What Travelers Are Experienced (Testimonial)                     => TestimonialsSection.jsx
+Explore Munnar Through Our Guest Lens                            => GuestGallerySection.jsx
+
+<div className="w-full flex items-center justify-between mt-6">
+        {steps.map((step, index) => {
+          const isCompleted = index < currentStep;
+          const isActive = index === currentStep;
+
+          return (
+            <div key={index} className="flex items-center w-full">
+              {/* Circle */}
+              <div
+                className={`flex items-center justify-center w-8 h-8 rounded-full 
+              ${isCompleted ? "bg-green-700 text-white" : "bg-gray-200 text-gray-400"}
+              ${isActive ? "border-2 border-green-700" : ""}`}
+              >
+                {isCompleted ? "✓" : ""}
+              </div>
+
+              {/* Label */}
+              <div
+                className={`ml-2 text-sm ${isCompleted || isActive ? "text-black" : "text-gray-500"
+                  }`}
+              >
+                {step}
+              </div>
+
+              {/* Line connector */}
+              {index < steps.length - 1 && (
+                <div
+                  className={`flex-1 h-1 mx-2 ${isCompleted ? "bg-green-700" : "bg-gray-200"
+                    }`}
+                ></div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+  const [currentStep, setCurrentStep] = useState(2);
+const steps = [
+  "Personal info",
+  "Trip dates",
+  "Stay",
+  "Transport",
+  "Routes",
+  "Review",
+];
+
+
+
+import person from "../assets/person_icon.svg";
+import phone from "../assets/phone_icon.svg";
+import mail from "../assets/mail_icon.svg";
+import location from "../assets/location_icon.svg";
+
+button color 
+-----------
+
+1. gradient with hover effect : 
+
+     bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] 
+  hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] 
