@@ -1,5 +1,4 @@
-"use client";
-import React from "react";
+import Image from "next/image";
 import hotImg from "../assets/hotel1.svg";
 import hotImg2 from "../assets/hotel2.avif";
 import hotImg3 from "../assets/hotel3.avif";
@@ -12,10 +11,9 @@ import eco from "../assets/eco.svg";
 import star from "../assets/star.svg";
 import wifi from "../assets/loc.svg";
 import fire from "../assets/loc.svg";
-import Image from "next/image";
-import { Heart } from "lucide-react";
+import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+
 const listings = [
   {
     id: "misty-hill-eco-retreat-1",
@@ -126,31 +124,25 @@ const listings = [
     image: hotImg3,
   },
 ];
-
-const HotelListingCard = () => {
-  // Router Hooks
-  const router = useRouter();
-  // functions
-  const handleNavigation = (id) => {
-    router.push(`/hotels/hotel_listing/${id}`);
-  };
-
+const ResponsiveHotelListingCard = () => {
   return (
-    <section className="space-y-4">
-      {listings.map((item, index) => {
-        return (
-          <div className="card bg-[#EEEEEE] w-[100%] rounded-2xl p-4 flex gap-4">
-            <div className="first-container h-[200px] w-[25%] ">
-              <div className="img-container  h-[100%] relative">
+    <>
+      <div className="header-container w-[90%] sticky top-15 bg-white py-3 z-40 m-auto mb-2">
+        <button className="bg-gray-300 text-black py-2 px-4 text-lg font-semibold w-[100px]">
+          Filter
+        </button>
+      </div>
+      <div className="card-container flex flex-col gap-3">
+        {listings.map((item, index) => {
+          return (
+            <div className="card w-[90%] border border-gray-200 m-auto rounded-lg bg-white shadow-md shadow-gray-300 p-4">
+              <div className="img-container w-[100%] max-sm:h-[200px] sm:h-[300px] relative">
                 <Image
                   src={item.image}
-                  className="w-[100%] rounded-lg h-[100%] object-cover"
+                  className="w-[100%] h-[100%] rounded-lg object-cover"
                 />
                 <div className="favorite-icon-container absolute top-4 right-4">
-                  <button
-                    onClick={() => handleFavorite(index)}
-                    className="cursor-pointer"
-                  >
+                  <button className="cursor-pointer">
                     {item.favorite ? (
                       <Image src={redHeart} alt="red heart" />
                     ) : (
@@ -159,72 +151,74 @@ const HotelListingCard = () => {
                   </button>
                 </div>
               </div>
-            </div>
-            <div className="second-container w-[75%] flex gap-2">
-              <div className="container-1 w-[80%] ">
-                <h1 className="text-[#246132] font-semibold text-lg flex items-center gap-2">
-                  {item.title}{" "}
-                  <span>
-                    <Image src={thumb} />
-                  </span>
-                </h1>
-                <div className="content-container mt-3">
-                  <h1 className="flex items-center gap-1 text-[#333333]">
-                    <Image src={loc} />
-                    {item.location}{" "}
-                    <span className="underline cursor-pointer text-sm text-[#AF4300]">
-                      Show on map
-                    </span>{" "}
+              <div className="content-container mt-2">
+                <div className="heading flex items-start justify-between">
+                  <h1 className="flex items-center gap-2 text-[#246132] font-semibold">
+                    {item.title}{" "}
+                    <span>
+                      <Image src={thumb} className="w-3 h-3" />
+                    </span>
                   </h1>
-                  <div className="main-content mt-2">
-                    <h1 className="text-[#1A1A1A] text-sm ">
-                      {item.description.slice(0, 130)}...
+                  <div>
+                    <h1 className="flex items-center text-[#1A1A1A] text-xs">
+                      {item.ratingLabel}{" "}
+                      <Image src={star} className="w-2 h-2" />{" "}
+                      <span>{item.rating}</span>
                     </h1>
-                    <div className="label-container mt-2 flex items-center gap-2">
-                      <div className="label-1 bg-white flex items-center gap-2 w-fit px-3 py-2 rounded-lg shadow">
-                        <Image src={eco} />
-                        <h1>Eco cottage</h1>
-                      </div>
-                      <div className="label-1 bg-white flex items-center gap-2 w-fit px-3 py-2 rounded-lg shadow">
-                        <Image src={wifi} />
-                        <h1>Free wifi</h1>
-                      </div>
-                      <div className="label-1 bg-white flex items-center gap-2 w-fit px-3 py-2 rounded-lg shadow">
-                        <Image src={fire} />
-                        <h1>Campfire</h1>
-                      </div>
-                    </div>
-                    <h1 className="font-semibold text-[#246132] mt-2">
-                      {item.priceText}
+                    <h1 className="text-[#777777] text-xs">
+                      {item.reviewCount} reviews
                     </h1>
                   </div>
                 </div>
-              </div>
-              <div className="container-2 w-[20%]">
-                <div className="content-container">
-                  <h1 className="flex items-center text-[#1A1A1A] font-semibold gap-2">
-                    {item.ratingLabel} <Image src={star} />{" "}
-                    <span>{item.rating}</span>
-                  </h1>
-                  <h1 className="text-[#777777] mt-1">
-                    {item.reviewCount} reviews
-                  </h1>
-
-                  <button
-                    onClick={() => handleNavigation(item.id)}
+                <div className="main-content-container mt-2">
+                  <div className="content-container ">
+                    <h1 className="flex items-center gap-1 text-[#333333]">
+                      <Image src={loc} />
+                      {item.location}{" "}
+                      <span className="underline cursor-pointer text-sm text-[#AF4300]">
+                        Show on map
+                      </span>{" "}
+                    </h1>
+                    <div className="main-content mt-2">
+                      <h1 className="text-[#1A1A1A] text-sm ">
+                        {item.description.slice(0, 130)}...
+                      </h1>
+                      <div className="label-container mt-2  flex items-center flex-wrap gap-2">
+                        <div className="label-1 bg-white border border-gray-200 flex items-center gap-2 w-fit px-3 py-2 rounded-lg shadow shadow-gray-200">
+                          <Image src={eco} />
+                          <h1>Eco cottage</h1>
+                        </div>
+                        <div className="label-1 bg-white border border-gray-200 flex items-center gap-2 w-fit px-3 py-2 rounded-lg shadow shadow-gray-200">
+                          <Image src={wifi} />
+                          <h1>Free wifi</h1>
+                        </div>
+                        <div className="label-1 bg-white border border-gray-200 flex items-center gap-2 w-fit px-3 py-2 rounded-lg shadow shadow-gray-200">
+                          <Image src={fire} />
+                          <h1>Campfire</h1>
+                        </div>
+                      </div>
+                      <h1 className="font-semibold text-[#246132] mt-2">
+                        {item.priceText}
+                      </h1>
+                    </div>
+                  </div>
+                </div>
+                <div className="footer-container">
+                  <Link
+                    href={`/hotels/hotel_listing/${item.id}`}
                     className="btn-container  bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] 
-  hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)]  text-white w-[100%] flex items-center justify-center mt-2 rounded-lg py-2 cursor-pointer"
+                  hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)]  text-white w-[100%] flex items-center justify-center mt-2 rounded-lg py-2 cursor-pointer"
                   >
                     View Details
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
-          </div>
-        );
-      })}
-    </section>
+          );
+        })}
+      </div>
+    </>
   );
 };
 
-export default HotelListingCard;
+export default ResponsiveHotelListingCard;

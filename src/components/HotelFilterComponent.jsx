@@ -228,7 +228,10 @@ const HotelFilterComponent = () => {
                   className="border border-[#216432] px-3 py-2 rounded-md"
                 />
               </div>
-              <button className="btn-green text-white px-4 py-3 rounded-lg w-[100%] mt-2 cursor-pointer">
+              <button
+                className="bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] 
+  hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)]  text-white px-4 py-3 rounded-lg w-[100%] mt-2 cursor-pointer"
+              >
                 Apply filter
               </button>
             </div>

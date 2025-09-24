@@ -5,13 +5,14 @@ import Footer from "@/components/Footer";
 import HotelFilterComponent from "@/components/HotelFilterComponent";
 import { ChevronDown } from "lucide-react";
 import HotelListingCard from "@/components/HotelListingCard";
+import ResponsiveHotelListingCard from "@/components/ResponsiveHotelListingCard";
 
 const page = () => {
   return (
     <>
       <Navbar />
       <section className="mx:4 md:mx-10">
-        <header className="mt-4 btn-green px-4 py-4 md:py-10 rounded-lg">
+        <header className="mt-4 btn-green px-4 py-4 md:py-10 rounded-lg hidden md:block">
           <SubCardNav />
           <div className="container-1">
             <div className="content-container text-white mt-4 md:ml-3">
@@ -26,11 +27,11 @@ const page = () => {
           </div>
         </header>
         <div className="main-content-container mt-6  grid grid-cols-12 gap-6">
-          <div className="filter-component-container py-2 rounded-xl overflow-auto col-span-3 h-fit bg-[#fefefe] shadow sticky top-[68px] ">
+          <div className="filter-component-container py-2 rounded-xl overflow-auto hidden md:block md:col-span-3 h-fit bg-[#fefefe] shadow sticky top-[68px] ">
             <HotelFilterComponent />
           </div>
-          <div className="hotel-card-component-container space-y-4 col-span-9">
-            <div className="box w-[100%] bg-white sticky top-[63px] border-none z-20">
+          <div className="hotel-card-component-container space-y-4 col-span-12 md:col-span-9">
+            <div className="box hidden w-[100%] bg-white sticky top-[63px] border-none z-20">
               <div className="box w-[100%] rounded-2xl bg-[#EEEEEE] py-3 px-4 shadow-none m-0  grid grid-cols-12 gap-2">
                 <div className="container-1 col-span-4  flex items-center">
                   <div className="location-container border-r border-amber-700 pr-3  flex items-center w-[100%] justify-between">
@@ -64,13 +65,21 @@ const page = () => {
                   </div>
                 </div>
                 <div className="container-1 col-span-2 flex items-center">
-                  <button className="btn-green text-white w-[100%] py-3 rounded-lg cursor-pointer ">
+                  <button
+                    className="bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] 
+  hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)]  text-white w-[100%] py-3 rounded-lg cursor-pointer "
+                  >
                     Search
                   </button>
                 </div>
               </div>
             </div>
-            <HotelListingCard />
+            <div className="hotel-listing-card hidden md:block">
+              <HotelListingCard />
+            </div>
+            <div className="responsiveCard md:hidden">
+              <ResponsiveHotelListingCard />
+            </div>
           </div>
         </div>
       </section>

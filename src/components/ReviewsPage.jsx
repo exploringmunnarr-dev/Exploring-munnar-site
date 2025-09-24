@@ -64,8 +64,8 @@ export default function ReviewsPage() {
       <div className="">
         {/* Header */}
         <h2 className="text-xl font-semibold ">Ratings and reviews</h2>
-        <div className="main-container flex gap-12 mt-8">
-          <div className="container-1 w-[20%]">
+        <div className="main-container md:flex gap-12 mt-8">
+          <div className="container-1 w-[100%] md:w-[20%]">
             <h1 className="font-semibold text-lg">overall rating</h1>
             <div className="ing-container bg-[#EEEEEE] w-fit px-4 rounded-lg mt-2">
               <div className="container-1 rounded-lg p-2 ">
@@ -93,12 +93,12 @@ export default function ReviewsPage() {
                       style={{ width: `${rating.value}%` }}
                     ></div>
                   </div>
-                </div>
+                </div> 
               ))}
             </div>
           </div>
           {/* Overall rating */}
-          <div className="container-2 w-[80%]">
+          <div className="container-2 w-[100%] mt-4 md:mt-0 md:w-[80%]">
             <div className="flex flex-col md:flex-row md:items-center gap-6">
               {/* Categories */}
               <div className="flex flex-wrap gap-3 ">

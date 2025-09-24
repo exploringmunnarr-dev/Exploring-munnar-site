@@ -20,8 +20,8 @@ const page = () => {
     <>
       <Navbar />
       {/* header ---------------------  */}
-      <header className="mt-2 py-2 sticky top-[63px] bg-white flex items-start justify-between border-b border-gray-100 px-4 md:px-10">
-        <div className="tabs-container text-[#333333] flex items-center gap-6">
+      <header className="mt-2 py-2 sticky top-[63px] z-10 bg-white md:flex items-start justify-between border-b border-gray-100 px-4 md:px-10">
+        <div className="tabs-container text-[#333333] flex items-center gap-6 max-sm:text-sm">
           <Link
             onClick={() => setSelectedTab("overview")}
             to="overview" // the ID of the section you want to scroll to
@@ -73,7 +73,7 @@ const page = () => {
             Location
           </Link>
         </div>
-        <div className="second-container flex items-center gap-6">
+        <div className="second-container flex items-center gap-6 mt-4  md:mt-0">
           <div className="review-section text-center">
             <div className="container flex items-center gap-2">
               <Image src={star} />

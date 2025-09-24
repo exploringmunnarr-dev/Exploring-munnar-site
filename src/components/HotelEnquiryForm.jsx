@@ -8,6 +8,7 @@ import location from "../assets/location_icon.svg";
 import calendar from "../assets/calendarIcon.svg";
 import kids from "../assets/kids_icon.svg";
 import adult from "../assets/adult_icon.svg";
+import { X } from "lucide-react";
 const HotelEnquiryForm = ({ setIsForm }) => {
   // refs
   const modalRef = useRef(null);
@@ -40,22 +41,30 @@ const HotelEnquiryForm = ({ setIsForm }) => {
     <>
       <section
         ref={modalRef}
-        className="bg-white max-sm:w-[90%] w-[80%] md:w-[50%] rounded-lg py-5 px-6 fixed z-110 top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%]"
+        className="bg-white max-sm:w-[90%] max-sm:h-[85vh] overflow-auto w-[80%] md:w-[50%] rounded-lg py-5 px-6 fixed z-110 top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%]"
       >
-        <header className="flex items-center gap-4 border-b border-[#777777] pb-5">
-          <div className="img-container w-[70px] ">
-            <Image src={img} className="w-[100%] rounded-lg" />
+        <header className="flex items-start gap-4 border-b border-[#777777] pb-5">
+          <div className="container-1 flex items-center gap-3">
+            <div className="img-container w-[70px] ">
+              <Image src={img} className="w-[100%] rounded-lg" />
+            </div>
+            <div className="content-container">
+              <h1 className="text-lg font-semibold md:text-3xl text-[#333333]">
+                Misty Hill Eco Retreat
+              </h1>
+              <h1 className="text-sm md:text-lg mt-1 text-[#333333]">
+                Tree house - Chinnakal
+              </h1>
+            </div>
           </div>
-          <div className="content-container">
-            <h1 className="text-xl font-semibold md:text-3xl text-[#333333]">
-              Misty Hill Eco Retreat
-            </h1>
-            <h1 className="text-lg mt-1 text-[#333333]">
-              Tree house - Chinnakal
-            </h1>
+          <div
+            onClick={() => setIsForm(false)}
+            className="icon-container cursor-pointer p-1 bg-gray-300 rounded-full "
+          >
+            <X className="w-5 h-5" />
           </div>
         </header>
-        <div className="form-container mt-4 sm:grid grid-cols-2 gap-x-4 gap-y-6">
+        <div className="form-container  mt-4 flex flex-col max-sm:text-xs sm:grid grid-cols-2 gap-x-4 gap-y-2 md:gap-y-6">
           <div className="input-container ">
             <div className="lable-container flex w-full gap-2 items-center">
               <Image src={person} className="w-7 h-7" />
@@ -113,7 +122,7 @@ const HotelEnquiryForm = ({ setIsForm }) => {
             </div>
             <input
               type="date"
-              placeholder="Enter your first name"
+              placeholder=""
               className="border rounded-lg border-[#777777] w-full p-2 mt-2"
             />
           </div>

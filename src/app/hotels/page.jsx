@@ -32,7 +32,10 @@ const page = () => {
                 <h1>Select location in munnar</h1>
                 <ChevronDown />
               </div>
-              <button className="btn-green px-4 text-white rounded-lg cursor-pointer text-sm md:text-sm  col-span-3">
+              <button
+                className="bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] 
+  hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)]  px-4 text-white rounded-lg cursor-pointer text-sm md:text-sm  col-span-3"
+              >
                 Search
               </button>
             </div>

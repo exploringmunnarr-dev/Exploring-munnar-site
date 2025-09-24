@@ -6,10 +6,10 @@ const HotelOverview = () => {
   const [isForm, setIsForm] = useState(false);
   return (
     <>
-      <section className="mt-4 md:mt-10 flex items-end gap-2">
-        <div className="container-1 w-[70%] border-b border-gray-200 pb-2">
+      <section className="mt-4 md:mt-10 md:flex items-end gap-2">
+        <div className="container-1 w-[100%] md:w-[70%] border-b border-gray-200 pb-2">
           <h1 className="text-xl font-semibold md:text-3xl">Overview</h1>
-          <div className="content-container mt-3">
+          <div className="content-container mt-3 max-sm:text-sm">
             <h1 className="text-[#777777]">
               Tucked away in the tranquil tea estates of Devikulam, Misty Hill
               Eco Retreat is a locally managed eco-stay perfect for couples,
@@ -25,7 +25,7 @@ const HotelOverview = () => {
             </h1>
           </div>
         </div>
-        <div className="container-1 w-[30%]">
+        <div className="container-1 mt-2 md:mt-0 md:w-[30%]">
           <div className="w-full rounded-xl p-4 bg-[#EEEEEE]">
             {/* Price and Rating */}
             <div className="flex justify-between items-center">
@@ -73,7 +73,7 @@ const HotelOverview = () => {
           </div>
         </div>
       </section>
-      {isForm && <HotelEnquiryForm setIsForm={setIsForm}/>}
+      {isForm && <HotelEnquiryForm setIsForm={setIsForm} />}
     </>
   );
 };

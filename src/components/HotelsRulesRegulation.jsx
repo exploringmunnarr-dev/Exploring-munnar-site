@@ -62,15 +62,15 @@ const HotelsRulesRegulation = () => {
         <div className="main-container mt-5 bg-[#eeeeee] p-4 rounded-xl">
           {policies.map((policy, index) => (
             <div key={index} className="">
-              <div className="flex items-start gap-3 py-4">
+              <div className="flex items-start gap-3 md:py-4 py-2">
                 <Image src={policy.icon} />
-                <div className="flex gap-3 items-start">
-                  <h3 className="font-semibold text-[#333333] text-lg w-[250px] ">
+                <div className="md:flex gap-3 items-start">
+                  <h3 className="font-semibold text-[#333333] text-sm md:text-lg w-[250px] ">
                     {policy.title}
                   </h3>
                   <div>
-                    <p className="text-[#1a1a1a]">{policy.subtitle}</p>
-                    <p className="text-[#777777] text-sm w-[90%]">
+                    <p className="text-[#1a1a1a] text-sm mt-2 md:mt-0 md:text-lg">{policy.subtitle}</p>
+                    <p className="text-[#777777] mt-2 md:mt-0 text-xs w-[90%] md:text-lg">
                       {policy.description}
                     </p>
                   </div>
