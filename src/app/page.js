@@ -1,9 +1,6 @@
-"use client"
-import Home from '@/Pages/Home'
-import React, {
-  useEffect,
-  useState
-} from 'react'
+"use client";
+import Home from "@/Pages/Home";
+import React, { useEffect, useState } from "react";
 const page = () => {
   const [scrollY, setScrollY] = useState(0);
   // // ( ("scroll : ", scrollY)
@@ -19,11 +16,11 @@ const page = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  return ( 
+  return (
     <>
-      <Home scroll = {scrollY}/> 
+      <Home scroll={scrollY} />
     </>
-  )
-}
+  );
+};
 
-export default page
+export default page;

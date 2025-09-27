@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import hotImg from "../assets/hotel1.svg";
 import hotImg2 from "../assets/hotel2.avif";
@@ -11,8 +12,11 @@ import eco from "../assets/eco.svg";
 import star from "../assets/star.svg";
 import wifi from "../assets/loc.svg";
 import fire from "../assets/loc.svg";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
+import { ChevronDown } from "lucide-react";
+import ResponsiveFilterComponent from "./ResponsiveFilterComponent";
+import ResponsivePriceComponent from "./ResponsivePriceComponent";
 
 const listings = [
   {
@@ -125,14 +129,34 @@ const listings = [
   },
 ];
 const ResponsiveHotelListingCard = () => {
+  const [isFilter, setisFilter] = useState(false);
+  const [ispriceRange, setispriceRange] = useState(false);
   return (
     <>
-      <div className="header-container w-[90%] sticky top-15 bg-white py-3 z-40 m-auto mb-2">
-        <button className="bg-gray-300 text-black py-2 px-4 text-lg font-semibold w-[100px]">
-          Filter
-        </button>
+      <div className="main-container mt-[-20px] sticky w-[100%] top-[65px] z-40">
+        <div className="filter-container px-4 flex items-center py-3 w-[80%] m-auto border shadow-md shadow-gray-400 rounded-full border-gray-50  bg-white ">
+          <div
+            onClick={() => setisFilter(true)}
+            className="filter-container w-[50%] border-r border-green-700 px-2 "
+          >
+            <div className="header flex gap-2 items-center justify-between">
+              <h1 className="text-gray-600 text-lg">Filters</h1>
+              <ChevronDown className="text-gray-400" />
+            </div>
+          </div>
+          <div
+            onClick={() => setispriceRange(true)}
+            className="price-container w-[50%] pl-2"
+          >
+            <div className="header flex gap-2 items-center justify-between">
+              <h1 className="text-gray-600">Price</h1>
+              <ChevronDown className="text-gray-400" />
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="card-container flex flex-col gap-3">
+
+      <div className="card-container mt-2 flex flex-col gap-3">
         {listings.map((item, index) => {
           return (
             <div className="card w-[90%] border border-gray-200 m-auto rounded-lg bg-white shadow-md shadow-gray-300 p-4">
@@ -217,6 +241,10 @@ const ResponsiveHotelListingCard = () => {
           );
         })}
       </div>
+      {isFilter && <ResponsiveFilterComponent setisFilter={setisFilter} />}
+      {ispriceRange && (
+        <ResponsivePriceComponent setispriceRange={setispriceRange} ispriceRange={ispriceRange}/>
+      )}
     </>
   );
 };

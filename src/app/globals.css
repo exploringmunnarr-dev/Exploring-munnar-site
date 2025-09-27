@@ -90,3 +90,25 @@ input::-webkit-inner-spin-button {
   background-color: rgba(255, 255, 255, 0.671);
   backdrop-filter: blur(2px);
 }
+/* Custom scrollbar */
+.filter-content-section::-webkit-scrollbar {
+  width: 20px;
+}
+
+.filter-content-section::-webkit-scrollbar-track {
+  background: transparent; /* light gray */
+  border-radius: 10px;
+}
+.filter-content-section::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3); /* default gray-like look */
+  border-radius: 10px;
+  border: 4px solid transparent; /* spacing to make it look like native */
+  background-clip: content-box;
+}
+.login-container {
+  background-color: rgb(255, 255, 255);
+  backdrop-filter: blur(5px);
+}
+.login-tint {
+  background-color: rgba(0, 0, 0, 0.813);
+}

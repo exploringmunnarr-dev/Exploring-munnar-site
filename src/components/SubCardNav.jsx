@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import transportIcon from "../assets/transport_icon.svg";
+import transportIcon from "../assets/transport_icon.svg"; 
 import cloudIcon from "../assets/cloud_icon.svg";
 import hotelIcon from "../assets/hotel_icon.svg";
 import activitiesIcon from "../assets/activities_icon.svg";

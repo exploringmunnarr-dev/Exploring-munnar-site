@@ -9,13 +9,14 @@ import StayByDestination from "@/components/StayByDestination";
 import UniqueStays from "@/components/UniqueStays";
 import FindPerfectStay from "@/components/FindPerfectStay";
 import WhyBookOurStay from "@/components/WhyBookOurStay";
+import MobileTab from "@/components/MobileTab";
 
 const page = () => {
   return (
     <>
       <Navbar />
       <section className="mx-4 md:mx-10">
-        <header className="mt-4 btn-green px-4 py-4 md:py-10 rounded-lg">
+        {/* <header className="mt-4 btn-green px-4 py-4 md:py-10 rounded-lg">
           <SubCardNav />
           <div className="container-1 md:flex items-center justify-between">
             <div className="content-container text-white mt-4 md:ml-3">
@@ -40,7 +41,7 @@ const page = () => {
               </button>
             </div>
           </div>
-        </header>
+        </header> */}
         <HotelsStayType />
         <StayByDestination />
         <UniqueStays />
@@ -49,6 +50,9 @@ const page = () => {
       </section>
       <ItnearyFaq />
       <Footer />
+      <div className="tab-container w-full fixed bottom-0 md:hidden">
+        <MobileTab />
+      </div>
     </>
   );
 };

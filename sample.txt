@@ -67,4 +67,33 @@ button color
 1. gradient with hover effect : 
 
      bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] 
-  hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] 
+     hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)]
+  
+
+
+  <div className="container-main w-[90%] h-[100vh] flex flex-col items-center justify-center border m-auto">
+          <h1 className="font-semibold text-4xl text-center">
+            Profile View Page
+          </h1>
+          <div className="btn-container flex gap-4">
+            <button
+              onClick={() => router.push("/users/profile?editMode=true")}
+              className="mt-6 bg-black text-white px-8 transition-all duration-300 py-2 text-lg rounded-lg hover:bg-white hover:border-1 border-gray-800 hover:text-black"
+            >
+              Edit
+            </button>
+            <button
+              onClick={() => router.push("/users/profile?editMode=false&name=nishanth")}
+              className="mt-6 bg-red-400 text-white px-8 transition-all duration-300 py-2 text-lg rounded-lg hover:bg-white hover:border-1 border-gray-800 hover:text-black"
+            >
+              Cancel
+            </button>
+          </div>
+
+          <h1 className="mt-4 font-semibold text-lg ">
+            Edit mode : <span className="text-green-700">{editMode}</span>
+          </h1>
+          <h1 className="mt-4 font-semibold text-lg ">
+            Name : <span className="text-green-700">{name}</span>
+          </h1>
+        </div>

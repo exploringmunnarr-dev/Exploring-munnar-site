@@ -1,8 +1,9 @@
 import BusTimeTable from "@/components/BusTimeTable";
 import Footer from "@/components/Footer";
 import ItnearyFaq from "@/components/ItnearyFaq";
+import MobileTab from "@/components/MobileTab";
 import Navbar from "@/components/Navbar";
-import ResponsiveTab from "@/components/responsiveTab";
+// import ResponsiveTab from "@/components/responsiveTab";
 import SubCardNav from "@/components/SubCardNav";
 import SubNavbar from "@/components/SubNavbar";
 import Testimonials from "@/components/Testimonials";
@@ -31,9 +32,9 @@ const page = () => {
       <Testimonials />
       <ItnearyFaq />
       <Footer />
-      {/* <div className="tab-container w-full fixed bottom-0 md:hidden">
-        <ResponsiveTab/>
-      </div> */}
+      <div className="tab-container w-full fixed bottom-0 md:hidden">
+          <MobileTab/>
+      </div>
     </>
   );
 };
