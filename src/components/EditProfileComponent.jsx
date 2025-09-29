@@ -9,13 +9,15 @@ import {
   Plus,
 } from "lucide-react";
 import ProfileFormComponent from "./ProfileFormComponent";
+import MyInterestModal from "./MyInterestModal";
+import UploadProfileImage from "./UploadProfileImage";
 
 const data = [
   { icon: Globe, label1: "Where I’ve always wanted to go", label: "location" },
   {
     icon: Music,
     label1: "My favourite song in secondary school",
-    
+    label: "music"
   },
   {
     icon: BriefcaseBusiness,
@@ -25,13 +27,17 @@ const data = [
   {
     icon: PawPrint,
     label1: "Pets",
+    label: "pets",
   },
 ];
 
 const EditProfileComponent = () => {
   //   states
   const [isForm, setIsForm] = useState(false);
+  const [isMyInterestModal, setIsMyInterestModal] = useState(false)
+  const [uploadImgModal, setUploadImgModal] = useState(false)
   const [formlable, setFormLabel] = useState("");
+
   // deifning rourter
   const router = useRouter();
 
@@ -46,8 +52,10 @@ const EditProfileComponent = () => {
         <div className="left-container  w-[30%] sticky top-10 ">
           <div className="name-container relative  w-[200px] h-[200px] m-auto border bg-gray-950 rounded-full flex items-center justify-center">
             <h1 className="text-[56px] text-white">N</h1>
-            <button className="edit-btn text-md font-semibold text-[#333333] bg-white px-4 py-2 rounded-full shadow-xl absolute bottom-[-10px] left-[50%] translate-x-[-50%] flex gap-2 items-center">
-              <Camera size={18} /> Edit
+            <button className=" absolute bottom-[-10px] left-[50%] translate-x-[-50%] ">
+              <div onClick={()=>setUploadImgModal(true)} className="edit-btn text-md  relative font-semibold text-[#333333] bg-white px-4 py-2 rounded-full shadow-xl flex gap-2 items-center">
+                <Camera size={18} /> Edit
+              </div>
             </button>
           </div>
         </div>
@@ -88,7 +96,7 @@ const EditProfileComponent = () => {
                 <h1 className="text-gray-600 text-lg">
                   Write something fun and punchy.
                 </h1>
-                <button className="font-semibold text-lg underline cursor-pointer">
+                <button onClick={() => formComponenthanlder("aboutMe")} className="font-semibold text-lg underline cursor-pointer">
                   Add intro
                 </button>
               </div>
@@ -115,7 +123,7 @@ const EditProfileComponent = () => {
                   <Plus />
                 </button>
               </div>
-              <button className="bg-[#eeeeee] px-4 py-3 rounded-lg text-lg font-semibold mt-4 cursor-pointer hover:bg-gray-100">
+              <button onClick={() => setIsMyInterestModal(true)} className="bg-[#eeeeee] px-4 py-3 rounded-lg text-lg font-semibold mt-4 cursor-pointer hover:bg-gray-100">
                 Add interests
               </button>
             </div>
@@ -132,7 +140,9 @@ const EditProfileComponent = () => {
           Done
         </button>
       </div>
-      {isForm && <ProfileFormComponent isForm={isForm} setIsForm={setIsForm} formlable={formlable}/>}
+      {isForm && <ProfileFormComponent isForm={isForm} setIsForm={setIsForm} formlable={formlable} />}
+      {isMyInterestModal && <MyInterestModal isMyInterestModal={isMyInterestModal} setIsMyInterestModal={setIsMyInterestModal} />}
+      {uploadImgModal && <UploadProfileImage setUploadImgModal={setUploadImgModal} uploadImgModal={uploadImgModal}/>}
     </>
   );
 };
