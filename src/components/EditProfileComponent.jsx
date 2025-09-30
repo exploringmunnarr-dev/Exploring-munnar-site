@@ -17,7 +17,7 @@ const data = [
   {
     icon: Music,
     label1: "My favourite song in secondary school",
-    label: "music"
+    label: "music",
   },
   {
     icon: BriefcaseBusiness,
@@ -34,8 +34,8 @@ const data = [
 const EditProfileComponent = () => {
   //   states
   const [isForm, setIsForm] = useState(false);
-  const [isMyInterestModal, setIsMyInterestModal] = useState(false)
-  const [uploadImgModal, setUploadImgModal] = useState(false)
+  const [isMyInterestModal, setIsMyInterestModal] = useState(false);
+  const [uploadImgModal, setUploadImgModal] = useState(false);
   const [formlable, setFormLabel] = useState("");
 
   // deifning rourter
@@ -53,7 +53,10 @@ const EditProfileComponent = () => {
           <div className="name-container relative  w-[200px] h-[200px] m-auto border bg-gray-950 rounded-full flex items-center justify-center">
             <h1 className="text-[56px] text-white">N</h1>
             <button className=" absolute bottom-[-10px] left-[50%] translate-x-[-50%] ">
-              <div onClick={()=>setUploadImgModal(true)} className="edit-btn text-md  relative font-semibold text-[#333333] bg-white px-4 py-2 rounded-full shadow-xl flex gap-2 items-center">
+              <div
+                onClick={() => setUploadImgModal(true)}
+                className="edit-btn text-md  relative font-semibold text-[#333333] bg-white px-4 py-2 rounded-full shadow-xl flex gap-2 items-center"
+              >
                 <Camera size={18} /> Edit
               </div>
             </button>
@@ -96,7 +99,10 @@ const EditProfileComponent = () => {
                 <h1 className="text-gray-600 text-lg">
                   Write something fun and punchy.
                 </h1>
-                <button onClick={() => formComponenthanlder("aboutMe")} className="font-semibold text-lg underline cursor-pointer">
+                <button
+                  onClick={() => formComponenthanlder("aboutMe")}
+                  className="font-semibold text-lg underline cursor-pointer"
+                >
                   Add intro
                 </button>
               </div>
@@ -113,17 +119,29 @@ const EditProfileComponent = () => {
                 </h1>
               </header>
               <div className="content-container flex items-center gap-4  mt-4 ">
-                <button className="w-[90px] py-2 flex items-center justify-center border border-dashed border-gray-300 rounded-full hover:bg-gray-100 cursor-pointer">
+                <button
+                  onClick={() => setIsMyInterestModal(true)}
+                  className="w-[90px] py-2 flex items-center justify-center border border-dashed border-gray-300 rounded-full hover:bg-gray-100 cursor-pointer"
+                >
                   <Plus />
                 </button>
-                <button className="w-[90px] py-2 flex items-center justify-center border border-dashed border-gray-300 rounded-full hover:bg-gray-100 cursor-pointer">
+                <button
+                  onClick={() => setIsMyInterestModal(true)}
+                  className="w-[90px] py-2 flex items-center justify-center border border-dashed border-gray-300 rounded-full hover:bg-gray-100 cursor-pointer"
+                >
                   <Plus />
                 </button>
-                <button className="w-[90px] py-2 flex items-center justify-center border border-dashed border-gray-300 rounded-full hover:bg-gray-100 cursor-pointer">
+                <button
+                  onClick={() => setIsMyInterestModal(true)}
+                  className="w-[90px] py-2 flex items-center justify-center border border-dashed border-gray-300 rounded-full hover:bg-gray-100 cursor-pointer"
+                >
                   <Plus />
                 </button>
               </div>
-              <button onClick={() => setIsMyInterestModal(true)} className="bg-[#eeeeee] px-4 py-3 rounded-lg text-lg font-semibold mt-4 cursor-pointer hover:bg-gray-100">
+              <button
+                onClick={() => setIsMyInterestModal(true)}
+                className="bg-[#eeeeee] px-4 py-3 rounded-lg text-lg font-semibold mt-4 cursor-pointer hover:bg-gray-100"
+              >
                 Add interests
               </button>
             </div>
@@ -140,9 +158,25 @@ const EditProfileComponent = () => {
           Done
         </button>
       </div>
-      {isForm && <ProfileFormComponent isForm={isForm} setIsForm={setIsForm} formlable={formlable} />}
-      {isMyInterestModal && <MyInterestModal isMyInterestModal={isMyInterestModal} setIsMyInterestModal={setIsMyInterestModal} />}
-      {uploadImgModal && <UploadProfileImage setUploadImgModal={setUploadImgModal} uploadImgModal={uploadImgModal}/>}
+      {isForm && (
+        <ProfileFormComponent
+          isForm={isForm}
+          setIsForm={setIsForm}
+          formlable={formlable}
+        />
+      )}
+      {isMyInterestModal && (
+        <MyInterestModal
+          isMyInterestModal={isMyInterestModal}
+          setIsMyInterestModal={setIsMyInterestModal}
+        />
+      )}
+      {uploadImgModal && (
+        <UploadProfileImage
+          setUploadImgModal={setUploadImgModal}
+          uploadImgModal={uploadImgModal}
+        />
+      )}
     </>
   );
 };
