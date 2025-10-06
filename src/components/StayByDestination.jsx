@@ -38,7 +38,7 @@ const StayByDestination = () => {
             <Image
               src={destinationImg}
               alt="Munnar Map"
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover "
             />
 
             {/* Location Pins will go here */}

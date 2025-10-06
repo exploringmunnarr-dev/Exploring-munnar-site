@@ -40,7 +40,7 @@ const UploadProfileImage = ({ setUploadImgModal, uploadImgModal }) => {
     <>
       <section
         ref={modalRef}
-        className="w-[500px] rounded-lg h-fit bg-white absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] z-10"
+        className="w-[90%] md:w-[500px] rounded-lg h-fit bg-white absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] z-10"
       >
         <div className="container-1 relative">
           <header className="py-2 px-4 items-center  flex justify-between">
@@ -57,11 +57,11 @@ const UploadProfileImage = ({ setUploadImgModal, uploadImgModal }) => {
                   src={previewImg}
                   width={100}
                   height={100}
-                  className=" w-[170px] h-[170px] object-cover m-auto rounded-full"
+                  className=" w-[140px] h-[140px] md:w-[170px] md:h-[170px] object-cover m-auto rounded-full"
                 />
               ) : (
                 <div>
-                  <User2 className="text-gray-400 w-[100px] h-[100px] m-auto" />
+                  <User2 className="text-gray-400 w-[70px] h-[70px] md:w-[100px] md:h-[100px] m-auto" />
                   <h1 className="text-[#777777] mt-2">
                     Drag and drop the image here.
                   </h1>

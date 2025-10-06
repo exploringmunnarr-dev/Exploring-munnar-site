@@ -82,11 +82,11 @@ const HotelsStayType = () => {
           >
             {cardData.map((item, index) => (
               <SwiperSlide key={index}>
-                <div className="card rounded-lg h-[300px] relative">
+                <div className="card rounded-lg h-[300px] relative overflow-hidden">
                   <Image
                     src={item.img}
                     alt={`Card ${index}`}
-                    className="w-full h-auto object-cover rounded-lg"
+                    className="w-full h-auto object-cover rounded-lg hover:scale-125 transition-all duration-300"
                   />
                   <div className="hoteltextContainer absolute bottom-0 rounded-b-lg w-[100%]">
                     <h3 className="text-center py-2 text-black">

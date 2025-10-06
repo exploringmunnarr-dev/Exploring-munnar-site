@@ -63,7 +63,7 @@ export default function ReviewsPage() {
     <section className="mt-4 md:mt-10 ">
       <div className="">
         {/* Header */}
-        <h2 className="text-xl font-semibold ">Ratings and reviews</h2>
+        <h2 className="text-xl md:text-3xl font-semibold text-[#333333]">Ratings and reviews</h2>
         <div className="main-container md:flex gap-12 mt-8">
           <div className="container-1 w-[100%] md:w-[20%]">
             <h1 className="font-semibold text-lg">overall rating</h1>

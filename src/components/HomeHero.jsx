@@ -19,7 +19,7 @@ import SubNavbar from './SubNavbar';
 const HomeHero = () => {
     return (
         <>
-            <div className="mx-2 h-[220px] md:h-auto md:mx-10 md:mt-4 md:rounded-3xl relative ">
+            <div className="mx-2 h-[220px] md:h-auto md:mx-10 mt-2 md:mt-4 md:rounded-3xl relative ">
                 <Swiper
                     spaceBetween={30}
                     centeredSlides={true}
@@ -31,16 +31,16 @@ const HomeHero = () => {
                     className="mySwiper md:rounded-3xl h-[100%]"
                 >
                     <SwiperSlide className='' style={{ width: "100%", }}>
-                        <Image src={img1} className=' h-[100%] w-[100%] object-cover' />
+                        <Image src={img1} className=' h-[100%] w-[100%] object-cover max-sm:rounded-xl' />
                     </SwiperSlide>
                     <SwiperSlide>
-                        <Image src={img2} className=' h-[100%] w-[100%] object-cover' />
+                        <Image src={img2} className=' h-[100%] w-[100%] object-cover max-sm:rounded-xl' />
                     </SwiperSlide>
                     <SwiperSlide>
-                        <Image src={img3} className=' h-[100%] w-[100%] object-cover' />
+                        <Image src={img3} className=' h-[100%] w-[100%] object-cover max-sm:rounded-xl' />
                     </SwiperSlide>
                     <SwiperSlide>
-                        <Image src={img4} className=' h-[100%] w-[100%] object-cover' />
+                        <Image src={img4} className=' h-[100%] w-[100%] object-cover max-sm:rounded-xl' />
                     </SwiperSlide>
 
                 </Swiper>

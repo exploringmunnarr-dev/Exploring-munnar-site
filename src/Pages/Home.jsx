@@ -11,6 +11,7 @@ import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
 import HomeHero from "@/components/HomeHero";
 import { useState } from "react";
+import MobileTab from "@/components/MobileTab";
 
 const Home = ({ scroll }) => {
   return (
@@ -27,6 +28,9 @@ const Home = ({ scroll }) => {
         <GuestGallerySection />
       </div>
       <Footer />
+       <div className="tab-container w-full fixed bottom-0 md:hidden">
+                <MobileTab/>
+            </div>
     </>
   );
 };

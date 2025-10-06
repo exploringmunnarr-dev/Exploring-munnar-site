@@ -86,7 +86,7 @@ export default function AmenitiesSection() {
     <section className="mt-4 md:mt-10">
       <div className="">
         {/* Popular Facilities */}
-        <h2 className="text-xl md:text-3xl font-semibold mb-3">
+        <h2 className="text-xl md:text-3xl text-[#333333] font-semibold mb-3">
           Popular Facilities available
         </h2>
         <div className="flex flex-wrap gap-3 mb-8 mt-4 ">
@@ -102,7 +102,7 @@ export default function AmenitiesSection() {
         </div>
 
         {/* All Amenities */}
-        <h2 className="text-xl md:text-3xl font-semibold mb-3">
+        <h2 className="text-xl md:text-3xl font-semibold text-[#333333] mb-3">
           All Amenities
         </h2>
         <div className="grid md:grid-cols-3 gap-10 mt-6">

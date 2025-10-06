@@ -43,31 +43,31 @@ const HotelHero = () => {
         </header>
         <div className="img-container mt-6 flex items-start gap-4">
           <div className="first-container w-[60%] ">
-            <div className="img-contianer-1 h-[250px] ">
+            <div className="img-contianer-1 h-[250px] overflow-hidden hover:rounded-xl">
               <Image
                 src={img1}
-                className="h-[100%] object-cover w-full rounded-xl"
+                className="h-[100%] object-cover w-full rounded-xl hover:scale-125 transition-all duration-300"
               />
             </div>
             <div className="second-img-container mt-4 flex gap-4">
-              <div className="container-1 h-[230px] w-[50%]">
+              <div className="container-1 h-[230px] w-[50%] overflow-hidden hover:rounded-xl">
                 <Image
                   src={img3}
-                  className="w-full h-[100%] rounded-xl object-cover"
+                  className="w-full h-[100%] rounded-xl object-cover hover:scale-125 transition-all duration-300 "
                 />
               </div>
-              <div className="container-1 w-[50%] h-[230px]">
+              <div className="container-1 w-[50%] h-[230px] overflow-hidden hover:rounded-xl">
                 <Image
                   src={img4}
-                  className="w-full object-cover rounded-xl h-[100%]"
+                  className="w-full object-cover rounded-xl h-[100%] hover:scale-125 transition-all duration-300"
                 />
               </div>
             </div>
           </div>
-          <div className="second-container w-[40%] h-[497px]">
+          <div className="second-container w-[40%] h-[497px] overflow-hidden hover:rounded-xl">
             <Image
               src={img2}
-              className="w-[100%] object-cover h-[100%] rounded-xl"
+              className="w-[100%] object-cover h-[100%] rounded-xl hover:scale-125 transition-all duration-300"
             />
           </div>
         </div>

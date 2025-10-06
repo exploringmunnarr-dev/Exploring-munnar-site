@@ -48,39 +48,39 @@ const EditProfileComponent = () => {
   };
   return (
     <>
-      <section className="w-[100%] flex h-[89%] pt-6 overflow-auto ">
-        <div className="left-container  w-[30%] sticky top-10 ">
-          <div className="name-container relative  w-[200px] h-[200px] m-auto border bg-gray-950 rounded-full flex items-center justify-center">
+      <section className="w-[100%] md:flex h-[89%] pt-2 md:pt-6 overflow-auto ">
+        <div className="left-container w-[100%] max-sm:mb-2 md:w-[30%] md:sticky top-10 ">
+          <div className="name-container relative w-[140px] h-[140px]  md:w-[200px] md:h-[200px] m-auto border bg-gray-950 rounded-full flex items-center justify-center">
             <h1 className="text-[56px] text-white">N</h1>
             <button className=" absolute bottom-[-10px] left-[50%] translate-x-[-50%] ">
               <div
                 onClick={() => setUploadImgModal(true)}
-                className="edit-btn text-md  relative font-semibold text-[#333333] bg-white px-4 py-2 rounded-full shadow-xl flex gap-2 items-center"
+                className="edit-btn  md:text-md relative font-semibold text-[#333333] bg-white px-4 py-2 rounded-full shadow-xl flex gap-2 items-center"
               >
                 <Camera size={18} /> Edit
               </div>
             </button>
           </div>
         </div>
-        <div className="left-container w-[70%] mr-3">
-          <div className="main-container  ml-12">
+        <div className="left-container  md:w-[70%] md:mr-3 max-sm:mx-4">
+          <div className="main-container  md:ml-12">
             <header>
-              <h1 className="font-semibold text-[32px] text-[#333333]">
+              <h1 className="font-semibold text-2xl md:text-[32px] text-[#333333]">
                 My profile
               </h1>
-              <h1 className="description text-gray-600 w-[80%] mt-4 text-lg">
+              <h1 className="description text-gray-600 md:w-[80%] mt-2 md:mt-4 text-lg">
                 Hosts and guests can see your profile and it may appear across
                 Exploring munnar to help us build trust in our community.{" "}
               </h1>
             </header>
             {/* form trigger container =======================  */}
-            <div className="form-data-container grid grid-cols-2 gap-6 mt-6">
+            <div className="form-data-container md:grid grid-cols-2 gap-6 mt-6">
               {data.map((item, index) => {
                 const Icon = item.icon;
                 return (
                   <div
                     onClick={() => formComponenthanlder(item.label)}
-                    className="card border-b py-6 w-full border-gray-300 flex items-center gap-4 text-lg cursor-pointer hover:rounded-lg hover:border-none hover:bg-gray-100 px-4 "
+                    className="card md:border-b py-6 w-full border-gray-300 flex items-center gap-4 text-lg cursor-pointer hover:rounded-lg hover:border-none hover:bg-gray-100 md:px-4 "
                   >
                     <Icon className="text-gray-600 w-8 h-8" />
                     <h1 className="text-gray-600">{item.label1}</h1>
@@ -91,7 +91,7 @@ const EditProfileComponent = () => {
             {/* About me section ========================= */}
             <div className="about-me-container mt-8">
               <header>
-                <h1 className="font-semibold text-[32px] text-[#333333]">
+                <h1 className="font-semibold text-2xl md:text-[32px] text-[#333333]">
                   About me
                 </h1>
               </header>
@@ -110,7 +110,7 @@ const EditProfileComponent = () => {
             {/* My interests section ========================= */}
             <div className="about-me-container mt-8">
               <header>
-                <h1 className="font-semibold text-[32px] text-[#333333]">
+                <h1 className="font-semibold text-2xl md:text-[32px] text-[#333333]">
                   My interests
                 </h1>
                 <h1 className="description text-gray-600 w-[80%] mt-4 text-lg">
@@ -148,7 +148,7 @@ const EditProfileComponent = () => {
           </div>
         </div>
       </section>
-      <div className="footer-container fixed bottom-0 py-4 w-[80%] m-auto flex justify-end">
+      <div className="footer-container fixed bottom-0 py-4 w-[95%] md:w-[80%] m-auto flex justify-end">
         <button
           onClick={() => {
             router.push("/users/profile?editMode=false");

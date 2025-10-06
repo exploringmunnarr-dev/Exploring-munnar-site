@@ -21,7 +21,7 @@ const page = () => {
     <>
       <section>
         <ProfileNavbar />
-        <div className="container-main w-[80%] h-[85vh] m-auto">
+        <div className="container-main md:w-[80%] h-[85vh] m-auto">
           {!editMode ? <ProfileComponent /> : <EditProfileComponent />}
         </div>
       </section>

@@ -16,20 +16,20 @@ const GuestGallerySection = () => {
                     </div>
                 </div>
                 <div className="mt-4 md:mt-0 md:w-[60%] grid grid-cols-10 grid-rows-6 gap-2 ">
-                    <div className="col-span-4 row-span-4 ">
-                        <Image src={img1} className='h-[100%] object-cover max-sm:rounded-xl rounded-b-xl' />
+                    <div className="col-span-4 row-span-4 overflow-hidden rounded-b-xl">
+                        <Image src={img1} className='h-[100%] object-cover max-sm:rounded-xl rounded-b-xl hover:scale-125 transition-all duration-300' />
                     </div>
-                    <div className="col-span-4 row-span-2 col-start-1 row-start-5 ">
-                        <Image src={img2} className='h-[100%] object-cover rounded-t-xl max-sm:rounded-xl' />
+                    <div className="col-span-4 row-span-2 col-start-1 row-start-5 rounded-t-xl overflow-hidden">
+                        <Image src={img2} className='h-[100%] object-cover rounded-t-xl max-sm:rounded-xl hover:scale-125 transition-all duration-300' />
                     </div>
-                    <div className="col-span-3 row-span-3 col-start-5 row-start-1 ">
-                        <Image src={img3} className='h-[100%] object-cover rounded-b-xl max-sm:rounded-xl' />
+                    <div className="col-span-3 row-span-3 col-start-5 row-start-1 rounded-b-xl overflow-hidden">
+                        <Image src={img3} className='h-[100%] object-cover rounded-b-xl max-sm:rounded-xl hover:scale-125 transition-all duration-300' />
                     </div>
-                    <div className="col-span-3 row-span-3 col-start-5 row-start-4 ">
-                        <Image src={img4} className='h-[100%] object-cover rounded-t-xl max-sm:rounded-xl' />
+                    <div className="col-span-3 row-span-3 col-start-5 row-start-4 rounded-t-xl overflow-hidden">
+                        <Image src={img4} className='h-[100%] object-cover rounded-t-xl max-sm:rounded-xl hover:scale-125 transition-all duration-300' />
                     </div>
-                    <div className="col-span-3 row-span-6 col-start-8 row-start-1 ">
-                        <Image src={img5} className='h-[100%] object-cover rounded-t-xl max-sm:rounded-xl'/>
+                    <div className="col-span-3 row-span-6 col-start-8 row-start-1 rounded-t-xl overflow-hidden">
+                        <Image src={img5} className='h-[100%] object-cover rounded-t-xl max-sm:rounded-xl hover:scale-125 transition-all duration-300'/>
                     </div>
                 </div>
 

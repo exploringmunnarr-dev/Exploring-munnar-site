@@ -96,19 +96,19 @@ const UniqueStays = () => {
           {data.map((item, index) => (
             <div
               key={index}
-              className="card min-w-[280px] hover:shadow-lg transition-all duration-300 shadow-gray-500 max-w-xs rounded-2xl overflow-hidden border border-gray-300 p-4 bg-[#eeeeee] flex-shrink-0"
+              className="card min-w-[280px] group hover:shadow-xl transition-all duration-300 shadow-gray-300 cursor-pointer max-w-xs rounded-2xl overflow-hidden border border-gray-300 p-4 bg-[#eeeeee] flex-shrink-0"
             >
               {/* Image */}
-              <div className="img-container relative group ">
+              <div className="img-container relative group overflow-hidden rounded-lg">
                 <Image
                   src={item.image}
                   alt={item.title}
                   width={400}
                   height={250}
-                  className="w-full h-48 object-cover rounded-lg"
+                  className="w-full h-48 object-cover rounded-lg hover:scale-125 transition-all duration-300"
                 />
-                <button className="absolute transition-all duration-500  top-2 right-2 bg-[#eeeeee] rounded-full p-2 shadow hover:scale-110 ">
-                  <Image src={heart} alt="heart" />
+                <button className="absolute group-hover:scale-105 transition-all duration-300  top-2 right-2 bg-[#eeeeee] rounded-full p-2 shadow hover:scale-110 ">
+                  <Image src={heart} alt="heart" className="" />
                 </button>
               </div>
 

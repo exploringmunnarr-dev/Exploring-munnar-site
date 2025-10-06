@@ -32,7 +32,7 @@ const cardData = [
 const WhyChooseUs = () => {
   return (
     <>
-      <section className="md:mx-10 mt-8 md:mt-14 mx-4 md:flex items-center justify-between gap-4 ">
+      <section className="md:mx-10 mt-8 md:mt-30 mx-4 md:flex items-center justify-between gap-4 ">
         <div className="first-container w-[100%] md:w-[40%] ">
           <h1 className="text-xl md:text-3xl font-semibold text-[#333333]">
             Why Travelers Choose Exploring Munnar

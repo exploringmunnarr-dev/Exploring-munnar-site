@@ -22,14 +22,22 @@ const ActivitiesSection = () => {
                 {/* Image container  */}
                 <div className="image-container mt-4 md:flex gap-4 h-[540px] ">
                     <div className="first-container w-[100%] md:w-[60%] h-[50%] ">
-                        <Image src={img1} className='h-[100%] w-[100%] object-cover rounded-xl' />
+                        <div className="img-container overflow-hidden rounded-xl">
+                            <Image src={img1} className='h-[100%] w-[100%] object-cover rounded-xl hover:scale-125 transition-all duration-300' />
+                        </div>
                         <div className="first-container-second-img mt-2 md:flex gap-3 h-[100%]" >
-                            <Image src={img2} className='h-[100%] w-[100%] md:w-[50%] object-cover rounded-2xl' />
-                            <Image src={img3} className='h-[97%] w-[100%] mt-2 md:w-[50%] object-cover rounded-2xl hidden md:block' />
+                            <div className="img-container w-[100%] h-[100%] overflow-hidden rounded-2xl">
+                                <Image src={img2} className='h-[100%] w-[100%] md:w-[100%] object-cover rounded-2xl hover:scale-125 transition-all duration-300' />
+                            </div>
+                            <div className="img-container  w-[100%]  h-[100%] overflow-hidden rounded-2xl">
+                                <Image src={img3} className='h-[100%] w-[100%] md:w-[100%] object-cover rounded-2xl hidden md:block  hover:scale-125 transition-all duration-300' />
+                            </div>
                         </div>
                     </div>
                     <div className="second-container hidden md:block w-[40%] ">
-                        <Image src={img4} className='h-[102%] object-cover w-[100%] rounded-xl' />
+                        <div className="img-container overflow-hidden rounded-xl">
+                            <Image src={img4} className='h-[102%] object-cover w-[100%] rounded-xl hover:scale-125 transition-all duration-300' />
+                        </div>
                     </div>
                 </div>
             </section>

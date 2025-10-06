@@ -141,10 +141,10 @@ const HotelListingCard = () => {
         return (
           <div className="card bg-[#EEEEEE] w-[100%] rounded-2xl p-4 flex gap-4">
             <div className="first-container h-[200px] w-[25%] ">
-              <div className="img-container  h-[100%] relative">
+              <div className="img-container  h-[100%] relative overflow-hidden hover:rounded-lg">
                 <Image
                   src={item.image}
-                  className="w-[100%] rounded-lg h-[100%] object-cover"
+                  className="w-[100%] rounded-lg h-[100%] object-cover hover:scale-125 transition-all duration-300"
                 />
                 <div className="favorite-icon-container absolute top-4 right-4">
                   <button

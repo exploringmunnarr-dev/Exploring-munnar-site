@@ -75,7 +75,7 @@ const MyInterestModal = ({ isMyInterestModal, setIsMyInterestModal }) => {
     <>
       <section
         ref={modalRef}
-        className="bg-white fixed top-[50%] left-[50%] translate-y-[-50%] z-10 translate-x-[-50%] w-[600px] h-[460px] py-2 rounded-lg border border-gray-200"
+        className="bg-white fixed top-[50%] left-[50%] translate-y-[-50%] z-10 translate-x-[-50%] w-[90%] md:w-[600px] h-fit md:h-[460px] py-2 rounded-lg border border-gray-200"
       >
         <div className="main-container-1 relative">
           <header className="py-1 border-b border-gray-300 px-2 flex justify-end">
@@ -85,10 +85,10 @@ const MyInterestModal = ({ isMyInterestModal, setIsMyInterestModal }) => {
             />
           </header>
           <div className="header-container mt-3 px-4">
-            <h1 className="font-semibold text-[#333333] text-2xl">
+            <h1 className="font-semibold text-[#333333] text-lg md:text-2xl">
               What are you into?
             </h1>
-            <h1 className="text-gray-500 text-lg mt-1">
+            <h1 className="text-gray-500 text-md md:text-lg mt-1">
               Pick some interests that you enjoy and that you want to show on
               your profile.
             </h1>
@@ -98,11 +98,10 @@ const MyInterestModal = ({ isMyInterestModal, setIsMyInterestModal }) => {
               return (
                 <div
                   onClick={() => handleSelectedItem(item.title)}
-                  className={`tab w-fit px-4 py-2  cursor-pointer rounded-full border border-gray-200  ${
-                    selectedItem.includes(item.title)
-                      ? "bg-gray-200 text-black"
-                      : "bg-gray-50 text-[#333333]"
-                  }`}
+                  className={`tab w-fit px-4 py-2 text-[14px] md:text-md cursor-pointer rounded-full border border-gray-200  ${selectedItem.includes(item.title)
+                    ? "bg-gray-200 text-black"
+                    : "bg-gray-50 text-[#333333]"
+                    }`}
                 >
                   <h1 className="">{item.title}</h1>
                 </div>

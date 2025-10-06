@@ -43,8 +43,8 @@ const HotelEnquiryForm = ({ setIsForm }) => {
         ref={modalRef}
         className="bg-white max-sm:w-[90%] max-sm:h-[85vh] overflow-auto w-[80%] md:w-[50%] rounded-lg py-5 px-6 fixed z-110 top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%]"
       >
-        <header className="flex items-start gap-4 border-b border-[#777777] pb-5">
-          <div className="container-1 flex items-center gap-3">
+        <header className="flex items-start justify-between gap-4 border-b border-[#777777] pb-5 ">
+          <div className="container-1 flex items-center gap-3 ">
             <div className="img-container w-[70px] ">
               <Image src={img} className="w-[100%] rounded-lg" />
             </div>

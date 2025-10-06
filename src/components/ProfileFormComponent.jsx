@@ -27,7 +27,7 @@ const ProfileFormComponent = ({ isForm, setIsForm, formlable }) => {
     <>
       <section
         ref={modelref}
-        className="bg-white fixed top-[50%] left-[50%] translate-y-[-50%] z-10 translate-x-[-50%] w-[600px] py-2 rounded-lg border border-gray-200"
+        className="bg-white fixed top-[50%] left-[50%] translate-y-[-50%] z-10 translate-x-[-50%] w-[90%] md:w-[600px] py-2 rounded-lg border border-gray-200"
       >
         <header className="py-1 border-b border-gray-300 px-2 flex justify-end">
           <X
@@ -36,10 +36,10 @@ const ProfileFormComponent = ({ isForm, setIsForm, formlable }) => {
           />
         </header>
         <div className="content-container px-4 mt-2 py-3 ">
-          <h1 className="font-semibold text-[#333333] text-2xl">
+          <h1 className="font-semibold text-[#333333] text-lg md:text-2xl">
             {data.title}
           </h1>
-          <h1 className="text-gray-500 text-lg mt-1">{data.description}</h1>
+          <h1 className="text-gray-500 text-md md:text-lg mt-1">{data.description}</h1>
           <input
             type="text"
             placeholder={data.placeholder}

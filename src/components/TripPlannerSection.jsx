@@ -82,7 +82,7 @@ const TripPlannerSection = () => {
         </div>
         <div className="second-container mt-4 w-[100%] md:w-[40%] ">
           <div className="first-section md:flex gap-2 ">
-            <div className="img-container md:w-[400px]">
+            <div className="img-container md:w-[400px] overflow-hidden">
               <Image src={img1} className="h-[95%] w-[100%]" />
             </div>
             <div className="second-img-section mt-2 md:mt-0 space-y-3">

@@ -6,7 +6,7 @@ const HotelLocation = () => {
     <>
         <section className='mt-4 md:mt-10'>
                 <header>
-                    <h1 className='text-xl font-semibold md:text-3xl'>Location</h1>
+                    <h1 className='text-xl font-semibold md:text-3xl text-[#333333]'>Location</h1>
                     <div className="img-container mt-4">
                             <Image src={locationImg}/>
                     </div>
