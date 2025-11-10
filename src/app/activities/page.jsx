@@ -1,10 +1,11 @@
 import BoatingAndLakeTours from "@/components/BoatingAndLakeTours";
+import Footer from "@/components/Footer";
 import ItnearyFaq from "@/components/ItnearyFaq";
+import MobileTab from "@/components/MobileTab";
 import Navbar from "@/components/Navbar";
 import PopularActivities from "@/components/PopularActivities";
 import SubCardNav from "@/components/SubCardNav";
 import React from "react";
-
 const page = () => {
   return (
     <>
@@ -29,6 +30,10 @@ const page = () => {
         </div>
       </div>
       <ItnearyFaq />
+      <Footer />
+      <div className="tab-container w-full fixed bottom-0 md:hidden">
+        <MobileTab />
+      </div>
     </>
   );
 };

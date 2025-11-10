@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import hotImg from "../assets/hotel1.svg";
 import hotImg2 from "../assets/hotel2.avif";
 import hotImg3 from "../assets/hotel3.avif";
@@ -16,6 +16,8 @@ import Image from "next/image";
 import { Heart } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+
 const listings = [
   {
     id: "misty-hill-eco-retreat-1",
@@ -128,8 +130,36 @@ const listings = [
 ];
 
 const HotelListingCard = () => {
+  // const [listings, setListings] = useState([]);
+  // const [page, setPage] = useState(1);
+  // const [hasMore, setHasMore] = useState(true);
+  // const limit = 10;
+
+  // // ✅ Fetch listings
+  // const fetchListings = async () => {
+  //   try {
+  //     const res = await axios.get(`/api/hotels?page=${page}&limit=${limit}`);
+  //     const newData = res.data.data;
+
+  //     setListings((prev) => [...prev, ...newData]);
+  //     setHasMore(res.data.hasMore);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchListings();
+  // }, [page]);
+
+  // // ✅ Load more handler
+  // const handleLoadMore = () => {
+  //   if (hasMore) setPage((prev) => prev + 1);
+  // };
+
   // Router Hooks
   const router = useRouter();
+
   // functions
   const handleNavigation = (id) => {
     router.push(`/hotels/hotel_listing/${id}`);
@@ -223,6 +253,17 @@ const HotelListingCard = () => {
           </div>
         );
       })}
+
+      {/* {hasMore && (
+        <div className="flex justify-center mt-6">
+          <button
+            onClick={handleLoadMore}
+            className="bg-[#246132] hover:bg-[#AF4300] text-white px-6 py-2 rounded-lg"
+          >
+            Load More
+          </button>
+        </div>
+      )} */}
     </section>
   );
 };
