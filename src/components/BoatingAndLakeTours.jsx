@@ -1,7 +1,10 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import m1 from "../assets/m1.svg";
 import str from "../assets/str.svg";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 const data = [
   {
     img: m1,
@@ -10,6 +13,7 @@ const data = [
     description: "Calm reservoir surrounded by rolling tea estates and hills",
     ratings: 4.99,
     reviewsCount: "499 reviews",
+    id: 1,
   },
   {
     img: m1,
@@ -18,6 +22,7 @@ const data = [
     description: "Calm reservoir surrounded by rolling tea estates and hills",
     ratings: 4.99,
     reviewsCount: "499 reviews",
+    id: 2,
   },
   {
     img: m1,
@@ -26,6 +31,7 @@ const data = [
     description: "Calm reservoir surrounded by rolling tea estates and hills",
     ratings: 4.99,
     reviewsCount: "499 reviews",
+    id: 3,
   },
 ];
 const BoatingAndLakeTours = () => {
@@ -67,12 +73,13 @@ const BoatingAndLakeTours = () => {
                         {item.reviewsCount}
                       </h1>
                     </div>
-                    <button
+                    <Link
+                      href={`/activities/${item.id}`}
                       className="bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] 
   hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] cursor-pointer rounded-lg py-2 px-4 text-white"
                     >
                       View Details
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
