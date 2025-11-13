@@ -10,6 +10,8 @@ import ac2 from "../../../assets/ac2.svg";
 import ac3 from "../../../assets/ac3.svg";
 import ItnearyFaq from "@/components/ItnearyFaq";
 import Footer from "@/components/Footer";
+import locationImg from '../../../assets/locationImgcopy.svg'
+
 const tabs = ["Overview", "Location", "FAQ's"];
 
 const data = {
@@ -36,11 +38,10 @@ const page = () => {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`relative pb-1 text-[15px] font-semibold  transition-all ${
-                  activeTab === tab
-                    ? "text-[#333333] after:content-[''] font-medium after:absolute after:left-0 after:bottom-0 after:w-full after:h-[2px] after:bg-[#AF4300]"
-                    : "text-gray-600 hover:text-[#333333]"
-                }`}
+                className={`relative pb-1 text-[15px] font-semibold  transition-all ${activeTab === tab
+                  ? "text-[#333333] after:content-[''] font-medium after:absolute after:left-0 after:bottom-0 after:w-full after:h-[2px] after:bg-[#AF4300]"
+                  : "text-gray-600 hover:text-[#333333]"
+                  }`}
               >
                 {tab}
               </button>
@@ -108,8 +109,16 @@ const page = () => {
             </button>
           </div>
         </div>
-        <ItnearyFaq/>
-        <Footer/>
+
+        <div className="overview-container mt-12 mx-9">
+          <h1 className='text-lg font-semibold'>Overview</h1>
+          <p className='mt-2 text-[#777777]'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore sapiente voluptatum quidem sint consequuntur exercitationem autem vel distinctio neque nulla necessitatibus quam, blanditiis optio quaerat, provident placeat qui, sunt expedita porro atque vitae. Fugiat amet eius, ipsa mollitia provident quo tempora asperiores nam quod quis corporis perferendis sint doloribus voluptatibus voluptates aliquid ad iste sit velit consequatur quaerat! Adipisci expedita nemo nostrum excepturi nesciunt omnis, delectus rem impedit dolorum reiciendis optio minima consequatur, sint fuga illum esse itaque voluptas minus ratione veniam, iusto nisi nihil? Cum nam obcaecati, placeat consequuntur similique laudantium dolorum tenetur laboriosam dolores ipsa, recusandae libero tempore.</p>
+        </div>
+        <div className="location-container mx-9 mt-12">
+          <Image src={locationImg} width={100} height={100} className="w-[100%] h-[100%]" />
+        </div>
+        <ItnearyFaq />
+        <Footer />
       </section>
     </>
   );
