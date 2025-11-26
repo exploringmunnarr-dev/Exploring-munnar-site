@@ -13,6 +13,8 @@ import img4 from "../assets/itnearyPersonalImg4.svg";
 import { useFormData } from "@/context/FormProvider";
 import axios from "axios";
 
+// working on itneary form 
+
 const ItnearyPersonalInfo = ({ setStep }) => {
   // context data
   const { setItnearyFormData, itnearyFormData } = useFormData();
