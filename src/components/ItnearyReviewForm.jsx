@@ -10,6 +10,7 @@ import bell from '../assets/bell_icon.svg'
 import Image from 'next/image'
 import { ChevronRight } from 'lucide-react'
 import { useFormData } from '@/context/FormProvider'
+import axios from 'axios'
 
 const routes_data = [
     { route: "Munnar rose garden", distance: "3km from mettupaty", img: routeImg1 },
@@ -24,6 +25,40 @@ const ItnearyReviewForm = ({ setStep }) => {
 
     // states 
     
+    // functions 
+
+    // API call 
+    const handleSubmit = async () => {
+  try {
+    // Convert values before sending
+    const formattedPayload = {
+      ...itnearyFormData,
+      hotelRequired: Array.isArray(itnearyFormData.hotelRequired)
+        ? itnearyFormData.hotelRequired
+        : itnearyFormData.hotelRequired.split(",").map(item => item.trim()),
+
+      taxiRequirement: Array.isArray(itnearyFormData.taxiRequirement)
+        ? itnearyFormData.taxiRequirement
+        : itnearyFormData.taxiRequirement.split(",").map(item => item.trim()),
+
+      routes: itnearyFormData.routes || [],
+
+      notes: itnearyFormData.notes || "",
+      userId: 1,
+    };
+
+    const response = await axios.post(
+      "https://munnar-backend.onrender.com/api/itinerary",
+      formattedPayload
+    );
+
+    console.log("Data sent:", response.data);
+  } catch (error) {
+    console.error("Error sending data:", error);
+  }
+};
+
+
     return (
         <>
             <section className='bg-white rounded-xl p-6 space-y-8'>
@@ -108,7 +143,7 @@ const ItnearyReviewForm = ({ setStep }) => {
                         <h1 className='flex items-center md:justify-center gap-2 text-[15px] md:text-lg'><input type="checkbox" className='scale-125 accent-[#AF4300]' />I confirm all the details are correct</h1>
                         <h1 className='flex items-center md:w-fit md:m-auto mt-2 md:mt-0 justify-end '>6 Out of 6 <ChevronRight className='h-5' /> </h1>
                         <div className="btn-container flex justify-end md:block">
-                            <button className='btn-green px-10 mt-2 py-2 font-semibold text-white rounded-lg cursor-pointer'>Submit</button>
+                            <button onClick={handleSubmit} className='btn-green px-10 mt-2 py-2 font-semibold text-white rounded-lg cursor-pointer'>Submit</button>
                         </div>
                     </div>
                 </footer>
