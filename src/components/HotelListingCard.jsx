@@ -129,7 +129,7 @@ const listings = [
   },
 ];
 
-const HotelListingCard = () => {
+const HotelListingCard = ({ listings }) => {
   // const [listings, setListings] = useState([]);
   // const [page, setPage] = useState(1);
   // const [hasMore, setHasMore] = useState(true);
@@ -164,6 +164,7 @@ const HotelListingCard = () => {
   const handleNavigation = (id) => {
     router.push(`/hotels/hotel_listing/${id}`);
   };
+  { console.log("hotel listing : ", listings[0]) }
 
   return (
     <section className="space-y-4">
@@ -172,8 +173,8 @@ const HotelListingCard = () => {
           <div className="card bg-[#EEEEEE] w-[100%] rounded-2xl p-4 flex gap-4">
             <div className="first-container h-[200px] w-[25%] ">
               <div className="img-container  h-[100%] relative overflow-hidden hover:rounded-lg">
-                <Image
-                  src={item.image}
+                <img
+                  src={item?.images[0]?.url} alt="image"
                   className="w-[100%] rounded-lg h-[100%] object-cover hover:scale-125 transition-all duration-300"
                 />
                 <div className="favorite-icon-container absolute top-4 right-4">
@@ -193,7 +194,7 @@ const HotelListingCard = () => {
             <div className="second-container w-[75%] flex gap-2">
               <div className="container-1 w-[80%] ">
                 <h1 className="text-[#246132] font-semibold text-lg flex items-center gap-2">
-                  {item.title}{" "}
+                  {item.name}{" "}
                   <span>
                     <Image src={thumb} />
                   </span>
@@ -211,21 +212,24 @@ const HotelListingCard = () => {
                       {item.description.slice(0, 130)}...
                     </h1>
                     <div className="label-container mt-2 flex items-center gap-2">
-                      <div className="label-1 bg-white flex items-center gap-2 w-fit px-3 py-2 rounded-lg shadow">
-                        <Image src={eco} />
-                        <h1>Eco cottage</h1>
-                      </div>
-                      <div className="label-1 bg-white flex items-center gap-2 w-fit px-3 py-2 rounded-lg shadow">
+                      {item.amenities.map((amenity, index) => {
+                        return <div className="label-1 bg-white flex items-center gap-2 w-fit px-3 py-2 rounded-lg shadow">
+                          <Image src={eco} />
+                          <h1>{amenity.name}</h1>
+                        </div>
+                      })}
+
+                      {/* <div className="label-1 bg-white flex items-center gap-2 w-fit px-3 py-2 rounded-lg shadow">
                         <Image src={wifi} />
                         <h1>Free wifi</h1>
                       </div>
                       <div className="label-1 bg-white flex items-center gap-2 w-fit px-3 py-2 rounded-lg shadow">
                         <Image src={fire} />
                         <h1>Campfire</h1>
-                      </div>
+                      </div> */}
                     </div>
                     <h1 className="font-semibold text-[#246132] mt-2">
-                      {item.priceText}
+                      From {item.pricePerNight} / night
                     </h1>
                   </div>
                 </div>
@@ -243,7 +247,7 @@ const HotelListingCard = () => {
                   <button
                     onClick={() => handleNavigation(item.id)}
                     className="btn-container  bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] 
-  hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)]  text-white w-[100%] flex items-center justify-center mt-2 rounded-lg py-2 cursor-pointer"
+             hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)]  text-white w-[100%] flex items-center justify-center mt-2 rounded-lg py-2 cursor-pointer"
                   >
                     View Details
                   </button>

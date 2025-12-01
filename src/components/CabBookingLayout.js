@@ -3,9 +3,17 @@
 import { useState } from "react";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
+import axios from "axios";
 
 // Custom Dropdown Component
-function CustomDropdown({ label, options, placeholder, value, onChange, error }) {
+function CustomDropdown({
+  label,
+  options,
+  placeholder,
+  value,
+  onChange,
+  error,
+}) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -59,7 +67,7 @@ export default function CabBookingLayout() {
   // Error states
   const [errors, setErrors] = useState({});
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validate
@@ -86,13 +94,43 @@ export default function CabBookingLayout() {
       vehicle: selectedVehicle,
     }).toString();
 
-    window.open(`/blank?${queryParams}`, "_blank");
+    const payload = {
+      userId : 1,
+      pickupLocation: pickup,
+      dropLocation: drop,
+      date: date,
+      time: time,
+      mobileNumber: mobile,
+      noOfPassengers: passengers,
+      vehicleType: selectedVehicle,
+    };
+      console.log("cab booking payload : ", payload);
+
+    try {
+      const response = await axios.post(
+        `https://munnar-backend.onrender.com/api/cab-booking`,
+        { payload }
+      );
+      console.log("cab booked successfully : ", response);
+    } catch (err) {
+      console.error("error occred while posting cab booking form : ", err);
+    }
   };
 
-  const locations = ["Munnar Town", "Kochi Airport", "Aluva", "Ernakulam", "Adimali"];
+  const locations = [
+    "Munnar Town",
+    "Kochi Airport",
+    "Aluva",
+    "Ernakulam",
+    "Adimali",
+  ];
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 w-full h-full">
+    <form
+      onSubmit={handleSubmit}
+      noValidate
+      className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 w-full h-full"
+    >
       {/* left layout */}
       <div className="bg-white rounded-xl shadow-md p-6 flex flex-col justify-between">
         <div>
@@ -121,7 +159,12 @@ export default function CabBookingLayout() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             <div className="relative">
               <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-1">
-                <Image src="/icons/calendar.svg" alt="date" width={18} height={18} />
+                <Image
+                  src="/icons/calendar.svg"
+                  alt="date"
+                  width={18}
+                  height={18}
+                />
                 Date
               </label>
               <input
@@ -132,12 +175,19 @@ export default function CabBookingLayout() {
                   errors.date ? "border-red-500" : "border-gray-300"
                 }`}
               />
-              {errors.date && <p className="text-red-500 text-xs mt-1">{errors.date}</p>}
+              {errors.date && (
+                <p className="text-red-500 text-xs mt-1">{errors.date}</p>
+              )}
             </div>
 
             <div className="relative">
               <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-1">
-                <Image src="/icons/time.svg" alt="time" width={18} height={18} />
+                <Image
+                  src="/icons/time.svg"
+                  alt="time"
+                  width={18}
+                  height={18}
+                />
                 Time
               </label>
               <input
@@ -148,7 +198,9 @@ export default function CabBookingLayout() {
                   errors.time ? "border-red-500" : "border-gray-300"
                 }`}
               />
-              {errors.time && <p className="text-red-500 text-xs mt-1">{errors.time}</p>}
+              {errors.time && (
+                <p className="text-red-500 text-xs mt-1">{errors.time}</p>
+              )}
             </div>
           </div>
 
@@ -156,7 +208,12 @@ export default function CabBookingLayout() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             <div className="relative">
               <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-1">
-                <Image src="/icons/mobile.svg" alt="mobile" width={18} height={18} />
+                <Image
+                  src="/icons/mobile.svg"
+                  alt="mobile"
+                  width={18}
+                  height={18}
+                />
                 Mobile number
               </label>
               <input
@@ -169,12 +226,19 @@ export default function CabBookingLayout() {
                   errors.mobile ? "border-red-500" : "border-gray-300"
                 }`}
               />
-              {errors.mobile && <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>}
+              {errors.mobile && (
+                <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>
+              )}
             </div>
 
             <div className="relative">
               <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-1">
-                <Image src="/icons/passengers.svg" alt="passengers" width={18} height={18} />
+                <Image
+                  src="/icons/passengers.svg"
+                  alt="passengers"
+                  width={18}
+                  height={18}
+                />
                 No of passengers
               </label>
               <input
@@ -187,12 +251,16 @@ export default function CabBookingLayout() {
                   errors.passengers ? "border-red-500" : "border-gray-300"
                 }`}
               />
-              {errors.passengers && <p className="text-red-500 text-xs mt-1">{errors.passengers}</p>}
+              {errors.passengers && (
+                <p className="text-red-500 text-xs mt-1">{errors.passengers}</p>
+              )}
             </div>
           </div>
 
           {/* Vehicle Type */}
-          <h3 className="text-md font-semibold mt-6 mb-2 text-black">Choose Vehicle Type</h3>
+          <h3 className="text-md font-semibold mt-6 mb-2 text-black">
+            Choose Vehicle Type
+          </h3>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
             {["Sedan", "Hatchback", "Suv", "Van", "Bus"].map((type) => {
               const isSelected = selectedVehicle === type;
@@ -217,7 +285,11 @@ export default function CabBookingLayout() {
                 </div>
               );
             })}
-            {errors.vehicle && <p className="text-red-500 text-xs mt-1 col-span-full">{errors.vehicle}</p>}
+            {errors.vehicle && (
+              <p className="text-red-500 text-xs mt-1 col-span-full">
+                {errors.vehicle}
+              </p>
+            )}
           </div>
         </div>
 
@@ -229,14 +301,21 @@ export default function CabBookingLayout() {
             Enquire now
           </button>
           <p className="text-xs text-gray-500 mt-3">
-            Avoid the hassle of last-minute rides. Pre-book reliable cabs with local drivers who know Munnar's terrain. Ideal for airport transfers, sightseeing, and intercity travel.
+            Avoid the hassle of last-minute rides. Pre-book reliable cabs with
+            local drivers who know Munnar's terrain. Ideal for airport
+            transfers, sightseeing, and intercity travel.
           </p>
         </div>
       </div>
 
       {/* Right image */}
       <div className="relative bg-white rounded-xl shadow-md overflow-hidden flex items-center justify-center w-full h-80 md:h-[400px] lg:h-[550px]">
-        <Image src="/images/munnar.jpg" alt="Munnar" fill className="object-cover" />
+        <Image
+          src="/images/munnar.jpg"
+          alt="Munnar"
+          fill
+          className="object-cover"
+        />
         <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
           <h2 className="text-center leading-snug">
             <span

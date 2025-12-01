@@ -1,13 +1,38 @@
-import React from "react";
+"use client"
+import React, { useEffect, useState } from "react";
 import SubCardNav from "@/components/SubCardNav";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import HotelFilterComponent from "@/components/HotelFilterComponent";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import HotelListingCard from "@/components/HotelListingCard";
 import ResponsiveHotelListingCard from "@/components/ResponsiveHotelListingCard";
+import axios from "axios";
 
 const page = () => {
+  const [pageNumber, setPageNumber] = useState(1);
+  const [hotelData, setHotelData] = useState([]);
+
+  // useEffect call's 
+  useEffect(() => {
+    async function fetchHotel() {
+      try {
+        const response = await axios.post(`https://munnar-backend.onrender.com/api/hotels-list`, {
+          "pageNumber": pageNumber
+        });
+        setHotelData(response.data.data.hotels);
+      } catch (err) {
+        console.error("Error while fetching hotel list : ", err)
+      }
+    }
+    fetchHotel()
+  }, [pageNumber])
+
+  // functions 
+  const handlePagination = () => {
+
+  }
+
   return (
     <>
       <Navbar />
@@ -75,7 +100,14 @@ const page = () => {
               </div>
             </div>
             <div className="hotel-listing-card hidden md:block">
-              <HotelListingCard />
+              <HotelListingCard listings={hotelData} />
+              <div className="btn-container flex justify-end mt-4" >
+                <button onClick={() => handlePagination()} className="flex items-center gap-2">
+                  <button className={`${pageNumber == 1 ? "cursor-disabled" : "cursor-pointer"}   `}><ChevronLeft className="w-4 h-4" /></button>
+                  <h1 className="text-sm text-[#AF4300]">{pageNumber}</h1>
+                  <button ><ChevronRight className="w-4 h-4" /></button>
+                </button>
+              </div>
             </div>
             <div className="responsiveCard md:hidden">
               <ResponsiveHotelListingCard />

@@ -33,7 +33,7 @@ const page = () => {
       <ItnearyFaq />
       <Footer />
       <div className="tab-container w-full fixed bottom-0 md:hidden">
-          <MobileTab/>
+        <MobileTab />
       </div>
     </>
   );
