@@ -12,6 +12,7 @@ import axios from "axios";
 const page = () => {
   // Auth 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  console.log("Changes made in Dec 2nd code")
 
   // states 
   const [pageNumber, setPageNumber] = useState(1);
