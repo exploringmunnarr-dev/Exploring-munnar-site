@@ -95,7 +95,7 @@ export default function CabBookingLayout() {
     }).toString();
 
     const payload = {
-      userId : 1,
+      userId: 1,
       pickupLocation: pickup,
       dropLocation: drop,
       date: date,
@@ -104,12 +104,21 @@ export default function CabBookingLayout() {
       noOfPassengers: passengers,
       vehicleType: selectedVehicle,
     };
-      console.log("cab booking payload : ", payload);
+    console.log("cab booking payload : ", payload);
 
     try {
       const response = await axios.post(
         `https://munnar-backend.onrender.com/api/cab-booking`,
-        { payload }
+        {
+          userId: 1,
+          pickupPoint: pickup,
+          dropPoint: drop,
+          date: date,
+          time: time,
+          mobileNumber: mobile,
+          noOfPassengers: passengers,
+          vehicleType: selectedVehicle,
+        }
       );
       console.log("cab booked successfully : ", response);
     } catch (err) {

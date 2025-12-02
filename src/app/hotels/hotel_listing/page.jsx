@@ -10,27 +10,68 @@ import ResponsiveHotelListingCard from "@/components/ResponsiveHotelListingCard"
 import axios from "axios";
 
 const page = () => {
+  // Auth 
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+  // states 
   const [pageNumber, setPageNumber] = useState(1);
+  const [pageNumberList, setPageNumberList] = useState([])
   const [hotelData, setHotelData] = useState([]);
+  const [loading, setLoading] = useState(false)
+  // filter inputStates 
+  const [stayType, setStayType] = useState([]);
+  const [loation, setLocation] = useState([]);
+  const [amenities, setAmenities] = useState([]);
+  const [experiences, setExperiences] = useState([]);
+  const [budget, setBudget] = useState({});
+
+  // console log's  
+  console.log("experiences : ", experiences)
 
   // useEffect call's 
   useEffect(() => {
     async function fetchHotel() {
       try {
-        const response = await axios.post(`https://munnar-backend.onrender.com/api/hotels-list`, {
+        setLoading(true)
+        const response = await axios.post(`${apiUrl}/api/hotels-list`, {
+          "stayType": stayType,
+          "location": loation,
+          "amenities": amenities,
+          "experiences": experiences,
+          // "budget": { startingFrom: 0, to: 0 },
           "pageNumber": pageNumber
         });
         setHotelData(response.data.data.hotels);
+        const totalPages = Array.from({ length: response.data.data.totalPages }, (_, i) => i + 1);
+        setPageNumberList(totalPages);
+        setTimeout(() => {
+          setLoading(false)
+        }, 1000);
       } catch (err) {
         console.error("Error while fetching hotel list : ", err)
+        setLoading(false)
       }
     }
     fetchHotel()
-  }, [pageNumber])
+  }, [pageNumber, stayType, loation, amenities, experiences])
+
 
   // functions 
-  const handlePagination = () => {
+  const handleNext = () => {
+    const lastPageNumber = pageNumberList[pageNumberList.length - 1];
+    if (pageNumber == lastPageNumber) {
+      return;
+    }
+    setPageNumber(pageNumber + 1);
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
 
+  const handlePrev = () => {
+    if (pageNumber == 1) {
+      return;
+    };
+    window.scrollTo({ top: 0, behavior: "smooth" })
+    setPageNumber(pageNumber - 1)
   }
 
   return (
@@ -53,7 +94,7 @@ const page = () => {
         </header>
         <div className="main-content-container mt-6  grid grid-cols-12 gap-6">
           <div className="filter-component-container py-2 rounded-xl overflow-auto hidden md:block md:col-span-3 h-fit bg-[#fefefe] shadow sticky top-[68px] ">
-            <HotelFilterComponent />
+            <HotelFilterComponent stayType={stayType} loation={loation} amenities={amenities} experiences={experiences} budget={budget} setStayType={setStayType} setLocation={setLocation} setAmenities={setAmenities} setExperiences={setExperiences} setBudget={setBudget} />
           </div>
           <div className="hotel-card-component-container space-y-4 col-span-12 md:col-span-9">
             <div className="box hidden w-[100%] bg-white sticky top-[63px] border-none z-20">
@@ -100,14 +141,21 @@ const page = () => {
               </div>
             </div>
             <div className="hotel-listing-card hidden md:block">
-              <HotelListingCard listings={hotelData} />
-              <div className="btn-container flex justify-end mt-4" >
-                <button onClick={() => handlePagination()} className="flex items-center gap-2">
-                  <button className={`${pageNumber == 1 ? "cursor-disabled" : "cursor-pointer"}   `}><ChevronLeft className="w-4 h-4" /></button>
-                  <h1 className="text-sm text-[#AF4300]">{pageNumber}</h1>
-                  <button ><ChevronRight className="w-4 h-4" /></button>
-                </button>
-              </div>
+              <HotelListingCard listings={hotelData} loading={loading} />
+
+              {hotelData.length !== 0 && (
+                <div className="flex items-center gap-3 justify-end mt-2">
+                  <button onClick={handlePrev} className={``}><ChevronLeft /></button>
+                  <div className="number-container flex items-center gap-2">
+                    {pageNumberList.map((item, index) => {
+                      return <button className={`${item == pageNumber ? "bg-amber-800 text-white px-2 py-1" : ""} text-sm rounded w-7 h-7`}>{item}</button>
+                    })}
+                  </div>
+
+                  <button onClick={handleNext}><ChevronRight /></button>
+                </div>
+              )}
+
             </div>
             <div className="responsiveCard md:hidden">
               <ResponsiveHotelListingCard />
