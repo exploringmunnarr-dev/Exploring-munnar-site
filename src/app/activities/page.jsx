@@ -6,7 +6,7 @@ import MobileTab from "@/components/MobileTab";
 import Navbar from "@/components/Navbar";
 import PopularActivities from "@/components/PopularActivities";
 import SubCardNav from "@/components/SubCardNav";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ship from '../../assets/ship.png'
 import zipline from '../../assets/ship.svg'
 import airBalloon from '../../assets/airBalloon.png'
@@ -18,6 +18,7 @@ import spa from '../../assets/spa.png'
 import boats from '../../assets/boats.png'
 import { ChevronDown } from "lucide-react";
 import Image from "next/image";
+import axios from "axios";
 
 const sortData = [
   "All of these", "Seasonal Activites", "Regular Activites"
@@ -25,11 +26,33 @@ const sortData = [
 const activityType = [{ icon: ship, title: "Boating & Lake Tours" }, { icon: zipline, title: "Ziplines & Adventure Parks" }, { icon: airBalloon, title: "Hot Air Balloon Rides" }, { icon: nature, title: "Farm & Garden Visits" }, { icon: forest, title: "Flower Gardens & Botanical Parks" }, { icon: cabin, title: "Factory Tours" }, { icon: tourMaps, title: "Trekking & Nature Trails" }, { icon: boats, title: "Local Cultural Events" }, { icon: spa, title: "Spas & Ayurvedic Centres" }]
 
 const page = () => {
+  // Auth 
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL
+
   // states 
   const [sortItem, setSortItem] = useState("All of these")
   const [selectedType, setSelectedType] = useState(["Boating & Lake Tours"])
+  const [activityData, setAcivityData] = useState([])
+       
 
-  console.log("selected activity type : ", selectedType)
+  // useEffect call's 
+  useEffect(() => {
+    async function fetchActivity() {
+
+      try {
+        const res = await axios.post(`${apiUrl}/api/activities-list`, {
+          search: "",
+          pageNumber: 1,
+          category: sortItem,
+          type: selectedType
+        })
+        console.log("activity data : ", res.data.data)
+      } catch (err) {
+        console.error("Error occured while fetching activity data")
+      }
+    }
+    fetchActivity()
+  }, [selectedType, sortItem])
 
   // functions 
   function hanldeActivityType(selectedItem) {
