@@ -3,9 +3,17 @@
 import { useState } from "react";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
+import axios from "axios";
 
 // Custom Dropdown Component
-function CustomDropdown({ label, options, placeholder, value, onChange, error }) {
+function CustomDropdown({
+  label,
+  options,
+  placeholder,
+  value,
+  onChange,
+  error,
+}) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -46,8 +54,10 @@ function CustomDropdown({ label, options, placeholder, value, onChange, error })
     </div>
   );
 }
-
 export default function SelfDriveLayout() {
+  // Auth
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
   const [pickup, setPickup] = useState("");
   const [drop, setDrop] = useState("");
   const [date, setDate] = useState("");
@@ -61,7 +71,7 @@ export default function SelfDriveLayout() {
 
   const [errors, setErrors] = useState({});
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const newErrors = {};
@@ -90,10 +100,33 @@ export default function SelfDriveLayout() {
       vehicle: selectedVehicle,
     }).toString();
 
-    window.open(`/blank?${queryParams}`, "_blank");
+    try {
+      const response = await axios.post(`${apiUrl}/api/self-drive`, {
+        userId: 1,
+        pickupLocation: pickup,
+        dropLocation: drop,
+        date: date,
+        time: time,
+        mobileNumber: mobile,
+        noOfDays: days,
+        fuelType: fuelType,
+        carCategory: selectedVehicle,
+        notes : notes,
+        driverNeeded: driverNeeded.toLowerCase() == "yes" ? true : false,
+      });
+      console.log("self drive car booked successfully : ", response);
+    } catch (err) {
+      console.error("error occred while posting self car driving booking form : ", err);
+    }
   };
 
-  const locations = ["Munnar Town", "Kochi Airport", "Aluva", "Ernakulam", "Adimali"];
+  const locations = [
+    "Munnar Town",
+    "Kochi Airport",
+    "Aluva",
+    "Ernakulam",
+    "Adimali",
+  ];
 
   return (
     <form
@@ -128,7 +161,12 @@ export default function SelfDriveLayout() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             <div className="relative">
               <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-1">
-                <Image src="/icons/calendar.svg" alt="date" width={18} height={18} />
+                <Image
+                  src="/icons/calendar.svg"
+                  alt="date"
+                  width={18}
+                  height={18}
+                />
                 Date
               </label>
               <input
@@ -139,12 +177,19 @@ export default function SelfDriveLayout() {
                   errors.date ? "border-red-500" : "border-gray-300"
                 }`}
               />
-              {errors.date && <p className="text-red-500 text-xs mt-1">{errors.date}</p>}
+              {errors.date && (
+                <p className="text-red-500 text-xs mt-1">{errors.date}</p>
+              )}
             </div>
 
             <div className="relative">
               <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-1">
-                <Image src="/icons/time.svg" alt="time" width={18} height={18} />
+                <Image
+                  src="/icons/time.svg"
+                  alt="time"
+                  width={18}
+                  height={18}
+                />
                 Time
               </label>
               <input
@@ -155,7 +200,9 @@ export default function SelfDriveLayout() {
                   errors.time ? "border-red-500" : "border-gray-300"
                 }`}
               />
-              {errors.time && <p className="text-red-500 text-xs mt-1">{errors.time}</p>}
+              {errors.time && (
+                <p className="text-red-500 text-xs mt-1">{errors.time}</p>
+              )}
             </div>
           </div>
 
@@ -163,7 +210,12 @@ export default function SelfDriveLayout() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             <div className="relative">
               <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-1">
-                <Image src="/icons/mobile.svg" alt="mobile" width={18} height={18} />
+                <Image
+                  src="/icons/mobile.svg"
+                  alt="mobile"
+                  width={18}
+                  height={18}
+                />
                 Mobile number
               </label>
               <input
@@ -175,12 +227,19 @@ export default function SelfDriveLayout() {
                   errors.mobile ? "border-red-500" : "border-gray-300"
                 }`}
               />
-              {errors.mobile && <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>}
+              {errors.mobile && (
+                <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>
+              )}
             </div>
 
             <div className="relative">
               <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-1">
-                <Image src="/icons/calendar.svg" alt="days" width={18} height={18} />
+                <Image
+                  src="/icons/calendar.svg"
+                  alt="days"
+                  width={18}
+                  height={18}
+                />
                 No of Days
               </label>
               <input
@@ -193,7 +252,9 @@ export default function SelfDriveLayout() {
                   errors.days ? "border-red-500" : "border-gray-300"
                 }`}
               />
-              {errors.days && <p className="text-red-500 text-xs mt-1">{errors.days}</p>}
+              {errors.days && (
+                <p className="text-red-500 text-xs mt-1">{errors.days}</p>
+              )}
             </div>
           </div>
 
@@ -215,10 +276,15 @@ export default function SelfDriveLayout() {
           {/* Fuel type and Driver needed */}
           <div className="md:flex items-start gap-12 mb-4">
             <div className="mb-4 md:mb-0">
-              <h3 className="text-md font-semibold mb-2 text-black">Choose fuel type</h3>
+              <h3 className="text-md font-semibold mb-2 text-black">
+                Choose fuel type
+              </h3>
               <div className="flex gap-4 text-black">
                 {["Petrol", "Diesel", "EV"].map((fuel) => (
-                  <label key={fuel} className="flex items-center gap-2 cursor-pointer">
+                  <label
+                    key={fuel}
+                    className="flex items-center gap-2 cursor-pointer"
+                  >
                     <input
                       type="radio"
                       name="fuel"
@@ -231,14 +297,21 @@ export default function SelfDriveLayout() {
                   </label>
                 ))}
               </div>
-              {errors.fuelType && <p className="text-red-500 text-xs mt-1">{errors.fuelType}</p>}
+              {errors.fuelType && (
+                <p className="text-red-500 text-xs mt-1">{errors.fuelType}</p>
+              )}
             </div>
 
             <div>
-              <h3 className="text-md font-semibold mb-2 text-black">Driver needed?</h3>
+              <h3 className="text-md font-semibold mb-2 text-black">
+                Driver needed?
+              </h3>
               <div className="flex gap-4 text-black">
                 {["YES", "NO"].map((option) => (
-                  <label key={option} className="flex items-center gap-2 cursor-pointer">
+                  <label
+                    key={option}
+                    className="flex items-center gap-2 cursor-pointer"
+                  >
                     <input
                       type="radio"
                       name="driver"
@@ -252,15 +325,19 @@ export default function SelfDriveLayout() {
                 ))}
               </div>
               {errors.driverNeeded && (
-                <p className="text-red-500 text-xs mt-1">{errors.driverNeeded}</p>
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.driverNeeded}
+                </p>
               )}
             </div>
           </div>
 
           {/* Vehicle Type */}
-          <h3 className="text-md font-semibold mt-4 mb-2 text-black">Choose Car category</h3>
+          <h3 className="text-md font-semibold mt-4 mb-2 text-black">
+            Choose Car category
+          </h3>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-            {["Sedan", "Hatchback", "Suv", "Van"].map((type) => {
+            {["Sedan", "Hatchback", "SUV", "Van"].map((type) => {
               const isSelected = selectedVehicle === type;
               return (
                 <div
@@ -284,7 +361,9 @@ export default function SelfDriveLayout() {
               );
             })}
             {errors.vehicle && (
-              <p className="text-red-500 text-xs mt-1 col-span-full">{errors.vehicle}</p>
+              <p className="text-red-500 text-xs mt-1 col-span-full">
+                {errors.vehicle}
+              </p>
             )}
           </div>
         </div>
@@ -297,14 +376,21 @@ export default function SelfDriveLayout() {
             Enquire now
           </button>
           <p className="text-xs text-gray-500 mt-3">
-            Avoid the hassle of last-minute rides. Pre-book reliable cabs with local drivers who know Munnar's terrain. Ideal for airport transfers, sightseeing, and intercity travel.
+            Avoid the hassle of last-minute rides. Pre-book reliable cabs with
+            local drivers who know Munnar's terrain. Ideal for airport
+            transfers, sightseeing, and intercity travel.
           </p>
         </div>
       </div>
 
       {/* Right image */}
       <div className="relative bg-white rounded-xl shadow-md overflow-hidden flex items-center justify-center w-full h-80 md:h-[400px] lg:h-[550px]">
-        <Image src="/images/munnar.jpg" alt="Munnar" fill className="object-cover" />
+        <Image
+          src="/images/munnar.jpg"
+          alt="Munnar"
+          fill
+          className="object-cover"
+        />
         <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
           <h2 className="text-center leading-snug">
             <span

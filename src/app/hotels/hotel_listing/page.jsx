@@ -27,7 +27,7 @@ const page = () => {
   const [budget, setBudget] = useState({});
 
   // console log's  
-  console.log("experiences : ", experiences)
+  console.log("hotel data : ", hotelData)
 
   // useEffect call's 
   useEffect(() => {
