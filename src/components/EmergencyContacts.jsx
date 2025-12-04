@@ -16,13 +16,13 @@ const EmergencyContacts = () => {
     <>
       <section className="mt-4 md:mt-10">
         <div className="heading-container text-center py-2 rounded-lg bg-[#C9001B] text-white">
-          <h1 className="font-bold text-4xl">Emergency contacts</h1>
+          <h1 className="font-bold text-xl md:text-4xl">Emergency contacts</h1>
         </div>
-        <div className="card-container grid grid-cols-4 gap-3 mt-4 ">
+        <div className="card-container grid grid-cols-2 md:grid-cols-4 gap-3 mt-4 ">
           {data.map((item, index) => {
             return (
               <div className="card bg-[#EEEEEE] rounded-lg text-center p-4">
-                <Image src={item.img} className="w-fit m-auto h-[60px]" />
+                <Image src={item.img} className="w-fit m-auto h-[40px] md:h-[60px]" />
                 <h1 className="text-lg font-semibold text-[#333333] mt-2">
                   {item.title}
                 </h1>

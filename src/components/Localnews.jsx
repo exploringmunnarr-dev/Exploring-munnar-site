@@ -70,7 +70,7 @@ const Localnews = () => {
           </h1>
         </header>
         <div className="main-container grid grid-cols-12 gap-8 ">
-          <div className="filter-container col-span-4 mt-4 sticky top-20 h-fit">
+          <div className="filter-container col-span-4 mt-4 sticky top-20 h-fit hidden md:block">
             <h1 className="font-semibold text-2xl">Filters</h1>
             <div className="category-container mt-4">
               <header className="flex items-center justify-between border-b border-gray-400 pb-4 ">
@@ -100,19 +100,19 @@ const Localnews = () => {
               </div>
             </div>
           </div>
-          <div className="content-container col-span-8 mt-4">
+          <div className="content-container col-span-12 md:col-span-8 mt-4">
             <h1 className="text-[#333333] font-semibold text-xl">
               Road and transport condition
             </h1>
             <div className="card-container mt-4 space-y-3">
               {data.map((item, index) => {
                 return (
-                  <div className="card bg-[#EEEEEE] flex items-center gap-4 rounded-lg p-3">
+                  <div className="card bg-[#EEEEEE] md:flex items-center gap-4 rounded-lg p-3">
                     <Image
                       src={item.img}
-                      className="w-[340px] rounded-xl h-[200px] object-cover"
+                      className="w-[100%] md:w-[340px] rounded-xl h-[200px] object-cover"
                     />
-                    <div className="content-container">
+                    <div className="content-container mt-4 md:mt-0">
                       <h1 className="text-lg text-[#333333] font-semibold">
                         {item.title}
                       </h1>
@@ -136,10 +136,10 @@ const Localnews = () => {
               <div className="container-1 space-y-3">
                 {emergencyAlert.map((item, index) => {
                   return (
-                    <div className="card bg-[#EEEEEE] flex items-center gap-4 rounded-lg p-3">
+                    <div className="card bg-[#EEEEEE] md:flex items-center gap-4 rounded-lg p-3">
                       <Image
                         src={item.img}
-                        className="w-[340px] rounded-xl h-[200px] object-cover"
+                        className="w-[100%] md:w-[340px] rounded-xl h-[200px] object-cover"
                       />
                       <div className="content-container">
                         <h1 className="text-lg text-[#333333] font-semibold">

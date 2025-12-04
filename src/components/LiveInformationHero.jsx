@@ -9,30 +9,30 @@ const LiveInformationHero = () => {
     <>
       <section className="">
         <header>
-          <h1 className="text-[#333333] text-xl font-semibold md:text-3xl">
+          <h1 className="text-[#333333] text-lg sm:text-xl font-semibold md:text-3xl">
             Current weather of munnar
           </h1>
         </header>
         <div className="main-container mt-4">
           <main className=" bg-[#EEEEEE] rounded-xl flex items-center justify-center p-6">
-            <div className="grid grid-cols-12 md:grid-cols-12 gap-6 w-full ">
+            <div className="md:grid md:grid-cols-12 gap-6 w-full max-sm:space-y-4">
               {/* Left Card - Current Weather */}
-              <div className="bg-white rounded-2xl col-span-5 shadow px-6 flex py-4  gap-14">
+              <div className="bg-white rounded-2xl col-span-12  lg:col-span-5 shadow px-6 flex justify-between py-4  gap-14">
                 <div className="first-container ">
                   <button className="bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] flex items-center gap-2 text-white px-4 text-sm py-2 rounded-full">
                     <span>
                       {" "}
-                      <Image src={lo} />{" "}
+                      <Image src={lo} className=""/>{" "}
                     </span>{" "}
                     Munnar
                   </button>
                   <div className="content-container mt-4 ">
-                    <h1 className="text-[#333333] text-xl font-semibold md:text-4xl">
+                    <h1 className="text-[#333333] text-md sm:text-xl font-semibold md:text-4xl">
                       Monday
                     </h1>
-                    <h1 className="text-[#333333]">24 Dec, 2025</h1>
-                    <div className="content-2-container mt-16">
-                      <h1 className="font-semibold text-5xl text-[#333333]">
+                    <h1 className="text-[#333333] text-sm sm:text-md">24 Dec, 2025</h1>
+                    <div className="content-2-container mt-4 sm:mt-16">
+                      <h1 className="font-semibold text-xl sm:text-5xl text-[#333333]">
                         26° C
                       </h1>
                       <h1 className="text-[#333333] text-sm ">
@@ -41,18 +41,18 @@ const LiveInformationHero = () => {
                     </div>
                   </div>
                 </div>
-                <div className="second-container flex flex-col  justify-center items-center">
+                <div className="second-container flex flex-col justify-center items-center">
                   <Image
                     src={sunIcon}
-                    className="w-[180px] h-[140px] object-cover "
+                    className="w-[70px] h-[70px] sm:w-[180px] sm:h-[140px] object-cover "
                   />
-                  <h1 className="text-3xl text-[#333333] mt-2">Cloudy</h1>
+                  <h1 className="text-2xl sm:text-3xl text-[#333333] mt-2">Cloudy</h1>
                   <h1 className="text-sm text-[#333333] ">Feels Like 26</h1>
                 </div>
               </div>
 
               {/* Middle Card - Hourly Forecast */}
-              <div className="bg-white col-span-5 rounded-2xl shadow p-6">
+              <div className="bg-white col-span-12 lg:col-span-5 rounded-2xl shadow p-6">
                 <h3 className="font-semibold text-[#333333] text-3xl mb-4">
                   Today
                 </h3>
@@ -80,7 +80,7 @@ const LiveInformationHero = () => {
               </div>
 
               {/* Right Card - Sunrise / Sunset */}
-              <div className="bg-white rounded-2xl shadow p-6 flex flex-col justify-between col-span-2">
+              <div className="bg-white rounded-2xl shadow p-6 flex flex-col justify-between col-span-12 lg:col-span-2">
                 <div>
                   <p className=" text-lg">Sunrise</p>
                   <p className="text-2xl font-bold text-[#246132] mt-3">
