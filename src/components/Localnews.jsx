@@ -1,8 +1,10 @@
-import React from "react";
+"use client"
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import c1 from "../assets/c1.svg";
 import e1 from "../assets/e1.svg";
 import { ChevronDown } from "lucide-react";
+import axios from "axios";
 
 const checkboxData = [
   "Roads and transport conditions",
@@ -58,6 +60,25 @@ const data = [
   },
 ];
 const Localnews = () => {
+  // Auth 
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL
+
+  // states 
+  const [newsData, setNewsData] = useState([]);
+
+  useEffect(() => {
+    fetchNews()
+  }, [])
+  // functions 
+  const fetchNews = async () => {
+    try {
+      const response = await axios.get(`${apiUrl}/api/news`);
+      console.log("response : ", response.data.data)
+    } catch (err) {
+      console.error("error occured while fetchinig news : ", err.message || err)
+    }
+  }
+
   return (
     <>
       <section className="mt-4 md:mt-10">

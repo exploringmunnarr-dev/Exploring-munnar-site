@@ -12,6 +12,7 @@ import Footer from "@/components/Footer";
 import HomeHero from "@/components/HomeHero";
 import { useState } from "react";
 import MobileTab from "@/components/MobileTab";
+import PromotionBanner from "@/components/PromotionBanner";
 
 const Home = ({ scroll }) => {
   return (
@@ -19,6 +20,7 @@ const Home = ({ scroll }) => {
       <Navbar scroll={scroll} />
       <HomeHero />
       <GetAroundSection />
+      <PromotionBanner />
       <TripPlannerSection />
       <StayOptionsSection />
       <ActivitiesSection />
@@ -28,9 +30,9 @@ const Home = ({ scroll }) => {
         <GuestGallerySection />
       </div>
       <Footer />
-       <div className="tab-container w-full fixed bottom-0 md:hidden">
-                <MobileTab/>
-            </div>
+      <div className="tab-container w-full fixed bottom-0 md:hidden">
+        <MobileTab />
+      </div>
     </>
   );
 };
