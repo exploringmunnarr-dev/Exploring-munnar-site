@@ -33,7 +33,7 @@ const page = () => {
   const [sortItem, setSortItem] = useState("All of these")
   const [selectedType, setSelectedType] = useState(["Boating & Lake Tours"])
   const [activityData, setAcivityData] = useState([])
-       
+
 
   // useEffect call's 
   useEffect(() => {
