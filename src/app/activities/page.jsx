@@ -21,7 +21,7 @@ import Image from "next/image";
 import axios from "axios";
 
 const sortData = [
-  "All of these", "Seasonal Activites", "Regular Activites"
+  "All of these", "Seasonal Activities", "Regular Activities"
 ]
 const activityType = [{ icon: ship, title: "Boating & Lake Tours" }, { icon: zipline, title: "Ziplines & Adventure Parks" }, { icon: airBalloon, title: "Hot Air Balloon Rides" }, { icon: nature, title: "Farm & Garden Visits" }, { icon: forest, title: "Flower Gardens & Botanical Parks" }, { icon: cabin, title: "Factory Tours" }, { icon: tourMaps, title: "Trekking & Nature Trails" }, { icon: boats, title: "Local Cultural Events" }, { icon: spa, title: "Spas & Ayurvedic Centres" }]
 
