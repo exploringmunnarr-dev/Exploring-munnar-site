@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import star from "../../../../assets/star.svg";
 import Image from "next/image";
@@ -13,9 +13,39 @@ import ReviewsPage from "@/components/ReviewsPage";
 import HotelEnquiryForm from "@/components/HotelEnquiryForm";
 import HotelsRulesRegulation from "@/components/HotelsRulesRegulation";
 import { Link, Element } from "react-scroll";
+import axios from "axios";
+import { useParams } from "next/navigation";
 const page = () => {
+
+  // Auth 
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL
+
+  // states 
   const [isForm, setIsForm] = useState(false);
   const [selectedtab, setSelectedTab] = useState("overview");
+  const [data, setData] = useState({})
+
+  // params 
+  const { hotel_id } = useParams()
+
+
+  // side effects 
+  useEffect(() => {
+    getHotelData()
+  }, [hotel_id])
+
+  // functions 
+  async function getHotelData() {
+    console.log("respomnse ")
+    try {
+      const response = await axios.get(`${apiUrl}/api/hotel/${hotel_id}`);
+      setData(response.data.data);
+      console.log("respomnse : ", response)
+    } catch (err) {
+      console.error("Error occured while fetching singel hotel data : ", err.message)
+    }
+  }
+
   return (
     <>
       <Navbar />
@@ -28,9 +58,8 @@ const page = () => {
             smooth={true} // smooth scroll
             duration={500} // scroll duration in ms
             offset={-130}
-            className={`cursor-pointer font-semibold ${
-              selectedtab === "overview" ? "border-b-2 border-[#AF4300]" : ""
-            }`}
+            className={`cursor-pointer font-semibold ${selectedtab === "overview" ? "border-b-2 border-[#AF4300]" : ""
+              }`}
           >
             OverView
           </Link>
@@ -40,9 +69,8 @@ const page = () => {
             smooth={true} // smooth scroll
             duration={500} // scroll duration in ms
             offset={-130} // adjust for header height
-            className={`cursor-pointer font-semibold ${
-              selectedtab === "facilities" ? "border-b-2 border-[#AF4300]" : ""
-            }`}
+            className={`cursor-pointer font-semibold ${selectedtab === "facilities" ? "border-b-2 border-[#AF4300]" : ""
+              }`}
           >
             Facilities
           </Link>
@@ -53,9 +81,8 @@ const page = () => {
             smooth={true}
             duration={500}
             offset={-130} // adjust if you have a fixed header
-            className={`cursor-pointer font-semibold ${
-              selectedtab === "reviews" ? "border-b-2 border-[#AF4300]" : ""
-            }`}
+            className={`cursor-pointer font-semibold ${selectedtab === "reviews" ? "border-b-2 border-[#AF4300]" : ""
+              }`}
           >
             Reviews
           </Link>
@@ -66,9 +93,8 @@ const page = () => {
             smooth={true}
             duration={500}
             offset={-130}
-            className={`cursor-pointer font-semibold ${
-              selectedtab === "location" ? "border-b-2 border-[#AF4300]" : ""
-            }`}
+            className={`cursor-pointer font-semibold ${selectedtab === "location" ? "border-b-2 border-[#AF4300]" : ""
+              }`}
           >
             Location
           </Link>
@@ -78,16 +104,16 @@ const page = () => {
             <div className="container flex items-center gap-2">
               <Image src={star} />
               <h1>
-                4.99{" "}
-                <span className="text-[#777777] text-[14px]">337 reviews</span>
+                {data?.rating}{" "}
+                {/* <span className="text-[#777777] text-[14px]">337 reviews</span> */}
               </h1>
             </div>
-            <h1 className="font-semibold">₹3,200 / night</h1>
+            <h1 className="font-semibold">₹ {data?.pricePerNight}/ night</h1>
           </div>
           <button
             onClick={() => setIsForm(true)}
             className=" bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] 
-  hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] text-white px-4 py-2 rounded-lg cursor-pointer"
+     hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] text-white px-4 py-2 rounded-lg cursor-pointer"
           >
             Reserve
           </button>
@@ -95,12 +121,12 @@ const page = () => {
       </header>
       <section className="mx-4 md:mx-10">
         {/* hero section ---------------  */}
-        <HotelHero />
+        <HotelHero data={data} />
         <div id="overview">
-          <HotelOverview />
+          <HotelOverview data={data} />
         </div>
         <div id="facilities">
-          <AmenitiesSection />
+          <AmenitiesSection data={data} />
         </div>
         <div id="reviews">
           <ReviewsPage />
@@ -108,11 +134,11 @@ const page = () => {
 
         <HotelsRulesRegulation />
         <div id="location">
-          <HotelLocation />
+          <HotelLocation data={data} />
         </div>
       </section>
       <Footer />
-      {isForm && <HotelEnquiryForm setIsForm={setIsForm} />}
+      {isForm && <HotelEnquiryForm data={data} setIsForm={setIsForm} />}
     </>
   );
 };

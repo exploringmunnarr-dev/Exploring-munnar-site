@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import down from "../assets/down.svg";
 import Image from "next/image";
 import HotelEnquiryForm from "./HotelEnquiryForm";
-const HotelOverview = () => {
+const HotelOverview = ({ data }) => {
   const [isForm, setIsForm] = useState(false);
   return (
     <>
-      <section className="mt-4 md:mt-10 md:flex items-end gap-2">
-        <div className="container-1 w-[100%] md:w-[70%] border-b border-gray-200 pb-2">
+      <section className="mt-4 md:mt-10 md:flex items-center gap-12">
+        <div className="container-1 w-[100%] md:w-[70%] border-b border-gray-200 pb-2 ">
           <h1 className="text-xl font-semibold md:text-3xl text-[#333333]">Overview</h1>
-          <div className="content-container mt-3 max-sm:text-sm">
+          {/* <div className="content-container mt-3 max-sm:text-sm">
             <h1 className="text-[#777777]">
               Tucked away in the tranquil tea estates of Devikulam, Misty Hill
               Eco Retreat is a locally managed eco-stay perfect for couples,
@@ -23,6 +23,14 @@ const HotelOverview = () => {
               ideal balance of raw nature and modern comfort.{" "}
               <span className="text-[#AF4300]">Read more</span>
             </h1>
+          </div> */}
+          <div className="content-container mt-3 max-sm:text-sm text-justify">
+            {data?.description?.split(".").map((item, index) => {
+              return <h1 className="mt-2 text-[#777777]">
+                {item}.
+              </h1>
+            })}
+
           </div>
         </div>
         <div className="container-1 mt-2 md:mt-0 md:w-[30%]">

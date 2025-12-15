@@ -15,7 +15,8 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-const HotelHero = () => {
+const HotelHero = ({ data }) => {
+  console.log("hotel data : ", data)
   const images = [img1, img2, img3, img4];
   return (
     <>
@@ -25,9 +26,9 @@ const HotelHero = () => {
             <h1 className="">
               <span className="text-xl md:text-3xl font-semibold text-[#333333]">
                 {" "}
-                Misty Hill Eco Retreat{" "}
+                {data?.name}
               </span>
-              <span className="text-[#AF4300] ">(8 more rooms left)</span>
+              {/* <span className="text-[#AF4300] ">(8 more rooms left)</span> */}
             </h1>
           </div>
           <div className="container-2 flex items-center gap-6">
@@ -45,20 +46,20 @@ const HotelHero = () => {
           <div className="first-container w-[60%] ">
             <div className="img-contianer-1 h-[250px] overflow-hidden hover:rounded-xl">
               <Image
-                src={img1}
+                src={data?.images?.[0]?.url} width={1000} height={1000}
                 className="h-[100%] object-cover w-full rounded-xl hover:scale-125 transition-all duration-300"
               />
             </div>
             <div className="second-img-container mt-4 flex gap-4">
               <div className="container-1 h-[230px] w-[50%] overflow-hidden hover:rounded-xl">
                 <Image
-                  src={img3}
+                  src={data?.images?.[3]?.url} width={1000} height={1000}
                   className="w-full h-[100%] rounded-xl object-cover hover:scale-125 transition-all duration-300 "
                 />
               </div>
               <div className="container-1 w-[50%] h-[230px] overflow-hidden hover:rounded-xl">
                 <Image
-                  src={img4}
+                  src={data?.images?.[4]?.url} width={1000} height={1000}
                   className="w-full object-cover rounded-xl h-[100%] hover:scale-125 transition-all duration-300"
                 />
               </div>
@@ -66,7 +67,7 @@ const HotelHero = () => {
           </div>
           <div className="second-container w-[40%] h-[497px] overflow-hidden hover:rounded-xl">
             <Image
-              src={img2}
+               src={data?.images?.[2]?.url} width={1000} height={1000}
               className="w-[100%] object-cover h-[100%] rounded-xl hover:scale-125 transition-all duration-300"
             />
           </div>

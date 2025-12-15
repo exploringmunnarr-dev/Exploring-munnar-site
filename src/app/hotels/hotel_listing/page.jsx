@@ -26,8 +26,7 @@ const page = () => {
   const [experiences, setExperiences] = useState([]);
   const [budget, setBudget] = useState({});
 
-  // console log's  
-  console.log("hotel data : ", hotelData)
+
 
   // useEffect call's 
   useEffect(() => {
@@ -134,7 +133,7 @@ const page = () => {
                 <div className="container-1 col-span-2 flex items-center">
                   <button
                     className="bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] 
-  hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)]  text-white w-[100%] py-3 rounded-lg cursor-pointer "
+                    hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)]  text-white w-[100%] py-3 rounded-lg cursor-pointer "
                   >
                     Search
                   </button>

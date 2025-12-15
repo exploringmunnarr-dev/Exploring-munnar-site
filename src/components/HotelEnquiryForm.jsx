@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import img from "../assets/enquiryFromImg1.svg";
 import person from "../assets/person_icon.svg";
@@ -9,12 +9,46 @@ import calendar from "../assets/calendarIcon.svg";
 import kids from "../assets/kids_icon.svg";
 import adult from "../assets/adult_icon.svg";
 import { X } from "lucide-react";
-const HotelEnquiryForm = ({ setIsForm }) => {
+import axios from "axios";
+const HotelEnquiryForm = ({ setIsForm, data }) => {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL
   // refs
   const modalRef = useRef(null);
 
-  // useEffect call's
+  // states 
+  const [formData, setFormData] = useState({
+    hotelId: data?.id,
+    userId: 1,
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    checkIn: "",
+    checkOut: "",
+    adults: "",
+    kids: ""
+  })
 
+
+  // functions 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
+  async function onSave() {
+    try {
+      const response = await axios.post(`${apiUrl}/api/hotel-booking`, formData)
+    } catch (err) {
+      console.error("Error occured while posting form data ")
+    }
+  }
+
+
+  // useEffect call's
   // handling outside click
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -37,6 +71,7 @@ const HotelEnquiryForm = ({ setIsForm }) => {
     };
   }, []);
 
+  console.log("formdata : ", formData)
   return (
     <>
       <section
@@ -46,14 +81,14 @@ const HotelEnquiryForm = ({ setIsForm }) => {
         <header className="flex items-start justify-between gap-4 border-b border-[#777777] pb-5 ">
           <div className="container-1 flex items-center gap-3 ">
             <div className="img-container w-[70px] ">
-              <Image src={img} className="w-[100%] rounded-lg" />
+              <Image src={data?.images?.[0].url} width={3000} height={3000} className="w-[100%] object-cover rounded-lg" />
             </div>
             <div className="content-container">
               <h1 className="text-lg font-semibold md:text-3xl text-[#333333]">
-                Misty Hill Eco Retreat
+                {data?.name}
               </h1>
               <h1 className="text-sm md:text-lg mt-1 text-[#333333]">
-                Tree house - Chinnakal
+                {data?.stayType} - {data?.location}
               </h1>
             </div>
           </div>
@@ -74,7 +109,10 @@ const HotelEnquiryForm = ({ setIsForm }) => {
             </div>
             <input
               type="text"
+              value={formData.firstName}
+              name="firstName"
               placeholder="Enter your first name"
+              onChange={(e) => handleInputChange(e)}
               className="border rounded-lg border-[#777777] w-full p-2 mt-2"
             />
           </div>
@@ -88,6 +126,9 @@ const HotelEnquiryForm = ({ setIsForm }) => {
             <input
               type="text"
               placeholder="Enter your second name"
+              value={formData.lastName}
+              name="lastName"
+              onChange={(e) => handleInputChange(e)}
               className="border rounded-lg border-[#777777] w-full p-2 mt-2"
             />
           </div>
@@ -101,6 +142,9 @@ const HotelEnquiryForm = ({ setIsForm }) => {
             <input
               type="number"
               placeholder="Eg; 1234567890"
+              onChange={(e) => handleInputChange(e)}
+              value={formData.phoneNumber}
+              name="phoneNumber"
               className="border rounded-lg border-[#777777] w-full p-2 mt-2"
             />
           </div>
@@ -112,6 +156,9 @@ const HotelEnquiryForm = ({ setIsForm }) => {
             <input
               type="text"
               placeholder="Eg; abc1234@gmail.com"
+              value={formData.email}
+              name="email"
+              onChange={(e) => handleInputChange(e)}
               className="border rounded-lg border-[#777777] w-full p-2 mt-2"
             />
           </div>
@@ -123,6 +170,9 @@ const HotelEnquiryForm = ({ setIsForm }) => {
             <input
               type="date"
               placeholder=""
+              onChange={(e) => handleInputChange(e)}
+              value={formData.checkIn}
+              name="checkIn"
               className="border rounded-lg border-[#777777] w-full p-2 mt-2"
             />
           </div>
@@ -136,6 +186,9 @@ const HotelEnquiryForm = ({ setIsForm }) => {
             <input
               type="date"
               placeholder="Enter your first name"
+              onChange={(e) => handleInputChange(e)}
+              value={formData.checkOut}
+              name="checkOut"
               className="border rounded-lg border-[#777777] w-full p-2 mt-2"
             />
           </div>
@@ -147,6 +200,9 @@ const HotelEnquiryForm = ({ setIsForm }) => {
             <input
               type="number"
               placeholder="1"
+              onChange={(e) => handleInputChange(e)}
+              value={formData.adults}
+              name="adults"
               className="border rounded-lg border-[#777777] w-full p-2 mt-2"
             />
           </div>
@@ -160,13 +216,16 @@ const HotelEnquiryForm = ({ setIsForm }) => {
             <input
               type="number"
               placeholder="2"
+              onChange={(e) => handleInputChange(e)}
+              value={formData.kids}
+              name="kids"
               className="border rounded-lg border-[#777777] w-full p-2 mt-2"
             />
           </div>
         </div>
-        <button
+        <button onClick={onSave}
           className=" bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] 
-  hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] w-full mt-3 text-white rounded-lg p-3 cursor-pointer transition-all duration-300"
+            hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] w-full mt-3 text-white rounded-lg p-3 cursor-pointer transition-all duration-300"
         >
           Submit
         </button>

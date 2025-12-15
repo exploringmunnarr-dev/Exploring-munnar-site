@@ -13,19 +13,21 @@ import star from "../assets/star.svg";
 import wifi from "../assets/loc.svg";
 import fire from "../assets/loc.svg";
 import Image from "next/image";
-import { Flame, Heart, Heater, ParkingCircle, RotateCcw, Utensils, Waves, Wifi } from "lucide-react";
+import { Flame, FlameIcon, Heart, Heater, ParkingCircle, RotateCcw, Utensils, Waves, Wifi, Wine } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import noData from '../assets/no_data.svg'
 const amenityIcons = {
-  WiFi: Wifi,
+  "Free WiFi": Wifi,
   Breakfast: Utensils,
   "Hot Water": Flame,
   Parking: ParkingCircle,
   Heater: Heater,
   "24/7 Room service": RotateCcw,
-  Spa: Waves
+  Spa: Waves,
+  "Campfire": FlameIcon,
+  "Couple Friendly": Wine
 };
 const loadingCount = [1, 2, 3];
 const listings = [
@@ -140,7 +142,6 @@ const listings = [
 ];
 
 const HotelListingCard = ({ listings, loading }) => {
-
   // Router Hooks
   const router = useRouter();
 
@@ -218,9 +219,9 @@ const HotelListingCard = ({ listings, loading }) => {
                         {item.description.slice(0, 130)}...
                       </h1>
                       <div className="label-container mt-2 flex flex-wrap items-center gap-2">
-                        {item.amenities.map((amenity, index) => {
+                        {item.experiences.map((amenity, index) => {
 
-                          const Icon = amenityIcons[amenity.name];
+                          const Icon = amenityIcons[amenity?.name];
                           return <div className="label-1 bg-white flex items-center gap-2 w-fit px-3 py-2 rounded-lg shadow">
                             {Icon && <Icon size={18} className="text-amber-800" />}
                             {/* <div className="text-amber-800">{icons[amenity.name]}</div> */}
@@ -247,7 +248,7 @@ const HotelListingCard = ({ listings, loading }) => {
                     <button
                       onClick={() => handleNavigation(item.id)}
                       className="btn-container  bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] 
-             hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)]  text-white w-[100%] flex items-center justify-center mt-2 rounded-lg py-2 cursor-pointer"
+                hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)]  text-white w-[100%] flex items-center justify-center mt-2 rounded-lg py-2 cursor-pointer"
                     >
                       View Details
                     </button>
