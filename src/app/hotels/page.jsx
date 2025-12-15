@@ -15,7 +15,7 @@ const page = () => {
   return (
     <>
       <Navbar />
-      <section className="mx-4 md:mx-10">
+      <section className="mx-4 md:mx-10 block">
         <HotelsStayType />
         <StayByDestination />
         <UniqueStays />
