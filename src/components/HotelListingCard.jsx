@@ -180,7 +180,7 @@ const HotelListingCard = ({ listings, loading }) => {
               <div className="first-container h-[200px] w-[25%] ">
                 <div className="img-container  h-[100%] relative overflow-hidden hover:rounded-lg">
                   <img
-                    src={item?.images[0]} alt="image"
+                    src={item?.images?.[0]?.url} alt="image"
                     className="w-[100%] rounded-lg h-[100%] object-cover hover:scale-125 transition-all duration-300"
                   />
                   <div className="favorite-icon-container absolute top-4 right-4">
