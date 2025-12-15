@@ -13,6 +13,7 @@ import HomeHero from "@/components/HomeHero";
 import { useState } from "react";
 import MobileTab from "@/components/MobileTab";
 import PromotionBanner from "@/components/PromotionBanner";
+import TopAttractions from "@/components/TopAttractions";
 
 const Home = ({ scroll }) => {
   return (
@@ -20,6 +21,7 @@ const Home = ({ scroll }) => {
       <Navbar scroll={scroll} />
       <HomeHero />
       <GetAroundSection />
+      <TopAttractions/>
       <PromotionBanner />
       <TripPlannerSection />
       <StayOptionsSection />

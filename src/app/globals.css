@@ -137,3 +137,8 @@ input::-webkit-inner-spin-button {
     transform: rotate(1turn);
   }
 }
+
+.blur-bg {
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(15px);
+}
