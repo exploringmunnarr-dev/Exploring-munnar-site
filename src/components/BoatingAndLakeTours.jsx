@@ -35,7 +35,6 @@ const data = [
   },
 ];
 const BoatingAndLakeTours = ({ groupedData }) => {
-
   return (
     <>
       {groupedData.map((item, index) => {
@@ -49,13 +48,13 @@ const BoatingAndLakeTours = ({ groupedData }) => {
             </h1>
           </header>
           <div className="content-container mt-4 space-y-3">
-            {/* {console.log("item : ", item)} */}
             {item.cardDatas.map((item, index) => {
               return (
                 <div className="card bg-[#eeeeee] rounded-lg px-4 py-3 flex items-center justify-between gap-3">
                   <div className="img-container">
                     <Image
-                      src={item.img}
+                      src={item?.images[0]?.url}
+                      width={1000} height={1000}
                       className="rounded-xl w-[430px] h-[200px] object-cover"
                     />
                   </div>
@@ -79,7 +78,7 @@ const BoatingAndLakeTours = ({ groupedData }) => {
                       <Link
                         href={`/activities/${item.id}`}
                         className="bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] 
-  hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] cursor-pointer rounded-lg py-2 px-4 text-white"
+                        hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] cursor-pointer rounded-lg py-2 px-4 text-white"
                       >
                         View Details
                       </Link>

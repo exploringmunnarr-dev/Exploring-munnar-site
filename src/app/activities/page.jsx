@@ -31,11 +31,11 @@ const page = () => {
 
   // states 
   const [sortItem, setSortItem] = useState("All of these")
-  const [selectedType, setSelectedType] = useState(["Boating & Lake Tours"])
+  const [selectedType, setSelectedType] = useState([])
   const [activityData, setAcivityData] = useState([])
   const [groupedData, setGroupedData] = useState([]);
 
-  console.log("grouped data's : ", groupedData)
+  // console.log("grouped data's : ", groupedData)
 
   useEffect(() => {
     if (activityData.length > 0) {
@@ -68,7 +68,7 @@ const page = () => {
           category: sortItem,
           type: selectedType
         })
-        console.log("activity data : ", res.data.data.activities)
+        // console.log("activity data : ", res.data.data.activities)
         setAcivityData(res.data.data.activities)
       } catch (err) {
         console.error("Error occured while fetching activity data")
@@ -141,7 +141,7 @@ const page = () => {
         </div>
         <div className="content-container col-span-9 mt-4">
           <PopularActivities />
-          <BoatingAndLakeTours groupedData={groupedData}/>
+          <BoatingAndLakeTours groupedData={groupedData} />
         </div>
       </div>
       <ItnearyFaq />

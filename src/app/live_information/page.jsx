@@ -1,12 +1,21 @@
-import React from "react";
 import Navbar from "@/components/Navbar";
 import SubCardNav from "@/components/SubCardNav";
 import LiveInformationHero from "@/components/LiveInformationHero";
 import Localnews from "@/components/Localnews";
 import Footer from "@/components/Footer";
 import EmergencyContacts from "@/components/EmergencyContacts";
+import { useTheme } from "@emotion/react";
 
 const page = () => {
+  // Auth 
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL
+
+  // states ------------------------------------ 
+  // const [data, setData] = useState([])
+
+  // side effects ----------------------------------- 
+
+  // functions ---------------------------------------
   return (
     <>
       <Navbar />
@@ -24,7 +33,7 @@ const page = () => {
       <div className="main-container mx-4 md:mx-10 mt-4">
         <LiveInformationHero />
         <Localnews />
-        <EmergencyContacts />
+        {/* <EmergencyContacts /> */}
       </div>
       <Footer />
     </>

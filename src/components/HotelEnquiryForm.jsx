@@ -10,7 +10,7 @@ import kids from "../assets/kids_icon.svg";
 import adult from "../assets/adult_icon.svg";
 import { X } from "lucide-react";
 import axios from "axios";
-const HotelEnquiryForm = ({ setIsForm, data }) => {
+const HotelEnquiryForm = ({ setIsForm, data, handleOpenSuccessPopup }) => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   // refs
   const modalRef = useRef(null);
@@ -29,6 +29,7 @@ const HotelEnquiryForm = ({ setIsForm, data }) => {
     kids: "",
   });
 
+
   // functions
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -44,12 +45,14 @@ const HotelEnquiryForm = ({ setIsForm, data }) => {
         `${apiUrl}/api/hotel-booking`,
         formData
       );
-      alert("Hotel booked successfully");
+      handleOpenSuccessPopup()
       setIsForm(false);
     } catch (err) {
       console.error("Error occured while posting form data ");
     }
   }
+
+
 
   // useEffect call's
   // handling outside click
@@ -74,7 +77,6 @@ const HotelEnquiryForm = ({ setIsForm, data }) => {
     };
   }, []);
 
-  console.log("formdata : ", formData);
   return (
     <>
       <section

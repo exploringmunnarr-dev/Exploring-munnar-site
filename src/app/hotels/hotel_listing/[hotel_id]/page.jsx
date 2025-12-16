@@ -15,6 +15,7 @@ import HotelsRulesRegulation from "@/components/HotelsRulesRegulation";
 import { Link, Element } from "react-scroll";
 import axios from "axios";
 import { useParams } from "next/navigation";
+import SuccessPopup from "@/components/SuccessPopup";
 const page = () => {
 
   // Auth 
@@ -24,7 +25,8 @@ const page = () => {
   const [isForm, setIsForm] = useState(false);
   const [selectedtab, setSelectedTab] = useState("overview");
   const [data, setData] = useState({})
-
+  const [modalTitle, setModalTitle] = useState("")
+  const [isSuccessPopup, setIsSuccessPopup] = useState(false)
   // params 
   const { hotel_id } = useParams()
 
@@ -44,6 +46,14 @@ const page = () => {
     } catch (err) {
       console.error("Error occured while fetching singel hotel data : ", err.message)
     }
+  }
+
+  const handleSuccessPopup = () => {
+    setIsSuccessPopup(false)
+  }
+
+  const handleOpenSuccessPopup = () => { 
+    setIsSuccessPopup(true)
   }
 
   return (
@@ -138,7 +148,9 @@ const page = () => {
         </div>
       </section>
       <Footer />
-      {isForm && <HotelEnquiryForm data={data} setIsForm={setIsForm} />}
+      {isForm && <HotelEnquiryForm data={data} setIsForm={setIsForm} handleOpenSuccessPopup={handleOpenSuccessPopup}/>}
+      {isSuccessPopup && <SuccessPopup onClose={handleSuccessPopup} />}
+
     </>
   );
 };

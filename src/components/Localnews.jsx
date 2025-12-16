@@ -62,22 +62,63 @@ const data = [
 const Localnews = () => {
   // Auth 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL
-
-  // states 
+  // state
   const [newsData, setNewsData] = useState([]);
+  const [groupedNews, setGroupedNews] = useState([]);
+
+  // helper to group by category -> [{ title, data }]
+  const groupByCategory = (items) => {
+    const groups = items.reduce((acc, item) => {
+      const key = item.category;
+      if (!acc[key]) {
+        acc[key] = { title: key, data: [] };
+      }
+      acc[key].data.push(item);
+      return acc;
+    }, {});
+
+    return Object.values(groups);
+  };
 
   useEffect(() => {
-    fetchNews()
-  }, [])
-  // functions 
+    fetchNews();
+  }, []);
+
   const fetchNews = async () => {
     try {
       const response = await axios.get(`${apiUrl}/api/news`);
-      console.log("response : ", response.data.data)
+      const raw = response.data.data;
+
+      setNewsData(raw);                 // original flat data
+      setGroupedNews(groupByCategory(raw)); // grouped data
     } catch (err) {
-      console.error("error occured while fetchinig news : ", err.message || err)
+      console.error(
+        "error occured while fetchinig news : ",
+        err.message || err
+      );
     }
-  }
+  };
+
+  console.log("grouped data : ", groupedNews)
+
+
+
+  const timeAgo = (dateString) => {
+    const now = new Date();
+    const past = new Date(dateString);
+    const diffMs = now - past;
+
+    const seconds = Math.floor(diffMs / 1000);
+    const minutes = Math.floor(diffMs / (1000 * 60));
+    const hours = Math.floor(diffMs / (1000 * 60 * 60));
+    const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+    if (seconds < 60) return `${seconds} seconds ago`;
+    if (minutes < 60) return `${minutes} minutes ago`;
+    if (hours < 24) return `${hours} hours ago`;
+    return `${days} days ago`;
+  };
+
 
   return (
     <>
@@ -121,24 +162,25 @@ const Localnews = () => {
               </div>
             </div>
           </div>
-          <div className="content-container col-span-12 md:col-span-8 mt-4">
-            <h1 className="text-[#333333] font-semibold text-xl">
+          <div className="content-container col-span-12 md:col-span-8 mt-4 ">
+            {/* <h1 className="text-[#333333] font-semibold text-xl">
               Road and transport condition
             </h1>
             <div className="card-container mt-4 space-y-3">
-              {data.map((item, index) => {
+              {newsData.map((item, index) => {
                 return (
                   <div className="card bg-[#EEEEEE] md:flex items-center gap-4 rounded-lg p-3">
                     <Image
-                      src={item.img}
+                      src={item?.imageUrl}
+                      width={1000} height={1000}
                       className="w-[100%] md:w-[340px] rounded-xl h-[200px] object-cover"
                     />
                     <div className="content-container mt-4 md:mt-0">
                       <h1 className="text-lg text-[#333333] font-semibold">
-                        {item.title}
+                        {item?.heading}
                       </h1>
-                      <h1 className="text-[#333333] mt-4">
-                        {item.description}
+                      <h1 className="text-[#333333] mt-4 text-justify">
+                        {item?.detail}
                       </h1>
                       <h1 className="text-sm text-[#777777] mt-4">
                         Last updated : 34mins ago
@@ -147,8 +189,38 @@ const Localnews = () => {
                   </div>
                 );
               })}
-            </div>
-            <div className="emergency-alerts-container">
+            </div> */}
+            {groupedNews.map((item, index) => {
+              return <div className="main-container">
+                <h1 className="text-[#333333] font-semibold text-xl mt-6">
+                  {item.title}
+                </h1>
+                {item?.data?.map((i) => {
+                  return <div className="card-container mt-6 space-y-3">
+                    <div className="card bg-[#EEEEEE] md:flex items-start gap-4 rounded-lg p-3">
+                      <Image
+                        src={i?.imageUrl}
+                        width={1000} height={1000}
+                        className="w-[100%] md:w-[340px] rounded-xl h-[200px] object-cover"
+                      />
+                      <div className="content-container mt-4 md:mt-0">
+                        <h1 className="text-lg text-[#333333] font-semibold">
+                          {i?.heading}
+                        </h1>
+                        <h1 className="text-[#333333] mt-4 text-justify">
+                          {i?.detail}
+                        </h1>
+                        <h1 className="text-sm text-[#777777] mt-4">
+                          Last updated : {timeAgo(i.createdAt)}
+                        </h1>
+
+                      </div>
+                    </div>
+                  </div>
+                })}
+              </div>
+            })}
+            {/* <div className="emergency-alerts-container hidden">
               <header className="my-6">
                 <h1 className="text-xl font-semibold text-[#333333]">
                   Emergency alerts
@@ -177,7 +249,7 @@ const Localnews = () => {
                   );
                 })}
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
