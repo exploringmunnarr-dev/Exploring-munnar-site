@@ -11,11 +11,11 @@ import adult from "../assets/adult_icon.svg";
 import { X } from "lucide-react";
 import axios from "axios";
 const HotelEnquiryForm = ({ setIsForm, data }) => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   // refs
   const modalRef = useRef(null);
 
-  // states 
+  // states
   const [formData, setFormData] = useState({
     hotelId: data?.id,
     userId: 1,
@@ -26,27 +26,30 @@ const HotelEnquiryForm = ({ setIsForm, data }) => {
     checkIn: "",
     checkOut: "",
     adults: "",
-    kids: ""
-  })
+    kids: "",
+  });
 
-
-  // functions 
+  // functions
   const handleInputChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value
-    }))
-  }
+      [name]: value,
+    }));
+  };
 
   async function onSave() {
     try {
-      const response = await axios.post(`${apiUrl}/api/hotel-booking`, formData)
+      const response = await axios.post(
+        `${apiUrl}/api/hotel-booking`,
+        formData
+      );
+      alert("Hotel booked successfully");
+      setIsForm(false);
     } catch (err) {
-      console.error("Error occured while posting form data ")
+      console.error("Error occured while posting form data ");
     }
   }
-
 
   // useEffect call's
   // handling outside click
@@ -71,7 +74,7 @@ const HotelEnquiryForm = ({ setIsForm, data }) => {
     };
   }, []);
 
-  console.log("formdata : ", formData)
+  console.log("formdata : ", formData);
   return (
     <>
       <section
@@ -81,7 +84,12 @@ const HotelEnquiryForm = ({ setIsForm, data }) => {
         <header className="flex items-start justify-between gap-4 border-b border-[#777777] pb-5 ">
           <div className="container-1 flex items-center gap-3 ">
             <div className="img-container w-[70px] ">
-              <Image src={data?.images?.[0].url} width={3000} height={3000} className="w-[100%] object-cover rounded-lg" />
+              <Image
+                src={data?.images?.[0].url}
+                width={3000}
+                height={3000}
+                className="w-[100%] object-cover rounded-lg"
+              />
             </div>
             <div className="content-container">
               <h1 className="text-lg font-semibold md:text-3xl text-[#333333]">
@@ -223,7 +231,8 @@ const HotelEnquiryForm = ({ setIsForm, data }) => {
             />
           </div>
         </div>
-        <button onClick={onSave}
+        <button
+          onClick={onSave}
           className=" bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] 
             hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] w-full mt-3 text-white rounded-lg p-3 cursor-pointer transition-all duration-300"
         >
