@@ -52,7 +52,7 @@ const page = () => {
     setIsSuccessPopup(false)
   }
 
-  const handleOpenSuccessPopup = () => { 
+  const handleOpenSuccessPopup = () => {
     setIsSuccessPopup(true)
   }
 
@@ -123,7 +123,7 @@ const page = () => {
           <button
             onClick={() => setIsForm(true)}
             className=" bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] 
-     hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] text-white px-4 py-2 rounded-lg cursor-pointer"
+            hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] text-white px-4 py-2 rounded-lg cursor-pointer"
           >
             Reserve
           </button>
@@ -133,7 +133,7 @@ const page = () => {
         {/* hero section ---------------  */}
         <HotelHero data={data} />
         <div id="overview">
-          <HotelOverview data={data} />
+          <HotelOverview data={data} handleOpenSuccessPopup={handleOpenSuccessPopup}  />
         </div>
         <div id="facilities">
           <AmenitiesSection data={data} />
@@ -148,7 +148,7 @@ const page = () => {
         </div>
       </section>
       <Footer />
-      {isForm && <HotelEnquiryForm data={data} setIsForm={setIsForm} handleOpenSuccessPopup={handleOpenSuccessPopup}/>}
+      {isForm && <HotelEnquiryForm data={data} setIsForm={setIsForm} handleOpenSuccessPopup={handleOpenSuccessPopup} />}
       {isSuccessPopup && <SuccessPopup onClose={handleSuccessPopup} />}
 
     </>

@@ -8,11 +8,16 @@ import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import HotelListingCard from "@/components/HotelListingCard";
 import ResponsiveHotelListingCard from "@/components/ResponsiveHotelListingCard";
 import axios from "axios";
+import { useForkRef } from "@mui/material";
+import { useFormData } from "@/context/FormProvider";
+import { useData } from "@/context/ThemeContext";
 
 const page = () => {
   // Auth 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   console.log("Changes made in Dec 2nd code")
+  const { stayType, setStayType } = useData()
+
 
   // states 
   const [pageNumber, setPageNumber] = useState(1);
@@ -20,7 +25,7 @@ const page = () => {
   const [hotelData, setHotelData] = useState([]);
   const [loading, setLoading] = useState(false)
   // filter inputStates 
-  const [stayType, setStayType] = useState([]);
+  // const [stayType, setStayType] = useState([]);
   const [loation, setLocation] = useState([]);
   const [amenities, setAmenities] = useState([]);
   const [experiences, setExperiences] = useState([]);
@@ -31,6 +36,7 @@ const page = () => {
   // useEffect call's 
   useEffect(() => {
     async function fetchHotel() {
+      console.log("running : ",stayType )
       try {
         setLoading(true)
         const response = await axios.post(`${apiUrl}/api/hotels-list`, {
@@ -41,6 +47,7 @@ const page = () => {
           // "budget": { startingFrom: 0, to: 0 },
           "pageNumber": pageNumber
         });
+        
         setHotelData(response.data.data.hotels);
         const totalPages = Array.from({ length: response.data.data.totalPages }, (_, i) => i + 1);
         setPageNumberList(totalPages);

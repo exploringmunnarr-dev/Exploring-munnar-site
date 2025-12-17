@@ -3,6 +3,7 @@ import { createContext, useContext, useState } from "react";
 
 const FormData = createContext();
 export function FormDataProvider({ children }) {
+
   const [itnearyFormData, setItnearyFormData] = useState({
     fullName: "",
     mobileNumber: "",
@@ -29,6 +30,7 @@ export function FormDataProvider({ children }) {
       value={{
         setItnearyFormData,
         itnearyFormData,
+       
       }}
     >
       {" "}
@@ -36,6 +38,7 @@ export function FormDataProvider({ children }) {
     </FormData.Provider>
   );
 }
+
 export function useFormData() {
   return useContext(FormData);
 }

@@ -1,15 +1,13 @@
-"use client"
+"use client";
 import { createContext, useContext, useState } from "react";
 const Data = createContext();
-export function DataProvider ({children}){
-       
+export function DataProvider({ children }) {
+  const [stayType, setStayType] = useState([]);
 
-    return (
-        <Data.Provider value={{}}>
-            {children}
-        </Data.Provider>
-    )
+  return (
+    <Data.Provider value={{ stayType, setStayType }}>{children}</Data.Provider>
+  );
 }
-export function useData (){
-    return useContext(Data)
+export function useData() {
+  return useContext(Data);
 }

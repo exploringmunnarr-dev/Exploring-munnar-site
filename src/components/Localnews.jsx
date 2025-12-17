@@ -7,8 +7,8 @@ import { ChevronDown } from "lucide-react";
 import axios from "axios";
 
 const checkboxData = [
-  "Roads and transport conditions",
-  "Emergency alerts",
+  "Roads And Transport Conditions",
+  "Emergency Alerts",
   "Local Events & Festivals",
   "Travel Restrictions & Health Guidelines",
   "Emergency Contacts",
@@ -65,6 +65,17 @@ const Localnews = () => {
   // state
   const [newsData, setNewsData] = useState([]);
   const [groupedNews, setGroupedNews] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState(["Roads And Transport Conditions"]);
+
+  // functions 
+
+  const handleCheckboxChange = (category) => {
+    setSelectedCategories((prev) =>
+      prev.includes(category)
+        ? prev.filter((c) => c !== category) // uncheck
+        : [...prev, category]                 // check
+    );
+  };
 
   // helper to group by category -> [{ title, data }]
   const groupByCategory = (items) => {
@@ -82,26 +93,27 @@ const Localnews = () => {
 
   useEffect(() => {
     fetchNews();
-  }, []);
+  }, [selectedCategories]);
 
   const fetchNews = async () => {
     try {
-      const response = await axios.get(`${apiUrl}/api/news`);
-      const raw = response.data.data;
+      const response = await axios.get(`${apiUrl}/api/news`, {
+        params: {
+          categories: selectedCategories.join(','), // 👈 comma-separated
+          search: "",
+        },
+      });
 
-      setNewsData(raw);                 // original flat data
-      setGroupedNews(groupByCategory(raw)); // grouped data
+      const raw = response.data.data;
+      setNewsData(raw);
+      setGroupedNews(groupByCategory(raw));
     } catch (err) {
       console.error(
-        "error occured while fetchinig news : ",
+        "error occurred while fetching news:",
         err.message || err
       );
     }
   };
-
-  console.log("grouped data : ", groupedNews)
-
-
 
   const timeAgo = (dateString) => {
     const now = new Date();
@@ -142,24 +154,30 @@ const Localnews = () => {
                 <ChevronDown className="w-6 h-6" />
               </header>
               <div className="checbox-container mt-3 space-y-3">
-                {checkboxData.map((item, index) => {
-                  return (
-                    <div className="input-container flex items-center gap-3">
-                      <input
-                        type="checkbox"
-                        className="scale-125 accent-amber-800"
-                      />
-                      <h1>{item}</h1>
-                    </div>
-                  );
-                })}
+                {checkboxData.map((item, index) => (
+                  <div
+                    key={index}
+                    className="input-container flex items-center gap-3"
+                  >
+                    <input
+                      type="checkbox"
+                      className="scale-125 accent-amber-800"
+                      checked={selectedCategories.includes(item)}
+                      onChange={() => handleCheckboxChange(item)}
+                    />
+                    <h1>{item}</h1>
+                  </div>
+                ))}
+
                 <button
+                  onClick={fetchNews}
                   className="text-white bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] 
-  hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] cursor-pointer w-full rounded-lg py-2"
+    hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] cursor-pointer w-full rounded-lg py-2"
                 >
                   Apply Filter
                 </button>
               </div>
+
             </div>
           </div>
           <div className="content-container col-span-12 md:col-span-8 mt-4 ">

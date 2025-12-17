@@ -153,6 +153,7 @@ const listings = [
 ];
 
 const HotelListingCard = ({ listings, loading }) => {
+  console.log("listings : ", listings)
   // Router Hooks
   const router = useRouter();
 

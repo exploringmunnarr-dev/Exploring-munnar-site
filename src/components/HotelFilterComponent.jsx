@@ -7,9 +7,10 @@ import amenitiesIcon from "../assets/amenitiesIcon.svg";
 import experienceIcon from "../assets/experienceIcon.svg";
 
 import Image from "next/image";
+import { useFormData } from "@/context/FormProvider";
 
 const stayTypes = [
-  "Tents & Camping Grounds",
+ "Tents & Camping Grounds",
   "Eco Cottages",
   "Treehouses",
   "Homestays & Guesthouses",
@@ -48,6 +49,8 @@ const priceFilterData = [
 ];
 
 const HotelFilterComponent = ({ setStayType, setLocation, setAmenities, setExperiences, setBudget, stayType, loation, amenities, experiences, budget }) => {
+  console.log("experiences : ", experiences)
+  console.log("amenities : ", amenities)
   // states
   const [selectedFilter, setSelectedFilter] = useState([]);
   const [stayTypeDropdown, setStayTypeDropdown] = useState(true);
@@ -59,15 +62,14 @@ const HotelFilterComponent = ({ setStayType, setLocation, setAmenities, setExper
 
   // functions 
   const handleStayType = (type) => {
-    if (stayType.includes(type)) {
-      const filteredItems = stayType.filter((item, i) => item !== type);
-      setStayType(filteredItems)
-      return
+    // if user clicks same type again, clear it (optional)
+    if (stayType === type) {
+      setStayType("");          // deselect
     } else {
-      setStayType((prev) => [...prev, type])
+      setStayType(prev => ([...prev, type]));        // select new one
     }
+  };
 
-  }
   const handleLocation = (loc) => {
     if (loation.includes(loc)) {
       setLocation((prev) => prev.filter((item) => item !== loc))
@@ -186,7 +188,7 @@ const HotelFilterComponent = ({ setStayType, setLocation, setAmenities, setExper
                       <input
                         type="checkbox"
                         checked={amenities.includes(item)}
-                        onChange={() => { handleExperiences(item) }}
+                        onChange={() => { handleAmenities(item) }}
                         className="scale-125 accent-[#AF4300]"
                       />
                       <h1 className="text-[#333333]">{item}</h1>

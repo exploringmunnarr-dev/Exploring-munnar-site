@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import React, { useRef } from "react";
 import hotelCard1 from "../assets/hotelCard1.svg";
 import hotelCard2 from "../assets/hotelCard2.svg";
@@ -17,18 +18,30 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation, Autoplay } from "swiper/modules";
+import { useData } from "@/context/ThemeContext";
 const cardData = [
   { img: hImg1, title: "Tents & Camping Grounds" },
-  { img: hImg2, title: "Eco cottages" },
-  { img: hImg3, title: "Tree house" },
-  { img: hImg4, title: "Home stays & guest house" },
-  { img: hImg5, title: "Hotels" },
-  { img: hImg6, title: "Resorts" },
+  { img: hImg2, title: "Eco Cottages" },
+  { img: hImg3, title: "Treehouses" },
+  { img: hImg4, title: "Homestays & Guesthouses" },
+  { img: hImg5, title: "Boutique Resorts & Hotels" },
+  // { img: hImg6, title: "Resorts" },
 ];
+// "Tents & Camping Grounds",
+//   "Eco Cottages",
+//   "Treehouses",
+//   "Homestays & Guesthouses",
+//   "Boutique Resorts & Hotels",
 const HotelsStayType = () => {
+  // context data 
+  const { stayType, setStayType } = useData()
+
+  const navigate = useRouter()
+
   // refs
   const cardRef = useRef(null);
 
+  // functions 
   const handleNext = () => {
     if (cardRef.current) {
       cardRef.current.scrollLeft += 400;
@@ -41,7 +54,11 @@ const HotelsStayType = () => {
     }
   };
 
-  console.log("screen width : ", window.innerWidth);
+  function handleStay(title) {
+    setStayType([title]);
+    navigate.push('/hotels/hotel_listing')
+
+  }
   return (
     <>
       <section className="mt-8 md:mt-10">
@@ -82,7 +99,7 @@ const HotelsStayType = () => {
           >
             {cardData.map((item, index) => (
               <SwiperSlide key={index}>
-                <div className="card rounded-lg h-[300px] relative overflow-hidden">
+                <div onClick={() => handleStay(item.title)} className="card rounded-lg h-[300px] relative overflow-hidden">
                   <Image
                     src={item.img}
                     alt={`Card ${index}`}
