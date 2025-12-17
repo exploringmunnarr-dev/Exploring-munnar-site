@@ -15,12 +15,11 @@ import { useEffect, useState } from "react";
 
 const facilityIconMap = {
   "Free WiFi": wifi,
-  "Campfire": fireicon,
+  Campfire: fireicon,
   "Couple Friendly": coupleIcon,
   "Private Bath": bathtub,
-  "Breakfast": breakfastIcon,
+  Breakfast: breakfastIcon,
 };
-
 
 const amenities = [
   {
@@ -84,16 +83,14 @@ const amenities = [
 ];
 
 export default function AmenitiesSection({ data }) {
-
-  const [amenitiesData, setAmenitiesData] = useState([])
+  const [amenitiesData, setAmenitiesData] = useState([]);
   useEffect(() => {
     const filtered = data?.amenities?.map((item) => {
-      return item
-    })
-    setAmenitiesData(filtered)
-    console.log("amenities  : ", filtered)
-  }, [data])
-
+      return item;
+    });
+    setAmenitiesData(filtered);
+    console.log("amenities  : ", filtered);
+  }, [data]);
 
   return (
     <section className="mt-4 md:mt-10">
@@ -119,7 +116,6 @@ export default function AmenitiesSection({ data }) {
             );
           })}
         </div>
-
 
         {/* All Amenities */}
         <h2 className="text-xl md:text-3xl font-semibold text-[#333333] mb-3">
@@ -162,26 +158,28 @@ export default function AmenitiesSection({ data }) {
 
         <div className="grid md:grid-cols-3 gap-10 mt-6">
           {amenitiesData?.map((i, index) => {
-            return <>
-              <div>
-                <h3 className="font-semibold mb-6 flex items-center gap-2">{i.name}</h3>
-                {console.log("i : ", i.data)}
-                <ul className="space-y-1 text-gray-700">
-                  {i.data.split(',').map((item, j) => (
-                    <li key={j} className="flex items-start gap-2">
-                      <span className="">
-                        <Image src={check} />
-                      </span>
-                      <span className="text-[#333333]">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-               
-              </div>
-            </>
+            return (
+              <>
+                <div>
+                  <h3 className="font-semibold mb-6 flex items-center gap-2">
+                    {i.name}
+                  </h3>
+                  {console.log("i : ", i.data)}
+                  <ul className="space-y-1 text-gray-700">
+                    {i.data.split(",").map((item, j) => (
+                      <li key={j} className="flex items-start gap-2">
+                        <span className="">
+                          <Image src={check} />
+                        </span>
+                        <span className="text-[#333333]">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </>
+            );
           })}
         </div>
-
       </div>
     </section>
   );
