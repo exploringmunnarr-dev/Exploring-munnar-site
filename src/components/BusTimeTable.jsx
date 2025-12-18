@@ -1,4 +1,5 @@
-import React from 'react'
+"use client"
+import React, { useEffect, useState } from 'react'
 import location from '../assets/location_icon.svg';
 import dropdownIcon from '../assets/dropdown_icon.svg'
 import clockIcon from '../assets/clock_icon.svg'
@@ -7,6 +8,7 @@ import busIcon from '../assets/bus_icon_table.svg'
 import Image from 'next/image';
 import { ChevronDown } from 'lucide-react';
 import ResponsiveBusTimeTable from './ResponsiveBusTimeTable';
+import axios from 'axios';
 
 const tableHeadData = ["Route", "Depature", "Arrival time", "Bus type", "Duration", "Price"];
 const tableData = [
@@ -17,6 +19,27 @@ const tableData = [
   { route: "Munnar - Coimbatore", depature: "7.30 AM", arraival_time: "7.30 PM", bus_type: { name: "Kerala RTC", category: "AC SLEEPER" }, duration: "Duration 5.30 hours", price: "Price RS 280" },
 ]
 const BusTimeTable = () => {
+  // Auth 
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL
+
+  // states 
+  const [isLoading, setIsLoading] = useState([]);
+  const [data, setData] = useState([])
+
+  // functions 
+  const fetchBusTimings = async () => {
+    try {
+      const res = await axios.get(`${apiUrl}/api/bus-timing`);
+      setData(res.data.data);
+    } catch (err) {
+      console.error("Error occured while fetching bus timings : ", err.message)
+    }
+  }
+
+  // side effects 
+  useEffect(() => {
+    fetchBusTimings()
+  }, [apiUrl])
   return (
     <>
       <section className='mx-4 md:mx-10 mt-8'>
@@ -70,22 +93,22 @@ const BusTimeTable = () => {
                 })}
               </thead>
               <tbody className='bg-[#EEEEEE] rounded-lg'>
-                {tableData.map((item, index) => {
+                {data.map((item, index) => {
                   return <tr className=''>
                     <td className='font-semibold pt-2 pb-2 pl-3'>{item.route}</td>
                     <td className='pt-2 pb-2 pl-3'>
                       <div className='relative'>
                         <div className='flex items-center gap-2'>
                           <Image src={clockIcon} className='w-6' />
-                          <h1>{item.depature}</h1>
+                          <h1>{item.departure_time}</h1>
                         </div>
                         <div className="absolute right-2 top-[50%] translate-y-[-50%] " >
                           <Image src={left_arrow} />
                         </div>
                       </div>
                     </td>
-                    <td className='pt-2 pb-2 pl-3'>{item.arraival_time}</td>
-                    <td className='py-4 pl-3 flex items-center gap-2'> <Image src={busIcon} /> {item.bus_type.name} <span className='text-gray-500'>{item.bus_type.category}</span> </td>
+                    <td className='pt-2 pb-2 pl-3'>{item.arrival_time}</td>
+                    <td className='py-4 pl-3 flex items-center gap-2'> <Image src={busIcon} /> {item.bus_type} <span className='text-gray-500'>{item.bus_type.category}</span> </td>
                     {/* <td className='py-4 pl-3 flex items-center gap-2'> <Image src={busIcon}/> {item.bus_type.name} <span className='text-gray-500'>{item.bus_type.category}</span> </td> */}
                     <td className='pl-3 '>{item.duration}</td>
                     <td className='pl-3'>{item.price}</td>
@@ -94,7 +117,7 @@ const BusTimeTable = () => {
               </tbody>
             </table>
           </div>
-          <ResponsiveBusTimeTable/>
+          <ResponsiveBusTimeTable data={data}/>
         </div>
       </section>
 

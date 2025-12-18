@@ -1,9 +1,10 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import heart from "../assets/treeHouseHeart.svg";
 import treeHouse from "../assets/treeHouseImg1.svg";
 import Image from "next/image";
 import Link from "next/link";
+import axios from "axios";
 
 const data = [
   {
@@ -68,9 +69,30 @@ const data = [
   },
 ];
 const UniqueStays = () => {
+  // Auth 
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL
+
   // states
+  const [isLoading, setIsLoading] = useState([])
+  // const [data, setData] = useState([])
+
 
   // functions
+  const getData = async () => {
+    try {
+      const res = await axios.post(`${apiUrl}/api/hotels-list`, { isHighlighted: true });
+      console.log("Response for featured hotel : ", res.data)
+    } catch (err) {
+      console.error("Error occured while fetching featured hotels data : ", err.message)
+    }
+  }
+
+  // side effects 
+  useEffect(() => {
+    getData()
+  }, [apiUrl])
+
+
   return (
     <>
       <section className="mt-8 md:mt-14">
