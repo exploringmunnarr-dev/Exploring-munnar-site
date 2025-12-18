@@ -69,11 +69,12 @@ const page = () => {
   useEffect(() => {
     setGroupedData([]);
     async function fetchActivity() {
+      const cleanedFilterItem = sortItem == "All of these" ? "" : sortItem;
       try {
         const res = await axios.post(`${apiUrl}/api/activities-list`, {
           search: "",
           pageNumber: 1,
-          category: sortItem,
+          category: cleanedFilterItem,
           type: selectedType,
         });
         // console.log("activity data : ", res.data.data.activities)

@@ -99,13 +99,17 @@ const BoatingAndLakeTours = ({ groupedData }) => {
         })
       ) : (
         <div className="text-center">
-          <Image src={noData} />
+          <Image
+            src={noData}
+            width={1000}
+            height={1000}
+            className="w-[300px] h-[300px] m-auto"
+          />
           <h1 className="font-semibold text-center text-lg text-[#333333] mt-[-30px]">
             No data found!
           </h1>
         </div>
       )}
-      
     </>
   );
 };
