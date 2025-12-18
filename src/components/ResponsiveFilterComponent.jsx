@@ -1,12 +1,12 @@
 import React from "react";
 import Image from "next/image";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, X } from "lucide-react";
 import stayTypeIcon from "../assets/stayTypeIcon.svg";
 import hotelLocationIcon from "../assets/hotelLocationIcon.svg";
 import amenitiesIcon from "../assets/amenitiesIcon.svg";
 import experienceIcon from "../assets/experienceIcon.svg";
 
-const stayType = [
+const stayTypes = [
   "Tents & Camping Grounds",
   "Eco Cottages",
   "Treehouses",
@@ -39,7 +39,57 @@ const experienceFilterData = [
   "Couple-Friendly",
   "Offbeat Experience",
 ];
-const ResponsiveFilterComponent = ({ setisFilter }) => {
+const ResponsiveFilterComponent = ({
+  setisFilter,
+  setStayType,
+  setLocation,
+  setAmenities,
+  setExperiences,
+  setBudget,
+  stayType,
+  loation,
+  amenities,
+  experiences,
+  budget,
+}) => {
+  // functions
+
+  const handleStayType = (type) => {
+    setStayType((prev) => {
+      if (prev.includes(type)) {
+        return prev.filter((item) => item !== type); // remove
+      }
+      return [...prev, type]; // add
+    });
+  };
+
+  const handleLocation = (loc) => {
+    if (loation.includes(loc)) {
+      setLocation((prev) => prev.filter((item) => item !== loc));
+      return;
+    } else {
+      setLocation((prev) => [...prev, loc]);
+    }
+  };
+
+  const handleAmenities = (amenity) => {
+    if (amenities.includes(amenity)) {
+      setAmenities((prev) => prev.filter((item) => item !== amenity));
+      return;
+    } else {
+      setAmenities((prev) => [...prev, amenity]);
+    }
+  };
+
+  const handleExperiences = (selectedExp) => {
+    if (experiences.includes(selectedExp)) {
+      setExperiences((prev) => prev.filter((item) => item !== selectedExp));
+      return;
+    } else {
+      setExperiences((prev) => [...prev, selectedExp]);
+    }
+  };
+
   return (
     <>
       <section className="fixed h-[100vh] z-[100] top-0 right-0 left-0 bottom-0 bg-white ">
@@ -51,8 +101,11 @@ const ResponsiveFilterComponent = ({ setisFilter }) => {
             />
             <h1 className="text-white text-xl">Filter</h1>
           </div>
-          <button className="bg-white px-4 py-2 rounded text-green-900">
-            Apply Filter
+          <button
+            onClick={() => setisFilter(false)}
+            className="bg-white px-4 py-2 rounded text-green-900"
+          >
+            <X />
           </button>
         </header>
         <div className="filter-content-section h-[90%] pb-2 mt-4 space-y-6 text-sm px-6 overflow-y-scroll">
@@ -67,11 +120,13 @@ const ResponsiveFilterComponent = ({ setisFilter }) => {
               </div>
             </div>
             <div className="checkbox-container mt-2 space-y-3">
-              {stayType.map((item, index) => {
+              {stayTypes.map((item, index) => {
                 return (
                   <div className="input-container flex gap-2 items-center">
                     <input
                       type="checkbox"
+                      checked={stayType.includes(item)}
+                      onChange={() => handleStayType(item)}
                       className="scale-125 accent-[#AF4300]"
                     />
                     <h1 className="text-[#333333]">{item}</h1>
@@ -98,6 +153,8 @@ const ResponsiveFilterComponent = ({ setisFilter }) => {
                     <input
                       type="checkbox"
                       className="scale-125 accent-[#AF4300]"
+                      checked={loation.includes(item)}
+                      onChange={() => handleLocation(item)}
                     />
                     <h1 className="text-[#333333]">{item}</h1>
                   </div>
@@ -125,6 +182,10 @@ const ResponsiveFilterComponent = ({ setisFilter }) => {
                   >
                     <input
                       type="checkbox"
+                      checked={amenities.includes(item)}
+                      onChange={() => {
+                        handleAmenities(item);
+                      }}
                       className="scale-125 accent-[#AF4300]"
                     />
                     <h1 className="text-[#333333]">{item}</h1>
@@ -150,6 +211,8 @@ const ResponsiveFilterComponent = ({ setisFilter }) => {
                   <div className="input-container flex gap-2 items-center">
                     <input
                       type="checkbox"
+                      checked={experiences.includes(item)}
+                      onChange={() => handleExperiences(item)}
                       className="scale-125 accent-[#AF4300]"
                     />
                     <h1 className="text-[#333333]">{item}</h1>

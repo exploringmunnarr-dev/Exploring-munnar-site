@@ -5,20 +5,29 @@ import a3 from "../assets/a3.svg";
 import a4 from "../assets/a4.svg";
 import l from "../assets/l.svg";
 import Image from "next/image";
-const PopularActivities = () => {
+import { Filter, ListFilter } from "lucide-react";
+const PopularActivities = ({ setIsResponsiveFilter, isResponsiveFilter }) => {
   return (
     <>
-      <section>
+      <section className=" w-[100%]">
         <header>
-          <h1 className="font-semibold text-xl md:text-3xl text-[#333333]">
-            Popular activites of munnar
-          </h1>
+          <div className="flex items-center justify-between">
+            <h1 className="font-semibold text-xl md:text-3xl text-[#333333]">
+              Popular activites of munnar
+            </h1>
+            <div
+              onClick={() => setIsResponsiveFilter(!isResponsiveFilter)}
+              className="filter-btn md:hidden cursor-pointer"
+            >
+              <ListFilter className="text-gray-600" />
+            </div>
+          </div>
           <h1 className="text-[#333333] mt-2">
-            Discover unique experiences across nature, culture and morev
+            Discover unique experiences across nature, culture and more
           </h1>
         </header>
-        <div className="content-container mt-4">
-          <div className="grid grid-cols-4 grid-rows-6 gap-4">
+        <div className="content-container mt-4 w-[100%] hidden md:block">
+          <div className="grid w-[100%] md:grid-cols-4 grid-rows-6 gap-4">
             <div className="col-span-2 row-span-4 ">
               <div className="img-container relative h-[100%] w-[100%] rounded-xl">
                 <Image

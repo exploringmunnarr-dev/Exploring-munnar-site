@@ -10,7 +10,7 @@ import Image from "next/image";
 import { useFormData } from "@/context/FormProvider";
 
 const stayTypes = [
- "Tents & Camping Grounds",
+  "Tents & Camping Grounds",
   "Eco Cottages",
   "Treehouses",
   "Homestays & Guesthouses",
@@ -48,9 +48,18 @@ const priceFilterData = [
   "₹5,000+",
 ];
 
-const HotelFilterComponent = ({ setStayType, setLocation, setAmenities, setExperiences, setBudget, stayType, loation, amenities, experiences, budget }) => {
-  console.log("experiences : ", experiences)
-  console.log("amenities : ", amenities)
+const HotelFilterComponent = ({
+  setStayType,
+  setLocation,
+  setAmenities,
+  setExperiences,
+  setBudget,
+  stayType,
+  loation,
+  amenities,
+  experiences,
+  budget,
+}) => {
   // states
   const [selectedFilter, setSelectedFilter] = useState([]);
   const [stayTypeDropdown, setStayTypeDropdown] = useState(true);
@@ -59,44 +68,46 @@ const HotelFilterComponent = ({ setStayType, setLocation, setAmenities, setExper
   const [experienceDropdown, setExperienceDropdown] = useState(false);
   const [priceDropdown, setPriceDropdown] = useState(false);
 
-
-  // functions 
+  // functions
   const handleStayType = (type) => {
-    // if user clicks same type again, clear it (optional)
-    if (stayType === type) {
-      setStayType("");          // deselect
-    } else {
-      setStayType(prev => ([...prev, type]));        // select new one
-    }
+    setStayType((prev) => {
+      if (prev.includes(type)) {
+        return prev.filter((item) => item !== type); // remove
+      }
+      return [...prev, type]; // add
+    });
   };
 
   const handleLocation = (loc) => {
     if (loation.includes(loc)) {
-      setLocation((prev) => prev.filter((item) => item !== loc))
+      setLocation((prev) => prev.filter((item) => item !== loc));
       return;
     } else {
-      setLocation((prev) => [...prev, loc])
+      setLocation((prev) => [...prev, loc]);
     }
-  }
+  };
   const handleAmenities = (amenity) => {
     if (amenities.includes(amenity)) {
-      setAmenities((prev) => prev.filter((item) => item !== amenity))
+      setAmenities((prev) => prev.filter((item) => item !== amenity));
       return;
     } else {
-      setAmenities(prev => [...prev, amenity])
+      setAmenities((prev) => [...prev, amenity]);
     }
-  }
+  };
   const handleExperiences = (selectedExp) => {
     if (experiences.includes(selectedExp)) {
-      setExperiences(prev => prev.filter((item) => item !== selectedExp));
+      setExperiences((prev) => prev.filter((item) => item !== selectedExp));
       return;
     } else {
-      setExperiences(prev => [...prev, selectedExp])
+      setExperiences((prev) => [...prev, selectedExp]);
     }
-  }
+  };
 
-  const handleBduget = () => { }
-  const handlePriceRange = () => { }
+  const handleBduget = (selectedBudget) => {
+    setBudget((prev) => (prev === selectedBudget ? "" : selectedBudget));
+  };
+
+  const handlePriceRange = () => {};
 
   return (
     <>
@@ -113,8 +124,9 @@ const HotelFilterComponent = ({ setStayType, setLocation, setAmenities, setExper
                 <h1 className="text-[#333333] font-semibold">Stay type</h1>
               </div>
               <ChevronDown
-                className={`cursor-pointer  ${stayTypeDropdown ? "rotate-180" : "rotate-0"
-                  } transition-all duration-300`}
+                className={`cursor-pointer  ${
+                  stayTypeDropdown ? "rotate-180" : "rotate-0"
+                } transition-all duration-300`}
                 onClick={() => setStayTypeDropdown(!stayTypeDropdown)}
               />
             </div>
@@ -144,8 +156,9 @@ const HotelFilterComponent = ({ setStayType, setLocation, setAmenities, setExper
                 <h1 className="text-[#333333] font-semibold">Location</h1>
               </div>
               <ChevronDown
-                className={`cursor-pointer  ${locationDropdown ? "rotate-180" : "rotate-0"
-                  } transition-all duration-300`}
+                className={`cursor-pointer  ${
+                  locationDropdown ? "rotate-180" : "rotate-0"
+                } transition-all duration-300`}
                 onClick={() => setLocationDropdown(!locationDropdown)}
               />
             </div>
@@ -175,8 +188,9 @@ const HotelFilterComponent = ({ setStayType, setLocation, setAmenities, setExper
                 <h1 className="text-[#333333] font-semibold">Amenities</h1>
               </div>
               <ChevronDown
-                className={`cursor-pointer  ${amenitiesDropdown ? "rotate-180" : "rotate-0"
-                  } transition-all duration-300`}
+                className={`cursor-pointer  ${
+                  amenitiesDropdown ? "rotate-180" : "rotate-0"
+                } transition-all duration-300`}
                 onClick={() => setAmenitiesDropdown(!amenitiesDropdown)}
               />
             </div>
@@ -188,7 +202,9 @@ const HotelFilterComponent = ({ setStayType, setLocation, setAmenities, setExper
                       <input
                         type="checkbox"
                         checked={amenities.includes(item)}
-                        onChange={() => { handleAmenities(item) }}
+                        onChange={() => {
+                          handleAmenities(item);
+                        }}
                         className="scale-125 accent-[#AF4300]"
                       />
                       <h1 className="text-[#333333]">{item}</h1>
@@ -206,8 +222,9 @@ const HotelFilterComponent = ({ setStayType, setLocation, setAmenities, setExper
                 <h1 className="text-[#333333] font-semibold">Experiences</h1>
               </div>
               <ChevronDown
-                className={`cursor-pointer  ${experienceDropdown ? "rotate-180" : "rotate-0"
-                  } transition-all duration-300`}
+                className={`cursor-pointer  ${
+                  experienceDropdown ? "rotate-180" : "rotate-0"
+                } transition-all duration-300`}
                 onClick={() => setExperienceDropdown(!experienceDropdown)}
               />
             </div>
@@ -237,8 +254,9 @@ const HotelFilterComponent = ({ setStayType, setLocation, setAmenities, setExper
                 <h1 className="text-[#333333] font-semibold">Price / Budget</h1>
               </div>
               <ChevronDown
-                className={`cursor-pointer  ${priceDropdown ? "rotate-180" : "rotate-0"
-                  } transition-all duration-300`}
+                className={`cursor-pointer  ${
+                  priceDropdown ? "rotate-180" : "rotate-0"
+                } transition-all duration-300`}
                 onClick={() => setPriceDropdown(!priceDropdown)}
               />
             </div>
@@ -249,6 +267,9 @@ const HotelFilterComponent = ({ setStayType, setLocation, setAmenities, setExper
                     <div className="input-container flex gap-2 items-center">
                       <input
                         type="radio"
+                        name="budget"
+                        checked={item === budget}
+                        onChange={() => handleBduget(item)}
                         className="scale-125 accent-[#AF4300]"
                       />
                       <h1 className="text-[#333333]">{item}</h1>

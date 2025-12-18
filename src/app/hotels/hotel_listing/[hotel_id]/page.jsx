@@ -17,44 +17,45 @@ import axios from "axios";
 import { useParams } from "next/navigation";
 import SuccessPopup from "@/components/SuccessPopup";
 const page = () => {
+  // Auth
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
-  // Auth 
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL
-
-  // states 
+  // states
   const [isForm, setIsForm] = useState(false);
   const [selectedtab, setSelectedTab] = useState("overview");
-  const [data, setData] = useState({})
-  const [modalTitle, setModalTitle] = useState("")
-  const [isSuccessPopup, setIsSuccessPopup] = useState(false)
-  // params 
-  const { hotel_id } = useParams()
+  const [data, setData] = useState({});
+  const [modalTitle, setModalTitle] = useState("");
+  const [isSuccessPopup, setIsSuccessPopup] = useState(false);
+  // params
+  const { hotel_id } = useParams();
 
-
-  // side effects 
+  // side effects
   useEffect(() => {
-    getHotelData()
-  }, [hotel_id])
+    getHotelData();
+  }, [hotel_id]);
 
-  // functions 
+  // functions
   async function getHotelData() {
-    console.log("respomnse ")
+    console.log("respomnse ");
     try {
       const response = await axios.get(`${apiUrl}/api/hotel/${hotel_id}`);
       setData(response.data.data);
-      console.log("respomnse : ", response)
+      console.log("respomnse : ", response);
     } catch (err) {
-      console.error("Error occured while fetching singel hotel data : ", err.message)
+      console.error(
+        "Error occured while fetching singel hotel data : ",
+        err.message
+      );
     }
   }
 
   const handleSuccessPopup = () => {
-    setIsSuccessPopup(false)
-  }
+    setIsSuccessPopup(false);
+  };
 
   const handleOpenSuccessPopup = () => {
-    setIsSuccessPopup(true)
-  }
+    setIsSuccessPopup(true);
+  };
 
   return (
     <>
@@ -68,8 +69,9 @@ const page = () => {
             smooth={true} // smooth scroll
             duration={500} // scroll duration in ms
             offset={-130}
-            className={`cursor-pointer font-semibold ${selectedtab === "overview" ? "border-b-2 border-[#AF4300]" : ""
-              }`}
+            className={`cursor-pointer font-semibold ${
+              selectedtab === "overview" ? "border-b-2 border-[#AF4300]" : ""
+            }`}
           >
             OverView
           </Link>
@@ -79,8 +81,9 @@ const page = () => {
             smooth={true} // smooth scroll
             duration={500} // scroll duration in ms
             offset={-130} // adjust for header height
-            className={`cursor-pointer font-semibold ${selectedtab === "facilities" ? "border-b-2 border-[#AF4300]" : ""
-              }`}
+            className={`cursor-pointer font-semibold ${
+              selectedtab === "facilities" ? "border-b-2 border-[#AF4300]" : ""
+            }`}
           >
             Facilities
           </Link>
@@ -91,8 +94,9 @@ const page = () => {
             smooth={true}
             duration={500}
             offset={-130} // adjust if you have a fixed header
-            className={`cursor-pointer font-semibold ${selectedtab === "reviews" ? "border-b-2 border-[#AF4300]" : ""
-              }`}
+            className={`cursor-pointer font-semibold ${
+              selectedtab === "reviews" ? "border-b-2 border-[#AF4300]" : ""
+            }`}
           >
             Reviews
           </Link>
@@ -103,8 +107,9 @@ const page = () => {
             smooth={true}
             duration={500}
             offset={-130}
-            className={`cursor-pointer font-semibold ${selectedtab === "location" ? "border-b-2 border-[#AF4300]" : ""
-              }`}
+            className={`cursor-pointer font-semibold ${
+              selectedtab === "location" ? "border-b-2 border-[#AF4300]" : ""
+            }`}
           >
             Location
           </Link>
@@ -133,7 +138,10 @@ const page = () => {
         {/* hero section ---------------  */}
         <HotelHero data={data} />
         <div id="overview">
-          <HotelOverview data={data} handleOpenSuccessPopup={handleOpenSuccessPopup}  />
+          <HotelOverview
+            data={data}
+            handleOpenSuccessPopup={handleOpenSuccessPopup}
+          />
         </div>
         <div id="facilities">
           <AmenitiesSection data={data} />
@@ -148,9 +156,14 @@ const page = () => {
         </div>
       </section>
       <Footer />
-      {isForm && <HotelEnquiryForm data={data} setIsForm={setIsForm} handleOpenSuccessPopup={handleOpenSuccessPopup} />}
+      {isForm && (
+        <HotelEnquiryForm
+          data={data}
+          setIsForm={setIsForm}
+          handleOpenSuccessPopup={handleOpenSuccessPopup}
+        />
+      )}
       {isSuccessPopup && <SuccessPopup onClose={handleSuccessPopup} />}
-
     </>
   );
 };

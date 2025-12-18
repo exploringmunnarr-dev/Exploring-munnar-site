@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import SubCardNav from "@/components/SubCardNav";
 import Navbar from "@/components/Navbar";
@@ -13,73 +13,71 @@ import { useFormData } from "@/context/FormProvider";
 import { useData } from "@/context/ThemeContext";
 
 const page = () => {
-  // Auth 
+  // Auth
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  console.log("Changes made in Dec 2nd code")
-  const { stayType, setStayType } = useData()
+  // console.log("Changes made in Dec 2nd code");
+  const { stayType, setStayType } = useData();
 
-
-  // states 
+  // states
   const [pageNumber, setPageNumber] = useState(1);
-  const [pageNumberList, setPageNumberList] = useState([])
+  const [pageNumberList, setPageNumberList] = useState([]);
   const [hotelData, setHotelData] = useState([]);
-  const [loading, setLoading] = useState(false)
-  // filter inputStates 
+  const [loading, setLoading] = useState(false);
+  // filter inputStates
   // const [stayType, setStayType] = useState([]);
   const [loation, setLocation] = useState([]);
   const [amenities, setAmenities] = useState([]);
   const [experiences, setExperiences] = useState([]);
   const [budget, setBudget] = useState({});
 
-
-
-  // useEffect call's 
+  // useEffect call's
   useEffect(() => {
     async function fetchHotel() {
-      console.log("running : ",stayType )
       try {
-        setLoading(true)
+        setLoading(true);
         const response = await axios.post(`${apiUrl}/api/hotels-list`, {
-          "stayType": stayType,
-          "location": loation,
-          "amenities": amenities,
-          "experiences": experiences,
-          // "budget": { startingFrom: 0, to: 0 },
-          "pageNumber": pageNumber
+          stayType: stayType,
+          location: loation,
+          amenities: amenities,
+          experiences: experiences,
+          budget: budget,
+          pageNumber: pageNumber,
         });
-        
+
         setHotelData(response.data.data.hotels);
-        const totalPages = Array.from({ length: response.data.data.totalPages }, (_, i) => i + 1);
+        const totalPages = Array.from(
+          { length: response.data.data.totalPages },
+          (_, i) => i + 1
+        );
         setPageNumberList(totalPages);
         setTimeout(() => {
-          setLoading(false)
+          setLoading(false);
         }, 1000);
       } catch (err) {
-        console.error("Error while fetching hotel list : ", err)
-        setLoading(false)
+        console.error("Error while fetching hotel list : ", err);
+        setLoading(false);
       }
     }
-    fetchHotel()
-  }, [pageNumber, stayType, loation, amenities, experiences])
+    fetchHotel();
+  }, [pageNumber, stayType, loation, amenities, experiences, budget]);
 
-
-  // functions 
+  // functions
   const handleNext = () => {
     const lastPageNumber = pageNumberList[pageNumberList.length - 1];
     if (pageNumber == lastPageNumber) {
       return;
     }
     setPageNumber(pageNumber + 1);
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const handlePrev = () => {
     if (pageNumber == 1) {
       return;
-    };
-    window.scrollTo({ top: 0, behavior: "smooth" })
-    setPageNumber(pageNumber - 1)
-  }
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setPageNumber(pageNumber - 1);
+  };
 
   return (
     <>
@@ -101,7 +99,18 @@ const page = () => {
         </header>
         <div className="main-content-container mt-6  grid grid-cols-12 gap-6">
           <div className="filter-component-container py-2 rounded-xl overflow-auto hidden md:block md:col-span-3 h-fit bg-[#fefefe] shadow sticky top-[68px] ">
-            <HotelFilterComponent stayType={stayType} loation={loation} amenities={amenities} experiences={experiences} budget={budget} setStayType={setStayType} setLocation={setLocation} setAmenities={setAmenities} setExperiences={setExperiences} setBudget={setBudget} />
+            <HotelFilterComponent
+              stayType={stayType}
+              loation={loation}
+              amenities={amenities}
+              experiences={experiences}
+              budget={budget}
+              setStayType={setStayType}
+              setLocation={setLocation}
+              setAmenities={setAmenities}
+              setExperiences={setExperiences}
+              setBudget={setBudget}
+            />
           </div>
           <div className="hotel-card-component-container space-y-4 col-span-12 md:col-span-9">
             <div className="box hidden w-[100%] bg-white sticky top-[63px] border-none z-20">
@@ -152,20 +161,45 @@ const page = () => {
 
               {hotelData.length !== 0 && (
                 <div className="flex items-center gap-3 justify-end mt-2">
-                  <button onClick={handlePrev} className={``}><ChevronLeft /></button>
+                  <button onClick={handlePrev} className={``}>
+                    <ChevronLeft />
+                  </button>
                   <div className="number-container flex items-center gap-2">
                     {pageNumberList.map((item, index) => {
-                      return <button className={`${item == pageNumber ? "bg-amber-800 text-white px-2 py-1" : ""} text-sm rounded w-7 h-7`}>{item}</button>
+                      return (
+                        <button
+                          className={`${
+                            item == pageNumber
+                              ? "bg-amber-800 text-white px-2 py-1"
+                              : ""
+                          } text-sm rounded w-7 h-7`}
+                        >
+                          {item}
+                        </button>
+                      );
                     })}
                   </div>
 
-                  <button onClick={handleNext}><ChevronRight /></button>
+                  <button onClick={handleNext}>
+                    <ChevronRight />
+                  </button>
                 </div>
               )}
-
             </div>
             <div className="responsiveCard md:hidden">
-              <ResponsiveHotelListingCard />
+              <ResponsiveHotelListingCard
+                listings={hotelData}
+                stayType={stayType}
+                loation={loation}
+                amenities={amenities}
+                experiences={experiences}
+                budget={budget}
+                setStayType={setStayType}
+                setLocation={setLocation}
+                setAmenities={setAmenities}
+                setExperiences={setExperiences}
+                setBudget={setBudget}
+              />
             </div>
           </div>
         </div>
