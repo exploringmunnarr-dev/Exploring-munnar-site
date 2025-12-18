@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import c1 from "../assets/c1.svg";
 import e1 from "../assets/e1.svg";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ListFilter } from "lucide-react";
 import axios from "axios";
 
 const checkboxData = [
@@ -66,7 +66,7 @@ const Localnews = () => {
   const [newsData, setNewsData] = useState([]);
   const [groupedNews, setGroupedNews] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState(["Roads And Transport Conditions"]);
-
+  const [respFilter, setRespFilter] = useState(false)
   // functions 
 
   const handleCheckboxChange = (category) => {
@@ -97,6 +97,7 @@ const Localnews = () => {
 
   const fetchNews = async () => {
     try {
+      setRespFilter(false)
       const response = await axios.get(`${apiUrl}/api/news`, {
         params: {
           categories: selectedCategories.join(','), // 👈 comma-separated
@@ -135,13 +136,16 @@ const Localnews = () => {
   return (
     <>
       <section className="mt-4 md:mt-10">
-        <header>
-          <h1 className="text-xl md:text-3xl font-semibold text-[#333333]">
-            Local news updates of munnar
-          </h1>
-          <h1 className="text-[#777777] mt-1">
-            Stay updated with latest news and events
-          </h1>
+        <header className="sticky top-15 py-2 md:py-0 bg-white md:static flex items-center justify-between">
+          <div>
+            <h1 className="text-xl md:text-3xl font-semibold text-[#333333]">
+              Local news updates of munnar
+            </h1>
+            <h1 className="text-[#777777] mt-1">
+              Stay updated with latest news and events
+            </h1>
+          </div>
+          <ListFilter onClick={() => setRespFilter(true)} className="text-gray-600 md:hidden" />
         </header>
         <div className="main-container grid grid-cols-12 gap-8 ">
           <div className="filter-container col-span-4 mt-4 sticky top-20 h-fit hidden md:block">
@@ -172,7 +176,7 @@ const Localnews = () => {
                 <button
                   onClick={fetchNews}
                   className="text-white bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] 
-    hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] cursor-pointer w-full rounded-lg py-2"
+                 hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] cursor-pointer w-full rounded-lg py-2"
                 >
                   Apply Filter
                 </button>
@@ -181,33 +185,6 @@ const Localnews = () => {
             </div>
           </div>
           <div className="content-container col-span-12 md:col-span-8 mt-4 ">
-            {/* <h1 className="text-[#333333] font-semibold text-xl">
-              Road and transport condition
-            </h1>
-            <div className="card-container mt-4 space-y-3">
-              {newsData.map((item, index) => {
-                return (
-                  <div className="card bg-[#EEEEEE] md:flex items-center gap-4 rounded-lg p-3">
-                    <Image
-                      src={item?.imageUrl}
-                      width={1000} height={1000}
-                      className="w-[100%] md:w-[340px] rounded-xl h-[200px] object-cover"
-                    />
-                    <div className="content-container mt-4 md:mt-0">
-                      <h1 className="text-lg text-[#333333] font-semibold">
-                        {item?.heading}
-                      </h1>
-                      <h1 className="text-[#333333] mt-4 text-justify">
-                        {item?.detail}
-                      </h1>
-                      <h1 className="text-sm text-[#777777] mt-4">
-                        Last updated : 34mins ago
-                      </h1>
-                    </div>
-                  </div>
-                );
-              })}
-            </div> */}
             {groupedNews.map((item, index) => {
               return <div className="main-container">
                 <h1 className="text-[#333333] font-semibold text-xl mt-6">
@@ -238,39 +215,53 @@ const Localnews = () => {
                 })}
               </div>
             })}
-            {/* <div className="emergency-alerts-container hidden">
-              <header className="my-6">
-                <h1 className="text-xl font-semibold text-[#333333]">
-                  Emergency alerts
-                </h1>
-              </header>
-              <div className="container-1 space-y-3">
-                {emergencyAlert.map((item, index) => {
-                  return (
-                    <div className="card bg-[#EEEEEE] md:flex items-center gap-4 rounded-lg p-3">
-                      <Image
-                        src={item.img}
-                        className="w-[100%] md:w-[340px] rounded-xl h-[200px] object-cover"
-                      />
-                      <div className="content-container">
-                        <h1 className="text-lg text-[#333333] font-semibold">
-                          {item.title}
-                        </h1>
-                        <h1 className="text-[#333333] mt-4">
-                          {item.description}
-                        </h1>
-                        <h1 className="text-sm text-[#777777] mt-4">
-                          Last updated : 34mins ago
-                        </h1>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div> */}
           </div>
         </div>
       </section>
+
+      {/* responsive filter container  */}
+
+      {respFilter && <div className="responsive-filter-container md:hidden">
+        <div onClick={() => setRespFilter(false)} className="fixed inset-0 bg-black/40 z-60"></div>
+        <div className="filter-container h-[100vh] fixed top-0 left-0 bg-white z-70 p-3 md:hidden">
+          <h1 className="font-semibold text-lg md:text-2xl">Filters</h1>
+          <div className="category-container mt-4">
+            <header className="flex items-center justify-between border-b border-gray-400 pb-4 ">
+              <h1 className="font-semibold md:text-lg text-[#333333]">
+                News categories
+              </h1>
+              <ChevronDown className="w-6 h-6" />
+            </header>
+            <div className="checbox-container mt-3 space-y-3">
+              {checkboxData.map((item, index) => (
+                <div
+                  key={index}
+                  className="input-container flex items-center gap-3"
+                >
+                  <input
+                    type="checkbox"
+                    className="scale-125 accent-amber-800"
+                    checked={selectedCategories.includes(item)}
+                    onChange={() => handleCheckboxChange(item)}
+                  />
+                  <h1 className="text-sm">{item}</h1>
+                </div>
+              ))}
+
+              <button
+                onClick={fetchNews}
+                className="text-white bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] 
+                 hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] cursor-pointer w-full rounded-lg py-2"
+              >
+                Apply Filter
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>}
+
+
     </>
   );
 };
