@@ -33,7 +33,7 @@ const page = () => {
       <div className="main-container mx-4 md:mx-10 mt-4">
         <LiveInformationHero />
         <Localnews />
-        {/* <EmergencyContacts /> */}
+        <EmergencyContacts />
       </div>
       <Footer />
     </>

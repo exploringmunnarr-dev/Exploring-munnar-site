@@ -26,7 +26,7 @@ const PopularActivities = ({ setIsResponsiveFilter, isResponsiveFilter }) => {
             Discover unique experiences across nature, culture and more
           </h1>
         </header>
-        <div className="content-container mt-4 w-[100%] hidden md:block">
+        <div className="content-container mt-4 w-[100%] hidden md:block ">
           <div className="grid w-[100%] md:grid-cols-4 grid-rows-6 gap-4">
             <div className="col-span-2 row-span-4 ">
               <div className="img-container relative h-[100%] w-[100%] rounded-xl">

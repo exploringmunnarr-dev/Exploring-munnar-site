@@ -41,7 +41,7 @@ const BoatingAndLakeTours = ({ groupedData }) => {
       {groupedData.length > 0 ? (
         groupedData.map((item, index) => {
           return (
-            <section className="mt-4 md:mt-10">
+            <section className="mt-4 md:mt-10 ">
               <header>
                 <h1 className="font-semibold text-xl md:text-3xl text-[#333333]">
                   {item.title}
@@ -59,13 +59,13 @@ const BoatingAndLakeTours = ({ groupedData }) => {
                           src={item?.images[0]?.url}
                           width={1000}
                           height={1000}
-                          className="rounded-xl w-[430px] h-[200px] object-cover"
+                          className="rounded-xl w-[100%] md:w-[430px] h-[200px] object-cover"
                         />
                       </div>
                       <div className="content-container w-[100%] mt-2 md:mt-0">
-                        <h1 className="font-semibold text-lg">{item.name}</h1>
-                        <h1 className="text-[#777777] mt-3">{item.duration}</h1>
-                        <h1 className="text-[#777777] ">
+                        <h1 className="font-semibold text-md md:text-lg ">{item.name}</h1>
+                        <h1 className="text-[#777777] mt-3 text-sm md:text-md">{item.duration}</h1>
+                        <h1 className="text-[#777777] text-sm md:text-md">
                           {item.description.slice(0, 170)}..
                         </h1>
                         <div className="footer-container mt-4 flex items-center justify-between">
@@ -75,7 +75,7 @@ const BoatingAndLakeTours = ({ groupedData }) => {
                               <span>
                                 <Image src={str} />
                               </span>
-                              {item.ratings}
+                              {item.rating}
                             </h1>
                             <h1 className="text-[#333333] text-xs">
                               {item.reviewsCount}

@@ -73,11 +73,10 @@ const page = () => {
                 className="cursor-pointer"
               >
                 <button
-                  className={`relative pb-1 text-[15px] font-semibold transition-all ${
-                    activeTab === tab
-                      ? "text-[#333333] after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[2px] after:bg-[#AF4300]"
-                      : "text-gray-600 hover:text-[#333333]"
-                  }`}
+                  className={`relative pb-1 text-[15px] font-semibold transition-all ${activeTab === tab
+                    ? "text-[#333333] after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[2px] after:bg-[#AF4300]"
+                    : "text-gray-600 hover:text-[#333333]"
+                    }`}
                 >
                   {tab}
                 </button>
@@ -155,7 +154,7 @@ const page = () => {
             <h1 className="text-lg font-semibold">Overview</h1>
             <div className="text-justify text-md ">
               {activityData?.description?.split(". ").map((item, i) => (
-                <p key={i} className="mt-2 text-[#777777]">
+                <p key={i} className="mt-2 text-[#777777] text-sm md:text-md">
                   {item}.
                 </p>
               ))}

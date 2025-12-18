@@ -182,8 +182,8 @@ const page = () => {
         {/* ------------- responsive filter container -------------------- */}
         {isResponsiveFilter && (
           <div className="responsive-filter-container md:hidden">
-            <div className="resp-tint fixed inset-0 bg-black/20 z-30"></div>
-            <div className="filter-container w-fit overflow-auto p-4 absolute top-0 left-0 z-100 h-[100vh]   bg-white">
+            <div onClick={() => setIsResponsiveFilter(false)} className="resp-tint fixed inset-0 bg-black/20 z-30"></div>
+            <div className="filter-container w-fit overflow-auto p-4 fixed top-0 left-0 z-100 h-[100vh]   bg-white">
               <div className="header flex items-center justify-between">
                 <h1 className="text-[#383838] text-xl font-medium">Filters</h1>
                 <X onClick={() => setIsResponsiveFilter(false)} />
