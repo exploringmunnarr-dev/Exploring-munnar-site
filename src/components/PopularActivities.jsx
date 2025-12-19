@@ -42,12 +42,12 @@ const PopularActivities = ({ setIsResponsiveFilter, isResponsiveFilter }) => {
                     </span>
                     Mattupetty Dam, Munnar
                   </h1>
-                  <button
+                  {/* <button
                     className="text-white bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] 
-  hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] cursor-pointer w-full rounded-lg py-2 "
+                  hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] cursor-pointer w-full rounded-lg py-2 "
                   >
                     View details
-                  </button>
+                  </button> */}
                 </div>
                 <div className="img-tint absolute top-0 rounded-xl right-0 bottom-0 left-0"></div>
               </div>
@@ -63,12 +63,12 @@ const PopularActivities = ({ setIsResponsiveFilter, isResponsiveFilter }) => {
                     </span>
                     Panniyarkutty, Munnar
                   </h1>
-                  <button
+                  {/* <button
                     className="text-white bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] 
-  hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] cursor-pointer w-full rounded-lg py-2 "
+                      hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] cursor-pointer w-full rounded-lg py-2 "
                   >
                     View details
-                  </button>
+                  </button> */}
                 </div>
                 <div className="img-tint absolute top-0 rounded-xl right-0 bottom-0 left-0"></div>
               </div>

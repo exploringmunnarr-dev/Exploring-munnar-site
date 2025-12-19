@@ -23,7 +23,7 @@ const cardData = [
     icon: icon3,
   },
   {
-    title: "24/7 Support",
+    title: "Customer Support",
     description:
       "Got a question? Our support team is always just a message away.",
     icon: icon4,

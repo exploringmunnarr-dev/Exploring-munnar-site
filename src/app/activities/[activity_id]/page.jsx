@@ -60,7 +60,7 @@ const page = () => {
       <section>
         <Navbar />
         {/* header ---------------------------------------------- */}
-        <div className="header md:flex px-9 mt-4 justify-between items-center border-b border-gray-200 pb-2 ">
+        <div className="header sticky top-15 py-2 bg-white md:flex px-9 mt-4 justify-between items-center border-b border-gray-200 pb-2 ">
           {/* Tabs Section */}
           <div className="flex gap-6 mb-4 md:mb-0">
             {tabs.map((tab) => (
@@ -75,11 +75,10 @@ const page = () => {
                 className="cursor-pointer"
               >
                 <button
-                  className={`relative pb-1 text-[15px] font-semibold transition-all ${
-                    activeTab === tab
-                      ? "text-[#333333] after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[2px] after:bg-[#AF4300]"
-                      : "text-gray-600 hover:text-[#333333]"
-                  }`}
+                  className={`relative pb-1 text-[15px] font-semibold transition-all ${activeTab === tab
+                    ? "text-[#333333] after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[2px] after:bg-[#AF4300]"
+                    : "text-gray-600 hover:text-[#333333]"
+                    }`}
                 >
                   {tab}
                 </button>
@@ -100,15 +99,15 @@ const page = () => {
               {/* Price */}
               <div className="text-right">
                 <p className="text-gray-800 font-semibold text-[15px]">
-                  ₹ {activityData?.price}/ night
+                  ₹ {activityData?.price}
                 </p>
               </div>
             </div>
 
             {/* Button */}
-            <button className="btn-green cursor-pointer text-white font-medium px-5 py-2 rounded-md hover:bg-green-800 transition">
+            {/* <button className="btn-green cursor-pointer text-white font-medium px-5 py-2 rounded-md hover:bg-green-800 transition">
               Reserve
-            </button>
+            </button> */}
           </div>
         </div>
 

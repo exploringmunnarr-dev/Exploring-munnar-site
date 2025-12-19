@@ -8,7 +8,7 @@ import four from '../assets/four.svg'
     const data = [
         {title : "Handpicked Hotels Only", description : "Explore stays based on what you love — lake views, plantation cottages, or treetop escapes.Easily filter by destination, vibe, or travel mood.", img : one},
         {title : "Search by Region or Experience", description : "Every stay is locally verified by our team to ensure comfort, cleanliness, and charm.No random listings — only stays we’d recommend to friends.", img : two},
-        {title : "Local 24/7 Customer Support", description : "Our support team is based right here in Munnar and available anytime.From booking help to on-trip queries — we’re just a message away.", img : three},
+        {title : "Customer Support", description : "Our support team is based right here in Munnar and available anytime.From booking help to on-trip queries — we’re just a message away.", img : three},
         {title : "Real Munnar Experience", description : "We highlight hidden gems and offbeat spots travelers often miss.Stay closer to nature, culture, and real local experiences.", img : four},
     ]
 

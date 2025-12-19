@@ -8,7 +8,7 @@ const data = [
     { icon: icon1, title: "Local Expertise", description: "Curated by locals and travel pros who know Munnar inside out" },
     { icon: icon2, title: "Personalized Itineraries", description: "Tell us your interests and budget — we’ll build your ideal trip." },
     { icon: icon3, title: "Real-Time Info", description: "Get live updates on weather, roads, transport, and attractions." },
-    { icon: icon4, title: "24/7 Support", description: "Got a question? Our support team is always just a message away." }
+    { icon: icon4, title: "Customer Support", description: "Got a question? Our support team is always just a message away." }
 ]
 const WhyTravelerChooseSection = () => {
     return (
