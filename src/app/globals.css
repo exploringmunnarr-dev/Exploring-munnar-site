@@ -142,3 +142,7 @@ input::-webkit-inner-spin-button {
   background: rgba(255, 255, 255, 0.16);
   backdrop-filter: blur(15px);
 }
+.tint-blur {
+  background-color: rgba(255, 255, 255, 0.329);
+  backdrop-filter: blur(4px);
+}

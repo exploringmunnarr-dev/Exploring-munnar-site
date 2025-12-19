@@ -4,6 +4,7 @@ import img1 from "../assets/plannerImg1.svg";
 import img2 from "../assets/plannerImg2.svg";
 import img3 from "../assets/plannerImg3.svg";
 import img4 from "../assets/plannerImg4.svg";
+import Link from "next/link";
 
 const itinerary = [
   {
@@ -50,9 +51,14 @@ const TripPlannerSection = () => {
               </h2>
 
               {/* CTA Button */}
-              <button className="mt-4 px-6 py-2  bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)]  hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] cursor-pointer text-white font-medium rounded-md hover:bg-green-900 transition">
-                Start Planning Now
-              </button>
+              <div className="btn-container mt-4">
+                <Link
+                  href={`itneary_planning`}
+                  className="px-6 py-2  bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)]  hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] cursor-pointer text-white font-medium rounded-md hover:bg-green-900 transition"
+                >
+                  Start Planning Now
+                </Link>
+              </div>
 
               {/* Itinerary List */}
               <div className="mt-8 space-y-4">

@@ -21,7 +21,7 @@ const Home = ({ scroll }) => {
       <Navbar scroll={scroll} />
       <HomeHero />
       <GetAroundSection />
-      <TopAttractions/>
+      <TopAttractions />
       <PromotionBanner />
       <TripPlannerSection />
       <StayOptionsSection />
