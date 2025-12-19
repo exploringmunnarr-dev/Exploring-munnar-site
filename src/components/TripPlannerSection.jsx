@@ -45,7 +45,7 @@ const TripPlannerSection = () => {
           <section className="">
             <div className="w-[100%] md:w-[94%]">
               {/* Heading */}
-              <h2 className="text-xl md:text-2xl font-semibold text-[#000000]">
+              <h2 className="text-lg md:text-2xl font-semibold text-[#000000]">
                 Plan Your Perfect Munnar Trip, Tell us your trip details and
                 interests, and we’ll generate a personalized itinerary
               </h2>

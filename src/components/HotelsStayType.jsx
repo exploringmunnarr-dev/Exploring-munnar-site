@@ -19,6 +19,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation, Autoplay } from "swiper/modules";
 import { useData } from "@/context/ThemeContext";
+import Link from "next/link";
 const cardData = [
   { img: hImg1, title: "Tents & Camping Grounds" },
   { img: hImg2, title: "Eco Cottages" },
@@ -33,15 +34,15 @@ const cardData = [
 //   "Homestays & Guesthouses",
 //   "Boutique Resorts & Hotels",
 const HotelsStayType = () => {
-  // context data 
-  const { stayType, setStayType } = useData()
+  // context data
+  const { stayType, setStayType } = useData();
 
-  const navigate = useRouter()
+  const navigate = useRouter();
 
   // refs
   const cardRef = useRef(null);
 
-  // functions 
+  // functions
   const handleNext = () => {
     if (cardRef.current) {
       cardRef.current.scrollLeft += 400;
@@ -56,8 +57,7 @@ const HotelsStayType = () => {
 
   function handleStay(title) {
     setStayType([title]);
-    navigate.push('/hotels/hotel_listing')
-
+    navigate.push("/hotels/hotel_listing");
   }
   return (
     <>
@@ -73,9 +73,9 @@ const HotelsStayType = () => {
               </p>
             </div>
           </div>
-          <button className="text-[#333333] underline cursor-pointer">
+          <Link href={`/hotels/hotel_listing`} className="text-[#333333] underline cursor-pointer">
             View all
-          </button>
+          </Link>
         </header>
         <div className="relative mt-4">
           <Swiper
@@ -99,7 +99,10 @@ const HotelsStayType = () => {
           >
             {cardData.map((item, index) => (
               <SwiperSlide key={index}>
-                <div onClick={() => handleStay(item.title)} className="card rounded-lg h-[300px] relative overflow-hidden">
+                <div
+                  onClick={() => handleStay(item.title)}
+                  className="card rounded-lg h-[300px] relative overflow-hidden"
+                >
                   <Image
                     src={item.img}
                     alt={`Card ${index}`}
