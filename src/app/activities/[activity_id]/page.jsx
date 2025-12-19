@@ -34,7 +34,7 @@ const page = () => {
   const [activeTab, setActiveTab] = useState("Overview");
   const [activityData, setActivityData] = useState({});
 
-  console.log("activity data : ", activityData)
+  console.log("activity data : ", activityData);
 
   // side effects
   useEffect(() => {
