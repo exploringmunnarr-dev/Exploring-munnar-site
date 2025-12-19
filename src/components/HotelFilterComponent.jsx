@@ -103,8 +103,30 @@ const HotelFilterComponent = ({
     }
   };
 
-  const handleBduget = (selectedBudget) => {
-    setBudget((prev) => (prev === selectedBudget ? "" : selectedBudget));
+  const parseBudgetRange = (rangeStr) => {
+    if (rangeStr === "Under ₹999") {
+      return { startingFrom: 0, to: 999 };
+    } else if (rangeStr === "₹5,000+") {
+      return { startingFrom: 5000, to: 999999 }; // or whatever max
+    } else {
+      // "₹1,000–₹2,499" format
+      const match = rangeStr.match(/₹([\d,]+)–₹([\d,]+)/);
+      if (match) {
+        const min = parseInt(match[1].replace(/,/g, ""));
+        const max = parseInt(match[2].replace(/,/g, ""));
+        return { startingFrom: min, to: max };
+      }
+    }
+    return { startingFrom: 0, to: 0 };
+  };
+
+  const handleBudget = (selectedBudget) => {
+    const rangeObj = parseBudgetRange(selectedBudget);
+    setBudget((prev) =>
+      prev.startingFrom === rangeObj.startingFrom && prev.to === rangeObj.to
+        ? { startingFrom: 0, to: 0 } // deselect if same
+        : rangeObj
+    );
   };
 
   const handlePriceRange = () => {};
@@ -268,8 +290,12 @@ const HotelFilterComponent = ({
                       <input
                         type="radio"
                         name="budget"
-                        checked={item === budget}
-                        onChange={() => handleBduget(item)}
+                        checked={
+                          budget.startingFrom ===
+                            parseBudgetRange(item).startingFrom &&
+                          budget.to === parseBudgetRange(item).to
+                        }
+                        onChange={() => handleBudget(item)}
                         className="scale-125 accent-[#AF4300]"
                       />
                       <h1 className="text-[#333333]">{item}</h1>

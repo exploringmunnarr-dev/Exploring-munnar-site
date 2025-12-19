@@ -34,6 +34,8 @@ const page = () => {
   const [activeTab, setActiveTab] = useState("Overview");
   const [activityData, setActivityData] = useState({});
 
+  console.log("activity data : ", activityData)
+
   // side effects
   useEffect(() => {
     getData();
@@ -73,10 +75,11 @@ const page = () => {
                 className="cursor-pointer"
               >
                 <button
-                  className={`relative pb-1 text-[15px] font-semibold transition-all ${activeTab === tab
-                    ? "text-[#333333] after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[2px] after:bg-[#AF4300]"
-                    : "text-gray-600 hover:text-[#333333]"
-                    }`}
+                  className={`relative pb-1 text-[15px] font-semibold transition-all ${
+                    activeTab === tab
+                      ? "text-[#333333] after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[2px] after:bg-[#AF4300]"
+                      : "text-gray-600 hover:text-[#333333]"
+                  }`}
                 >
                   {tab}
                 </button>

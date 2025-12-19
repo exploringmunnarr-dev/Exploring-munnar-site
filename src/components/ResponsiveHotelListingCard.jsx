@@ -148,17 +148,17 @@ const ResponsiveHotelListingCard = ({
   return (
     <>
       <div className="main-container mt-[-20px] sticky w-[100%] top-[65px] z-40">
-        <div className="filter-container px-4 flex items-center py-3 w-[80%] m-auto border shadow-md shadow-gray-400 rounded-full border-gray-50  bg-white ">
+        <div className="filter-container px-4 flex items-center py-3 w-fit text-center md:w-[80%] m-auto border shadow-md shadow-gray-400 rounded-full border-gray-50  bg-white ">
           <div
             onClick={() => setisFilter(true)}
-            className="filter-container w-[50%] border-r border-green-700 px-2 "
+            className="filter-container w-[100%] border-r11 border-green-700 px-2 text-center"
           >
-            <div className="header flex gap-2 items-center justify-between">
+            <div className="header flex gap-2 items-center justify-between F">
               <h1 className="text-gray-600 text-lg">Filters</h1>
               <ChevronDown className="text-gray-400" />
             </div>
           </div>
-          <div
+          {/* <div
             onClick={() => setispriceRange(true)}
             className="price-container w-[50%] pl-2"
           >
@@ -166,7 +166,7 @@ const ResponsiveHotelListingCard = ({
               <h1 className="text-gray-600">Price</h1>
               <ChevronDown className="text-gray-400" />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 

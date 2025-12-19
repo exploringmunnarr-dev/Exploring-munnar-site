@@ -28,7 +28,7 @@ const page = () => {
   const [loation, setLocation] = useState([]);
   const [amenities, setAmenities] = useState([]);
   const [experiences, setExperiences] = useState([]);
-  const [budget, setBudget] = useState({});
+  const [budget, setBudget] = useState({ startingFrom: 0, to: 0 });
 
   // useEffect call's
   useEffect(() => {
