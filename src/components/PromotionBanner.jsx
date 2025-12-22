@@ -45,11 +45,11 @@ const PromotionBanner = () => {
                                              
                                                     "
               >
-                <div className="rounded-xl h-[140px] sm:h-[200px] md:h-[300px] w-full relative overflow-hidden  bg-white">
+                <div className="rounded-xl h-[140px] sm:h-[200px] md:h-[300px] w-full relative  bg-white">
                   <Image
                     src={slide.img}
                     alt={slide.title}
-                    className="h-full w-full object-cover"
+                    className="h-full w-full "
                   />
                   {/* <div className="px-4 py-1 absolute w-[100%] bottom-[60px] left-0 blur-bg ">
                                     <h3 className="font-semibold text-md text-white">{slide.title}</h3>
