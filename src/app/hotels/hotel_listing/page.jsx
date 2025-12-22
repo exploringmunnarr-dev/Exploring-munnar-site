@@ -16,7 +16,9 @@ const page = () => {
   // Auth
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   // console.log("Changes made in Dec 2nd code");
-  const { stayType, setStayType } = useData();
+  const { stayType, setStayType, loation, setLocation } = useData();
+
+  console.log("selected location : ", loation);
 
   // states
   const [pageNumber, setPageNumber] = useState(1);
@@ -25,7 +27,7 @@ const page = () => {
   const [loading, setLoading] = useState(false);
   // filter inputStates
   // const [stayType, setStayType] = useState([]);
-  const [loation, setLocation] = useState([]);
+  // const [loation, setLocation] = useState([]);
   const [amenities, setAmenities] = useState([]);
   const [experiences, setExperiences] = useState([]);
   const [budget, setBudget] = useState({ startingFrom: 0, to: 0 });

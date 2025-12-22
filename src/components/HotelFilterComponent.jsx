@@ -63,7 +63,7 @@ const HotelFilterComponent = ({
   // states
   const [selectedFilter, setSelectedFilter] = useState([]);
   const [stayTypeDropdown, setStayTypeDropdown] = useState(true);
-  const [locationDropdown, setLocationDropdown] = useState(false);
+  const [locationDropdown, setLocationDropdown] = useState(true);
   const [amenitiesDropdown, setAmenitiesDropdown] = useState(false);
   const [experienceDropdown, setExperienceDropdown] = useState(false);
   const [priceDropdown, setPriceDropdown] = useState(false);

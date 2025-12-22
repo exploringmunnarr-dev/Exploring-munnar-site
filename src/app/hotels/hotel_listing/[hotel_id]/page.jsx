@@ -36,11 +36,10 @@ const page = () => {
 
   // functions
   async function getHotelData() {
-    console.log("respomnse ");
     try {
       const response = await axios.get(`${apiUrl}/api/hotel/${hotel_id}`);
       setData(response.data.data);
-      console.log("respomnse : ", response);
+      console.log("hotel data : ", response.data.data);
     } catch (err) {
       console.error(
         "Error occured while fetching singel hotel data : ",

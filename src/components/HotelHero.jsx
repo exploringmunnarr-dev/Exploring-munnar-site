@@ -15,10 +15,13 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import ImageModalComponent from "./ImageModalComponent";
 const HotelHero = ({ data }) => {
   const images = [img1, img2, img3, img4];
 
+  // states
   const [imgData, setImgData] = useState([]);
+  const [isImageModal, setImageModal] = useState(false);
 
   useEffect(() => {
     const responsiveImgData = data?.images?.filter((item) => {
@@ -47,7 +50,6 @@ const HotelHero = ({ data }) => {
               <h1>Share</h1>
             </div>
             <div className="container flex items-center gap-2">
-              F
               <Image src={heartLike} />
               <h1>Save</h1>
             </div>
@@ -91,6 +93,14 @@ const HotelHero = ({ data }) => {
             />
           </div>
         </div>
+        <div className="show-more-container flex justify-end mt-2">
+          <button
+            onClick={() => setImageModal(true)}
+            className="text-green-800 cursor-pointer underline"
+          >
+            Show more
+          </button>
+        </div>
       </section>
       {/* ---------- responsive  */}
       <div className="container-1 mb-3 border hidden">
@@ -114,7 +124,6 @@ const HotelHero = ({ data }) => {
           className="mySwiper md:rounded-3xl h-full w-full"
         >
           {imgData?.map((item, index) => {
-            console.log("Res data : ", item.url);
             return (
               <SwiperSlide>
                 <Image
@@ -129,6 +138,13 @@ const HotelHero = ({ data }) => {
           })}
         </Swiper>
       </div>
+      {isImageModal && (
+        <ImageModalComponent
+          isImageModal={isImageModal}
+          setImageModal={setImageModal}
+          data={data}
+        />
+      )}
     </>
   );
 };

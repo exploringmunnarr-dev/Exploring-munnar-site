@@ -1,10 +1,21 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import destinationImg from "../assets/destinationImg.svg";
 import locationImg from "../assets/locationImg.svg";
+import { useFormData } from "@/context/FormProvider";
+import { useData } from "@/context/ThemeContext";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const locationData = [
-  { img: locationImg, title: "Chinnakanal", top: "24%", left: "20%", resTop : "20%"},
+  {
+    img: locationImg,
+    title: "Chinnakanal",
+    top: "24%",
+    left: "20%",
+    resTop: "20%",
+  },
   { img: locationImg, title: "Devikulam", top: "44%", left: "35%" },
   { img: locationImg, title: "Munnar Town", top: "25%", left: "56%" },
   { img: locationImg, title: "Lockhart Gap", top: "22%", left: "80%" },
@@ -15,6 +26,25 @@ const locationData = [
 ];
 
 const StayByDestination = () => {
+  // conext
+  const { loation, setLocation } = useData();
+
+  // naigation hooks
+  const router = useRouter();
+
+  // functions
+
+  // setting Location
+  const handleLocation = (loc) => {
+    if (loation.includes(loc)) {
+      setLocation((prev) => prev.filter((item) => item !== loc));
+      return;
+    } else {
+      setLocation((prev) => [...prev, loc]);
+    }
+    router.push(`/hotels/hotel_listing`)
+  };
+
   return (
     <>
       <section className="mt-8 md:mt-14">
@@ -29,9 +59,12 @@ const StayByDestination = () => {
               </p>
             </div>
           </div>
-          <button className="text-[#333333] underline cursor-pointer">
+          <Link
+            href={`/hotels/hotel_listing`}
+            className="text-[#333333] underline cursor-pointer"
+          >
             View hotels
-          </button>
+          </Link>
         </header>
         <div className="content-container h-[500px] mt-4">
           <div className="relative h-[500px] mt-3 rounded-xl overflow-hidden">
@@ -44,6 +77,7 @@ const StayByDestination = () => {
             {/* Location Pins will go here */}
             {locationData.map((loc, index) => (
               <div
+                onClick={() => handleLocation(loc.title)}
                 key={index}
                 className="absolute flex flex-col items-center "
                 style={{
