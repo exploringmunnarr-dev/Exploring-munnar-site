@@ -24,7 +24,7 @@ const page = () => {
       </section>
       <ItnearyFaq />
       <Footer />
-      <div className="tab-container w-full fixed bottom-0 md:hidden">
+      <div className="tab-container w-full fixed bottom-0 z-100 md:hidden">
         <MobileTab />
       </div>
     </>

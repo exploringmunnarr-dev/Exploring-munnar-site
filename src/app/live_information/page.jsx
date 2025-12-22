@@ -5,6 +5,7 @@ import Localnews from "@/components/Localnews";
 import Footer from "@/components/Footer";
 import EmergencyContacts from "@/components/EmergencyContacts";
 import { useTheme } from "@emotion/react";
+import MobileTab from "@/components/MobileTab";
 
 const page = () => {
   // Auth 
@@ -19,7 +20,7 @@ const page = () => {
   return (
     <>
       <Navbar />
-      <header className="mx-4 md:mx-10 mt-4 btn-green px-4 py-10 rounded-lg">
+      <header className="mx-4 md:mx-10 mt-4 btn-green px-4 py-10 rounded-lg hidden md:block">
         <SubCardNav />
         <div className="content-container text-white mt-4 ml-3">
           <h1 className="font-medium text-3xl ">
@@ -36,6 +37,9 @@ const page = () => {
         <EmergencyContacts />
       </div>
       <Footer />
+      <div className="tab-container w-full fixed bottom-0 z-100 scale-z-100 md:hidden">
+        <MobileTab />
+      </div>
     </>
   );
 };

@@ -11,6 +11,7 @@ import axios from "axios";
 import { useForkRef } from "@mui/material";
 import { useFormData } from "@/context/FormProvider";
 import { useData } from "@/context/ThemeContext";
+import MobileTab from "@/components/MobileTab";
 
 const page = () => {
   // Auth
@@ -207,8 +208,10 @@ const page = () => {
         </div>
       </section>
       <Footer />
+      <div className="tab-container w-full fixed bottom-0 md:hidden">
+        <MobileTab />
+      </div>
     </>
-    //
   );
 };
 

@@ -1,11 +1,12 @@
-import AboutUsHeroSection from '@/components/AboutUsHeroSection'
-import Footer from '@/components/Footer'
-import Navbar from '@/components/Navbar'
-import OurMission from '@/components/OurMission'
-import Testimonials from '@/components/Testimonials'
-import WhoWeAreSection from '@/components/WhoWeAreSection'
-import WhyTravelerChooseSection from '@/components/WhyTravelerChooseSection'
-import React from 'react'
+import AboutUsHeroSection from "@/components/AboutUsHeroSection";
+import Footer from "@/components/Footer";
+import MobileTab from "@/components/MobileTab";
+import Navbar from "@/components/Navbar";
+import OurMission from "@/components/OurMission";
+import Testimonials from "@/components/Testimonials";
+import WhoWeAreSection from "@/components/WhoWeAreSection";
+import WhyTravelerChooseSection from "@/components/WhyTravelerChooseSection";
+import React from "react";
 
 const page = () => {
   return (
@@ -19,8 +20,11 @@ const page = () => {
       <div className="footer-container pt-8">
         <Footer />
       </div>
+      <div className="tab-container w-full fixed bottom-0 md:hidden">
+        <MobileTab />
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default page
+export default page;

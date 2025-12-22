@@ -15,6 +15,7 @@ import axios from "axios";
 import { act } from "react";
 import { Link, Element } from "react-scroll";
 import ImageModalComponent from "@/components/ImageModalComponent";
+import MobileTab from "@/components/MobileTab";
 
 const tabs = ["Overview", "Location", "FAQ's"];
 
@@ -35,7 +36,6 @@ const page = () => {
   const [activeTab, setActiveTab] = useState("Overview");
   const [activityData, setActivityData] = useState({});
   const [isImageModal, setImageModal] = useState(false);
-
 
   // side effects
   useEffect(() => {
@@ -76,10 +76,11 @@ const page = () => {
                 className="cursor-pointer"
               >
                 <button
-                  className={`relative pb-1 text-[15px] font-semibold transition-all ${activeTab === tab
-                    ? "text-[#333333] after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[2px] after:bg-[#AF4300]"
-                    : "text-gray-600 hover:text-[#333333]"
-                    }`}
+                  className={`relative pb-1 text-[15px] font-semibold transition-all ${
+                    activeTab === tab
+                      ? "text-[#333333] after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[2px] after:bg-[#AF4300]"
+                      : "text-gray-600 hover:text-[#333333]"
+                  }`}
                 >
                   {tab}
                 </button>
@@ -151,9 +152,13 @@ const page = () => {
                 {activityData?.category}
               </button>
             </div>
-            <button onClick={() => setImageModal(true)} className="underline text-green-800 text-sm cursor-pointer">View more</button>
+            <button
+              onClick={() => setImageModal(true)}
+              className="underline text-green-800 text-sm cursor-pointer"
+            >
+              View more
+            </button>
           </div>
-
         </div>
 
         <Element name="Overview">
@@ -183,11 +188,18 @@ const page = () => {
           <ItnearyFaq />
         </Element>
         <Footer />
+        <div className="tab-container w-full fixed bottom-0 z-100 md:hidden">
+          <MobileTab />
+        </div>
       </section>
 
-      {isImageModal && <ImageModalComponent isImageModal={isImageModal}
-        setImageModal={setImageModal}
-        data={activityData} />}
+      {isImageModal && (
+        <ImageModalComponent
+          isImageModal={isImageModal}
+          setImageModal={setImageModal}
+          data={activityData}
+        />
+      )}
     </>
   );
 };
