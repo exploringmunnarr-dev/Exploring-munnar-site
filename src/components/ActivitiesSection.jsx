@@ -21,9 +21,9 @@ const ActivitiesSection = () => {
             </h1>
           </div>
           <button>
-            <h1 className="font-semibold text-[#333333] underline hover:text-green-600">
+            <Link href={`/activities`} className="font-semibold text-[#333333] underline hover:text-green-600">
               View all
-            </h1>
+            </Link>
           </button>
         </header>
         {/* Image container  */}

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import icon1 from "../assets/Icon_tent.svg";
 import icon2 from "../assets/Icon_leaf.svg";
 import icon3 from "../assets/Icon_tree.svg";
@@ -15,6 +15,9 @@ import activeHotel from "../assets/activeHotel.svg";
 import activeHome from "../assets/activeHome.svg";
 import activeTree from "../assets/activeTree.svg";
 import Image from "next/image";
+import axios from "axios";
+import { useRouter } from "next/router";
+import Link from "next/link";
 const tabDatas = [
   {
     title: "Tents",
@@ -97,7 +100,7 @@ const cardData = [
   },
   {
     id: 1,
-    category: "resorts",
+    category: "resort",
     title: "resort",
     image: treeHouse,
     rating: 4.8,
@@ -118,25 +121,50 @@ const cardData = [
 ];
 
 const StayOptionsSection = () => {
+  // Auth 
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL
+
   // states ------------------->
-  const [data, setData] = useState(cardData);
+  const [data, setData] = useState([]);
   const [activeTab, setActivetab] = useState("");
 
-  // function for filtering the data's --------------->
-  const handleFilter = (categoryName) => {
-    if (activeTab == categoryName) {
-      setActivetab("");
-      setData(cardData);
-    } else {
-      setActivetab(categoryName);
-      const filteredData = cardData.filter((item, index) => {
-        return item.category.toLowerCase() == categoryName.toLowerCase();
-      });
-      // // ( (filteredData);
-      setData(filteredData);
-    }
-  };
+  // side effects 
+  useEffect(() => {
+    getData()
+  }, [])
 
+  // function
+
+  // const handleFilter = (categoryName) => {
+  //   console.log("filter items : ", categoryName)
+  //   if (activeTab == categoryName) {
+  //     setActivetab("");
+  //     setData(data);
+  //   } else {
+  //     setActivetab(categoryName);
+  //     const filteredData = cardData.filter((item, index) => {
+  //       return item.category.toLowerCase() == categoryName.toLowerCase();
+  //     });
+  //     // // ( (filteredData);
+  //     setData(filteredData);
+  //   }
+  // };
+
+  async function getData() {
+    try {
+      const res = await axios.post(`${apiUrl}/api/hotels-list`, {
+        isHighlighted: true
+      })
+      setData(res.data.data.hotels)
+    } catch (err) {
+      console.error("Error occured while fetching highlighted hotel : ", err.message)
+    }
+  }
+
+  function handleNavigate(item) {
+    const router = useRouter();
+    router.push(``)
+  }
   return (
     <>
       <section className="main-container mx-4 md:mx-10 mt-14">
@@ -153,21 +181,20 @@ const StayOptionsSection = () => {
               for every kind of traveler.
             </h1>
           </div>
-          <h2 className="font-semibold max-sm:text-[14px]  text-[#333333] underline hover:text-green-700">
+          <Link href={`/hotels/hotel_listing`} className="font-semibold max-sm:text-[14px]  text-[#333333] underline hover:text-green-700">
             View all
-          </h2>
+          </Link>
         </header>
         <div className="tab-container flex items-center gap-4 mt-4 ">
           {tabDatas.map((title, index) => {
             return (
               <div
                 key={index}
-                onClick={() => handleFilter(title.categoryName)}
-                className={`tab  cursor-pointer flex gap-2 items-center md:border border-[#1a552b] rounded-md text-sm md:text-md  md:px-4 py-1 h-[50px] ${
-                  activeTab !== title.categoryName
-                    ? "md:bg-[#eeeeee] text-[#1a552b]"
-                    : "bg-green-800 text-white"
-                }  `}
+                // onClick={() => handleFilter(title.categoryName)}
+                className={`tab  cursor-pointer flex gap-2 items-center md:border border-[#1a552b] rounded-md text-sm md:text-md  md:px-4 py-1 h-[50px] ${activeTab !== title.categoryName
+                  ? "md:bg-[#eeeeee] text-[#1a552b]"
+                  : "bg-green-800 text-white"
+                  }  `}
               >
                 {activeTab !== title.categoryName ? (
                   <Image src={title.icon} />
@@ -181,16 +208,18 @@ const StayOptionsSection = () => {
           })}
         </div>
 
-        <div className="card-container mt-4 flex space-x-4 overflow-x-auto scrollbar-hide">
+        <div className="card-container mt-4 flex space-x-4 overflow-x-auto scrollbar-hide ">
           {data.map((item, index) => (
-            <div
+            <Link
+              href={`/hotels/hotel_listing/${item.id}`}
               key={index}
               className="card min-w-[280px] hover:shadow-lg shadow-gray-500 transition-all duration-300  max-w-xs rounded-2xl  overflow-hidden border border-gray-300 p-4 bg-[#eeeeee] flex-shrink-0"
             >
               {/* Image */}
               <div className="img-container relative group ">
+
                 <Image
-                  src={item.image}
+                  src={item?.images?.[0].url}
                   alt={item.title}
                   width={400}
                   height={250}
@@ -207,26 +236,26 @@ const StayOptionsSection = () => {
                 <div className="flex items-center text-sm text-[#333333]">
                   <span className="mr-1">🌟</span>
                   <span className="font-medium">{item.rating}</span>
-                  <span className="ml-1">({item.reviews})</span>
+                  {/* <span className="ml-1">({item.reviews})</span> */}
                 </div>
 
                 {/* Title */}
                 <h3 className="text-lg font-semibold text-[#333333]">
-                  {item.title}
+                  {item?.name?.slice(0, 26)}..
                 </h3>
 
                 {/* Price */}
                 <p className="text-[#af4300] font-semibold">
-                  ₹{item.price} / night
+                  ₹{item?.pricePerNight} / night
                 </p>
 
                 {/* Tags */}
-                <p className="text-sm text-gray-600">{item.tags}</p>
+                <p className="text-sm text-gray-600">{item?.stayType}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
-      </section>
+      </section >
     </>
   );
 };

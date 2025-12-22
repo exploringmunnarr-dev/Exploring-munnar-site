@@ -1,5 +1,10 @@
 "use client";
 import Image from "next/image";
+import icon1 from '../assets/navIvon1.svg'
+import icon2 from '../assets/navIcon2.svg'
+import icon3 from '../assets/navIcon3.svg'
+import icon4 from '../assets/navIcon4.svg'
+import icon5 from '../assets/navIcon5.svg'
 import logo from "../assets/logo.svg";
 import heart from "../assets/heart.svg";
 import menu from "../assets/menu.svg";
@@ -7,10 +12,19 @@ import profile from "../assets/profile.svg";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Sidebar from "./Sidebar";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { X } from "lucide-react";
 import LoginModal from "./LoginModal";
-
+import SubNavbar from "./SubNavbar";
+const data = [
+  { title: "Transports", icon: icon1, link: "transports" },
+  { title: "Hotels & stays", icon: icon2, link: "hotels" },
+  { title: "Activities", icon: icon3, link: "activities" },
+  { title: "Live information", icon: icon4, link: "live_information" },
+  {
+    title: "Itneary planning", icon: icon5, link: "itneary_planning"
+  },
+]
 export default function Navbar() {
   // Context Data ------------------------->
 
@@ -18,13 +32,28 @@ export default function Navbar() {
   const [isSidebar, setIsSidebar] = useState(false);
   const pathname = usePathname();
   const [showLoginForm, setShowLoginForm] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+
+  console.log("scroll : ", scrollY)
+
   // console logs  ----------------------->
   // // ( (pathname)
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <>
-      <header className="w-full px-4 md:px-10 py-1  bg-[#EBEBEB] sticky top-0 z-50">
-        <div className="main-container flex justify-between ">
+      <header className={`w-full px-4 md:px-10 ${scrollY > 100 ? "bg-white border-b border-gray-300" : ""} py-1  bg-[#EBEBEB] sticky top-0 z-50`}>
+        <div className={`main-container transition-all duration-300 flex justify-between ${scrollY > 100 ? "hidden" : ""}`}>
           <div className="flex items-center space-x-2 ">
             <Image
               src={logo}
@@ -36,9 +65,8 @@ export default function Navbar() {
           <nav className="hidden md:flex items-center w-fit translate-x-[50px]  space-x-6 text-lg text-gray-700 font-medium">
             <Link
               href="/"
-              className={`${
-                pathname === "/" ? "text-green-700 font-medium" : ""
-              }`}
+              className={`${pathname === "/" ? "text-green-700 font-medium" : ""
+                }`}
             >
               {" "}
               Home
@@ -46,18 +74,16 @@ export default function Navbar() {
             <span>|</span>
             <Link
               href="/our_company"
-              className={` ${
-                pathname.includes("our_company") ? "text-green-700" : ""
-              } `}
+              className={` ${pathname.includes("our_company") ? "text-green-700" : ""
+                } `}
             >
               Our Company
             </Link>
             <span>|</span>
             <Link
               href="/contact_us"
-              className={` ${
-                pathname.includes("contact_us") ? "text-green-700" : ""
-              } `}
+              className={` ${pathname.includes("contact_us") ? "text-green-700" : ""
+                } `}
             >
               Contact us
             </Link>
@@ -91,7 +117,7 @@ export default function Navbar() {
               </div>
               {isSidebar && (
                 <div className="sidebar-container absolute top-full right-4">
-                  <Sidebar setIsSidebar={setIsSidebar}/>
+                  <Sidebar setIsSidebar={setIsSidebar} />
                 </div>
               )}
               <Image
@@ -104,6 +130,26 @@ export default function Navbar() {
               />
             </div>
           </div>
+        </div>
+        <div className={`subnavbar-container transition-all duration-300 bg-[#ffffff]  flex items-center gap-4 py-1 ${scrollY > 100 ? "block" : "hidden"}`} >
+          <div className="flex items-center transition-all duration-300 space-x-2 ">
+            <Image
+              src={logo}
+              alt="explore Munar"
+              width={100}
+              className=" w-[100px] md:w-[100px]"
+            />
+          </div>
+          <nav className='md:flex items-center gap-2 w-fit m-auto rounded-xl py-2 px-4 transition-all duration-300'>
+            {data.map((item, index) => {
+              return <div key={index} className={`nav-item pr-4 pl-2 border-r ${index == 4 ? "border-none" : ""} font-medium text-[#333333] text-lg`}>
+                <Link href={`/${item.link}`} className='flex gap-3'>
+                  <Image src={item.icon} />
+                  <h1>{item.title}</h1>
+                </Link>
+              </div>
+            })}
+          </nav>
         </div>
       </header>
       {showLoginForm && <LoginModal setShowLoginForm={setShowLoginForm} />}

@@ -19,7 +19,7 @@ const data = [
 const SubNavbar = () => {
     return (
         <>
-            <nav className='hidden md:flex items-center gap-2 bg-white rounded-xl py-2 px-4'>
+            <nav className='hidden md:flex items-center gap-2 bg-white rounded-xl py-2 px-4 '>
                 {data.map((item, index) => {
                     return <div key={index} className={`nav-item pr-4 pl-2 border-r ${index == 4 ? "border-none" : ""} font-medium text-[#333333] text-lg`}>
                         <Link href={`/${item.link}`} className='flex gap-3'>

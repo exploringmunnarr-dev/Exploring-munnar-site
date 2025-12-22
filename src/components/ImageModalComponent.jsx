@@ -12,13 +12,11 @@ const ImageModalComponent = ({ isImageModal, setImageModal, data }) => {
     if (isImageModal) {
       document.body.style.overflow = "hidden";
     } else {
-      a;
       document.body.style.overflow = "auto";
     }
 
     return () => {
       document.body.style.overflow = "auto";
-      canvasData;
     };
   }, [isImageModal]);
 
@@ -30,7 +28,7 @@ const ImageModalComponent = ({ isImageModal, setImageModal, data }) => {
     // console.log("filteredUrl : ", filteredUrl);
     setImageUrls(filteredUrl);
   }, []);
-  cls;
+
   return (
     <>
       <div

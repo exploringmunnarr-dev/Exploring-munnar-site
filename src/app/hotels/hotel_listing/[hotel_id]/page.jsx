@@ -68,9 +68,8 @@ const page = () => {
             smooth={true} // smooth scroll
             duration={500} // scroll duration in ms
             offset={-130}
-            className={`cursor-pointer font-semibold ${
-              selectedtab === "overview" ? "border-b-2 border-[#AF4300]" : ""
-            }`}
+            className={`cursor-pointer font-semibold ${selectedtab === "overview" ? "border-b-2 border-[#AF4300]" : ""
+              }`}
           >
             OverView
           </Link>
@@ -80,9 +79,8 @@ const page = () => {
             smooth={true} // smooth scroll
             duration={500} // scroll duration in ms
             offset={-130} // adjust for header height
-            className={`cursor-pointer font-semibold ${
-              selectedtab === "facilities" ? "border-b-2 border-[#AF4300]" : ""
-            }`}
+            className={`cursor-pointer font-semibold ${selectedtab === "facilities" ? "border-b-2 border-[#AF4300]" : ""
+              }`}
           >
             Facilities
           </Link>
@@ -93,9 +91,8 @@ const page = () => {
             smooth={true}
             duration={500}
             offset={-130} // adjust if you have a fixed header
-            className={`cursor-pointer font-semibold ${
-              selectedtab === "reviews" ? "border-b-2 border-[#AF4300]" : ""
-            }`}
+            className={`cursor-pointer font-semibold ${selectedtab === "reviews" ? "border-b-2 border-[#AF4300]" : ""
+              }`}
           >
             Reviews
           </Link>
@@ -106,9 +103,8 @@ const page = () => {
             smooth={true}
             duration={500}
             offset={-130}
-            className={`cursor-pointer font-semibold ${
-              selectedtab === "location" ? "border-b-2 border-[#AF4300]" : ""
-            }`}
+            className={`cursor-pointer font-semibold ${selectedtab === "location" ? "border-b-2 border-[#AF4300]" : ""
+              }`}
           >
             Location
           </Link>

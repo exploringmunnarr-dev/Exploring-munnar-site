@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { useData } from "@/context/ThemeContext";
 import { useState } from "react";
 import LoadingPage from "@/Pages/LoadingPage";
+import Link from "next/link";
 
 const transports = [
   {
@@ -81,9 +82,9 @@ export default function GetAroundSection() {
           <h2 className="text-xl md:text-3xl font-semibold text-[#333333]">
             Get Around Munnar with Ease
           </h2>
-          <h2 className="font-medium max-sm:text-[14px] text-[#333333] underline hover:text-green-700 ">
+          <Link href={`/transports`} className="font-medium max-sm:text-[14px] text-[#333333] underline hover:text-green-700 ">
             Explore all transports
-          </h2>
+          </Link>
         </div>
         <div className="flex items-center justify-between mb-8 max-sm:text-[14px]">
           <p className="text-[#999999] mt-2">

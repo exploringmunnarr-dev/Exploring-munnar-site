@@ -14,6 +14,7 @@ import locationImg from "../../../assets/locationImgcopy.svg";
 import axios from "axios";
 import { act } from "react";
 import { Link, Element } from "react-scroll";
+import ImageModalComponent from "@/components/ImageModalComponent";
 
 const tabs = ["Overview", "Location", "FAQ's"];
 
@@ -33,8 +34,8 @@ const page = () => {
   //   states
   const [activeTab, setActiveTab] = useState("Overview");
   const [activityData, setActivityData] = useState({});
+  const [isImageModal, setImageModal] = useState(false);
 
-  console.log("activity data : ", activityData);
 
   // side effects
   useEffect(() => {
@@ -113,7 +114,7 @@ const page = () => {
 
         {/* HERO SECTION -------------------  */}
         <div className="main-container mt-4 mx-4 md:mx-9">
-          <div className="hero-section  md:flex gap-2">
+          <div className="hero-section  md:flex gap-2 ">
             <div className="container-1 h-[220px] md:h-[510px] w-[100%] md:w-[58%]">
               <div className="img-1 h-[100%]">
                 <Image
@@ -141,14 +142,18 @@ const page = () => {
           </div>
 
           {/* category-container ---------------------  */}
-          <div className="category-tab-container  mt-4 flex gap-4 items-center">
-            <button className="bg-[#EEEEEE] text-[#333333] text-sm md:text-md px-4 py-2 rounded-full shadow">
-              {activityData?.type}
-            </button>
-            <button className="bg-[#EEEEEE] text-[#333333] text-sm md:text-md px-4 py-2 rounded-full shadow">
-              {activityData?.category}
-            </button>
+          <div className="flex items-center justify-between">
+            <div className="category-tab-container  mt-4 md:flex gap-4 items-center w-[240px] md:full">
+              <button className="md:bg-[#EEEEEE] text-[#333333] text-sm md:text-md px-4 py-2 rounded-full md:shadow">
+                {activityData?.type}
+              </button>
+              <button className="md:bg-[#EEEEEE] text-[#333333] text-sm md:text-md px-4 py-2 rounded-full md:shadow">
+                {activityData?.category}
+              </button>
+            </div>
+            <button onClick={() => setImageModal(true)} className="underline text-green-800 text-sm cursor-pointer">View more</button>
           </div>
+
         </div>
 
         <Element name="Overview">
@@ -179,6 +184,10 @@ const page = () => {
         </Element>
         <Footer />
       </section>
+
+      {isImageModal && <ImageModalComponent isImageModal={isImageModal}
+        setImageModal={setImageModal}
+        data={activityData} />}
     </>
   );
 };
