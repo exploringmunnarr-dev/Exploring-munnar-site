@@ -1,9 +1,11 @@
 "use client";
 
+
 import { useState } from "react";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import axios from "axios";
+import SuccessPopup from "./SuccessPopup";
 
 // Custom Dropdown Component
 function CustomDropdown({
@@ -68,6 +70,7 @@ export default function SelfDriveLayout() {
   const [fuelType, setFuelType] = useState("");
   const [driverNeeded, setDriverNeeded] = useState("");
   const [selectedVehicle, setSelectedVehicle] = useState("");
+  const [isModal, setIsModal] = useState(false)
 
   const [errors, setErrors] = useState({});
 
@@ -114,9 +117,10 @@ export default function SelfDriveLayout() {
         notes : notes,
         driverNeeded: driverNeeded.toLowerCase() == "yes" ? true : false,
       });
-      console.log("self drive car booked successfully : ", response);
+       setIsModal(true)
     } catch (err) {
       console.error("error occred while posting self car driving booking form : ", err);
+      setIsModal(false)
     }
   };
 
@@ -128,6 +132,9 @@ export default function SelfDriveLayout() {
     "Adimali",
   ];
 
+   function onClose(){
+    window.location.reload()
+  }
   return (
     <form
       onSubmit={handleSubmit}
@@ -409,6 +416,7 @@ export default function SelfDriveLayout() {
           </h2>
         </div>
       </div>
+      {isModal && <SuccessPopup onClose={onClose}/>}
     </form>
   );
 }

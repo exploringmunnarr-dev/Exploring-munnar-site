@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import axios from "axios";
+import SuccessPopup from "./SuccessPopup";
 
 // Custom Dropdown Component
 function CustomDropdown({
@@ -15,7 +16,7 @@ function CustomDropdown({
   error,
 }) {
   const [open, setOpen] = useState(false);
-
+ 
   return (
     <div className="relative w-full">
       <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-1">
@@ -63,9 +64,15 @@ export default function CabBookingLayout() {
   const [mobile, setMobile] = useState("");
   const [passengers, setPassengers] = useState("");
   const [selectedVehicle, setSelectedVehicle] = useState("");
-
-  // Error states
+ const [isModal, setIsModal] = useState(false)
+  
+ // Error states
   const [errors, setErrors] = useState({});
+
+
+  function onClose(){
+    window.location.reload()
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -104,7 +111,7 @@ export default function CabBookingLayout() {
       noOfPassengers: passengers,
       vehicleType: selectedVehicle,
     };
-    console.log("cab booking payload : ", payload);
+    
 
     try {
       const response = await axios.post(
@@ -120,9 +127,10 @@ export default function CabBookingLayout() {
           vehicleType: selectedVehicle,
         }
       );
-      console.log("cab booked successfully : ", response);
+          setIsModal(true)
     } catch (err) {
       console.error("error occred while posting cab booking form : ", err);
+      setIsModal(false)
     }
   };
 
@@ -343,6 +351,7 @@ export default function CabBookingLayout() {
           </h2>
         </div>
       </div>
+      {isModal && <SuccessPopup onClose={onClose}/>}
     </form>
   );
 }

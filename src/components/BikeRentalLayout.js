@@ -4,6 +4,8 @@ import { useState } from "react";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import axios from "axios";
+import SuccessPopup from "./SuccessPopup";
+
 
 // Custom Dropdown Component
 function CustomDropdown({
@@ -68,6 +70,7 @@ export default function BikeRentalLayout() {
   const [notes, setNotes] = useState("");
   const [fuelType, setFuelType] = useState("");
   const [driverNeeded, setDriverNeeded] = useState("");
+  const [isModal, setIsModal] = useState(false)
 
   const [errors, setErrors] = useState({});
 
@@ -111,9 +114,10 @@ export default function BikeRentalLayout() {
         notes:notes,
         driverNeeded: driverNeeded.toLowerCase() == "yes" ? true : false,
       });
-      console.log("Biike booked successfully : ", response);
+          setIsModal(true)
     } catch (err) {
       console.error("error occred while posting cab booking form : ", err);
+        setIsModal(false)
     }
   };
 
@@ -124,6 +128,10 @@ export default function BikeRentalLayout() {
     "Ernakulam",
     "Adimali",
   ];
+
+   function onClose(){
+    window.location.reload()
+  }
 
   return (
     <form
@@ -371,6 +379,7 @@ export default function BikeRentalLayout() {
           </h2>
         </div>
       </div>
+      {isModal && <SuccessPopup onClose={onClose}/>}
     </form>
   );
 }

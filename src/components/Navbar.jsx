@@ -175,6 +175,47 @@ export default function Navbar() {
                 );
               })}
             </nav>
+            <div className="flex items-center space-x-1 ">
+              <Image src={heart} className="md:hidden" />
+              {/* Favourites */}
+              <div className="hidden items-center cursor-pointer md:flex">
+                <Image src={heart} alt="icon" />
+                {/* <span className="text-lg font-medium">Favourites</span> */}
+              </div>
+
+              {/* Profile Avatar */}
+              <div className="bg-white p-2 rounded-lg flex items-center gap-2 relative">
+                <div className="icon-container">
+                  {isSidebar ? (
+                    <X
+                      onClick={() => setIsSidebar(false)}
+                      className="text-gray-700 cursor-pointer"
+                    />
+                  ) : (
+                    <Image
+                      onClick={() => setIsSidebar(true)}
+                      src={menu}
+                      alt="menu_icon"
+                      width={100}
+                      className="h-[12px] w-[22px] cursor-pointer"
+                    />
+                  )}
+                </div>
+                {isSidebar && (
+                  <div className="sidebar-container absolute top-full right-4">
+                    <Sidebar setIsSidebar={setIsSidebar} />
+                  </div>
+                )}
+                <Image
+                  onClick={() => setShowLoginForm(true)}
+                  src={profile}
+                  alt="profile"
+                  width={100}
+                  height={22}
+                  className="h-[26px] w-[30px] cursor-pointer"
+                />
+              </div>
+            </div>
           </div>
         )}
       </header>
