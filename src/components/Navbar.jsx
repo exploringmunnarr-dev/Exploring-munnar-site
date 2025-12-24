@@ -36,10 +36,7 @@ export default function Navbar() {
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [scrollY, setScrollY] = useState(0);
 
-  console.log("scroll : ", scrollY);
-
-  // console logs  ----------------------->
-  // // ( (pathname)
+  // ( (pathname)
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
@@ -55,14 +52,12 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`w-full px-4 md:px-10 ${
-          scrollY > 100 ? "bg-white border-b border-gray-300" : ""
-        } py-1  bg-[#EBEBEB] sticky top-0 z-50`}
+        className={`w-full px-4 md:px-10 ${scrollY > 100 ? "bg-white border-b border-gray-300" : ""
+          } py-1  bg-[#EBEBEB] sticky top-0 z-50`}
       >
         <div
-          className={`main-container transition-all duration-300 flex justify-between ${
-            scrollY > 100 ? "hidden" : ""
-          }`}
+          className={`main-container transition-all duration-300 flex justify-between ${scrollY > 100 ? "hidden" : ""
+            }`}
         >
           <div className="flex items-center space-x-2 ">
             <Image
@@ -75,9 +70,8 @@ export default function Navbar() {
           <nav className="hidden md:flex items-center w-fit translate-x-[50px]  space-x-6 text-lg text-gray-700 font-medium">
             <Link
               href="/"
-              className={`${
-                pathname === "/" ? "text-green-700 font-medium" : ""
-              }`}
+              className={`${pathname === "/" ? "text-green-700 font-medium" : ""
+                }`}
             >
               {" "}
               Home
@@ -85,18 +79,16 @@ export default function Navbar() {
             <span>|</span>
             <Link
               href="/our_company"
-              className={` ${
-                pathname.includes("our_company") ? "text-green-700" : ""
-              } `}
+              className={` ${pathname.includes("our_company") ? "text-green-700" : ""
+                } `}
             >
               Our Company
             </Link>
             <span>|</span>
             <Link
               href="/contact_us"
-              className={` ${
-                pathname.includes("contact_us") ? "text-green-700" : ""
-              } `}
+              className={` ${pathname.includes("contact_us") ? "text-green-700" : ""
+                } `}
             >
               Contact us
             </Link>
@@ -146,9 +138,8 @@ export default function Navbar() {
         </div>
         {scrollY > 100 && (
           <div
-            className={`hidden md:flex subnavbar-container transition-all duration-300 bg-[#ffffff]  items-center gap-4 py-1 ${
-              scrollY > 100 ? "block" : "hidden opacity-0"
-            }`}
+            className={`hidden md:flex subnavbar-container transition-all duration-300 bg-[#ffffff]  items-center gap-4 py-1 ${scrollY > 100 ? "block" : "hidden opacity-0"
+              }`}
           >
             <div className="flex items-center transition-all duration-300 space-x-2 ">
               <Image
@@ -163,9 +154,8 @@ export default function Navbar() {
                 return (
                   <div
                     key={index}
-                    className={`nav-item pr-4 pl-2 border-r ${
-                      index == 4 ? "border-none" : ""
-                    } font-medium text-[#333333] text-lg`}
+                    className={`nav-item pr-4 pl-2 border-r ${index == 4 ? "border-none" : ""
+                      } font-medium text-[#333333] text-lg`}
                   >
                     <Link href={`/${item.link}`} className="flex gap-3">
                       <Image src={item.icon} />

@@ -19,7 +19,7 @@ const page = () => {
   // console.log("Changes made in Dec 2nd code");
   const { stayType, setStayType, loation, setLocation } = useData();
 
-  console.log("selected location : ", loation);
+  // console.log("selected location : ", loation);
 
   // states
   const [pageNumber, setPageNumber] = useState(1);
