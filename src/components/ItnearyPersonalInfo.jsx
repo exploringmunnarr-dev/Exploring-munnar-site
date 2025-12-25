@@ -18,9 +18,11 @@ import axios from "axios";
 const ItnearyPersonalInfo = ({ setStep }) => {
   // context data
   const { setItnearyFormData, itnearyFormData } = useFormData();
+  console.log("Itneary form : ", itnearyFormData)
   const [peviousData, setPreviousData] = useState({});
   // states
   const [contactMethod, setContactMethod] = useState("");
+  const [errors, setErrors] = useState({})
   const [personalInforErrors, setPersonalInfoErrors] = useState({
     fullName: false,
     mobileNumber: false,
@@ -55,7 +57,15 @@ const ItnearyPersonalInfo = ({ setStep }) => {
   };
 
   function handleNext() {
-    localStorage.setItem("itnearyData", JSON.stringify(itnearyFormData));
+    const newErrors = {};
+    if (!itnearyFormData.fullName) newErrors.fullName = "Full name is required"
+    setErrors(newErrors)
+
+    if (Object.keys(newErrors).length == 0) {
+      setStep("trip_date");
+      localStorage.setItem("itnearyData", JSON.stringify(itnearyFormData));
+    }
+
   }
 
   console.log("")
@@ -65,7 +75,7 @@ const ItnearyPersonalInfo = ({ setStep }) => {
         "https://munnar-backend.onrender.com/api/health"
       );
       const data = await response.text();
-    console.log("Fetch Response:", data);
+      console.log("Fetch Response:", data);
     } catch (err) {
       console.error("Error occured : ", err.message);
     }
@@ -86,7 +96,7 @@ const ItnearyPersonalInfo = ({ setStep }) => {
   }, []);
 
   useEffect(() => {
-    setItnearyFormData((prev) => ({
+    setItnearyFormData((prev) => ({ 
       ...prev,
       contactMethod: contactMethod,
     }));
@@ -120,6 +130,7 @@ const ItnearyPersonalInfo = ({ setStep }) => {
                 placeholder="Eg; ragul dravid"
                 className="mt-2 p-2 border border-[#777777] rounded-lg text-black w-full"
               />
+              {errors.fullName && <p className="text-red-300 text-sm">{errors.fullName}</p>}
             </div>
             <div className="input-container">
               <label className="text-[#333333] flex items-center gap-2 text-lg font-medium">
@@ -178,14 +189,12 @@ const ItnearyPersonalInfo = ({ setStep }) => {
                   <input type="radio" name="option" class="peer hidden" />
                   <span
                     onClick={() => setContactMethod("phone")}
-                    className={`w-4 md:w-6 h-4 md:h-6 rounded-full ${
-                      contactMethod == "phone" ? "bg-gray-200" : "border-2"
-                    } border-[#AF4300] flex items-center justify-center`}
+                    className={`w-4 md:w-6 h-4 md:h-6 rounded-full ${contactMethod == "phone" ? "bg-gray-200" : "border-2"
+                      } border-[#AF4300] flex items-center justify-center`}
                   >
                     <span
-                      className={`w-3 h-3 rounded-full ${
-                        contactMethod == "phone" ? "bg-green-800" : ""
-                      }`}
+                      className={`w-3 h-3 rounded-full ${contactMethod == "phone" ? "bg-green-800" : ""
+                        }`}
                     ></span>
                   </span>
                   <h1 className="text-[#333333]">Phone call</h1>
@@ -194,14 +203,12 @@ const ItnearyPersonalInfo = ({ setStep }) => {
                   <input type="radio" name="option" class="peer hidden" />
                   <span
                     onClick={() => setContactMethod("whatsapp")}
-                    className={`w-4 md:w-6 h-4 md:h-6 rounded-full ${
-                      contactMethod == "whatsapp" ? "bg-gray-200" : "border-2"
-                    } border-[#AF4300] flex items-center justify-center`}
+                    className={`w-4 md:w-6 h-4 md:h-6 rounded-full ${contactMethod == "whatsapp" ? "bg-gray-200" : "border-2"
+                      } border-[#AF4300] flex items-center justify-center`}
                   >
                     <span
-                      className={`w-3 h-3 rounded-full ${
-                        contactMethod == "whatsapp" ? "bg-green-800" : ""
-                      }`}
+                      className={`w-3 h-3 rounded-full ${contactMethod == "whatsapp" ? "bg-green-800" : ""
+                        }`}
                     ></span>
                   </span>
                   <h1 className="text-[#333333]">Whatsapp</h1>
@@ -210,14 +217,12 @@ const ItnearyPersonalInfo = ({ setStep }) => {
                   <input type="radio" name="option" class="peer hidden" />
                   <span
                     onClick={() => setContactMethod("email")}
-                    className={`w-4 md:w-6 h-4 md:h-6 rounded-full ${
-                      contactMethod == "email" ? "bg-gray-200" : "border-2"
-                    } border-[#AF4300] flex items-center justify-center`}
+                    className={`w-4 md:w-6 h-4 md:h-6 rounded-full ${contactMethod == "email" ? "bg-gray-200" : "border-2"
+                      } border-[#AF4300] flex items-center justify-center`}
                   >
                     <span
-                      className={`w-3 h-3 rounded-full ${
-                        contactMethod == "email" ? "bg-green-800" : ""
-                      }`}
+                      className={`w-3 h-3 rounded-full ${contactMethod == "email" ? "bg-green-800" : ""
+                        }`}
                     ></span>
                   </span>
                   <h1 className="text-[#333333]">Email</h1>
@@ -277,7 +282,7 @@ const ItnearyPersonalInfo = ({ setStep }) => {
             <button
               onClick={() => {
                 handleNext();
-                setStep("trip_date");
+
               }}
               className="btn-green px-8 py-2 rounded-lg text-white cursor-pointer"
             >
