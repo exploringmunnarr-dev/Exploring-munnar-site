@@ -58,15 +58,28 @@ const ItnearyPersonalInfo = ({ setStep }) => {
 
   function handleNext() {
     const newErrors = {};
-    if (!itnearyFormData.fullName) newErrors.fullName = "Full name is required"
-    setErrors(newErrors)
 
-    if (Object.keys(newErrors).length == 0) {
+    if (!itnearyFormData.fullName) {
+      newErrors.fullName = "Full name is required";
+    }
+
+    if (!itnearyFormData.mobileNumber || itnearyFormData.mobileNumber.length === 0) {
+      newErrors.mobileNumber = "Mobile number is required";
+    }
+
+    if (!itnearyFormData.mailId || itnearyFormData.mailId.length === 0) {
+      newErrors.mailId = "Mail-id is required";
+    }
+
+    setErrors(newErrors);
+
+    // ⛔ If errors exist, this block will NOT run
+    if (Object.keys(newErrors).length === 0) {
       setStep("trip_date");
       localStorage.setItem("itnearyData", JSON.stringify(itnearyFormData));
     }
-
   }
+
 
   console.log("")
   async function healthCheck() {
@@ -96,7 +109,7 @@ const ItnearyPersonalInfo = ({ setStep }) => {
   }, []);
 
   useEffect(() => {
-    setItnearyFormData((prev) => ({ 
+    setItnearyFormData((prev) => ({
       ...prev,
       contactMethod: contactMethod,
     }));
@@ -146,6 +159,8 @@ const ItnearyPersonalInfo = ({ setStep }) => {
                 maxLength="10"
                 className="mt-2 p-2 border border-[#777777] rounded-lg text-black w-full"
               />
+              {errors.mobileNumber && <p className="text-red-300 text-sm">{errors.mobileNumber}</p>}
+
               {personalInforErrors.mobileNumber && (
                 <p className="text-red-400 text-[12px] md:text-[16px]">
                   Mobile number must be less than 10 characters
@@ -165,6 +180,8 @@ const ItnearyPersonalInfo = ({ setStep }) => {
                 placeholder="Eg;abc@gmail.com"
                 className="mt-2 p-2 border border-[#777777] rounded-lg text-black w-full"
               />
+              {errors.mailId && <p className="text-red-300 text-sm">{errors.mailId}</p>}
+
             </div>
             <div className="input-container">
               <label className="text-[#333333] flex items-center gap-2 text-lg font-medium">
@@ -267,7 +284,7 @@ const ItnearyPersonalInfo = ({ setStep }) => {
               <h1>1 Out of 6 &gt; &gt;</h1>
               <button
                 onClick={() => {
-                  setStep("trip_date");
+                  handleNext();
                 }}
                 className="btn-green px-8 py-2 rounded-lg text-white cursor-pointer"
               >

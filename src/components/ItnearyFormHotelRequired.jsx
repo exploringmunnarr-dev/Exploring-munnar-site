@@ -26,23 +26,31 @@ import tree from "../assets/tree.svg";
 import resort from "../assets/resort_icon.svg";
 import hotel from "../assets/hotel.svg";
 import { useFormData } from "@/context/FormProvider";
+import treeActive from '../assets/treeActive.svg'
+import EcoActive from '../assets/ecoCottageActive.svg'
+import homeActive from '../assets/homeActive.svg'
+import tentActive from '../assets/tentActive.svg'
+import resortActive from '../assets/resortActive.svg'
+import star3 from '../assets/active3star.svg'
+import star5 from '../assets/fivestarActive.svg'
+
 const filterTabs = [
-  { icon: star, title: "5 star Hotels" },
-  { icon: three_star, title: "3 star Hotels" },
-  { icon: tent, title: "Tents" },
-  { icon: home_icon, title: "Home stays & geust house" },
-  { icon: leaf_icon, title: "Eco cottages" },
-  { icon: tree, title: "Tree house" },
-  { icon: resort, title: "Resorts" },
-  { icon: hotel, title: "Hotels" },
+  { icon: star, title: "5 star Hotels", active: star5 },
+  { icon: three_star, title: "3 star Hotels", active: star3 },
+  { icon: tent, title: "Tents", active: tentActive },
+  { icon: home_icon, title: "Home stays & geust house", active: homeActive },
+  { icon: leaf_icon, title: "Eco cottages", active: EcoActive },
+  { icon: tree, title: "Tree house", active: treeActive },
+  { icon: resort, title: "Resorts", active: resortActive },
+  { icon: hotel, title: "Hotels", active: "" },
 ];
 const ItnearyFormHotelRequired = ({ setStep }) => {
   // context Data
   const { setItnearyFormData, itnearyFormData } = useFormData();
 
   // states
-  const [priceRange, setPriceRange] = useState(()=>{
-    return itnearyFormData.roomBudget? itnearyFormData.roomBudget : ""
+  const [priceRange, setPriceRange] = useState(() => {
+    return itnearyFormData.roomBudget ? itnearyFormData.roomBudget : ""
   });
   const [hotelsRequired, setHotelRequired] = useState(() => {
     return itnearyFormData.hotelRequired ? itnearyFormData.hotelRequired : [];
@@ -99,13 +107,16 @@ const ItnearyFormHotelRequired = ({ setStep }) => {
               return (
                 <div
                   onClick={() => handleHotelRequired(item.title)}
-                  className={`bg-[#EEEEEE] cursor-pointer flex items-center gap-2 text-[#246132] border-1 border-[#246232] w-fit px-4 py-2 rounded-lg  ${
-                    hotelsRequired.includes(item.title)
-                      ? "btn-green text-white"
-                      : ""
-                  } `}
+                  className={`bg-[#EEEEEE] cursor-pointer flex items-center gap-2 text-[#246132] border-1 border-[#246232] w-fit px-4 py-2 rounded-lg  ${hotelsRequired.includes(item.title)
+                    ? "btn-green text-white"
+                    : ""
+                    } `}
                 >
-                  <Image src={item.icon} />
+                  {hotelsRequired.includes(item.title)
+                    ? <Image src={item.active} />
+                    : <Image src={item.icon} />
+                  }
+
                   <button className={`cursor-pointer  `}>{item.title}</button>
                 </div>
               );

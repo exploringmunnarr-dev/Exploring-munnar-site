@@ -7,6 +7,13 @@ import { useFormData } from "@/context/FormProvider";
 import { useData } from "@/context/ThemeContext";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import devikulamImg from '../assets/devikulamImg2.svg'
+import munnar from '../assets/munnarTown.svg'
+import lokh from '../assets/lokh.svg'
+import pallivasal from '../assets/pallivasal.svg'
+import mungulam from '../assets/mungulam.svg'
+import suryanelli from '../assets/suryanelli.svg'
+import ananchal from '../assets/ananchal.svg'
 
 const locationData = [
   {
@@ -16,13 +23,13 @@ const locationData = [
     left: "20%",
     resTop: "20%",
   },
-  { img: locationImg, title: "Devikulam", top: "44%", left: "35%" },
-  { img: locationImg, title: "Munnar Town", top: "25%", left: "56%" },
-  { img: locationImg, title: "Lockhart Gap", top: "22%", left: "80%" },
-  { img: locationImg, title: "Anachal", top: "65%", left: "14%" },
-  { img: locationImg, title: "Pallivasal", top: "58%", left: "75%" },
-  { img: locationImg, title: "Suryanelli", top: "86%", left: "35%" },
-  { img: locationImg, title: "Mangulam", top: "75%", left: "90%" },
+  { img: devikulamImg, title: "Devikulam", top: "44%", left: "35%", },
+  { img: munnar, title: "Munnar Town", top: "25%", left: "56%" },
+  { img: lokh, title: "Lockhart Gap", top: "22%", left: "80%" },
+  { img: ananchal, title: "Anachal", top: "65%", left: "14%" },
+  { img: pallivasal, title: "Pallivasal", top: "58%", left: "75%" },
+  { img: suryanelli, title: "Suryanelli", top: "86%", left: "35%" },
+  { img: mungulam, title: "Mangulam", top: "75%", left: "90%" },
 ];
 
 const StayByDestination = () => {
@@ -93,7 +100,7 @@ const StayByDestination = () => {
                   <Image
                     src={loc.img}
                     alt={loc.title}
-                    className="w-full  cursor-pointer hover:scale-115 group transition-all duration-300 h-full mt-2 object-cover "
+                    className="w-full h-full cursor-pointer hover:scale-115 group transition-all duration-300  mt-2 object-cover "
                   />
                 </div>
               </div>

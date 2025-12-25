@@ -68,7 +68,7 @@ const ContactForm = () => {
               {errors.lastName && <p className='mt-1 text-sm text-red-400'>{errors.lastName}</p>}
             </div>
             <div className="input-container">
-              <label className='flex items-center gap-2 text-[#333333] text-lg font-medium'><span><Image src={icon3} className='w-7' /></span>phone number</label>
+              <label className='flex items-center gap-2 text-[#333333] text-lg font-medium'><span><Image src={icon3} className='w-7 rotate-230' /></span>phone number</label>
               <input type="text" placeholder='Eg ;1234567890' name='phoneNumber' value={formData.phoneNumber} onChange={(e) => handleInputChange(e)} className='border-2 border-[#777777] rounded-xl p-3 mt-2 w-full outline-none' />
               {errors.phoneNumber && <p className='mt-1 text-sm text-red-400'>{errors.phoneNumber}</p>}
             </div>

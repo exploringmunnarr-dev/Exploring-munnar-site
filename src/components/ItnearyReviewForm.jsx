@@ -38,8 +38,9 @@ const routes_data = [
 
 const ItnearyReviewForm = ({ setStep }) => {
   // Context Data's
-  const { itnearyFormData } = useFormData();
+  const { itnearyFormData, setItnearyFormData } = useFormData();
 
+  console.log("itneary form data : ", itnearyFormData)
   // states
   const [isModal, setIsModal] = useState(false);
   // functions
@@ -57,8 +58,8 @@ const ItnearyReviewForm = ({ setStep }) => {
         taxiRequirement: Array.isArray(itnearyFormData.taxiRequirement)
           ? itnearyFormData.taxiRequirement
           : itnearyFormData.taxiRequirement
-              .split(",")
-              .map((item) => item.trim()),
+            .split(",")
+            .map((item) => item.trim()),
 
         routes: itnearyFormData.routes || [],
 
@@ -70,8 +71,29 @@ const ItnearyReviewForm = ({ setStep }) => {
         "https://munnar-backend.onrender.com/api/itinerary",
         formattedPayload
       );
+      setItnearyFormData({
+        fullName: "",
+        mobileNumber: "",
+        mailId: "",
+        comingFrom: "",
+        contactMethod: "",
+        startDate: "",
+        endDate: "",
+        adult: "",
+        child: "",
+        nightStays: "",
+        typeOfGroup: "",
+        hotelRequired: "",
+        roomBudget: "",
+        roomsRequired: "",
+        taxiType: "",
+        taxiRequirement: "",
+        carCategory: "",
+        routes: [],
+      })
 
       setIsModal(true);
+      localStorage.removeItem("itnearyData")
     } catch (error) {
       setIsModal(false);
       console.error("Error sending data:", error);
@@ -116,9 +138,9 @@ const ItnearyReviewForm = ({ setStep }) => {
               Trip dates & group details
             </h1>
             <div className="content-container text-[#333333] md:flex items-center justify-between w-[100%] md:w-[50%] mt-2 md:mt-3 text-lg">
-              <h1>May 10 – May 14, 2024</h1>
-              <h1> 2 Adults</h1>
-              <h1>Family</h1>
+              <h1>{itnearyFormData?.startDate} – {itnearyFormData?.endDate}</h1>
+              <h1> {itnearyFormData?.adult} Adults</h1>
+              <h1>{itnearyFormData?.typeOfGroup}</h1>
             </div>
           </header>
           <Image
@@ -136,9 +158,9 @@ const ItnearyReviewForm = ({ setStep }) => {
               Accomodation
             </h1>
             <div className="content-container text-[#333333] md:flex items-center justify-between md:w-[50%] mt-2 md:mt-3 text-lg">
-              <h1>3 Star Room</h1>
-              <h1> Type: 1 Room</h1>
-              <h1>Budget: Rs 5,000/room</h1>
+              <h1>{itnearyFormData?.hotelRequired}</h1>
+              <h1> Type: {itnearyFormData?.roomsRequired} Room</h1>
+              <h1>Budget: Rs {itnearyFormData.roomBudget}/room</h1>
             </div>
           </header>
           <Image src={edit_icon} className="cursor-pointer" />
@@ -152,9 +174,9 @@ const ItnearyReviewForm = ({ setStep }) => {
               Transports
             </h1>
             <div className="content-container text-[#333333] md:flex items-center justify-between  md:w-[50%] mt-2 md:mt-3 text-lg">
-              <h1>Yes, Private</h1>
-              <h1>Requirement: Local Sightseeing</h1>
-              <h1>Suv 5 seater</h1>
+              <h1>{itnearyFormData?.taxiType}</h1>
+              <h1>Requirement: {itnearyFormData?.taxiRequirement}</h1>
+              <h1>{itnearyFormData?.carCategory}</h1>
             </div>
           </header>
           <Image src={edit_icon} className="cursor-pointer" />
@@ -167,15 +189,15 @@ const ItnearyReviewForm = ({ setStep }) => {
               </span>
               Routes
             </h1>
-            <div className="container-1 text-[#333333] md:flex items-center  gap-6 mt-2 text-lg ">
+            {/* <div className="container-1 text-[#333333] md:flex items-center  gap-6 mt-2 text-lg ">
               <h1>Mattupetty–Topstation–Vattavada</h1>
               <h1>Requirement: Local Sightseeing</h1>
-            </div>
+            </div> */}
           </header>
           <Image src={edit_icon} className="cursor-pointer" />
         </div>
         <div className="routes-container space-y-2 md:grid grid-cols-4">
-          {routes_data.map((item, index) => {
+          {itnearyFormData?.routes.map((item, index) => {
             return (
               <>
                 <div className="main-container flex gap-4 items-center">
@@ -188,11 +210,11 @@ const ItnearyReviewForm = ({ setStep }) => {
                     <Image src={item.img} />
                     <div className="text-lg">
                       <h1 className="text-black md:text-[#333333] text-sm md:text-lg ">
-                        {item.route}
+                        {item}
                       </h1>
-                      <h1 className="text-[#333333] text-sm md:text-lg">
-                        {item.distance}
-                      </h1>
+                      {/* <h1 className="text-[#333333] text-sm md:text-lg">
+                        {item}
+                      </h1> */}
                     </div>
                   </div>
                 </div>
