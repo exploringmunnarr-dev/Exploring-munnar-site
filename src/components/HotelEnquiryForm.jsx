@@ -28,6 +28,7 @@ const HotelEnquiryForm = ({ setIsForm, data, handleOpenSuccessPopup }) => {
     adults: "",
     kids: "",
   });
+  const [errors, setErrors] = useState({});
 
 
   // functions
@@ -40,12 +41,22 @@ const HotelEnquiryForm = ({ setIsForm, data, handleOpenSuccessPopup }) => {
   };
 
   async function onSave() {
+    const newErrors = {};
+    if (!formData.firstName) newErrors.firstName = "First name is required";
+    if (!formData.lastName) newErrors.lastName = "Last name is required";
+    if (!formData.email) newErrors.email = "Mail id is required";
+    if (!formData.phoneNumber) newErrors.phoneNumber = "Phone number is required";
+    if (!formData.checkIn) newErrors.checkIn = "Check-in date is required";
+    if (!formData.checkOut) newErrors.checkOut = "Check-out date is required";
+    if (!formData.adults) newErrors.adults = "Adults count is required";
+    if (!formData.kids) newErrors.kids = "Kids count is required";
+
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) return;
+
     try {
-      const response = await axios.post(
-        `${apiUrl}/api/hotel-booking`,
-        formData
-      );
-      handleOpenSuccessPopup()
+      const response = await axios.post(`${apiUrl}/api/hotel-booking`, formData);
+      handleOpenSuccessPopup();
       setIsForm(false);
     } catch (err) {
       console.error("Error occured while posting form data ");
@@ -125,6 +136,9 @@ const HotelEnquiryForm = ({ setIsForm, data, handleOpenSuccessPopup }) => {
               onChange={(e) => handleInputChange(e)}
               className="border rounded-lg border-[#777777] w-full p-2 mt-2"
             />
+            {errors.firstName && (
+              <p className="text-red-300 text-sm mt-1">{errors.firstName}</p>
+            )}
           </div>
           <div className="input-container ">
             <div className="lable-container flex w-full gap-2 items-center">
@@ -141,6 +155,9 @@ const HotelEnquiryForm = ({ setIsForm, data, handleOpenSuccessPopup }) => {
               onChange={(e) => handleInputChange(e)}
               className="border rounded-lg border-[#777777] w-full p-2 mt-2"
             />
+            {errors.lastName && (
+              <p className="text-red-300 text-sm mt-1">{errors.lastName}</p>
+            )}
           </div>
           <div className="input-container ">
             <div className="lable-container flex w-full gap-2 items-center">
@@ -157,6 +174,9 @@ const HotelEnquiryForm = ({ setIsForm, data, handleOpenSuccessPopup }) => {
               name="phoneNumber"
               className="border rounded-lg border-[#777777] w-full p-2 mt-2"
             />
+            {errors.phoneNumber && (
+              <p className="text-red-300 text-sm mt-1">{errors.phoneNumber}</p>
+            )}
           </div>
           <div className="input-container ">
             <div className="lable-container flex w-full gap-2 items-center">
@@ -171,6 +191,9 @@ const HotelEnquiryForm = ({ setIsForm, data, handleOpenSuccessPopup }) => {
               onChange={(e) => handleInputChange(e)}
               className="border rounded-lg border-[#777777] w-full p-2 mt-2"
             />
+            {errors.email && (
+              <p className="text-red-300 text-sm mt-1">{errors.email}</p>
+            )}
           </div>
           <div className="input-container ">
             <div className="lable-container flex w-full gap-2 items-center">
@@ -185,6 +208,9 @@ const HotelEnquiryForm = ({ setIsForm, data, handleOpenSuccessPopup }) => {
               name="checkIn"
               className="border rounded-lg border-[#777777] w-full p-2 mt-2"
             />
+            {errors.checkIn && (
+              <p className="text-red-300 text-sm mt-1">{errors.checkIn}</p>
+            )}
           </div>
           <div className="input-container ">
             <div className="lable-container flex w-full gap-2 items-center">
@@ -201,6 +227,9 @@ const HotelEnquiryForm = ({ setIsForm, data, handleOpenSuccessPopup }) => {
               name="checkOut"
               className="border rounded-lg border-[#777777] w-full p-2 mt-2"
             />
+            {errors.checkOut && (
+              <p className="text-red-300 text-sm mt-1">{errors.checkOut}</p>
+            )}
           </div>
           <div className="input-container ">
             <div className="lable-container flex w-full gap-2 items-center">
@@ -215,6 +244,9 @@ const HotelEnquiryForm = ({ setIsForm, data, handleOpenSuccessPopup }) => {
               name="adults"
               className="border rounded-lg border-[#777777] w-full p-2 mt-2"
             />
+            {errors.adults && (
+              <p className="text-red-300 text-sm mt-1">{errors.adults}</p>
+            )}
           </div>
           <div className="input-container ">
             <div className="lable-container flex w-full gap-2 items-center">
@@ -231,6 +263,9 @@ const HotelEnquiryForm = ({ setIsForm, data, handleOpenSuccessPopup }) => {
               name="kids"
               className="border rounded-lg border-[#777777] w-full p-2 mt-2"
             />
+            {errors.kids && (
+              <p className="text-red-300 text-sm mt-1">{errors.kids}</p>
+            )}
           </div>
         </div>
         <button

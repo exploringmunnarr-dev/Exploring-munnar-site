@@ -19,7 +19,7 @@ import EndDateItneary from "./EndDateItnearyForm";
 import checkedRadio from "../assets/checkedRadio.svg";
 import star from "../assets/star_icon.svg";
 import tent from "../assets/tent_icon.svg";
-import three_star from "../assets/three_star_icon.svg";
+import three_star from "../assets/three_star_icon.svg"; 
 import home_icon from "../assets/home_icon.svg";
 import leaf_icon from "../assets/leaf_icon.svg";
 import tree from "../assets/tree.svg";
