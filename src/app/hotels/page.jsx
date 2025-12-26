@@ -10,6 +10,7 @@ import UniqueStays from "@/components/UniqueStays";
 import FindPerfectStay from "@/components/FindPerfectStay";
 import WhyBookOurStay from "@/components/WhyBookOurStay";
 import MobileTab from "@/components/MobileTab";
+import TopRatedHotels from "@/components/TopRatedHotels";
 
 const page = () => {
   return (
@@ -19,6 +20,7 @@ const page = () => {
         <HotelsStayType />
         <StayByDestination />
         <UniqueStays />
+        <TopRatedHotels />
         <WhyBookOurStay />
         <FindPerfectStay />
       </section>
