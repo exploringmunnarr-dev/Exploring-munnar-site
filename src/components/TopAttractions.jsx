@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import cbeToMunnar from "../assets/Coimbatore to Munnar.jpg";
 import ernakulamToMunnar from "../assets/Ernakulam to Munnar.jpg";
@@ -90,6 +90,70 @@ const TopAttractions = () => {
     },
   ];
 
+  const slidesBySet = {
+    setone: [
+      {
+        title: "Royal Wildlife Sanctuary",
+        subtitle: "2 km from the route",
+        image: mtp1,
+      },
+      { title: "Pritvi Lake", subtitle: "4 km from the route", image: mtp2 },
+    ],
+    settwo: [
+      {
+        title: "Nature Trail A",
+        subtitle: "1.5 km from the route",
+        image: mtp3,
+      },
+      {
+        title: "Nature Trail B",
+        subtitle: "1.5 km from the route",
+        image: mtp4,
+      },
+    ],
+    setthree: [
+      {
+        title: "Pond & Viewpoint",
+        subtitle: "3 km from the route",
+        image: mtp5,
+      },
+      {
+        title: "Pond & Viewpoint",
+        subtitle: "3 km from the route",
+        image: mtp5,
+      },
+      {
+        title: "Pond & Viewpoint",
+        subtitle: "3 km from the route",
+        image: mtp5,
+      },
+      {
+        title: "Pond & Viewpoint",
+        subtitle: "3 km from the route",
+        image: mtp5,
+      },
+      {
+        title: "Pond & Viewpoint",
+        subtitle: "3 km from the route",
+        image: mtp5,
+      },
+      {
+        title: "Pond & Viewpoint",
+        subtitle: "3 km from the route",
+        image: mtp5,
+      },
+    ],
+    setfour: [
+      { title: "Tea Estate", subtitle: "5 km from the route", image: mtp6 },
+      { title: "Water Fall", subtitle: "6 km from the route", image: mtp7 },
+    ],
+  };
+
+  const [selected, setSelected] = useState(attractions[0].set);
+  const currentSlides = selected
+    ? slidesBySet[selected] ?? []
+    : slidesBySet[attractions[0].set];
+
   return (
     <>
       <section className="py-4 mx-4 md:mx-10 mt-8 md:mt-14 ">
@@ -111,21 +175,49 @@ const TopAttractions = () => {
         {/* tab container  */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {attractions.map((item, index) => {
+            const isSelected = selected === item.set;
             return (
-              <div className="card relative w-full h-[60px] md:h-[160px]">
-                <div className="tint absolute top-0 right-0 left-0 bottom-0 rounded-xl"></div>
-                <Image
-                  src={item.img}
-                  width={100}
-                  height={100}
-                  alt=""
-                  className="w-full rounded-xl h-full object-cover"
-                />
-                <div className="content-container absolute top-[50%] left-3 md:left-4 translate-y-[-50%] text-white">
+              <div
+                key={item.set || index}
+                role="button"
+                tabIndex={0}
+                aria-pressed={isSelected}
+                onClick={() =>
+                  setSelected((prev) => (prev === item.set ? null : item.set))
+                }
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ")
+                    setSelected((prev) =>
+                      prev === item.set ? null : item.set
+                    );
+                }}
+                className={`card relative w-full h-[60px] md:h-[160px] rounded-xl overflow-hidden cursor-pointer transition-all duration-300 ${
+                  isSelected ? "bg-[#114422]" : ""
+                }`}
+              >
+                {!isSelected && (
+                  <>
+                    <Image
+                      src={item.img}
+                      width={100}
+                      height={100}
+                      alt=""
+                      className="w-full rounded-xl h-full object-cover"
+                    />
+                  </>
+                )}
+
+                {isSelected && (
+                  <div className="absolute inset-0 bg-[#114422] rounded-xl z-0"></div>
+                )}
+
+                <div className="content-container absolute top-[50%] left-3 md:left-4 translate-y-[-50%] text-white z-10">
                   <h1 className="font-semibold mb-2 text-md md:text-xl w-[100%] md:w-[50%]">
                     {item.title}
                   </h1>
-                  <h1 className="hidden md:block w-[100%] md:w-[90%] ">{item.desc}</h1>
+                  <h1 className="hidden md:block w-[100%] md:w-[90%] ">
+                    {item.desc}
+                  </h1>
                 </div>
               </div>
             );
@@ -142,17 +234,23 @@ const TopAttractions = () => {
 
           <div className="w-full md:w-[69%]">
             <Swiper
+              key={selected ?? "default"}
               modules={[Autoplay]}
               spaceBetween={20}
               slidesPerView={1} // mobile = 1 full card
-              autoplay={{ delay: 1000, disableOnInteraction: false }}
+              loop={currentSlides.length > 1}
+              autoplay={{
+                delay: 1000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: false,
+              }}
               breakpoints={{
                 640: { slidesPerView: 1.5 },
                 768: { slidesPerView: 2.2 },
                 1024: { slidesPerView: 3.2 },
               }}
             >
-              {slides.map((slide, index) => (
+              {currentSlides.map((slide, index) => (
                 <SwiperSlide
                   key={index}
                   className="
