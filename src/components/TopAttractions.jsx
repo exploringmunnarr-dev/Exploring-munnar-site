@@ -71,7 +71,7 @@ const slides = [
 ];
 
 const TopAttractions = () => {
-  console.log("Testing console: ", "hello")
+  
   const attractions = [
     {
       title: "Mettupatti to Munnar",
@@ -271,7 +271,7 @@ const TopAttractions = () => {
 
           <div className="w-full md:w-[69%]">
             <Swiper
-              className="border h-[320px]"
+              className="h-[320px]"
               key={selected ?? "default"}
               modules={[Autoplay]}
               spaceBetween={20}

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import banner1 from "../assets/banner1.svg";
 import banner2 from "../assets/banner2.png";
 import banner3 from "../assets/banner3.svg";
@@ -10,6 +10,7 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Autoplay } from "swiper/modules";
+import axios from "axios";
 
 const bannerData = [
   { img: banner1, id: 123, hotelDetails: {} },
@@ -23,6 +24,30 @@ const bannerData = [
 ];
 
 const PromotionBanner = () => {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+  useEffect(() => {
+    const fetchPromotedHotels = async () => {
+      console.log("Fetching promoted hotels...");
+      try {
+        const res = await axios.post(
+          `${apiUrl}/api/hotels-list`,
+          {},
+          {
+            params: {
+              isFeatured: true,
+            },
+          }
+        );
+        console.log("Promoted hotels data:", res.data.data.hotels);
+      } catch (error) {
+        console.error("Error fetching promoted hotels:", error);
+      }
+    };
+
+    fetchPromotedHotels();
+  }, [apiUrl]);
+
   return (
     <>
       <section className="md:py-4 max-sm:mt-[-30px]  mx-4 md:mx-10 md:mt-8">
