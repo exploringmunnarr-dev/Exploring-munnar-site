@@ -25,9 +25,8 @@ function CustomDropdown({
         {label}
       </label>
       <div
-        className={`w-full border rounded-lg px-3 py-2 flex items-center justify-between cursor-pointer ${
-          value ? "text-black border-gray-400" : "text-gray-400 border-gray-300"
-        } ${error ? "border-red-500" : ""}`}
+        className={`w-full border rounded-lg px-3 py-2 flex items-center justify-between cursor-pointer ${value ? "text-black border-gray-400" : "text-gray-400 border-gray-300"
+          } ${error ? "border-red-500" : ""}`}
         onClick={() => setOpen(!open)}
       >
         <span>{value || placeholder}</span>
@@ -40,9 +39,8 @@ function CustomDropdown({
           {options.map((opt, i) => (
             <li
               key={i}
-              className={`px-3 py-2 cursor-pointer hover:bg-[#114422] hover:text-white ${
-                value === opt ? "bg-[#114422] text-white" : "text-black"
-              }`}
+              className={`px-3 py-2 cursor-pointer hover:bg-[#114422] hover:text-white ${value === opt ? "bg-[#114422] text-white" : "text-black"
+                }`}
               onClick={() => {
                 onChange(opt);
                 setOpen(false);
@@ -114,10 +112,10 @@ export default function SelfDriveLayout() {
         noOfDays: days,
         fuelType: fuelType,
         carCategory: selectedVehicle,
-        notes : notes,
+        notes: notes,
         driverNeeded: driverNeeded.toLowerCase() == "yes" ? true : false,
       });
-       setIsModal(true)
+      setIsModal(true)
     } catch (err) {
       console.error("error occred while posting self car driving booking form : ", err);
       setIsModal(false)
@@ -132,7 +130,7 @@ export default function SelfDriveLayout() {
     "Adimali",
   ];
 
-   function onClose(){
+  function onClose() {
     window.location.reload()
   }
   return (
@@ -180,9 +178,8 @@ export default function SelfDriveLayout() {
                 type="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-                className={`w-full border rounded-lg pl-3 pr-10 py-2 outline-none text-black ${
-                  errors.date ? "border-red-500" : "border-gray-300"
-                }`}
+                className={`w-full border rounded-lg pl-3 pr-10 py-2 outline-none text-black ${errors.date ? "border-red-500" : "border-gray-300"
+                  }`}
               />
               {errors.date && (
                 <p className="text-red-500 text-xs mt-1">{errors.date}</p>
@@ -203,9 +200,8 @@ export default function SelfDriveLayout() {
                 type="time"
                 value={time}
                 onChange={(e) => setTime(e.target.value)}
-                className={`w-full border rounded-lg pl-3 pr-10 py-2 outline-none text-black ${
-                  errors.time ? "border-red-500" : "border-gray-300"
-                }`}
+                className={`w-full border rounded-lg pl-3 pr-10 py-2 outline-none text-black ${errors.time ? "border-red-500" : "border-gray-300"
+                  }`}
               />
               {errors.time && (
                 <p className="text-red-500 text-xs mt-1">{errors.time}</p>
@@ -230,9 +226,8 @@ export default function SelfDriveLayout() {
                 value={mobile}
                 onChange={(e) => setMobile(e.target.value)}
                 placeholder="Eg:+91 55555 55555"
-                className={`w-full border rounded-lg pl-3 pr-4 py-2 outline-none placeholder-gray-400 text-black ${
-                  errors.mobile ? "border-red-500" : "border-gray-300"
-                }`}
+                className={`w-full border rounded-lg pl-3 pr-4 py-2 outline-none placeholder-gray-400 text-black ${errors.mobile ? "border-red-500" : "border-gray-300"
+                  }`}
               />
               {errors.mobile && (
                 <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>
@@ -255,9 +250,8 @@ export default function SelfDriveLayout() {
                 onChange={(e) => setDays(e.target.value)}
                 min="1"
                 placeholder="1"
-                className={`w-full border rounded-lg pl-3 pr-4 py-2 outline-none placeholder-gray-400 text-black ${
-                  errors.days ? "border-red-500" : "border-gray-300"
-                }`}
+                className={`w-full border rounded-lg pl-3 pr-4 py-2 outline-none placeholder-gray-400 text-black ${errors.days ? "border-red-500" : "border-gray-300"
+                  }`}
               />
               {errors.days && (
                 <p className="text-red-500 text-xs mt-1">{errors.days}</p>
@@ -350,11 +344,10 @@ export default function SelfDriveLayout() {
                 <div
                   key={type}
                   onClick={() => setSelectedVehicle(type)}
-                  className={`flex flex-col items-center justify-center border rounded-lg py-4 cursor-pointer transition ${
-                    isSelected
+                  className={`flex flex-col items-center justify-center border rounded-lg py-4 cursor-pointer transition ${isSelected
                       ? "bg-[#114422] border-[#114422] text-white"
                       : "bg-gray-50 border-gray-300 text-black"
-                  }`}
+                    }`}
                 >
                   <Image
                     src={`/icons/${type.toLowerCase()}.svg`}
@@ -384,7 +377,7 @@ export default function SelfDriveLayout() {
           </button>
           <p className="text-xs text-gray-500 mt-3">
             Avoid the hassle of last-minute rides. Pre-book reliable cabs with
-            local drivers who know Munnar's terrain. Ideal for airport
+            local drivers who know Munnar&apos;s terrain. Ideal for airport
             transfers, sightseeing, and intercity travel.
           </p>
         </div>
@@ -416,7 +409,7 @@ export default function SelfDriveLayout() {
           </h2>
         </div>
       </div>
-      {isModal && <SuccessPopup onClose={onClose}/>}
+      {isModal && <SuccessPopup onClose={onClose} />}
     </form>
   );
 }

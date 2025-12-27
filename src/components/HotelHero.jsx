@@ -17,6 +17,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import ImageModalComponent from "./ImageModalComponent";
 const HotelHero = ({ data }) => {
+  console.log("image data : ", data);
   const images = [img1, img2, img3, img4];
 
   // states
@@ -68,7 +69,7 @@ const HotelHero = ({ data }) => {
             <div className="second-img-container mt-4 flex gap-4">
               <div className="container-1 h-[230px] w-[50%] overflow-hidden hover:rounded-xl">
                 <Image
-                  src={data?.images?.[3]?.url}
+                  src={data?.images?.[1]?.url}
                   width={1000}
                   height={1000}
                   className="w-full h-[100%] rounded-xl object-cover hover:scale-125 transition-all duration-300 "
@@ -76,7 +77,7 @@ const HotelHero = ({ data }) => {
               </div>
               <div className="container-1 w-[50%] h-[230px] overflow-hidden hover:rounded-xl">
                 <Image
-                  src={data?.images?.[4]?.url}
+                  src={data?.images?.[2]?.url}
                   width={1000}
                   height={1000}
                   className="w-full object-cover rounded-xl h-[100%] hover:scale-125 transition-all duration-300"
@@ -86,7 +87,7 @@ const HotelHero = ({ data }) => {
           </div>
           <div className="second-container w-[40%] h-[497px] overflow-hidden hover:rounded-xl">
             <Image
-              src={data?.images?.[2]?.url}
+              src={data?.images?.[3]?.url}
               width={1000}
               height={1000}
               className="w-[100%] object-cover h-[100%] rounded-xl hover:scale-125 transition-all duration-300"

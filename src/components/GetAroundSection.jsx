@@ -11,7 +11,7 @@ import carIcon4 from "../assets/carIcon4.svg";
 import { useRouter } from "next/navigation";
 import { useData } from "@/context/ThemeContext";
 import { useState } from "react";
-import LoadingPage from "@/Pages/LoadingPage";
+import LoadingPage from "@/view/LoadingPage";
 import Link from "next/link";
 
 const transports = [

@@ -16,7 +16,7 @@ function CustomDropdown({
   error,
 }) {
   const [open, setOpen] = useState(false);
- 
+
   return (
     <div className="relative w-full">
       <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-1">
@@ -24,9 +24,8 @@ function CustomDropdown({
         {label}
       </label>
       <div
-        className={`w-full border rounded-lg px-3 py-2 flex items-center justify-between cursor-pointer ${
-          value ? "text-black border-gray-400" : "text-gray-400 border-gray-300"
-        } ${error ? "border-red-500" : ""}`}
+        className={`w-full border rounded-lg px-3 py-2 flex items-center justify-between cursor-pointer ${value ? "text-black border-gray-400" : "text-gray-400 border-gray-300"
+          } ${error ? "border-red-500" : ""}`}
         onClick={() => setOpen(!open)}
       >
         <span>{value || placeholder}</span>
@@ -39,9 +38,8 @@ function CustomDropdown({
           {options.map((opt, i) => (
             <li
               key={i}
-              className={`px-3 py-2 cursor-pointer hover:bg-[#114422] hover:text-white ${
-                value === opt ? "bg-[#114422] text-white" : "text-black"
-              }`}
+              className={`px-3 py-2 cursor-pointer hover:bg-[#114422] hover:text-white ${value === opt ? "bg-[#114422] text-white" : "text-black"
+                }`}
               onClick={() => {
                 onChange(opt);
                 setOpen(false);
@@ -64,13 +62,13 @@ export default function CabBookingLayout() {
   const [mobile, setMobile] = useState("");
   const [passengers, setPassengers] = useState("");
   const [selectedVehicle, setSelectedVehicle] = useState("");
- const [isModal, setIsModal] = useState(false)
-  
- // Error states
+  const [isModal, setIsModal] = useState(false)
+
+  // Error states
   const [errors, setErrors] = useState({});
 
 
-  function onClose(){
+  function onClose() {
     window.location.reload()
   }
 
@@ -111,7 +109,7 @@ export default function CabBookingLayout() {
       noOfPassengers: passengers,
       vehicleType: selectedVehicle,
     };
-    
+
 
     try {
       const response = await axios.post(
@@ -127,7 +125,7 @@ export default function CabBookingLayout() {
           vehicleType: selectedVehicle,
         }
       );
-          setIsModal(true)
+      setIsModal(true)
     } catch (err) {
       console.error("error occred while posting cab booking form : ", err);
       setIsModal(false)
@@ -188,9 +186,8 @@ export default function CabBookingLayout() {
                 type="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-                className={`w-full border rounded-lg pl-3  py-2 outline-none text-black ${
-                  errors.date ? "border-red-500" : "border-gray-300"
-                }`}
+                className={`w-full border rounded-lg pl-3  py-2 outline-none text-black ${errors.date ? "border-red-500" : "border-gray-300"
+                  }`}
               />
               {errors.date && (
                 <p className="text-red-500 text-xs mt-1">{errors.date}</p>
@@ -211,9 +208,8 @@ export default function CabBookingLayout() {
                 type="time"
                 value={time}
                 onChange={(e) => setTime(e.target.value)}
-                className={`w-full border rounded-lg pl-3  py-2 outline-none text-black ${
-                  errors.time ? "border-red-500" : "border-gray-300"
-                }`}
+                className={`w-full border rounded-lg pl-3  py-2 outline-none text-black ${errors.time ? "border-red-500" : "border-gray-300"
+                  }`}
               />
               {errors.time && (
                 <p className="text-red-500 text-xs mt-1">{errors.time}</p>
@@ -239,9 +235,8 @@ export default function CabBookingLayout() {
                 onChange={(e) => setMobile(e.target.value)}
                 pattern="^\+?\d{10,15}$"
                 placeholder="Eg:+91 55555 55555"
-                className={`w-full border rounded-lg pl-3 pr-10 py-2 outline-none placeholder-gray-400 text-black ${
-                  errors.mobile ? "border-red-500" : "border-gray-300"
-                }`}
+                className={`w-full border rounded-lg pl-3 pr-10 py-2 outline-none placeholder-gray-400 text-black ${errors.mobile ? "border-red-500" : "border-gray-300"
+                  }`}
               />
               {errors.mobile && (
                 <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>
@@ -264,9 +259,8 @@ export default function CabBookingLayout() {
                 onChange={(e) => setPassengers(e.target.value)}
                 min="1"
                 placeholder="Enter number of passengers"
-                className={`w-full border rounded-lg pl-3 pr-4 py-2 outline-none placeholder-gray-400 text-black ${
-                  errors.passengers ? "border-red-500" : "border-gray-300"
-                }`}
+                className={`w-full border rounded-lg pl-3 pr-4 py-2 outline-none placeholder-gray-400 text-black ${errors.passengers ? "border-red-500" : "border-gray-300"
+                  }`}
               />
               {errors.passengers && (
                 <p className="text-red-500 text-xs mt-1">{errors.passengers}</p>
@@ -285,11 +279,10 @@ export default function CabBookingLayout() {
                 <div
                   key={type}
                   onClick={() => setSelectedVehicle(type)}
-                  className={`flex flex-col items-center justify-center border rounded-lg py-4 cursor-pointer transition ${
-                    isSelected
+                  className={`flex flex-col items-center justify-center border rounded-lg py-4 cursor-pointer transition ${isSelected
                       ? "bg-[#114422] border-[#114422] text-white"
                       : "bg-gray-50 border-gray-300 text-black"
-                  }`}
+                    }`}
                 >
                   <Image
                     src={`/icons/${type.toLowerCase()}.svg`}
@@ -319,7 +312,7 @@ export default function CabBookingLayout() {
           </button>
           <p className="text-xs text-gray-500 mt-3">
             Avoid the hassle of last-minute rides. Pre-book reliable cabs with
-            local drivers who know Munnar's terrain. Ideal for airport
+            local drivers who know Munnar&apos;s terrain. Ideal for airport
             transfers, sightseeing, and intercity travel.
           </p>
         </div>
@@ -351,7 +344,7 @@ export default function CabBookingLayout() {
           </h2>
         </div>
       </div>
-      {isModal && <SuccessPopup onClose={onClose}/>}
+      {isModal && <SuccessPopup onClose={onClose} />}
     </form>
   );
 }

@@ -7,7 +7,7 @@ import ProfileNavbar from "@/components/ProfileNavbar";
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 
-const page = () => {
+const ProfileContent = () => {
   // params
   const searchParams = useSearchParams();
   const editMode = searchParams.get("editMode") == "true";
@@ -29,4 +29,12 @@ const page = () => {
   );
 };
 
-export default page;
+const Page = () => {
+  return (
+    <React.Suspense fallback={<div>Loading...</div>}>
+      <ProfileContent />
+    </React.Suspense>
+  );
+};
+
+export default Page;

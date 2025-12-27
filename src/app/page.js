@@ -1,7 +1,7 @@
 "use client";
-import Home from "@/Pages/Home";
+import Home from "@/view/Home";
 import React, { useEffect, useState } from "react";
-const page = () => {
+const Page = () => {
   const [scrollY, setScrollY] = useState(0);
   // // ( ("scroll : ", scrollY)
   useEffect(() => {
@@ -23,4 +23,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

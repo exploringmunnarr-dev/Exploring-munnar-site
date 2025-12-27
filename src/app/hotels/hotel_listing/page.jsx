@@ -40,7 +40,7 @@ const page = () => {
         setLoading(true);
         const response = await axios.post(`${apiUrl}/api/hotels-list`, {
           stayType: stayType,
-          location: loation,
+          locationRange: loation,
           amenities: amenities,
           experiences: experiences,
           budget: budget,

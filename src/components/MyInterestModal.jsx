@@ -13,7 +13,6 @@ import {
   Theater,
   Waves,
   Wine,
-  Yoga,
 } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -31,7 +30,6 @@ const categories = [
   { title: "Theatre", icon: Theater },
   { title: "Water sports", icon: Waves },
   { title: "Wine", icon: Wine },
-  { title: "Yoga", icon: Yoga },
 ];
 
 const MyInterestModal = ({ isMyInterestModal, setIsMyInterestModal }) => {
