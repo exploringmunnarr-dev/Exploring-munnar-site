@@ -6,86 +6,36 @@ import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
 
-const data = [
-  {
-    id: 1,
-    category: "tents",
-    title: "Tent",
-    image: treeHouse,
-    rating: 4.8,
-    reviews: 120,
-    price: 2200,
-    tags: "Eco Stay | Couple Favourite",
-  },
-  {
-    id: 1,
-    category: "eco cottages",
-    title: "Eco cottage",
-    image: treeHouse,
-    rating: 4.8,
-    reviews: 120,
-    price: 2200,
-    tags: "Eco Stay | Couple Favourite",
-  },
-  {
-    id: 1,
-    category: "tree house",
-    title: "Tree house",
-    image: treeHouse,
-    rating: 4.8,
-    reviews: 120,
-    price: 2200,
-    tags: "Eco Stay | Couple Favourite",
-  },
-  {
-    id: 1,
-    category: "home stays",
-    title: "Home stays",
-    image: treeHouse,
-    rating: 4.8,
-    reviews: 120,
-    price: 2200,
-    tags: "Eco Stay | Couple Favourite",
-  },
-  {
-    id: 1,
-    category: "resorts",
-    title: "resort",
-    image: treeHouse,
-    rating: 4.8,
-    reviews: 120,
-    price: 2200,
-    tags: "Eco Stay | Couple Favourite",
-  },
-  {
-    id: 1,
-    category: "hotels",
-    title: "Hotel",
-    image: treeHouse,
-    rating: 4.8,
-    reviews: 120,
-    price: 2200,
-    tags: "Eco Stay | Couple Favourite",
-  },
-];
+
 const UniqueStays = () => {
   // Auth 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
   // states
-  const [isLoading, setIsLoading] = useState([])
-  // const [data, setData] = useState([])
-
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   // functions
   const getData = async () => {
     try {
-      const res = await axios.post(`${apiUrl}/api/hotels-list`, { isHighlighted: true });
-      console.log("Response for featured hotel : ", res.data)
+      setIsLoading(true);
+      const res = await axios.post(`${apiUrl}/api/hotels-list`, {
+        isUniqueStays: true,
+      });
+      console.log("Response for featured hotel : ", res.data);
+      if (res.data && res.data.data && res.data.data.hotels) {
+        setData(res.data.data.hotels);
+        console.log("Data for unique stays : ", res.data.data.hotels);
+      } 
+      setIsLoading(false);
     } catch (err) {
-      console.error("Error occured while fetching featured hotels data : ", err.message)
+      console.error(
+        "Error occured while fetching featured hotels data : ",
+        err.message
+      );
+      setIsLoading(false);
     }
-  }
+  };
 
   // side effects 
   useEffect(() => {
@@ -116,15 +66,16 @@ const UniqueStays = () => {
         </header>
         <div className="card-container mt-4 flex space-x-4 overflow-x-auto scrollbar-hide">
           {data.map((item, index) => (
-            <div
+            <Link
+              href={`/hotels/hotel_listing/${item.id}`}
               key={index}
               className="card min-w-[280px] group hover:shadow-xl transition-all duration-300 shadow-gray-300 cursor-pointer max-w-xs rounded-2xl overflow-hidden border border-gray-300 p-4 bg-[#eeeeee] flex-shrink-0"
             >
               {/* Image */}
               <div className="img-container relative group overflow-hidden rounded-lg">
                 <Image
-                  src={item.image}
-                  alt={item.title}
+                  src={item?.images?.[0]?.url || treeHouse}
+                  alt={item.name}
                   width={400}
                   height={250}
                   className="w-full h-48 object-cover rounded-lg hover:scale-125 transition-all duration-300"
@@ -139,24 +90,26 @@ const UniqueStays = () => {
                 {/* Rating */}
                 <div className="flex items-center text-sm text-[#333333]">
                   <span className="mr-1">🌟</span>
-                  <span className="font-medium">{item.rating}</span>
-                  <span className="ml-1">({item.reviews})</span>
+                  <span className="font-medium">{item.rating || 4.5}</span>
+                  {/* <span className="ml-1">({item.reviews})</span> */}
                 </div>
 
                 {/* Title */}
                 <h3 className="text-lg font-semibold text-[#333333]">
-                  {item.title}
+                  {item.name}
                 </h3>
 
                 {/* Price */}
                 <p className="text-[#af4300] font-semibold">
-                  ₹{item.price} / night
+                  ₹{item.pricePerNight} / night
                 </p>
 
                 {/* Tags */}
-                <p className="text-sm text-gray-600">{item.tags}</p>
+                <p className="text-sm text-gray-600">
+                  {item.stayType || "Unique Stay"}
+                </p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
