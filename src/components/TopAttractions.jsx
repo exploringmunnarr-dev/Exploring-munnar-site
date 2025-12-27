@@ -71,6 +71,7 @@ const slides = [
 ];
 
 const TopAttractions = () => {
+  console.log("Testing console: ", "hello")
   const attractions = [
     {
       title: "Mettupatti to Munnar",
