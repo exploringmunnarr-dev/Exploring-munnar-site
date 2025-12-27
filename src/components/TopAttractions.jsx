@@ -17,12 +17,20 @@ import mtp5 from "../assets/mtp5.svg";
 import mtp6 from "../assets/mtp6.svg";
 import mtp7 from "../assets/mtp7.svg";
 
+import attractionImg1 from "../assets/attractionImg1.svg";
+import anayirangalDam from "../assets/anayirangalDam.webp";
+import lockhartgapviewpoint from "../assets/lockhart-gap-view-point.jpg";
+import tataTeaMuseum from "../assets/tataTeaMuseum.jpg";
+import roseGarden from "../assets/roseGarden.jpg";
+import chitrapuram from "../assets/chitrapuram.webp";
+
 // swiper imports
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Autoplay } from "swiper/modules";
+import Link from "next/link";
 
 const slides = [
   {
@@ -93,11 +101,35 @@ const TopAttractions = () => {
   const slidesBySet = {
     setone: [
       {
-        title: "Royal Wildlife Sanctuary",
+        title: "Chinnakanal Waterfalls (Power House Falls)",
         subtitle: "2 km from the route",
-        image: mtp1,
+        image: attractionImg1,
       },
-      { title: "Pritvi Lake", subtitle: "4 km from the route", image: mtp2 },
+      {
+        title: "Anayirangal Dam",
+        subtitle: "4 km from the route",
+        image: anayirangalDam,
+      },
+      {
+        title: "Lockhart Gap Viewpoint",
+        subtitle: "4 km from the route",
+        image: lockhartgapviewpoint,
+      },
+      {
+        title: "Tea Museum (TATA Tea Museum – Nallathanni)",
+        subtitle: "4 km from the route",
+        image: tataTeaMuseum,
+      },
+      {
+        title: "Rose Garden",
+        subtitle: "4 km from the route",
+        image: roseGarden,
+      },
+      {
+        title: "Chithirapuram Viewpoint",
+        subtitle: "4 km from the route",
+        image: chitrapuram,
+      },
     ],
     settwo: [
       {
@@ -167,9 +199,12 @@ const TopAttractions = () => {
               Munnar — each offering a unique travel experience
             </h1>
           </div>
-          <button className="underline text-[#333333] cursor-pointer">
-            View
-          </button>
+          <Link
+            href={"/nearByAttractions"}
+            className="underline text-[#333333] cursor-pointer"
+          >
+            View all
+          </Link>
         </div>
 
         {/* tab container  */}
