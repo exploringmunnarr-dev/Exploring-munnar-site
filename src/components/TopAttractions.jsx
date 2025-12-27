@@ -104,6 +104,7 @@ const TopAttractions = () => {
         title: "Chinnakanal Waterfalls (Power House Falls)",
         subtitle: "2 km from the route",
         image: attractionImg1,
+        link: "/chinnakanal-waterfalls-power-house-falls",
       },
       {
         title: "Anayirangal Dam",
@@ -269,15 +270,15 @@ const TopAttractions = () => {
 
           <div className="w-full md:w-[69%]">
             <Swiper
+              className="border h-[320px]"
               key={selected ?? "default"}
               modules={[Autoplay]}
               spaceBetween={20}
-              slidesPerView={1} // mobile = 1 full card
+              slidesPerView={1}
               loop={currentSlides.length > 1}
               autoplay={{
-                delay: 1000,
+                delay: 2000,
                 disableOnInteraction: false,
-                pauseOnMouseEnter: false,
               }}
               breakpoints={{
                 640: { slidesPerView: 1.5 },
@@ -286,18 +287,15 @@ const TopAttractions = () => {
               }}
             >
               {currentSlides.map((slide, index) => (
-                <SwiperSlide
-                  key={index}
-                  className="
-          transition-all duration-500
-          [&.swiper-slide-active]:scale-100
-        "
-                >
-                  <div className="rounded-xl h-[320px] relative overflow-hidden w-full bg-white">
+                <SwiperSlide key={index} className="h-full ">
+                  <Link
+                    href={`${slide.link}`}
+                    className="rounded-xl h-[320px] relative overflow-hidden w-full bg-white"
+                  >
                     <Image
                       src={slide.image}
                       alt={slide.title}
-                      className="h-full w-full object-cover"
+                      className="h-full w-full object-cover rounded-lg"
                     />
 
                     <div className="px-4 py-1 absolute w-full bottom-[60px] left-0 blur-bg">
@@ -306,7 +304,7 @@ const TopAttractions = () => {
                       </h3>
                       <p className="text-[#2D4600] text-sm">{slide.subtitle}</p>
                     </div>
-                  </div>
+                  </Link>
                 </SwiperSlide>
               ))}
             </Swiper>

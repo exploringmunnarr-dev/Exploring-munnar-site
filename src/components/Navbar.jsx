@@ -53,7 +53,7 @@ export default function Navbar() {
     <>
       <header
         className={`w-full px-4 md:px-10 ${scrollY > 100 ? "bg-white border-b border-gray-300" : ""
-          } py-1  bg-[#EBEBEB] sticky top-0 z-50`}
+          } py-1  bg-[#EBEBEB] md:sticky top-0 z-50`}
       >
         <div
           className={`main-container transition-all duration-300 flex justify-between ${scrollY > 100 ? "hidden" : ""
