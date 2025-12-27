@@ -105,6 +105,11 @@ const ItnearyReviewForm = ({ setStep }) => {
     window.location.reload();
   }
 
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    return new Date(dateString).toDateString();
+  };
+
   return (
     <>
       <section className="bg-white rounded-xl p-6 space-y-8">
@@ -137,10 +142,13 @@ const ItnearyReviewForm = ({ setStep }) => {
               </span>
               Trip dates & group details
             </h1>
-            <div className="content-container text-[#333333] md:flex items-center justify-between w-[100%] md:w-[50%] mt-2 md:mt-3 text-lg">
-              <h1>{itnearyFormData?.startDate} – {itnearyFormData?.endDate}</h1>
-              <h1> {itnearyFormData?.adult} Adults</h1>
-              <h1>{itnearyFormData?.typeOfGroup}</h1>
+            <div className="content-container text-[#333333] md:flex items-center gap-4 justify-between w-[100%] md:w-[50%] mt-2 md:mt-3 text-lg">
+              <h1>
+                {formatDate(itnearyFormData?.startDate)} –{" "}
+                {formatDate(itnearyFormData?.endDate)}
+              </h1>
+              <h1 className="whitespace-nowrap"> {itnearyFormData?.adult} Adults</h1>
+              <h1 className="whitespace-nowrap">{itnearyFormData?.typeOfGroup}</h1>
             </div>
           </header>
           <Image
@@ -207,10 +215,16 @@ const ItnearyReviewForm = ({ setStep }) => {
                     className="scale-125 accent-[#AF4300]"
                   />
                   <div className="flex items-center gap-3">
-                    <Image src={item.img} />
+                    <Image
+                      src={item.image_url || item.img || routeImg1}
+                      width={50}
+                      height={50}
+                      className="object-cover rounded-md"
+                      alt={item.route}
+                    />
                     <div className="text-lg">
                       <h1 className="text-black md:text-[#333333] text-sm md:text-lg ">
-                        {item}
+                        {item.route}
                       </h1>
                       {/* <h1 className="text-[#333333] text-sm md:text-lg">
                         {item}

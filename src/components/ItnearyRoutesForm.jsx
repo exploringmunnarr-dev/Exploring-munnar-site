@@ -16,7 +16,7 @@ const attraction_data = [
   },
   {
     img: img2,
-    title: "Eravikulam  Marayoor – Kanthalloor",
+    title: "Eravikulam - Marayoor – Kanthalloor",
     description: "Wildlife ,& view points",
   },
   {
@@ -45,13 +45,14 @@ const ItnearyRoutesForm = ({ setStep }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   // Functions
-  const handleCheck = (r) => {
-    console.log("Checked route : ", r);
+  const handleCheck = (itemData) => {
+    console.log("Checked route : ", itemData);
     setSelectedRoutes((prev) => {
-      if (prev.includes(r)) {
-        return prev.filter((item) => item !== r);
+      const exists = prev.some((p) => p.route === itemData.route);
+      if (exists) {
+        return prev.filter((item) => item.route !== itemData.route);
       } else {
-        return [...prev, r];
+        return [...prev, itemData];
       }
     });
   };
@@ -100,9 +101,10 @@ const ItnearyRoutesForm = ({ setStep }) => {
       // Transform API data to match route_data structure
       // Adjust these fields based on your actual API response structure
       const formattedRoutes = res.data.data.map((item) => ({
-        route:  item.spot_name,
+        route: item.spot_name,
         distance: item.distance || item.location || "Distance unavailable",
-        img: routeImg1, // Use default image or map from API if available
+        image_url: item.image_url || routeImg1, // Use API image or fallback
+        img: routeImg1, // Keep original property just in case
         checked: false,
       }));
 
@@ -133,9 +135,8 @@ const ItnearyRoutesForm = ({ setStep }) => {
             return (
               <div
                 key={index}
-                className={`card relative w-full cursor-pointer transition-all duration-200 ${
-                  isActive ? "" : ""
-                }`}
+                className={`card relative w-full cursor-pointer transition-all duration-200 ${isActive ? "" : ""
+                  }`}
                 onClick={() => handleTabChange(item.title)}
               >
                 <div className="img-container w-[100%]">
@@ -147,9 +148,8 @@ const ItnearyRoutesForm = ({ setStep }) => {
                 </div>
                 <div className="content-container absolute top-[50%] translate-y-[-50%] left-6">
                   <h1
-                    className={`font-semibold max-sm:text-xl text-3xl w-[65%] transition-all duration-200 ${
-                      isActive ? "text-white drop-shadow-lg" : "text-white"
-                    }`}
+                    className={`font-semibold max-sm:text-xl text-3xl w-[65%] transition-all duration-200 ${isActive ? "text-white drop-shadow-lg" : "text-white"
+                      }`}
                   >
                     {item.title}
                   </h1>
@@ -159,9 +159,8 @@ const ItnearyRoutesForm = ({ setStep }) => {
                       e.stopPropagation();
                       handleTabChange(item.title);
                     }}
-                    className={`font-semibold text-white flex items-center gap-3 px-3 py-2 rounded-lg bg-[#AF4300] mt-2 cursor-pointer transition-all duration-200 ${
-                      isActive ? "bg-[#8A3700] scale-105" : ""
-                    }`}
+                    className={`font-semibold text-white flex items-center gap-3 px-3 py-2 rounded-lg bg-[#AF4300] mt-2 cursor-pointer transition-all duration-200 ${isActive ? "bg-[#8A3700] scale-105" : ""
+                      }`}
                   >
                     <Image src={compass} className="w-5 h-5" alt="compass" />
                     View Attractions
@@ -195,8 +194,8 @@ const ItnearyRoutesForm = ({ setStep }) => {
                   <input
                     type="checkbox"
                     id={`route-${selectedTab}-${index}`}
-                    onChange={() => handleCheck(item.route)}
-                    checked={selectedRoutes.includes(item.route)}
+                    onChange={() => handleCheck(item)}
+                    checked={selectedRoutes.some((r) => r.route === item.route)}
                     className="accent-[#AF4300] scale-120 w-3 h-3"
                   />
                   <label
@@ -204,7 +203,9 @@ const ItnearyRoutesForm = ({ setStep }) => {
                     className="content-contaiener flex items-center gap-4 cursor-pointer flex-1"
                   >
                     <Image
-                      src={item.img}
+                      src={item?.image_url}
+                      width={1000}
+                      height={1000}
                       className="object-cover w-12 h-12 rounded-md flex-shrink-0"
                       alt={item.route}
                     />

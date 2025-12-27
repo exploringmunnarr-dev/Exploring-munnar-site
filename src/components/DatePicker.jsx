@@ -38,7 +38,7 @@ export default function DatePicker() {
   }, []);
 
   // logs
-  
+
   // Generate days in the month
   const daysInMonth = (month, year) => new Date(year, month + 1, 0).getDate();
   const firstDayOfMonth = (month, year) => new Date(year, month, 1).getDay();
@@ -91,7 +91,11 @@ export default function DatePicker() {
           {/* Header */}
           <div className="flex justify-between items-center mb-4">
             <button
-              onClick={() => setCurrentMonth(new Date(year, month - 1, 1))}
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                setCurrentMonth(new Date(year, month - 1, 1));
+              }}
               className="px-2 py-1 text-gray-600 hover:bg-gray-100 rounded"
             >
               <ChevronLeft />
@@ -100,7 +104,11 @@ export default function DatePicker() {
               {months[month]} {year}
             </span>
             <button
-              onClick={() => setCurrentMonth(new Date(year, month + 1, 1))}
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                setCurrentMonth(new Date(year, month + 1, 1));
+              }}
               className="px-2 py-1 text-gray-600 hover:bg-gray-100 rounded"
             >
               <ChevronRight />
@@ -127,11 +135,14 @@ export default function DatePicker() {
                 year === selectedDate.getFullYear();
               return (
                 <button
+                  type="button"
                   key={day}
-                  onClick={() => handleDateClick(day)}
-                  className={`py-1  rounded-full  hover:bg-green-900 hover:text-white ${
-                    isSelected ? "bg-green-800 text-white" : ""
-                  }`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleDateClick(day);
+                  }}
+                  className={`py-1  rounded-full  hover:bg-green-900 hover:text-white ${isSelected ? "bg-green-800 text-white" : ""
+                    }`}
                 >
                   {day}
                 </button>

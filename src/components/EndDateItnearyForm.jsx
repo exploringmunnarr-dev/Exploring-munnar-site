@@ -14,7 +14,7 @@ export default function EndDateItneary() {
   });
   const [showCalendar, setShowCalendar] = useState(false);
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  
+
   // refs 
   const calendarRef = useRef();
 
@@ -22,7 +22,7 @@ export default function EndDateItneary() {
   console.log("End date : ", itnearyFormData)
 
   // useEffect calls
-  
+
   useEffect(() => {
     setItnearyFormData((prev) => ({
       ...prev,
@@ -52,9 +52,9 @@ export default function EndDateItneary() {
   const handleDateClick = (day) => {
     const newDate = new Date(year, month, day);
     setEndDate(newDate);
-    setItnearyFormData((prev)=>({
+    setItnearyFormData((prev) => ({
       ...prev,
-      endDate : endDate
+      endDate: endDate
     }))
 
     setShowCalendar(false);
@@ -96,7 +96,11 @@ export default function EndDateItneary() {
           {/* Header */}
           <div className="flex justify-between items-center mb-4">
             <button
-              onClick={() => setCurrentMonth(new Date(year, month - 1, 1))}
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                setCurrentMonth(new Date(year, month - 1, 1));
+              }}
               className="px-2 py-1 text-gray-600 hover:bg-gray-100 rounded"
             >
               <ChevronLeft />
@@ -105,7 +109,11 @@ export default function EndDateItneary() {
               {months[month]} {year}
             </span>
             <button
-              onClick={() => setCurrentMonth(new Date(year, month + 1, 1))}
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                setCurrentMonth(new Date(year, month + 1, 1));
+              }}
               className="px-2 py-1 text-gray-600 hover:bg-gray-100 rounded"
             >
               <ChevronRight />
@@ -132,11 +140,14 @@ export default function EndDateItneary() {
                 year === endDate.getFullYear();
               return (
                 <button
+                  type="button"
                   key={day}
-                  onClick={() => handleDateClick(day)}
-                  className={`py-1  rounded-full  hover:bg-green-900 hover:text-white ${
-                    isSelected ? "bg-green-800 text-white" : ""
-                  }`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleDateClick(day);
+                  }}
+                  className={`py-1  rounded-full  hover:bg-green-900 hover:text-white ${isSelected ? "bg-green-800 text-white" : ""
+                    }`}
                 >
                   {day}
                 </button>
