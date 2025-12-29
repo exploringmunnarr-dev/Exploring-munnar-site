@@ -6,7 +6,7 @@ import MobileTab from "@/components/MobileTab";
 import Navbar from "@/components/Navbar";
 import PopularActivities from "@/components/PopularActivities";
 import SubCardNav from "@/components/SubCardNav";
-import React, { useEffect, useState, useTransition } from "react";
+import React, { useEffect, useState } from "react";
 import ship from "../../assets/ship.png";
 import zipline from "../../assets/ship.svg";
 import airBalloon from "../../assets/airBalloon.png";
@@ -16,7 +16,7 @@ import cabin from "../../assets/cabin.png";
 import tourMaps from "../../assets/tourMaps.png";
 import spa from "../../assets/spa.png";
 import boats from "../../assets/boats.png";
-import { ChevronDown, Filter, X } from "lucide-react";
+import { ChevronDown, X } from "lucide-react";
 import Image from "next/image";
 import axios from "axios";
 
@@ -33,7 +33,7 @@ const activityType = [
   { icon: spa, title: "Spas & Ayurvedic Centres" },
 ];
 
-const page = () => {
+const Page = () => {
   // Auth
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -259,4 +259,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
