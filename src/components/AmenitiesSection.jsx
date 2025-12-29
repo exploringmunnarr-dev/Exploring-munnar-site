@@ -2,8 +2,8 @@
 // import { Wifi, Flame, Heart, Bath, Coffee } from "lucide-react";
 import wifi from "../assets/wifiIcon.svg";
 import breakfastIcon from "../assets/breakfastIcon.svg";
-import bathtub from "../assets/bathtubicon.svg";
-import fireicon from "../assets/fireicon.svg";
+import bathtub from "../assets/bathtubIcon.svg";
+import fireicon from "../assets/fireIcon.svg";
 import coupleIcon from "../assets/c.svg";
 import check from "../assets/check.svg";
 import roomIcon from "../assets/roomIcon.svg";

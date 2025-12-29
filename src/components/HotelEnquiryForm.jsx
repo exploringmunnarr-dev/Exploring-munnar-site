@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import img from "../assets/enquiryFromImg1.svg";
 import person from "../assets/person_icon.svg";
-import phone from "../assets/phone_icon.svg";
+import phone from "../assets/Phone_icon.svg";
 import mail from "../assets/mail_icon.svg";
 import location from "../assets/location_icon.svg";
 import calendar from "../assets/calendarIcon.svg";

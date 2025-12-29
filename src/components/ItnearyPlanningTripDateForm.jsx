@@ -5,7 +5,7 @@ import personalInfoIcon from "../assets/personalIcon.svg";
 import calendar from "../assets/calendarIcon.svg";
 import light from "../assets/light_icon.svg";
 import person from "../assets/person_icon.svg";
-import phone from "../assets/phone_icon.svg";
+import phone from "../assets/Phone_icon.svg";
 import mail from "../assets/mail_icon.svg";
 import location from "../assets/location_icon.svg";
 import img1 from "../assets/itnearyPersonalImg1.svg";
