@@ -86,10 +86,10 @@ const BusTimeTable = () => {
     <>
       <section className="mx-4 md:mx-10 mt-8">
         <header className="">
-          <h1 className="text-[#333333] text-xl md:text-3xl">
+          <h1 className="text-xl md:text-3xl font-semibold text-[#333333]">
             Plan your journey with realtime bus schedules
           </h1>
-          <h1 className="text-[#777777] mt-2 text-lg">
+          <h1 className="text-[#777777] mt-2 mb-8">
             Select your favourite Munnar spot and browse available stays.
           </h1>
         </header>

@@ -52,7 +52,7 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`w-full px-4 md:px-10 ${scrollY > 100 ? "bg-white border-b border-gray-300" : ""
+        className={`w-full px-2 md:px-10 ${scrollY > 100 ? "bg-white border-b border-gray-300" : ""
           } py-1  bg-[#EBEBEB] md:sticky top-0 z-50`}
       >
         <div
@@ -104,7 +104,7 @@ export default function Navbar() {
 
             {/* Profile Avatar */}
             <div className="bg-white p-2 rounded-lg flex items-center gap-2 relative">
-              <div className="icon-container">
+              <div className="icon-container ">
                 {isSidebar ? (
                   <X
                     onClick={() => setIsSidebar(false)}
@@ -121,7 +121,7 @@ export default function Navbar() {
                 )}
               </div>
               {isSidebar && (
-                <div className="sidebar-container absolute top-full right-4">
+                <div className="sidebar-container absolute top-full right-4 z-20">
                   <Sidebar setIsSidebar={setIsSidebar} />
                 </div>
               )}
@@ -174,7 +174,7 @@ export default function Navbar() {
               </div>
 
               {/* Profile Avatar */}
-              <div className="bg-white p-2 rounded-lg flex items-center gap-2 relative">
+              <div className="bg-white p-2 rounded-lg flex items-center gap-2 relative ">
                 <div className="icon-container">
                   {isSidebar ? (
                     <X

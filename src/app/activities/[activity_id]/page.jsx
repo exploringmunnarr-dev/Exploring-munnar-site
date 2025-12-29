@@ -61,7 +61,7 @@ const page = () => {
       <section>
         <Navbar />
         {/* header ---------------------------------------------- */}
-        <div className="header sticky top-15 py-2 bg-white md:flex px-9 mt-4 justify-between items-center border-b border-gray-200 pb-2 ">
+        <div className="header sticky top-0 md:top-15 py-3 bg-white md:flex px-3 md:px-9 mt-4 justify-between items-center border-b border-gray-200 pb-2 ">
           {/* Tabs Section */}
           <div className="flex gap-6 mb-4 md:mb-0">
             {tabs.map((tab) => (
@@ -91,7 +91,7 @@ const page = () => {
           {/* Right Section */}
           <div className="flex items-center justify-between md:justify-start gap-6">
             {/* Rating */}
-            <div>
+            <div className="flex items-center w-full justify-between md:block">
               <div className="flex items-center gap-1 text-sm text-gray-600">
                 <Star className="text-yellow-500 w-4 h-4 fill-yellow-500" />
                 <span className="font-medium text-gray-800">4.9</span>

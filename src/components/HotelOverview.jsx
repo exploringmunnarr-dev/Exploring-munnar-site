@@ -48,14 +48,14 @@ const HotelOverview = ({ data, handleOpenSuccessPopup }) => {
             </div>
 
             {/* Check-in / Checkout */}
-            <div className="grid grid-cols-2 mt-4 border rounded-md divide-x border-[#777777]  bg-white">
+            <div className="grid md:grid-cols-2 mt-4 border rounded-md md:divide-x border-[#777777]  bg-white">
               <div className="px-3 py-2">
                 <p className="text-xs font-semibold">CHECK-IN</p>
                 <input type="text" placeholder="2/6/2023" className="text-sm text-gray-500 outline-none" />
               </div>
-              <div className="px-3 py-2">
+              <div className="px-3 py-2 border-t border-gray-200">
                 <p className="text-xs font-semibold">CHECKOUT</p>
-                <input type="text" placeholder="2/6/2023" className="text-sm text-gray-500 outline-none" />
+                <input type="text" placeholder="2/6/2023" className="text-sm text-gray-500 outline-none   " />
               </div>
             </div>
 
