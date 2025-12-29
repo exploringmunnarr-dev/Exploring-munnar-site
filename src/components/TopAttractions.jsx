@@ -71,7 +71,6 @@ const slides = [
 ];
 
 const TopAttractions = () => {
-  
   const attractions = [
     {
       title: "Mettupatti to Munnar",
