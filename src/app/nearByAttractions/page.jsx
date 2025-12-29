@@ -3,7 +3,7 @@ import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar'
 import React, { useState } from 'react'
 import img1 from '../../assets/attractionImg1.svg'
-import img2 from '../../assets/attractionimg2.svg'
+import img2 from '../../assets/attractionImg2.svg'
 import img3 from '../../assets/attractionImg3.svg'
 import Image from 'next/image';
 import Link from 'next/link';
