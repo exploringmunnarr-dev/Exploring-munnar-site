@@ -1,8 +1,8 @@
 import React from "react";
-import icon1 from "../assets/whychooseUsIcon1.svg";
-import icon2 from "../assets/whychooseUsIcon2.svg";
-import icon3 from "../assets/whychooseIcon3.svg";
-import icon4 from "../assets/whychooseIcon4.svg";
+import icon1 from "../assets/whyChooseUsIcon1.svg";
+import icon2 from "../assets/whyChooseUsIcon2.svg";
+import icon3 from "../assets/whyChooseIcon3.svg";
+import icon4 from "../assets/whyChooseIcon4.svg";
 import Image from "next/image";
 const cardData = [
   {

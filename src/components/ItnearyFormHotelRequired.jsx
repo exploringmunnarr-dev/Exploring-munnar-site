@@ -32,7 +32,7 @@ import homeActive from '../assets/homeActive.svg'
 import tentActive from '../assets/tentActive.svg'
 import resortActive from '../assets/resortActive.svg'
 import star3 from '../assets/active3star.svg'
-import star5 from '../assets/fivestarActive.svg'
+import star5 from '../assets/fiveStarActive.svg'
 
 const filterTabs = [
   { icon: star, title: "5 star Hotels", active: star5 },
