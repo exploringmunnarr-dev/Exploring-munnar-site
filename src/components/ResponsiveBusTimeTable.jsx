@@ -60,7 +60,9 @@ const ResponsiveBusTimeTable = ({ data }) => {
               <div className="time-table-card bg-gray-100 rounded-lg p-2">
                 <div className="header flex items-center justify-between">
                   <div className="container-1">
-                    <h1 className="font-semibold">{item.route}</h1>
+                    <h1 className="font-semibold">
+                      {item.from} - {item.to}
+                    </h1>
                   </div>
                   <button className="btn-green text-white px-2 py-1 text-sm rounded-lg">
                     {item.bus_type}
@@ -92,14 +94,12 @@ const ResponsiveBusTimeTable = ({ data }) => {
             );
           })
         ) : (
-          
-            <div className="w-[90%] m-auto text-center">
-              <Image src={noData} />
-              <h1 className="font-semibold text-xl text-[#333333] mt-[-20px]">
-                No data found!
-              </h1>
-            </div>
-          
+          <div className="w-[90%] m-auto text-center">
+            <Image src={noData} />
+            <h1 className="font-semibold text-xl text-[#333333] mt-[-20px]">
+              No data found!
+            </h1>
+          </div>
         )}
       </section>
     </>

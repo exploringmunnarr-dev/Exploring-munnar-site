@@ -1,77 +1,31 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import axios from "axios";
+import dynamic from "next/dynamic";
 import heart from "../assets/treeHouseHeart.svg";
 import treeHouse from "../assets/treeHouseImg1.svg";
 
-const cards = [
-  {
-    id: 1,
-    title: "Evergreen Treehouse Retreat",
-    image: treeHouse,
-    rating: 4.9,
-    reviews: 337,
-    price: 2200,
-    tags: "Eco Stay | Couple Favourite",
-  },
-  {
-    id: 2,
-    title: "Evergreen Treehouse Retreat",
-    image: treeHouse,
-    rating: 4.9,
-    reviews: 337,
-    price: 2200,
-    tags: "Eco Stay | Couple Favourite",
-  },
-  {
-    id: 3,
-    title: "Evergreen Treehouse Retreat",
-    image: treeHouse,
-    rating: 4.9,
-    reviews: 337,
-    price: 2200,
-    tags: "Eco Stay | Couple Favourite",
-  },
-  {
-    id: 4,
-    title: "Evergreen Treehouse Retreat",
-    image: treeHouse,
-    rating: 4.9,
-    reviews: 337,
-    price: 2200,
-    tags: "Eco Stay | Couple Favourite",
-  },
-  {
-    id: 4,
-    title: "Evergreen Treehouse Retreat",
-    image: treeHouse,
-    rating: 4.9,
-    reviews: 337,
-    price: 2200,
-    tags: "Eco Stay | Couple Favourite",
-  },
-  {
-    id: 4,
-    title: "Evergreen Treehouse Retreat",
-    image: treeHouse,
-    rating: 4.9,
-    reviews: 337,
-    price: 2200,
-    tags: "Eco Stay | Couple Favourite",
-  },
-  {
-    id: 4,
-    title: "Evergreen Treehouse Retreat",
-    image: treeHouse,
-    rating: 4.9,
-    reviews: 337,
-    price: 2200,
-    tags: "Eco Stay | Couple Favourite",
-  },
-];
-
 const TopRatedHotels = () => {
+  const [hotels, setHotels] = useState([]);
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+  useEffect(() => {
+    const fetchTopRatedHotels = async () => {
+      try {
+        const res = await axios.post(`${apiUrl}/api/hotels-list`, {
+          isTopRated: true,
+        });
+        setHotels(res.data.data.hotels);
+      } catch (err) {
+        console.error("Error fetching top-rated hotels:", err.message);
+      }
+    };
+
+    fetchTopRatedHotels();
+  }, [apiUrl]);
+
   return (
     <>
       <section className="mt-8 md:mt-14">
@@ -94,43 +48,50 @@ const TopRatedHotels = () => {
           </Link>
         </header>
         <div className="card-container mt-4 flex space-x-4 overflow-x-auto scrollbar-hide">
-          {cards.map((item) => (
-            <div
-              key={item.id}
-              className="card min-w-[280px] group hover:shadow-xl transition-all duration-300 shadow-gray-300 cursor-pointer max-w-xs rounded-2xl overflow-hidden border border-gray-300 p-4 bg-[#eeeeee] flex-shrink-0"
-            >
-              <div className="img-container relative group overflow-hidden rounded-lg">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  width={400}
-                  height={250}
-                  className="w-full h-48 object-cover rounded-lg hover:scale-125 transition-all duration-300"
-                />
-                <button className="absolute group-hover:scale-105 transition-all duration-300 top-2 right-2 bg-[#eeeeee] rounded-full p-2 shadow">
-                  <Image src={heart} alt="heart" />
-                </button>
-              </div>
-              <div className="mt-2">
-                <div className="flex items-center text-sm text-[#333333]">
-                  <span className="mr-1">🌟</span>
-                  <span className="font-medium">{item.rating}</span>
-                  <span className="ml-1">({item.reviews} reviews)</span>
+          {hotels.length > 0 ? (
+            hotels.map((item) => (
+              <Link
+                key={item.id}
+                href={`/hotels/hotel_listing/${item.id}`}
+                className="card min-w-[280px] group hover:shadow-xl transition-all duration-300 shadow-gray-300 cursor-pointer max-w-xs rounded-2xl overflow-hidden border border-gray-300 p-4 bg-[#eeeeee] flex-shrink-0"
+              >
+                <div className="img-container relative group overflow-hidden rounded-lg">
+                  <Image
+                    src={item?.images?.[0]?.url || treeHouse}
+                    alt={item.name}
+                    width={400}
+                    height={250}
+                    className="w-full h-48 object-cover rounded-lg hover:scale-125 transition-all duration-300"
+                  />
+                  <button className="absolute group-hover:scale-105 transition-all duration-300 top-2 right-2 bg-[#eeeeee] rounded-full p-2 shadow">
+                    <Image src={heart} alt="heart" />
+                  </button>
                 </div>
-                <h3 className="text-lg font-semibold text-[#333333]">
-                  {item.title}
-                </h3>
-                <p className="text-[#af4300] font-semibold">
-                  ₹ {item.price} / night
-                </p>
-                <p className="text-sm text-gray-600">{item.tags}</p>
-              </div>
+                <div className="mt-2">
+                  <div className="flex items-center text-sm text-[#333333]">
+                    <span className="mr-1">🌟</span>
+                    <span className="font-medium">{item.rating}</span>
+                    <span className="ml-1">({item.reviews} reviews)</span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-[#333333]">
+                    {item.name}
+                  </h3>
+                  <p className="text-[#af4300] font-semibold">
+                    ₹ {item.pricePerNight} / night
+                  </p>
+                  <p className="text-sm text-gray-600">{item.stayType}</p>
+                </div>
+              </Link>
+            ))
+          ) : (
+            <div className="w-full py-10 text-center text-gray-500">
+              No top-rated hotels found.
             </div>
-          ))}
+          )}
         </div>
       </section>
     </>
   );
 };
 
-export default TopRatedHotels;
+export default dynamic(() => Promise.resolve(TopRatedHotels), { ssr: false });

@@ -67,6 +67,11 @@ const BusTimeTable = () => {
   // states
   const [isLoading, setIsLoading] = useState([]);
   const [data, setData] = useState([]);
+  const [fromSearch, setFromSearch] = useState("");
+  const [toSearch, setToSearch] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
+  const [respFromSearch, setRespFromSearch] = useState("");
+  const [respToSearch, setRespToSearch] = useState("");
 
   // functions
   const fetchBusTimings = async () => {
@@ -82,6 +87,49 @@ const BusTimeTable = () => {
   useEffect(() => {
     fetchBusTimings();
   }, [apiUrl]);
+
+  useEffect(() => {
+    if (fromSearch || toSearch) {
+      const filtered = data.filter(
+        (item) =>
+          (fromSearch
+            ? item.from.toLowerCase().includes(fromSearch.toLowerCase())
+            : true) &&
+          (toSearch
+            ? item.to.toLowerCase().includes(toSearch.toLowerCase())
+            : true)
+      );
+      setFilteredData(filtered);
+    } else {
+      setFilteredData(data);
+    }
+  }, [data, fromSearch, toSearch]);
+
+  const handleResponsiveSearch = () => {
+    const filtered = data.filter(
+      (item) =>
+        (respFromSearch
+          ? item.from.toLowerCase().includes(respFromSearch.toLowerCase())
+          : true) &&
+        (respToSearch
+          ? item.to.toLowerCase().includes(respToSearch.toLowerCase())
+          : true)
+    );
+    setFilteredData(filtered);
+  };
+
+  const handleSearch = (e) => {
+    const value = e.target.value.trim(); // Remove leading/trailing spaces
+    setFromSearch(value);
+    const filteredData = tableData.filter((item) =>
+      item.route
+        .replace(/\s+/g, "")
+        .toLowerCase()
+        .includes(value.replace(/\s+/g, "").toLowerCase())
+    );
+    setData(filteredData);
+  };
+
   return (
     <>
       <section className="mx-4 md:mx-10 mt-8">
@@ -105,6 +153,8 @@ const BusTimeTable = () => {
                 type="text"
                 placeholder="Munnar"
                 className="w-[100%] outline-none ml-2"
+                value={fromSearch}
+                onChange={(e) => setFromSearch(e.target.value)}
               />
             </div>
           </div>
@@ -118,6 +168,8 @@ const BusTimeTable = () => {
                 type="text"
                 placeholder="Kochi"
                 className="w-[100%] outline-none ml-2"
+                value={toSearch}
+                onChange={(e) => setToSearch(e.target.value)}
               />
             </div>
           </div>
@@ -130,15 +182,22 @@ const BusTimeTable = () => {
               type="text"
               placeholder="From"
               className="border border-gray-600 w-1/2 px-2 py-1 rounded-lg"
+              value={respFromSearch}
+              onChange={(e) => setRespFromSearch(e.target.value)}
             />
             <ArrowRightLeft className="" size={18} />
             <input
               type="text"
               placeholder="To"
               className="border border-gray-600 w-1/2 px-2 py-1 rounded-lg"
+              value={respToSearch}
+              onChange={(e) => setRespToSearch(e.target.value)}
             />
           </div>
-          <button className="btn-green text-white py-2 rounded-lg w-full mt-4">
+          <button
+            className="btn-green text-white py-2 rounded-lg w-full mt-4"
+            onClick={handleResponsiveSearch}
+          >
             Search
           </button>
         </div>
@@ -152,47 +211,55 @@ const BusTimeTable = () => {
                 })}
               </thead>
               <tbody className="bg-[#EEEEEE] rounded-lg">
-                {data.map((item, index) => {
-                  return (
-                    <tr className="">
-                      <td className="font-semibold pt-2 pb-2 pl-3">
-                        {item.from} - {item.to}
-                      </td>
-                      <td className="pt-2 pb-2 pl-3">
-                        <div className="relative">
-                          <div className="flex items-center gap-2">
-                            <Image src={clockIcon} className="w-6" />
-                            <h1>{item.departure_time}</h1>
+                {filteredData.length > 0 ? (
+                  filteredData.map((item, index) => {
+                    return (
+                      <tr className="" key={index}>
+                        <td className="font-semibold pt-2 pb-2 pl-3">
+                          {item.from} - {item.to}
+                        </td>
+                        <td className="pt-2 pb-2 pl-3">
+                          <div className="relative">
+                            <div className="flex items-center gap-2">
+                              <Image src={clockIcon} className="w-6" />
+                              <h1>{item.departure_time}</h1>
+                            </div>
+                            <div className="absolute right-2 top-[50%] translate-y-[-50%] ">
+                              <Image src={left_arrow} />
+                            </div>
                           </div>
-                          <div className="absolute right-2 top-[50%] translate-y-[-50%] ">
-                            <Image src={left_arrow} />
-                          </div>
-                        </div>
-                      </td>
-                      <td className="pt-2 pb-2 pl-3">{item.arrival_time}</td>
-                      <td className="py-4 pl-3 flex items-center gap-2">
-                        {" "}
-                        <Image src={busIcon} /> {item.bus_type}{" "}
-                        <span className="text-gray-500">
-                          {item.bus_type.category}
-                        </span>{" "}
-                      </td>
-                      {/* <td className="py-4 pl-3 border flex items-center gap-2">
-                        {" "}
-                        <Image src={busIcon} /> {item.bus_type.name}{" "}
-                        <span className="text-gray-500">
-                          {item.bus_type.category}
-                        </span>{" "}
-                      </td> */}
-                      <td className="pl-3 ">{item.duration}</td>
-                      <td className="pl-3">{item.price}</td>
-                    </tr>
-                  );
-                })}
+                        </td>
+                        <td className="pt-2 pb-2 pl-3">{item.arrival_time}</td>
+                        <td className="py-4 pl-3 flex items-center gap-2">
+                          {" "}
+                          <Image src={busIcon} /> {item.bus_type}{" "}
+                          <span className="text-gray-500">
+                            {item.bus_type.category}
+                          </span>{" "}
+                        </td>
+                        {/* <td className="py-4 pl-3 border flex items-center gap-2">
+                          {" "}
+                          <Image src={busIcon} /> {item.bus_type.name}{" "}
+                          <span className="text-gray-500">
+                            {item.bus_type.category}
+                          </span>{" "}
+                        </td> */}
+                        <td className="pl-3 ">{item.duration}</td>
+                        <td className="pl-3">{item.price}</td>
+                      </tr>
+                    );
+                  })
+                ) : (
+                  <tr>
+                    <td colSpan={6} className="text-center py-8 text-gray-500">
+                      No data found
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
-          <ResponsiveBusTimeTable data={data} />
+          <ResponsiveBusTimeTable data={filteredData} />
         </div>
       </section>
     </>
