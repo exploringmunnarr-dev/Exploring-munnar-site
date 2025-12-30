@@ -29,13 +29,13 @@ const PromotionBanner = () => {
   const [data, setData] = useState([])
   useEffect(() => {
     const fetchPromotedHotels = async () => {
-      console.log("Fetching promoted hotels...");
+    // console.log("Fetching promoted hotels...");
       try {
         const res = await axios.post(
           `${apiUrl}/api/hotels-list`,
           { isFeatured: true, },
         );
-        console.log("Promoted hotels data:", res.data.data.hotels);
+        // console.log("Promoted hotels data:", res.data.data.hotels);
         setData(res.data.data.hotels)
       } catch (error) {
         console.error("Error fetching promoted hotels:", error);

@@ -3,7 +3,7 @@ import { X } from "lucide-react";
 import { formConfigs } from "../data/profileFormConfig";
 
 const ProfileFormComponent = ({ isForm, setIsForm, formlable }) => {
-  console.log("formConfig : ", formConfigs[formlable]);
+  // console.log("formConfig : ", formConfigs[formlable]);
 
   //   extracting form data's
   const data = formConfigs[formlable];

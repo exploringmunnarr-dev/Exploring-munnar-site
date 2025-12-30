@@ -37,7 +37,7 @@ const ItnearyPlanningTripDateForm = ({ setStep }) => {
   };
 
   const handleNext = () => {
-    console.log("trip date running");
+    // console.log("trip date running");
     localStorage.setItem("itnearyData", JSON.stringify(itnearyFormData));
   };
 

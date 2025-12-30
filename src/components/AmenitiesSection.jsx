@@ -89,7 +89,7 @@ export default function AmenitiesSection({ data }) {
       return item;
     });
     setAmenitiesData(filtered);
-    console.log("amenities  : ", filtered);
+    // console.log("amenities  : ", filtered);
   }, [data]);
 
   return (
@@ -164,7 +164,7 @@ export default function AmenitiesSection({ data }) {
                   <h3 className="font-semibold mb-6 flex items-center gap-2">
                     {i.name}
                   </h3>
-                  {console.log("i : ", i.data)}
+                  {/* console.log("i : ", i.data) */}
                   <ul className="space-y-1 text-gray-700">
                     {i.data.split(",").map((item, j) => (
                       <li key={j} className="flex items-start gap-2">

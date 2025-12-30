@@ -18,7 +18,7 @@ import axios from "axios";
 const ItnearyPersonalInfo = ({ setStep }) => {
   // context data
   const { setItnearyFormData, itnearyFormData } = useFormData();
-  console.log("Itneary form : ", itnearyFormData)
+  // console.log("Itneary form : ", itnearyFormData)
   const [peviousData, setPreviousData] = useState({});
   // states
   const [contactMethod, setContactMethod] = useState("");
@@ -81,14 +81,14 @@ const ItnearyPersonalInfo = ({ setStep }) => {
   }
 
 
-  console.log("")
+  // console.log("")
   async function healthCheck() {
     try {
       const response = await axios.get(
         "https://munnar-backend.onrender.com/api/health"
       );
       const data = await response.text();
-      console.log("Fetch Response:", data);
+      // console.log("Fetch Response:", data);
     } catch (err) {
       console.error("Error occured : ", err.message);
     }
@@ -115,7 +115,7 @@ const ItnearyPersonalInfo = ({ setStep }) => {
     }));
   }, [contactMethod]);
 
-  console.log(" data :", itnearyFormData);
+  // console.log(" data :", itnearyFormData);
   // jsx here👇
   return (
     <>

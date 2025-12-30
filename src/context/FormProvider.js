@@ -24,7 +24,7 @@ export function FormDataProvider({ children }) {
     carCategory: "",
     routes: [],
   });
-  console.log("itneary form data : ", itnearyFormData);
+  // console.log("itneary form data : ", itnearyFormData);
   return (
     <FormData.Provider
       value={{

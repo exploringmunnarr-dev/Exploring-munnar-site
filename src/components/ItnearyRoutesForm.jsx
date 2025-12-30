@@ -46,7 +46,7 @@ const ItnearyRoutesForm = ({ setStep }) => {
 
   // Functions
   const handleCheck = (itemData) => {
-    console.log("Checked route : ", itemData);
+    // console.log("Checked route : ", itemData);
     setSelectedRoutes((prev) => {
       const exists = prev.some((p) => p.route === itemData.route);
       if (exists) {
@@ -80,7 +80,7 @@ const ItnearyRoutesForm = ({ setStep }) => {
     localStorage.setItem("itnearyData", JSON.stringify(itnearyFormData));
   };
 
-  console.log("fetched routes : ", fetchedRoutes);
+  // console.log("fetched routes : ", fetchedRoutes);
 
   const normalizeRoute = (value) =>
     value.replace(/–/g, "-").replace(/\s+/g, " ").trim();
@@ -96,7 +96,7 @@ const ItnearyRoutesForm = ({ setStep }) => {
         },
       });
 
-      console.log("Fetched data : ", res.data.data);
+      // console.log("Fetched data : ", res.data.data);
 
       // Transform API data to match route_data structure
       // Adjust these fields based on your actual API response structure

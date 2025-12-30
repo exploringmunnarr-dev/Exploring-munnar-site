@@ -17,7 +17,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import ImageModalComponent from "./ImageModalComponent";
 const HotelHero = ({ data }) => {
-  console.log("image data : ", data);
+  // console.log("image data : ", data);
   const images = [img1, img2, img3, img4];
 
   // states
@@ -29,7 +29,7 @@ const HotelHero = ({ data }) => {
       return item.url;
     });
     setImgData(responsiveImgData);
-    console.log("image data : ", responsiveImgData);
+    // console.log("image data : ", responsiveImgData);
   }, [data]);
 
   return (

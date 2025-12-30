@@ -67,7 +67,7 @@ const MyInterestModal = ({ isMyInterestModal, setIsMyInterestModal }) => {
     }
   };
 
-  console.log("selected Items : ", selectedItem);
+  // console.log("selected Items : ", selectedItem);
 
   return (
     <>

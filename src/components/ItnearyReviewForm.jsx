@@ -40,7 +40,7 @@ const ItnearyReviewForm = ({ setStep }) => {
   // Context Data's
   const { itnearyFormData, setItnearyFormData } = useFormData();
 
-  console.log("itneary form data : ", itnearyFormData)
+  // console.log("itneary form data : ", itnearyFormData)
   // states
   const [isModal, setIsModal] = useState(false);
   // functions
