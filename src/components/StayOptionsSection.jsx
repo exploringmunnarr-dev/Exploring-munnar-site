@@ -88,10 +88,10 @@ const cardData = [
     price: 2200,
     tags: "Eco Stay | Couple Favourite",
   },
-  {
+   {
     id: 1,
-    category: "home stays",
-    title: "Home stays",
+    category: "resort",
+    title: "resort",
     image: treeHouse,
     rating: 4.8,
     reviews: 120,
@@ -100,8 +100,8 @@ const cardData = [
   },
   {
     id: 1,
-    category: "resort",
-    title: "resort",
+    category: "home stays",
+    title: "Home stays",
     image: treeHouse,
     rating: 4.8,
     reviews: 120,
@@ -126,6 +126,7 @@ const StayOptionsSection = () => {
 
   // states ------------------->
   const [data, setData] = useState([]);
+  const [allData, setAllData] = useState([]);
   const [activeTab, setActivetab] = useState("");
 
   // side effects 
@@ -135,20 +136,22 @@ const StayOptionsSection = () => {
 
   // function
 
-  // const handleFilter = (categoryName) => {
-  //   console.log("filter items : ", categoryName)
-  //   if (activeTab == categoryName) {
-  //     setActivetab("");
-  //     setData(data);
-  //   } else {
-  //     setActivetab(categoryName);
-  //     const filteredData = cardData.filter((item, index) => {
-  //       return item.category.toLowerCase() == categoryName.toLowerCase();
-  //     });
-  //     // // ( (filteredData);
-  //     setData(filteredData);
-  //   }
-  // };
+  const handleFilter = (categoryName) => {
+    // Toggle selection: deselect if same tab clicked
+    if (activeTab === categoryName) {
+      setActivetab("");
+      setData(allData);
+    } else {
+      setActivetab(categoryName);
+      const filteredData = allData.filter((item) => {
+        return (
+          item?.stayType &&
+          item.stayType.toLowerCase().includes(categoryName.toLowerCase())
+        );
+      });
+      setData(filteredData);
+    }
+  };
 
   async function getData() {
     try {
@@ -156,6 +159,8 @@ const StayOptionsSection = () => {
         isHighlighted: true
       })
       setData(res.data.data.hotels)
+      setAllData(res.data.data.hotels)
+      console.log("Highlighted hotels data : ", res.data.data.hotels)
     } catch (err) {
       console.error("Error occured while fetching highlighted hotel : ", err.message)
     }
@@ -185,16 +190,18 @@ const StayOptionsSection = () => {
             View all
           </Link>
         </header>
-        <div className="tab-container flex items-center gap-4 mt-4 ">
+        <div className="tab-container flex items-center flex-wrap gap-4 mt-4 ">
           {tabDatas.map((title, index) => {
             return (
               <div
                 key={index}
-                // onClick={() => handleFilter(title.categoryName)}
-                className={`tab  cursor-pointer flex gap-2 items-center md:border border-[#1a552b] rounded-md text-sm md:text-md  md:px-4 py-1 h-[50px] ${activeTab !== title.categoryName
+                onClick={() => handleFilter(title.categoryName)}
+                className={`tab  cursor-pointer flex gap-2  items-center border border-[#1a552b] rounded-md text-sm md:text-md  px-4 py-1 h-[50px] ${activeTab !== title.categoryName
                   ? "md:bg-[#eeeeee] text-[#1a552b]"
                   : "bg-green-800 text-white"
                   }  `}
+                role="button"
+                aria-pressed={activeTab === title.categoryName}
               >
                 {activeTab !== title.categoryName ? (
                   <Image src={title.icon} />
@@ -202,58 +209,64 @@ const StayOptionsSection = () => {
                   <Image src={title.activeIcon} />
                 )}
 
-                <h1 className="hidden md:block">{title.title}</h1>
+                <h1 className="block">{title.title}</h1>
               </div>
             );
           })}
         </div>
 
-        <div className="card-container mt-4 flex space-x-4 overflow-x-auto scrollbar-hide ">
-          {data.map((item, index) => (
-            <Link
-              href={`/hotels/hotel_listing/${item.id}`}
-              key={index}
-              className="card min-w-[280px] hover:shadow-lg shadow-gray-500 transition-all duration-300  max-w-xs rounded-2xl  overflow-hidden border border-gray-300 p-4 bg-[#eeeeee] flex-shrink-0"
-            >
-              {/* Image */}
-              <div className="img-container relative group ">
+        <div className="card-container mt-4">
+          {data.length === 0 && allData.length > 0 ? (
+            <div className="w-full py-10 text-center text-gray-500">No stays found for the selected category.</div>
+          ) : (
+            <div className="flex space-x-4 overflow-x-auto scrollbar-hide ">
+              {data.map((item, index) => (
+                <Link
+                  href={`/hotels/hotel_listing/${item.id}`}
+                  key={index}
+                  className="card min-w-[280px] hover:shadow-lg shadow-gray-500 transition-all duration-300  max-w-xs rounded-2xl  overflow-hidden border border-gray-300 p-4 bg-[#eeeeee] flex-shrink-0"
+                >
+                  {/* Image */}
+                  <div className="img-container relative group ">
 
-                <Image
-                  src={item?.images?.[0].url}
-                  alt={item.title}
-                  width={400}
-                  height={250}
-                  className="w-full h-48 object-cover rounded-lg"
-                />
-                <button className="absolute transition-all duration-500  top-2 right-2 bg-[#eeeeee] rounded-full p-2 shadow hover:scale-110 ">
-                  <Image src={heart} alt="heart" />
-                </button>
-              </div>
+                    <Image
+                      src={item?.images?.[0].url}
+                      alt={item.title}
+                      width={400}
+                      height={250}
+                      className="w-full h-48 object-cover rounded-lg"
+                    />
+                    <button className="absolute transition-all duration-500  top-2 right-2 bg-[#eeeeee] rounded-full p-2 shadow hover:scale-110 ">
+                      <Image src={heart} alt="heart" />
+                    </button>
+                  </div>
 
-              {/* Content */}
-              <div className="mt-2">
-                {/* Rating */}
-                <div className="flex items-center text-sm text-[#333333]">
-                  <span className="mr-1">🌟</span>
-                  <span className="font-medium">{item.rating}</span>
-                  {/* <span className="ml-1">({item.reviews})</span> */}
-                </div>
+                  {/* Content */}
+                  <div className="mt-2">
+                    {/* Rating */}
+                    <div className="flex items-center text-sm text-[#333333]">
+                      <span className="mr-1">🌟</span>
+                      <span className="font-medium">{item.rating}</span>
+                      {/* <span className="ml-1">({item.reviews})</span> */}
+                    </div>
 
-                {/* Title */}
-                <h3 className="text-lg font-semibold text-[#333333]">
-                  {item?.name?.slice(0, 26)}..
-                </h3>
+                    {/* Title */}
+                    <h3 className="text-lg font-semibold text-[#333333]">
+                      {item?.name?.slice(0, 26)}..
+                    </h3>
 
-                {/* Price */}
-                <p className="text-[#af4300] font-semibold">
-                  ₹{item?.pricePerNight} / night
-                </p>
+                    {/* Price */}
+                    <p className="text-[#af4300] font-semibold">
+                      ₹{item?.pricePerNight} / night
+                    </p>
 
-                {/* Tags */}
-                <p className="text-sm text-gray-600">{item?.stayType}</p>
-              </div>
-            </Link>
-          ))}
+                    {/* Tags */}
+                    <p className="text-sm text-gray-600">{item?.stayType}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </section >
     </>

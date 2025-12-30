@@ -47,13 +47,13 @@ const PromotionBanner = () => {
 
   return (
     <>
-      <section className="md:py-4 max-sm:mt-[-30px]  mx-4 md:mx-10 md:mt-8">
+      <section className="md:py-4   mx-4 md:mx-10 mt-8">
         <div className="w-[100%]">
           <Swiper
             className="w-[100%]"
             modules={[Autoplay]}
             slidesPerView={1}
-            autoplay={{ delay: 2000, disableOnInteraction: false }}
+            autoplay={{ delay: 7000, disableOnInteraction: false }}
             breakpoints={{
               640: { slidesPerView: 1 },
               1024: { slidesPerView: 1 },

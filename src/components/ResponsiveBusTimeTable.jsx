@@ -50,6 +50,7 @@ const ResponsiveBusTimeTable = ({ data }) => {
     return formatedDuration;
   };
 
+  console.log("responsive data:", data);
   return (
     <>
       <section className="mt-4 md:hidden space-y-2">
@@ -62,7 +63,7 @@ const ResponsiveBusTimeTable = ({ data }) => {
                     <h1 className="font-semibold">{item.route}</h1>
                   </div>
                   <button className="btn-green text-white px-2 py-1 text-sm rounded-lg">
-                    {item.bus_type.category}
+                    {item.bus_type}
                   </button>
                 </div>
                 <div className="body-container flex items-center gap-4 mt-6 mb-2">
@@ -84,7 +85,7 @@ const ResponsiveBusTimeTable = ({ data }) => {
                 <div className="footer-container mt-4 flex justify-between ">
                   {/* <h1 className="text-gray-600 ">{item.bus_type}</h1> */}
                   <h1 className="md:text-[#216432] text-[#af4300] text-[16px] font-semibold">
-                    {item.price}
+                    ₹ {item.price}
                   </h1>
                 </div>
               </div>

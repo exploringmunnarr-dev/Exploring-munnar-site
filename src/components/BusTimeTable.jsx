@@ -177,7 +177,13 @@ const BusTimeTable = () => {
                           {item.bus_type.category}
                         </span>{" "}
                       </td>
-                      {/* <td className='py-4 pl-3 flex items-center gap-2'> <Image src={busIcon}/> {item.bus_type.name} <span className='text-gray-500'>{item.bus_type.category}</span> </td> */}
+                      {/* <td className="py-4 pl-3 border flex items-center gap-2">
+                        {" "}
+                        <Image src={busIcon} /> {item.bus_type.name}{" "}
+                        <span className="text-gray-500">
+                          {item.bus_type.category}
+                        </span>{" "}
+                      </td> */}
                       <td className="pl-3 ">{item.duration}</td>
                       <td className="pl-3">{item.price}</td>
                     </tr>
