@@ -62,7 +62,7 @@ const HotelsStayType = () => {
   return (
     <>
       <section className="mt-8 md:mt-10">
-        <header className="flex items-start justify-between">
+        <header className="md:flex items-start justify-between">
           <div>
             <h2 className="text-xl md:text-3xl font-semibold text-[#333333]">
               Browse by Stay Type

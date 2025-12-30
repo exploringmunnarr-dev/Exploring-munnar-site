@@ -6,7 +6,7 @@ import clockIcon from "../assets/clock_icon.svg";
 import left_arrow from "../assets/left_arrow copy.svg";
 import busIcon from "../assets/bus_icon_table.svg";
 import Image from "next/image";
-import { ChevronDown } from "lucide-react";
+import { ArrowRightLeft, ChevronDown } from "lucide-react";
 import ResponsiveBusTimeTable from "./ResponsiveBusTimeTable";
 import axios from "axios";
 
@@ -93,15 +93,14 @@ const BusTimeTable = () => {
             Select your favourite Munnar spot and browse available stays.
           </h1>
         </header>
-        {/* ------------------------------- root container  --------------------------------  */}
-        <div className="root-container mt-4 bg-[#EEEEEE] grid sm:grid-cols-2 md:grid-cols-2 gap-1 md:gap-3 md:p-4 rounded-lg">
+        {/* ------------------------------- root container for laptop and above screens  --------------------------------  */}
+        <div className="root-container hidden  mt-4 bg-[#EEEEEE] md:grid sm:grid-cols-2 md:grid-cols-2 gap-1 md:gap-3 md:p-4 rounded-lg">
           <div className="p-2  ">
-            <div className="label-container items-center gap-1 hidden md:flex">
+            <div className="label-container items-center gap-1 md:flex">
               <Image src={location} alt="location_image" className="w-5 h-5" />
               <h1 className="text-[#333333]">From</h1>
             </div>
             <div className="input-container border-2 border-[#777777] bg-white rounded-lg px-4 py-2 flex items-center justify-between mt-2">
-              <h1 className="text-[#777777] sm:hidden ">From</h1>
               <input
                 type="text"
                 placeholder="Munnar"
@@ -110,12 +109,11 @@ const BusTimeTable = () => {
             </div>
           </div>
           <div className="p-2 ">
-            <div className="label-container items-center gap-1 hidden md:flex">
+            <div className="label-container items-center gap-1 md:flex">
               <Image src={location} alt="location_image" className="w-5 h-5" />
               <h1 className="text-[#333333] ">To</h1>
             </div>
-            <div className="input-container border-2 border-[#777777] bg-white rounded-lg px-4 py-2 flex items-center justify-between mt-2">
-              <h1 className="text-[#777777] sm:hidden ">To</h1>
+            <div className="input-container border-2  border-[#777777] bg-white rounded-lg px-4 py-2 flex items-center justify-between mt-2">
               <input
                 type="text"
                 placeholder="Kochi"
@@ -123,20 +121,29 @@ const BusTimeTable = () => {
               />
             </div>
           </div>
-          {/* <div className="p-2 col-span-2 sm:col-span-12 md:col-span-1 ">
-            <div className="label-container items-center gap-1 hidden md:flex">
-              <Image src={location} alt="location_image" className="w-5 h-5" />
-              <h1 className="text-[#333333] ">Bus type</h1>
-            </div>
-            <div className="input-container border-2 border-[#777777] bg-white rounded-lg px-4 py-2 flex items-center justify-between mt-2">
-              <h1 className="text-[#777777] hidden sm:block">Sleeper</h1>
-              <h1 className="text-[#777777] sm:hidden">Bus Type</h1>
-              <Image src={dropdownIcon} className="w-7 h-7" />
-            </div>
-          </div> */}
+        </div>
+
+        {/* responsive root container  */}
+        <div className="resp-root-container md:hidden  bg-[#EEEEEE] px-2 py-4 rounded-lg">
+          <div className="input-container-1 w-full flex items-center gap-3">
+            <input
+              type="text"
+              placeholder="From"
+              className="border border-gray-600 w-1/2 px-2 py-1 rounded-lg"
+            />
+            <ArrowRightLeft className="" size={18} />
+            <input
+              type="text"
+              placeholder="To"
+              className="border border-gray-600 w-1/2 px-2 py-1 rounded-lg"
+            />
+          </div>
+          <button className="btn-green text-white py-2 rounded-lg w-full mt-4">
+            Search
+          </button>
         </div>
         {/* -------------------------------- table-container  -------------------------------------------  */}
-        <div className="table-container">
+        <div className="table-container ">
           <div className="overflow-auto hidden md:block">
             <table className="w-full mt-4 max-sm:text-[10px]   overflow-auto ">
               <thead>

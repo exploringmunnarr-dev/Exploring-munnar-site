@@ -190,7 +190,7 @@ const TopAttractions = () => {
   return (
     <>
       <section className="py-4 mx-4 md:mx-10 mt-8 md:mt-14 ">
-        <div className="header flex gap-2 justify-between mb-8">
+        <div className="header  md:flex gap-2 justify-between mb-8">
           <div>
             <h1 className="text-xl md:text-3xl font-semibold text-[#333333]">
               Discover top attractions along each route to Munnar

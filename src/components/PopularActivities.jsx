@@ -13,7 +13,8 @@ const PopularActivities = ({ setIsResponsiveFilter, isResponsiveFilter }) => {
         <header className="">
           <div className="flex items-center justify-between sticky top-0 bg-white ">
             <h1 className="font-semibold text-lg md:text-3xl text-[#333333] flex items-center gap-2">
-              Popular activites <span className="hidden md:block">of munnar</span>
+              Popular activites{" "}
+              <span className="hidden md:block">of munnar</span>
             </h1>
             <div
               onClick={() => setIsResponsiveFilter(!isResponsiveFilter)}
@@ -28,8 +29,8 @@ const PopularActivities = ({ setIsResponsiveFilter, isResponsiveFilter }) => {
           </h1>
         </header>
         {/* responsive img container */}
-        <div className="img-container mt-4 relative">
-          <Image src={a2} className="w-[100%] h-[100%] object-cover" />
+        <div className="img-container mt-4 relative  md:hidden">
+          <Image src={a2} className="w-full h-[230px] object-cover" />
           <div className="content-container text-center  text-white absolute z-10 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
             <h1 className="text-3xl font-semibold mb-2">Zip line</h1>
             <h1 className="font-semibold mb-2 flex items-center gap-2">
