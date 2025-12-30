@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import c1 from "../assets/c1.svg";
@@ -60,20 +60,23 @@ const data = [
   },
 ];
 const Localnews = () => {
-  // Auth 
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL
+  // Auth
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   // state
   const [newsData, setNewsData] = useState([]);
   const [groupedNews, setGroupedNews] = useState([]);
-  const [selectedCategories, setSelectedCategories] = useState(["Roads And Transport Conditions"]);
-  const [respFilter, setRespFilter] = useState(false)
-  // functions 
+  const [selectedCategories, setSelectedCategories] = useState([
+    "Roads And Transport Conditions",
+  ]);
+  const [respFilter, setRespFilter] = useState(false);
+  // functions
 
   const handleCheckboxChange = (category) => {
-    setSelectedCategories((prev) =>
-      prev.includes(category)
-        ? prev.filter((c) => c !== category) // uncheck
-        : [...prev, category]                 // check
+    setSelectedCategories(
+      (prev) =>
+        prev.includes(category)
+          ? prev.filter((c) => c !== category) // uncheck
+          : [...prev, category] // check
     );
   };
 
@@ -97,10 +100,10 @@ const Localnews = () => {
 
   const fetchNews = async () => {
     try {
-      setRespFilter(false)
+      setRespFilter(false);
       const response = await axios.get(`${apiUrl}/api/news`, {
         params: {
-          categories: selectedCategories.join(','), // 👈 comma-separated
+          categories: selectedCategories.join(","), // 👈 comma-separated
           search: "",
         },
       });
@@ -109,10 +112,7 @@ const Localnews = () => {
       setNewsData(raw);
       setGroupedNews(groupByCategory(raw));
     } catch (err) {
-      console.error(
-        "error occurred while fetching news:",
-        err.message || err
-      );
+      console.error("error occurred while fetching news:", err.message || err);
     }
   };
 
@@ -132,20 +132,25 @@ const Localnews = () => {
     return `${days} days ago`;
   };
 
-
   return (
     <>
       <section className="mt-4 md:mt-10">
-        <header className="sticky top-15 py-2 md:py-0 bg-white md:static flex items-center justify-between">
+        <header className="sticky top-0 md:top-15 py-2 md:py-0 bg-white md:static flex items-center justify-between">
           <div>
-            <h1 className="text-xl md:text-3xl font-semibold text-[#333333]">
+            <h1 className="text-lg md:text-3xl font-semibold text-[#333333]">
               Local news updates of munnar
             </h1>
-            <h1 className="text-[#777777] mt-1">
+            <h1 className="text-[#777777] mt-1 max-sm:w-[250px] ">
               Stay updated with latest news and events
             </h1>
           </div>
-          <ListFilter onClick={() => setRespFilter(true)} className="text-gray-600 md:hidden" />
+          <div
+            onClick={() => setRespFilter(true)}
+            className="filter-container border rounded-lg px-4 py-2 flex items-center gap-2 cursor-pointer"
+          >
+            <h1 className="text-green-800">Filter</h1>
+            <ListFilter className="text-green-900 md:hidden" />
+          </div>
         </header>
         <div className="main-container grid grid-cols-12 gap-8 ">
           <div className="filter-container col-span-4 mt-4 sticky top-20 h-fit hidden md:block">
@@ -181,39 +186,42 @@ const Localnews = () => {
                   Apply Filter
                 </button>
               </div>
-
             </div>
           </div>
           <div className="content-container col-span-12 md:col-span-8 mt-4 ">
             {groupedNews.map((item, index) => {
-              return <div className="main-container">
-                <h1 className="text-[#333333] font-semibold text-xl mt-6">
-                  {item.title}
-                </h1>
-                {item?.data?.map((i) => {
-                  return <div className="card-container mt-6 space-y-3">
-                    <div className="card bg-[#EEEEEE] md:flex items-start gap-4 rounded-lg p-3">
-                      <Image
-                        src={i?.imageUrl}
-                        width={1000} height={1000}
-                        className="w-[100%] md:w-[340px] rounded-xl h-[200px] object-cover"
-                      />
-                      <div className="content-container mt-4 md:mt-0">
-                        <h1 className="text-lg text-[#333333] font-semibold">
-                          {i?.heading}
-                        </h1>
-                        <h1 className="text-[#333333] mt-4 text-justify">
-                          {i?.detail}
-                        </h1>
-                        <h1 className="text-sm text-[#777777] mt-4">
-                          Last updated : {timeAgo(i.createdAt)}
-                        </h1>
-
+              return (
+                <div className="main-container">
+                  <h1 className="text-[#333333] font-semibold text-xl mt-6">
+                    {item.title}
+                  </h1>
+                  {item?.data?.map((i) => {
+                    return (
+                      <div className="card-container mt-6 space-y-3">
+                        <div className="card bg-[#EEEEEE] md:flex items-start gap-4 rounded-lg p-3">
+                          <Image
+                            src={i?.imageUrl}
+                            width={1000}
+                            height={1000}
+                            className="w-[100%] md:w-[340px] rounded-xl h-[200px] object-cover"
+                          />
+                          <div className="content-container mt-4 md:mt-0">
+                            <h1 className="text-lg text-[#333333] font-semibold">
+                              {i?.heading}
+                            </h1>
+                            <h1 className="text-[#333333] mt-4 text-justify">
+                              {i?.detail}
+                            </h1>
+                            <h1 className="text-sm text-[#777777] mt-4">
+                              Last updated : {timeAgo(i.createdAt)}
+                            </h1>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                })}
-              </div>
+                    );
+                  })}
+                </div>
+              );
             })}
           </div>
         </div>
@@ -221,47 +229,49 @@ const Localnews = () => {
 
       {/* responsive filter container  */}
 
-      {respFilter && <div className="responsive-filter-container md:hidden">
-        <div onClick={() => setRespFilter(false)} className="fixed inset-0 bg-black/40 z-60"></div>
-        <div className="filter-container h-[100vh] fixed top-0 left-0 bg-white z-70 p-3 md:hidden">
-          <h1 className="font-semibold text-lg md:text-2xl">Filters</h1>
-          <div className="category-container mt-4">
-            <header className="flex items-center justify-between border-b border-gray-400 pb-4 ">
-              <h1 className="font-semibold md:text-lg text-[#333333]">
-                News categories
-              </h1>
-              <ChevronDown className="w-6 h-6" />
-            </header>
-            <div className="checbox-container mt-3 space-y-3">
-              {checkboxData.map((item, index) => (
-                <div
-                  key={index}
-                  className="input-container flex items-center gap-3"
-                >
-                  <input
-                    type="checkbox"
-                    className="scale-125 accent-amber-800"
-                    checked={selectedCategories.includes(item)}
-                    onChange={() => handleCheckboxChange(item)}
-                  />
-                  <h1 className="text-sm">{item}</h1>
-                </div>
-              ))}
+      {respFilter && (
+        <div className="responsive-filter-container md:hidden">
+          <div
+            onClick={() => setRespFilter(false)}
+            className="fixed inset-0 bg-black/40 z-120"
+          ></div>
+          <div className="filter-container h-[100vh] fixed top-0 left-0 bg-white z-130 p-3 md:hidden">
+            <h1 className="font-semibold text-lg md:text-2xl">Filters</h1>
+            <div className="category-container mt-4">
+              <header className="flex items-center justify-between border-b border-gray-400 pb-4 ">
+                <h1 className="font-semibold md:text-lg text-[#333333]">
+                  News categories
+                </h1>
+                <ChevronDown className="w-6 h-6" />
+              </header>
+              <div className="checbox-container mt-3 space-y-3">
+                {checkboxData.map((item, index) => (
+                  <div
+                    key={index}
+                    className="input-container flex items-center gap-3"
+                  >
+                    <input
+                      type="checkbox"
+                      className="scale-125 accent-amber-800"
+                      checked={selectedCategories.includes(item)}
+                      onChange={() => handleCheckboxChange(item)}
+                    />
+                    <h1 className="text-sm">{item}</h1>
+                  </div>
+                ))}
 
-              <button
-                onClick={fetchNews}
-                className="text-white bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] 
+                <button
+                  onClick={fetchNews}
+                  className="text-white bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] 
                  hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] cursor-pointer w-full rounded-lg py-2"
-              >
-                Apply Filter
-              </button>
+                >
+                  Apply Filter
+                </button>
+              </div>
             </div>
-
           </div>
         </div>
-      </div>}
-
-
+      )}
     </>
   );
 };
