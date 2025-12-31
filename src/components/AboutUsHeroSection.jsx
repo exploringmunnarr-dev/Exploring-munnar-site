@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import about_us_img from '../assets/abput_us_img.svg'
 const AboutUsHeroSection = () => {
+    console.log("about us hero section rendered")
     return (
         <>
             <section className='mt-4 h-[200px] md:h-auto md:mx-10 mx-4 relative'>
