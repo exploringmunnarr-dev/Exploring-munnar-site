@@ -16,7 +16,6 @@ import mtp4 from "../assets/mtp4.svg";
 import mtp5 from "../assets/mtp5.svg";
 import mtp6 from "../assets/mtp6.svg";
 import mtp7 from "../assets/mtp7.svg";
-
 import attractionImg1 from "../assets/attractionImg1.svg";
 import anayirangalDam from "../assets/anayirangalDam.webp";
 import lockhartgapviewpoint from "../assets/lockhart-gap-view-point.jpg";
@@ -31,6 +30,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Autoplay } from "swiper/modules";
 import Link from "next/link";
+
+// kesavardhan reference 
+
+import natureTrailC from "../assets/naature-trail-c.jpg";
+
 
 const slides = [
   {
@@ -71,6 +75,8 @@ const slides = [
 ];
 
 const TopAttractions = () => {
+  
+  // tab data 
   const attractions = [
     {
       title: "Mettupatti to Munnar",
@@ -98,6 +104,7 @@ const TopAttractions = () => {
     },
   ];
 
+  // kesavardhan should work here 
   const slidesBySet = {
     setone: [
       {
@@ -110,38 +117,50 @@ const TopAttractions = () => {
         title: "Anayirangal Dam",
         subtitle: "4 km from the route",
         image: anayirangalDam,
+        link: "/anayirangal-dam"
       },
       {
         title: "Lockhart Gap Viewpoint",
         subtitle: "4 km from the route",
         image: lockhartgapviewpoint,
+        link : "/lockhart-gap-viewpoint"
       },
       {
         title: "Tea Museum (TATA Tea Museum – Nallathanni)",
         subtitle: "4 km from the route",
         image: tataTeaMuseum,
+        link : "/tea-museum-nallathanni"
       },
       {
         title: "Rose Garden",
         subtitle: "4 km from the route",
         image: roseGarden,
+        link: "/rose-garden"
       },
       {
         title: "Chithirapuram Viewpoint",
         subtitle: "4 km from the route",
         image: chitrapuram,
+        link: "/chithirapuram-viewpoint"
       },
+      
     ],
     settwo: [
       {
         title: "Nature Trail A",
         subtitle: "1.5 km from the route",
         image: mtp3,
+        link : "/nature-trail-a"
       },
       {
         title: "Nature Trail B",
         subtitle: "1.5 km from the route",
         image: mtp4,
+      },
+      {
+        title: "Nature Trail C",
+        subtitle: "1.5 km from the route",
+        image: natureTrailC,
       },
     ],
     setthree: [

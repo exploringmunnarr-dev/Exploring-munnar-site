@@ -5,6 +5,14 @@ import chinnaKanalImg2 from "../../assets/chinnaKanalImg2.jpg";
 import React from "react";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+
+export const metadata = {
+  title:
+    "Chinnakanal Waterfalls (Power House Falls) – Top Scenic Stop on the Mettupatti to Munnar Route",
+  description:
+    "Explore Chinnakanal Waterfalls, also known as Power House Falls, a must-visit spot on the Mettupatti to Munnar route. Best for photography, nature lovers & travelers.",
+};
+
 const page = () => {
   return (
     <>

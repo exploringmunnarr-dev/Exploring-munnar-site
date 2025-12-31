@@ -27,7 +27,8 @@ const Home = ({ scroll }) => {
       <HomeHero />
       <GetAroundSection />
       <PromotionBanner />
-      <TopAttractions />
+      {/* Kesavardhan --> */}
+      <TopAttractions /> 
       <TripPlannerSection />
       <StayOptionsSection />
       <ActivitiesSection />
