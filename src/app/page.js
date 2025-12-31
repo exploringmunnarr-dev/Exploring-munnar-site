@@ -1,6 +1,9 @@
 "use client";
 import Home from "@/view/Home";
 import React, { useEffect, useState } from "react";
+
+
+
 const Page = () => {
   const [scrollY, setScrollY] = useState(0);
   // // ( ("scroll : ", scrollY)

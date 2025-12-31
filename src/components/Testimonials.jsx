@@ -13,38 +13,23 @@ import Image from "next/image";
 const testimonials = [
   {
     name: "Manzur",
-    role: "Founder at Google",
-    text: "Yet preference connection unpleasant yet melancholy but end appearance. And excellence partially estimating terminated day everything.",
+    role: "Travel Enthusiast",
+    text: "Exploring Munnar made our trip completely stress-free. From hotel selection to local sightseeing, everything was perfectly organized. The team shared real-time updates and local tips that made our journey smooth and memorable.",
   },
   {
     name: "Sam",
-    role: "Founder at UpSkills",
-    text: "Yet preference connection unpleasant yet melancholy but end appearance. And excellence partially estimating terminated day everything.",
+    role: "Family Traveler",
+    text: "We had an amazing experience exploring Munnar. The itinerary was well planned, transport was reliable, and the stays were comfortable. Their local expertise helped us explore hidden spots we would have otherwise missed.",
   },
   {
-    name: "Manzur",
-    role: "Founder at Google",
-    text: "Yet preference connection unpleasant yet melancholy but end appearance. And excellence partially estimating terminated day everything.",
+    name: "Ayesha",
+    role: "Honeymoon Traveler",
+    text: "Our honeymoon trip to Munnar was beautifully arranged. Personalized planning, quick support, and authentic experiences made it special. Highly recommended for couples looking for a peaceful and romantic getaway.",
   },
   {
-    name: "Manzur",
-    role: "Founder at Google",
-    text: "Yet preference connection unpleasant yet melancholy but end appearance. And excellence partially estimating terminated day everything.",
-  },
-  {
-    name: "Manzur",
-    role: "Founder at Google",
-    text: "Yet preference connection unpleasant yet melancholy but end appearance. And excellence partially estimating terminated day everything.",
-  },
-  {
-    name: "Manzur",
-    role: "Founder at Google",
-    text: "Yet preference connection unpleasant yet melancholy but end appearance. And excellence partially estimating terminated day everything.",
-  },
-  {
-    name: "Manzur",
-    role: "Founder at Google",
-    text: "Yet preference connection unpleasant yet melancholy but end appearance. And excellence partially estimating terminated day everything.",
+    name: "Ravi Kumar",
+    role: "Solo Traveler",
+    text: "Exploring Munnar is more than a travel service, they feel like local companions.Budget-friendly packages, smooth coordination, and great support throughout the trip. I’ll definitely book with them again",
   },
 ];
 const Testimonials = () => {

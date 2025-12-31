@@ -7,16 +7,14 @@ import EmergencyContacts from "@/components/EmergencyContacts";
 import { useTheme } from "@emotion/react";
 import MobileTab from "@/components/MobileTab";
 
+export const metadata = {
+  title: "Munnar Live Updates – Weather, Traffic & Travel Alerts",
+  description:
+    "Get real-time updates on Munnar weather, road conditions, traffic, and tourist alerts. Plan your trip with accurate live information.",
+};
+
 const page = () => {
-  // Auth 
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL
-
-  // states ------------------------------------ 
-  // const [data, setData] = useState([])
-
-  // side effects ----------------------------------- 
-
-  // functions ---------------------------------------
+ 
   return (
     <>
       <Navbar />

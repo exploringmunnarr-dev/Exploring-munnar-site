@@ -19,6 +19,7 @@ import boats from "../../assets/boats.png";
 import { ChevronDown, X } from "lucide-react";
 import Image from "next/image";
 import axios from "axios";
+import ActivitiesFaq from "@/components/ActivitiesFaq";
 
 const sortData = ["All of these", "Seasonal Activities", "Regular Activities"];
 const activityType = [
@@ -248,7 +249,8 @@ const Page = () => {
           </div>
         )}
       </div>
-      <ItnearyFaq />
+      {/* <ItnearyFaq /> */}
+      <ActivitiesFaq/>
       <Footer />
       <div className="tab-container w-full fixed bottom-0 md:hidden">
         <MobileTab />

@@ -5,6 +5,12 @@ import Navbar from "@/components/Navbar";
 import ContactUsMapSection from "@/components/ContactUsMapSection";
 import MobileTab from "@/components/MobileTab";
 
+export const metadata = {
+  title: "Contact Exploring Munnar – Support & Travel Assistance",
+  description:
+    "Reach out to us for hotel bookings, cab services, itinerary planning, and travel support. We’re here to help you plan your Munnar trip.",
+};
+
 const page = () => {
   return (
     <>

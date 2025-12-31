@@ -3,36 +3,36 @@ import React, { useState } from "react";
 import Image from "next/image";
 import plus from "../assets/plus.svg";
 import minus from "../assets/minus.svg";
+
 const accordianData = [
   {
-    question: "Is the itinerary fully personalized?",
+    question: "Are all attractions open throughout the year?",
+    answer: "Some attractions are seasonal and depend on weather conditions.",
+  },
+  {
+    question: "Do you list both popular and hidden places?",
+    answer: "Yes. We feature famous spots and lesser-known local gems.",
+  },
+  {
+    question: "Can I visit attractions without a guide?",
+    answer: "Yes, but guided options are available for better experiences.",
+  },
+  {
+    question: "Are attractions suitable for senior citizens?",
     answer:
-      "Yes. We design itineraries based on your dates, interests, and travel style.",
+      "Many are senior-friendly. Difficulty levels are clearly mentioned.",
   },
   {
-    question: "How many days can you plan for?",
-    answer: "From short 1-day trips to extended multi-day vacations.",
+    question: "Can attractions be added to my itinerary?",
+    answer: "Yes. We seamlessly include them in your travel plan.",
   },
   {
-    question: "Do you include stays, transport, and activities?",
-    answer: "Yes. Everything can be included in one seamless plan.",
-  },
-  {
-    question: "Is itinerary planning free?",
-    answer:
-      "Initial planning assistance is free. Charges apply only if bookings are confirmed.",
-  },
-  {
-    question: "Can I modify the itinerary later?",
-    answer: "Yes. You can request changes before final confirmation.",
-  },
-  {
-    question: "Who will assist me during the trip?",
-    answer: "Our local Munnar team will assist you throughout your journey.",
+    question: "Do you update attraction information regularly?",
+    answer: "Yes. Timings, access, and conditions are kept up to date.",
   },
 ];
 
-const ItnearyFaq = () => {
+const NearByAttractionsFaq = () => {
   const [activeIndex, setActiveIndex] = useState(null);
 
   const toggleAccordion = (index) => {
@@ -49,7 +49,7 @@ const ItnearyFaq = () => {
         {accordianData.map((item, index) => (
           <div
             key={index}
-            className=" rounded-xl  p-4 cursor-pointer transition-all duration-300"
+            className="rounded-xl p-4 cursor-pointer transition-all duration-300"
           >
             {/* Question */}
             <div
@@ -58,7 +58,7 @@ const ItnearyFaq = () => {
               } pb-2 border-gray-300`}
               onClick={() => toggleAccordion(index)}
             >
-              <h2 className=" text-md md:text-xl text-[#333333] md:font-semibold max-sm:w-[80%] ">
+              <h2 className="text-md md:text-xl text-[#333333] md:font-semibold max-sm:w-[80%]">
                 {item.question}
               </h2>
               <span className="w-8 h-8 bg-[#eeeeee] rounded-full cursor-pointer flex items-center justify-center">
@@ -85,4 +85,4 @@ const ItnearyFaq = () => {
   );
 };
 
-export default ItnearyFaq;
+export default NearByAttractionsFaq;

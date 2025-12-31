@@ -3,36 +3,41 @@ import React, { useState } from "react";
 import Image from "next/image";
 import plus from "../assets/plus.svg";
 import minus from "../assets/minus.svg";
+
 const accordianData = [
   {
-    question: "Is the itinerary fully personalized?",
+    question: "Are all hotels and stays verified?",
     answer:
-      "Yes. We design itineraries based on your dates, interests, and travel style.",
+      "Yes. All listed stays are personally verified by our team or trusted local partners.",
   },
   {
-    question: "How many days can you plan for?",
-    answer: "From short 1-day trips to extended multi-day vacations.",
-  },
-  {
-    question: "Do you include stays, transport, and activities?",
-    answer: "Yes. Everything can be included in one seamless plan.",
-  },
-  {
-    question: "Is itinerary planning free?",
+    question: "Can I choose stays based on location in Munnar?",
     answer:
-      "Initial planning assistance is free. Charges apply only if bookings are confirmed.",
+      "Yes. You can filter stays by areas like Munnar Town, Chinnakanal, Devikulam, Suryanelli, and more.",
   },
   {
-    question: "Can I modify the itinerary later?",
-    answer: "Yes. You can request changes before final confirmation.",
+    question: "Do you list homestays, treehouses, and eco stays?",
+    answer:
+      "Absolutely. We feature homestays, treehouses, eco cottages, tents, and unique stays.",
   },
   {
-    question: "Who will assist me during the trip?",
-    answer: "Our local Munnar team will assist you throughout your journey.",
+    question: "Are prices transparent?",
+    answer:
+      "Yes. No hidden charges. Final price will be clearly shared before confirmation.",
+  },
+  {
+    question: "Can I cancel or change my stay booking?",
+    answer:
+      "Yes, as per the property’s cancellation policy. We’ll inform you in advance.",
+  },
+  {
+    question: "Is local support available during my stay?",
+    answer:
+      "Yes. Our Exploring Munnar support team is available throughout your trip.",
   },
 ];
 
-const ItnearyFaq = () => {
+const HotelsFaq = () => {
   const [activeIndex, setActiveIndex] = useState(null);
 
   const toggleAccordion = (index) => {
@@ -43,13 +48,13 @@ const ItnearyFaq = () => {
     <section className="mt-14 md:mx-10 mx-4">
       <h1 className="font-semibold text-lg md:text-3xl mb-6">
         Got Questions? We've Got Answers
-      </h1>
+              </h1>
 
       <div className="max-sm:space-y-2 space-y-4">
         {accordianData.map((item, index) => (
           <div
             key={index}
-            className=" rounded-xl  p-4 cursor-pointer transition-all duration-300"
+            className="rounded-xl p-4 cursor-pointer transition-all duration-300"
           >
             {/* Question */}
             <div
@@ -58,7 +63,7 @@ const ItnearyFaq = () => {
               } pb-2 border-gray-300`}
               onClick={() => toggleAccordion(index)}
             >
-              <h2 className=" text-md md:text-xl text-[#333333] md:font-semibold max-sm:w-[80%] ">
+              <h2 className="text-md md:text-xl text-[#333333] md:font-semibold max-sm:w-[80%]">
                 {item.question}
               </h2>
               <span className="w-8 h-8 bg-[#eeeeee] rounded-full cursor-pointer flex items-center justify-center">
@@ -85,4 +90,4 @@ const ItnearyFaq = () => {
   );
 };
 
-export default ItnearyFaq;
+export default HotelsFaq;

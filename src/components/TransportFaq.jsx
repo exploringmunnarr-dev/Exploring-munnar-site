@@ -3,36 +3,40 @@ import React, { useState } from "react";
 import Image from "next/image";
 import plus from "../assets/plus.svg";
 import minus from "../assets/minus.svg";
+
 const accordianData = [
   {
-    question: "Is the itinerary fully personalized?",
+    question: "What transport options are available in Munnar?",
     answer:
-      "Yes. We design itineraries based on your dates, interests, and travel style.",
+      "Cabs, self-drive cars, bike rentals, and local buses are available.",
   },
   {
-    question: "How many days can you plan for?",
-    answer: "From short 1-day trips to extended multi-day vacations.",
-  },
-  {
-    question: "Do you include stays, transport, and activities?",
-    answer: "Yes. Everything can be included in one seamless plan.",
-  },
-  {
-    question: "Is itinerary planning free?",
+    question: "Are drivers local and experienced?",
     answer:
-      "Initial planning assistance is free. Charges apply only if bookings are confirmed.",
+      "Yes. Our drivers are locals who know Munnar’s terrain and routes well.",
   },
   {
-    question: "Can I modify the itinerary later?",
-    answer: "Yes. You can request changes before final confirmation.",
+    question: "Can I book transport in advance?",
+    answer:
+      "Yes. Advance booking is recommended, especially during weekends and holidays.",
   },
   {
-    question: "Who will assist me during the trip?",
-    answer: "Our local Munnar team will assist you throughout your journey.",
+    question: "Do you provide airport and railway station pickups?",
+    answer:
+      "Yes. We offer airport, railway, and intercity pickup & drop services.",
+  },
+  {
+    question: "Are transport prices fixed?",
+    answer:
+      "Prices depend on distance, vehicle type, and duration. No hidden costs.",
+  },
+  {
+    question: "Is customer support available during the journey?",
+    answer: "Yes. Our support team is reachable throughout your travel.",
   },
 ];
 
-const ItnearyFaq = () => {
+const TransportFaq = () => {
   const [activeIndex, setActiveIndex] = useState(null);
 
   const toggleAccordion = (index) => {
@@ -49,7 +53,7 @@ const ItnearyFaq = () => {
         {accordianData.map((item, index) => (
           <div
             key={index}
-            className=" rounded-xl  p-4 cursor-pointer transition-all duration-300"
+            className="rounded-xl p-4 cursor-pointer transition-all duration-300"
           >
             {/* Question */}
             <div
@@ -58,7 +62,7 @@ const ItnearyFaq = () => {
               } pb-2 border-gray-300`}
               onClick={() => toggleAccordion(index)}
             >
-              <h2 className=" text-md md:text-xl text-[#333333] md:font-semibold max-sm:w-[80%] ">
+              <h2 className="text-md md:text-xl text-[#333333] md:font-semibold max-sm:w-[80%]">
                 {item.question}
               </h2>
               <span className="w-8 h-8 bg-[#eeeeee] rounded-full cursor-pointer flex items-center justify-center">
@@ -85,4 +89,4 @@ const ItnearyFaq = () => {
   );
 };
 
-export default ItnearyFaq;
+export default TransportFaq;

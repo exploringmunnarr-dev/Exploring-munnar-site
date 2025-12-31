@@ -7,9 +7,16 @@ import Navbar from "@/components/Navbar";
 import SubCardNav from "@/components/SubCardNav";
 import SubNavbar from "@/components/SubNavbar";
 import Testimonials from "@/components/Testimonials";
+import TransportFaq from "@/components/TransportFaq";
 import TransportFormComponent from "@/components/TransportFormComponent";
 import WhyTravelerChooseSection from "@/components/WhyTravelerChooseSection";
 import React from "react";
+
+export const metadata = {
+  title: "Munnar Cab Services – Airport, Local & Outstation Rides",
+  description:
+    "Book reliable cab services in Munnar for sightseeing, airport pickup, and outstation travel. Clean cars, expert drivers, and best prices.",
+};
 
 const page = () => {
   return (
@@ -30,7 +37,8 @@ const page = () => {
       <TransportFormComponent />
       <BusTimeTable />
       <Testimonials />
-      <ItnearyFaq />
+      {/* <ItnearyFaq /> */}
+      <TransportFaq />
       <Footer />
       <div className="tab-container w-full fixed bottom-0 z-100 md:hidden">
         <MobileTab />

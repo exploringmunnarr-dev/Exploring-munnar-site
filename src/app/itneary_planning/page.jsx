@@ -1,4 +1,4 @@
-"use client";
+
 import Footer from "@/components/Footer";
 import ItnearyFaq from "@/components/ItnearyFaq";
 import ItnearyFormContainer from "@/components/ItnearyFormContainer";
@@ -7,6 +7,12 @@ import MobileTab from "@/components/MobileTab";
 import Navbar from "@/components/Navbar";
 import { FormDataProvider } from "@/context/FormProvider";
 import React from "react";
+
+export const metadata = {
+  title: "Munnar Itinerary Planner – 1 to 4 Day Trip Plans",
+  description:
+    "Create your perfect Munnar itinerary with top attractions, routes, travel timings, and expert recommendations tailored to your schedule.",
+};
 
 const page = () => {
   return (

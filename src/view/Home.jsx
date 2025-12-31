@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import React from "react";
 import Navbar from "@/components/Navbar";
 import GetAroundSection from "@/components/GetAroundSection";
@@ -10,10 +10,15 @@ import GuestGallerySection from "@/components/GuestGallerySection";
 import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
 import HomeHero from "@/components/HomeHero";
-import { useState } from "react";
 import MobileTab from "@/components/MobileTab";
 import PromotionBanner from "@/components/PromotionBanner";
 import TopAttractions from "@/components/TopAttractions";
+
+export const metadata = {
+  title: "Explore Munnar | Travel & Tourism",
+  description:
+    "Discover Munnar attractions, hotels, activities, and custom trip planning in one place.",
+};
 
 const Home = ({ scroll }) => {
   return (

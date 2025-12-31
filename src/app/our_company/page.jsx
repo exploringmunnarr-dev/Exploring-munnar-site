@@ -8,6 +8,12 @@ import WhoWeAreSection from "@/components/WhoWeAreSection";
 import WhyTravelerChooseSection from "@/components/WhyTravelerChooseSection";
 import React from "react";
 
+export const metadata = {
+  title: "About Exploring Munnar – Trusted Travel & Tourism Partner",
+  description:
+    "Learn about Exploring Munnar, our mission, services, and commitment to offering the best travel experiences in Munnar",
+};
+
 const page = () => {
   return (
     <>

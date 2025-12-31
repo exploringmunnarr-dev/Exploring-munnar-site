@@ -11,6 +11,13 @@ import FindPerfectStay from "@/components/FindPerfectStay";
 import WhyBookOurStay from "@/components/WhyBookOurStay";
 import MobileTab from "@/components/MobileTab";
 import TopRatedHotels from "@/components/TopRatedHotels";
+import HotelsFaq from "@/components/HotelsFaq";
+
+export const metadata = {
+  title: "Best Hotels in Munnar – Resorts, Cottages & Homestays",
+  description:
+    "Find top-rated hotels, resorts, treehouses, and cottages in Munnar. Compare locations, amenities, and reviews to choose the perfect stay.",
+};
 
 const page = () => {
   return (
@@ -24,7 +31,8 @@ const page = () => {
         <WhyBookOurStay />
         <FindPerfectStay />
       </section>
-      <ItnearyFaq />
+      {/* <ItnearyFaq /> */}
+      <HotelsFaq />
       <Footer />
       <div className="tab-container w-full fixed bottom-0 z-100 md:hidden">
         <MobileTab />

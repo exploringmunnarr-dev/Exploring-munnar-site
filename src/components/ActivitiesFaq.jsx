@@ -3,36 +3,41 @@ import React, { useState } from "react";
 import Image from "next/image";
 import plus from "../assets/plus.svg";
 import minus from "../assets/minus.svg";
+
 const accordianData = [
   {
-    question: "Is the itinerary fully personalized?",
+    question: "Are activities suitable for families and kids?",
     answer:
-      "Yes. We design itineraries based on your dates, interests, and travel style.",
+      "Yes. We list activities suitable for families, couples, and adventure lovers.",
   },
   {
-    question: "How many days can you plan for?",
-    answer: "From short 1-day trips to extended multi-day vacations.",
-  },
-  {
-    question: "Do you include stays, transport, and activities?",
-    answer: "Yes. Everything can be included in one seamless plan.",
-  },
-  {
-    question: "Is itinerary planning free?",
+    question: "Do activities require advance booking?",
     answer:
-      "Initial planning assistance is free. Charges apply only if bookings are confirmed.",
+      "Some popular activities do. We recommend booking in advance during peak season.",
   },
   {
-    question: "Can I modify the itinerary later?",
-    answer: "Yes. You can request changes before final confirmation.",
+    question: "Are adventure activities safe?",
+    answer:
+      "Yes. All activities are conducted by trained operators following safety standards.",
   },
   {
-    question: "Who will assist me during the trip?",
-    answer: "Our local Munnar team will assist you throughout your journey.",
+    question: "Can I filter activities by type?",
+    answer:
+      "Yes. You can filter by boating, trekking, zipline, cultural events, wellness, etc.",
+  },
+  {
+    question: "Are activities available all year round?",
+    answer:
+      "Most are seasonal. Availability depends on weather and local conditions.",
+  },
+  {
+    question: "Can I combine activities with my itinerary?",
+    answer:
+      "Yes. We can include activities while planning your personalized itinerary.",
   },
 ];
 
-const ItnearyFaq = () => {
+const ActivitiesFaq = () => {
   const [activeIndex, setActiveIndex] = useState(null);
 
   const toggleAccordion = (index) => {
@@ -42,14 +47,14 @@ const ItnearyFaq = () => {
   return (
     <section className="mt-14 md:mx-10 mx-4">
       <h1 className="font-semibold text-lg md:text-3xl mb-6">
-        Got Questions? We've Got Answers
+        Activities – FAQ
       </h1>
 
       <div className="max-sm:space-y-2 space-y-4">
         {accordianData.map((item, index) => (
           <div
             key={index}
-            className=" rounded-xl  p-4 cursor-pointer transition-all duration-300"
+            className="rounded-xl p-4 cursor-pointer transition-all duration-300"
           >
             {/* Question */}
             <div
@@ -58,7 +63,7 @@ const ItnearyFaq = () => {
               } pb-2 border-gray-300`}
               onClick={() => toggleAccordion(index)}
             >
-              <h2 className=" text-md md:text-xl text-[#333333] md:font-semibold max-sm:w-[80%] ">
+              <h2 className="text-md md:text-xl text-[#333333] md:font-semibold max-sm:w-[80%]">
                 {item.question}
               </h2>
               <span className="w-8 h-8 bg-[#eeeeee] rounded-full cursor-pointer flex items-center justify-center">
@@ -85,4 +90,4 @@ const ItnearyFaq = () => {
   );
 };
 
-export default ItnearyFaq;
+export default ActivitiesFaq;
