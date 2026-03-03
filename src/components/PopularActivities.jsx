@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import a1 from "../assets/a1.svg";
 import a2 from "../assets/a2.svg";
@@ -6,11 +7,19 @@ import a4 from "../assets/a4.svg";
 import l from "../assets/l.svg";
 import Image from "next/image";
 import { Filter, ListFilter } from "lucide-react";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+// import required modules
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 const PopularActivities = ({ setIsResponsiveFilter, isResponsiveFilter }) => {
   return (
     <>
       <section className=" w-[100%]">
-        <header className="">
+        <header className="sticky top-0 z-20">
           <div className="flex items-center justify-between sticky top-0 bg-white ">
             <h1 className="font-semibold text-lg md:text-3xl text-[#333333] flex items-center gap-2">
               Popular activites{" "}
@@ -24,29 +33,83 @@ const PopularActivities = ({ setIsResponsiveFilter, isResponsiveFilter }) => {
               <ListFilter className="text-green-900" />
             </div>
           </div>
-          <h1 className="text-[#333333] mt-2">
+          <h1 className="text-[#333333] mt-2 hidden md:block">
             Discover unique experiences across nature, culture and more
           </h1>
         </header>
-        {/* responsive img container */}
-        <div className="img-container mt-4 relative  md:hidden">
-          <Image src={a2} className="w-full h-[230px] object-cover" />
-          <div className="content-container text-center  text-white absolute z-10 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
-            <h1 className="text-3xl font-semibold mb-2">Zip line</h1>
-            <h1 className="font-semibold mb-2 flex items-center gap-2">
-              <span>
-                <Image src={l} />
-              </span>
-              Panniyarkutty, Munnar
-            </h1>
-            {/* <button
-                    className="text-white bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] 
-                      hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] cursor-pointer w-full rounded-lg py-2 "
-                  >
-                    View details
-                  </button> */}
-          </div>
-          <div className="img-tint absolute top-0 rounded-xl right-0 bottom-0 left-0"></div>
+        {/* responsive img container with carousel */}
+        <div className="mt-4 md:hidden">
+          <Swiper
+            spaceBetween={30}
+            centeredSlides={true}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+            modules={[Autoplay, Pagination, Navigation]}
+            className="mySwiper rounded-xl"
+          >
+            <SwiperSlide>
+              <div className="img-container relative h-[230px]">
+                <Image src={a1} className="w-full h-[100%] object-cover rounded-xl" />
+                <div className="content-container text-center text-white absolute z-10 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+                  <h1 className="text-3xl font-semibold mb-2">Boating</h1>
+                  <h1 className="font-semibold mb-2 flex items-center gap-2 justify-center">
+                    <span>
+                      <Image src={l} />
+                    </span>
+                    Mattupetty Dam, Munnar
+                  </h1>
+                </div>
+                <div className="img-tint absolute top-0 rounded-xl right-0 bottom-0 left-0"></div>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="img-container relative h-[230px]">
+                <Image src={a2} className="w-full h-[100%] object-cover rounded-xl" />
+                <div className="content-container text-center text-white absolute z-10 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+                  <h1 className="text-3xl font-semibold mb-2">Zip line</h1>
+                  <h1 className="font-semibold mb-2 flex items-center gap-2 justify-center">
+                    <span>
+                      <Image src={l} />
+                    </span>
+                    Panniyarkutty, Munnar
+                  </h1>
+                </div>
+                <div className="img-tint absolute top-0 rounded-xl right-0 bottom-0 left-0"></div>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="img-container relative h-[230px]">
+                <Image src={a3} className="w-full h-[100%] object-cover rounded-xl" />
+                <div className="content-container text-center text-white absolute z-10 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+                  <h1 className="text-3xl font-semibold mb-2">Activity 3</h1>
+                  <h1 className="font-semibold mb-2 flex items-center gap-2 justify-center">
+                    <span>
+                      <Image src={l} />
+                    </span>
+                    Munnar
+                  </h1>
+                </div>
+                <div className="img-tint absolute top-0 rounded-xl right-0 bottom-0 left-0"></div>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="img-container relative h-[230px]">
+                <Image src={a4} className="w-full h-[100%] object-cover rounded-xl" />
+                <div className="content-container text-center text-white absolute z-10 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+                  <h1 className="text-3xl font-semibold mb-2">Activity 4</h1>
+                  <h1 className="font-semibold mb-2 flex items-center gap-2 justify-center">
+                    <span>
+                      <Image src={l} />
+                    </span>
+                    Munnar
+                  </h1>
+                </div>
+                <div className="img-tint absolute top-0 rounded-xl right-0 bottom-0 left-0"></div>
+              </div>
+            </SwiperSlide>
+          </Swiper>
         </div>
         <div className="content-container mt-4 w-[100%] hidden md:block ">
           <div className="grid w-[100%] md:grid-cols-4 grid-rows-6 gap-4">

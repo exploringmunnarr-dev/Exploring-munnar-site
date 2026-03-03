@@ -24,8 +24,9 @@ function CustomDropdown({
         {label}
       </label>
       <div
-        className={`w-full border rounded-lg px-3 py-2 flex items-center justify-between cursor-pointer ${value ? "text-black border-gray-400" : "text-gray-400 border-gray-300"
-          } ${error ? "border-red-500" : ""}`}
+        className={`w-full border rounded-lg px-3 py-2 flex items-center justify-between cursor-pointer ${
+          value ? "text-black border-gray-400" : "text-gray-400 border-gray-300"
+        } ${error ? "border-red-500" : ""}`}
         onClick={() => setOpen(!open)}
       >
         <span>{value || placeholder}</span>
@@ -38,8 +39,9 @@ function CustomDropdown({
           {options.map((opt, i) => (
             <li
               key={i}
-              className={`px-3 py-2 cursor-pointer hover:bg-[#114422] hover:text-white ${value === opt ? "bg-[#114422] text-white" : "text-black"
-                }`}
+              className={`px-3 py-2 cursor-pointer hover:bg-[#114422] hover:text-white ${
+                value === opt ? "bg-[#114422] text-white" : "text-black"
+              }`}
               onClick={() => {
                 onChange(opt);
                 setOpen(false);
@@ -62,14 +64,13 @@ export default function CabBookingLayout() {
   const [mobile, setMobile] = useState("");
   const [passengers, setPassengers] = useState("");
   const [selectedVehicle, setSelectedVehicle] = useState("");
-  const [isModal, setIsModal] = useState(false)
+  const [isModal, setIsModal] = useState(false);
 
   // Error states
   const [errors, setErrors] = useState({});
 
-
   function onClose() {
-    window.location.reload()
+    window.location.reload();
   }
 
   const handleSubmit = async (e) => {
@@ -110,7 +111,6 @@ export default function CabBookingLayout() {
       vehicleType: selectedVehicle,
     };
 
-
     try {
       const response = await axios.post(
         `https://munnar-backend.onrender.com/api/cab-booking`,
@@ -123,12 +123,12 @@ export default function CabBookingLayout() {
           mobileNumber: mobile,
           noOfPassengers: passengers,
           vehicleType: selectedVehicle,
-        }
+        },
       );
-      setIsModal(true)
+      setIsModal(true);
     } catch (err) {
       console.error("error occred while posting cab booking form : ", err);
-      setIsModal(false)
+      setIsModal(false);
     }
   };
 
@@ -186,8 +186,9 @@ export default function CabBookingLayout() {
                 type="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-                className={`w-full border rounded-lg pl-3  py-2 outline-none text-black ${errors.date ? "border-red-500" : "border-gray-300"
-                  }`}
+                className={`w-full border rounded-lg pl-3  py-2 outline-none text-black ${
+                  errors.date ? "border-red-500" : "border-gray-300"
+                }`}
               />
               {errors.date && (
                 <p className="text-red-500 text-xs mt-1">{errors.date}</p>
@@ -208,8 +209,9 @@ export default function CabBookingLayout() {
                 type="time"
                 value={time}
                 onChange={(e) => setTime(e.target.value)}
-                className={`w-full border rounded-lg pl-3  py-2 outline-none text-black ${errors.time ? "border-red-500" : "border-gray-300"
-                  }`}
+                className={`w-full border rounded-lg pl-3  py-2 outline-none text-black ${
+                  errors.time ? "border-red-500" : "border-gray-300"
+                }`}
               />
               {errors.time && (
                 <p className="text-red-500 text-xs mt-1">{errors.time}</p>
@@ -235,8 +237,9 @@ export default function CabBookingLayout() {
                 onChange={(e) => setMobile(e.target.value)}
                 pattern="^\+?\d{10,15}$"
                 placeholder="Eg:+91 55555 55555"
-                className={`w-full border rounded-lg pl-3 pr-10 py-2 outline-none placeholder-gray-400 text-black ${errors.mobile ? "border-red-500" : "border-gray-300"
-                  }`}
+                className={`w-full border rounded-lg pl-3 pr-10 py-2 outline-none placeholder-gray-400 text-black ${
+                  errors.mobile ? "border-red-500" : "border-gray-300"
+                }`}
               />
               {errors.mobile && (
                 <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>
@@ -259,8 +262,9 @@ export default function CabBookingLayout() {
                 onChange={(e) => setPassengers(e.target.value)}
                 min="1"
                 placeholder="Enter number of passengers"
-                className={`w-full border rounded-lg pl-3 pr-4 py-2 outline-none placeholder-gray-400 text-black ${errors.passengers ? "border-red-500" : "border-gray-300"
-                  }`}
+                className={`w-full border rounded-lg pl-3 pr-4 py-2 outline-none placeholder-gray-400 text-black ${
+                  errors.passengers ? "border-red-500" : "border-gray-300"
+                }`}
               />
               {errors.passengers && (
                 <p className="text-red-500 text-xs mt-1">{errors.passengers}</p>
@@ -279,10 +283,11 @@ export default function CabBookingLayout() {
                 <div
                   key={type}
                   onClick={() => setSelectedVehicle(type)}
-                  className={`flex flex-col items-center justify-center border rounded-lg py-4 cursor-pointer transition ${isSelected
+                  className={`flex flex-col items-center justify-center border rounded-lg py-4 cursor-pointer transition ${
+                    isSelected
                       ? "bg-[#114422] border-[#114422] text-white"
                       : "bg-gray-50 border-gray-300 text-black"
-                    }`}
+                  }`}
                 >
                   <Image
                     src={`/icons/${type.toLowerCase()}.svg`}
@@ -319,13 +324,15 @@ export default function CabBookingLayout() {
       </div>
 
       {/* Right image */}
-      <div className="relative bg-white rounded-xl shadow-md overflow-hidden flex items-center justify-center w-full h-80 md:h-[400px] lg:h-[550px]">
-        <Image
-          src="/images/munnar.jpg"
-          alt="Munnar"
-          fill
-          className="object-cover"
-        />
+      <div className="relative bg-white rounded-xl  shadow-md overflow-hidden flex items-center justify-center w-full ">
+        <div className="img-container border p-2">
+          <Image
+            src="/images/munnar.jpg"
+            alt="Munnar"
+            fill
+            className="object-cover "
+          />
+        </div>
         <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
           <h2 className="text-center leading-snug">
             <span

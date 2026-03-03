@@ -137,9 +137,9 @@ const BusTimeTable = () => {
           <h1 className="text-xl md:text-3xl font-semibold text-[#333333]">
             Plan your journey with realtime bus schedules
           </h1>
-          <h1 className="text-[#777777] mt-2 mb-8">
+          {/* <h1 className="text-[#777777] mt-2 mb-8">
             Select your favourite Munnar spot and browse available stays.
-          </h1>
+          </h1> */}
         </header>
         {/* ------------------------------- root container for laptop and above screens  --------------------------------  */}
         <div className="root-container hidden  mt-4 bg-[#EEEEEE] md:grid sm:grid-cols-2 md:grid-cols-2 gap-1 md:gap-3 md:p-4 rounded-lg">

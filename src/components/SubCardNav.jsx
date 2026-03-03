@@ -10,6 +10,7 @@ import active_activity from "../assets/active_activity.svg";
 import active_itneary from "../assets/active_itneary.svg";
 import active_live_information from "../assets/active_live_information.svg";
 import Image from "next/image";
+import itnearyIc from '../assets/itnearyIc.svg';
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 const data = [
@@ -39,7 +40,7 @@ const data = [
   },
   {
     title: "Itneary planning",
-    icon: "",
+    icon: itnearyIc,
     activeIcon: active_itneary,
     location: "itneary_planning",
   },
