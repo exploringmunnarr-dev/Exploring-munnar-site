@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import logo from "../assets/logo.svg";
 import loginbg from "../assets/login2.avif";
 import Image from "next/image";
+import logingImg from '../assets/loginImg.jpg';
 import { Eye, EyeOff, LogIn } from "lucide-react";
 import SignupForm from "./SignupForm";
 const LoginModal = ({ setShowLoginForm }) => {
@@ -40,7 +41,7 @@ const LoginModal = ({ setShowLoginForm }) => {
         className="login-container p-6 rounded-xl flex items-center gap-6 w-[90%] md:w-[70%] md:h-[600px] fixed z-[200]  top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%]"
       >
         <Image
-          src={loginbg}
+          src={logingImg}
           className="w-[60%] h-[100%] object-cover rounded-xl hidden md:block"
         />
         <div className="w-[100%] md:w-[40%]">
