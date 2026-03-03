@@ -384,7 +384,7 @@ export default function SelfDriveLayout() {
       </div>
 
       {/* Right image */}
-      <div className="relative bg-white rounded-xl shadow-md overflow-hidden flex items-center justify-center w-full h-80 md:h-[400px] lg:h-[550px]">
+      <div className="relative bg-white rounded-xl shadow-md overflow-hidden flex items-center justify-center w-full ">
         <Image
           src="/images/munnar.jpg"
           alt="Munnar"

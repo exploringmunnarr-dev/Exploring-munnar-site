@@ -4,6 +4,7 @@ import linkedin from '../assets/linkedin.svg'
 import twitter from '../assets/twitter.svg'
 import pinterest from '../assets/pinterest.svg'
 import Image from 'next/image'
+import Link from 'next/link'
 const Footer = () => {
     return (
         <>
@@ -14,18 +15,19 @@ const Footer = () => {
                         <div className="list-container mt-6  w-[70%]">
                             <h1>Discover the beauty of Munnar with curated stays,local experiences, and real-time travel insights.  </h1>
                             <div className="icon-container gap-3 items-center mt-6 hidden md:flex">
-                                <Image src={fb} alt='social_media_icon' className='w-5 h-5'/>
-                                <Image src={twitter} alt='social_media_icon' className='w-5 h-5'/>
-                                <Image src={linkedin} alt='social_media_icon' className='w-5 h-5'/>
-                                <Image src={pinterest} alt='social_media_icon' className='w-5 h-5'/>
+                                <Image src={fb} alt='social_media_icon' className='w-5 h-5' />
+                                <Image src={twitter} alt='social_media_icon' className='w-5 h-5' />
+                                <Image src={linkedin} alt='social_media_icon' className='w-5 h-5' />
+                                {/* <Image src={pinterest} alt='social_media_icon' className='w-5 h-5'/> */}
                             </div>
                         </div>
                     </div>
                     <div className="container-2">
                         <h1 className='font-medium text-2xl'>Company</h1>
                         <div className="list-container mt-6 ">
-                            <h1>About Us </h1>
-                            <h1>Contact</h1>
+                            {/* <h1>About Us </h1> */}
+                            <Link href="/our_company" className="">About Us</Link> <br />
+                            <Link href="/contact_us" className="">Contact Us</Link>
                             <h1>Our Blogs </h1>
                             <h1>Careers </h1>
                             <h1>FAQs </h1>
