@@ -19,18 +19,20 @@ const PopularActivities = ({ setIsResponsiveFilter, isResponsiveFilter }) => {
   return (
     <>
       <section className=" w-[100%]">
-        <header className="sticky top-0 z-20">
-          <div className="flex items-center justify-between sticky top-0 bg-white ">
+        <header className="">
+          <div className="flex items-center justify-between  bg-white ">
             <h1 className="font-semibold text-lg md:text-3xl text-[#333333] flex items-center gap-2">
               Popular activites{" "}
               <span className="hidden md:block">of munnar</span>
             </h1>
-            <div
-              onClick={() => setIsResponsiveFilter(!isResponsiveFilter)}
-              className="filter-btn md:hidden cursor-pointer flex items-center gap-2 border border-green-900 px-2 py-1 rounded-md"
-            >
-              <span className="text-green-900">Filter</span>
-              <ListFilter className="text-green-900" />
+            <div className="filter-container fixed top-20 right-4  z-20">
+              <div
+                onClick={() => setIsResponsiveFilter(!isResponsiveFilter)}
+                className="filter-btn md:hidden cursor-pointer bg-white  flex items-center gap-2 border border-green-900 px-2 py-1 rounded-md"
+              >
+                <span className="text-green-900">Filter</span>
+                <ListFilter className="text-green-900" />
+              </div>
             </div>
           </div>
           <h1 className="text-[#333333] mt-2 hidden md:block">
