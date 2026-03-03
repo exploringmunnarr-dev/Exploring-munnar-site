@@ -116,7 +116,7 @@ const Page = () => {
         </div>
       </header>
       <div className="main-container grid grid-cols-12 gap-6 mx-4 md:mx-10">
-        <div className="filter-container col-span-3 mt-4 sticky h-fit top-[80px]  bg-white hidden md:block">
+        <div className="filter-container  col-span-3 mt-4 sticky h-fit top-[80px]  bg-white hidden md:block">
           <h1 className="text-[#383838] text-2xl font-semibold">Filters</h1>
           <div className="sort-container mt-3">
             <div className="header border-b border-[#333333a3] pb-2 flex items-center gap-2 justify-between">
