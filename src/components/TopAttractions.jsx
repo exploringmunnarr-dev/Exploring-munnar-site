@@ -74,81 +74,170 @@ const TopAttractions = () => {
         title: "Anayirangal Dam",
         subtitle: "4 km from the route",
         image: anayirangalDam,
+        link: "/anayirangal-dam",
       },
       {
         title: "Lockhart Gap Viewpoint",
         subtitle: "4 km from the route",
         image: lockhartgapviewpoint,
+        link: "/lockhart-gap-viewpoint",
       },
       {
         title: "Tea Museum (TATA Tea Museum – Nallathanni)",
         subtitle: "4 km from the route",
         image: tataTeaMuseum,
+        link: "/tata-tea-museum-nallathanni",
       },
       {
         title: "Rose Garden",
         subtitle: "4 km from the route",
         image: roseGarden,
+        link: "/rose-garden-munnar",
       },
       {
         title: "Chithirapuram Viewpoint",
         subtitle: "4 km from the route",
         image: chitrapuram,
+        link: "/chithirapuram-viewpoint",
       },
       {
         title: "attraction testing",
         subtitle: "4 km from the route",
         image: attractiontesting1,
-      link: "/attraction-testing",
+        link: "/attraction-testing",
       },
     ],
     settwo: [
       {
-        title: "Nature Trail A",
-        subtitle: "1.5 km from the route",
-        image: mtp3,
+        title: "Aliyar Dam",
+        subtitle: "Scenic stop on Coimbatore to Munnar route",
+        image: cbeToMunnar,
+        link: "/aliyar-dam",
       },
       {
-        title: "Nature Trail B",
-        subtitle: "1.5 km from the route",
-        image: mtp4,
+        title: "Monkey Falls",
+        subtitle: "Refreshing waterfall on Coimbatore route",
+        image: cbeToMunnar,
+        link: "/monkey-falls",
+      },
+      {
+        title: "Loam's View Point",
+        subtitle: "Scenic stop on Valparai Ghat Road",
+        image: cbeToMunnar,
+        link: "/loams-view-point",
+      },
+      {
+        title: "Chinnar Wildlife Sanctuary",
+        subtitle: "Wildlife sanctuary with trekking",
+        image: cbeToMunnar,
+        link: "/chinnar-wildlife-sanctuary",
+      },
+      {
+        title: "Marayoor Sandalwood Forest",
+        subtitle: "Unique sandalwood forest attraction",
+        image: cbeToMunnar,
+        link: "/marayoor-sandalwood-forest",
+      },
+      {
+        title: "Lakkam Waterfalls",
+        subtitle: "Beautiful waterfall near Munnar",
+        image: cbeToMunnar,
+        link: "/lakkam-waterfalls",
+      },
+      {
+        title: "Pambar River Viewpoints",
+        subtitle: "Scenic nature stops on Coimbatore route",
+        image: cbeToMunnar,
+        link: "/pambar-river-viewpoints",
       },
     ],
     setthree: [
       {
-        title: "Pond & Viewpoint",
-        subtitle: "3 km from the route",
-        image: mtp5,
+        title: "Cheeyappara Waterfalls",
+        subtitle: "Top scenic stop on Ernakulam route",
+        image: ernakulamToMunnar,
+        link: "/cheeyappara-waterfalls",
       },
       {
-        title: "Pond & Viewpoint",
-        subtitle: "3 km from the route",
-        image: mtp5,
+        title: "Valara Waterfalls",
+        subtitle: "Twin waterfalls on Ernakulam route",
+        image: ernakulamToMunnar,
+        link: "/valara-waterfalls",
       },
       {
-        title: "Pond & Viewpoint",
-        subtitle: "3 km from the route",
-        image: mtp5,
+        title: "Neriamangalam Bridge Viewpoint",
+        subtitle: "Gateway to Munnar",
+        image: ernakulamToMunnar,
+        link: "/neriamangalam-bridge-viewpoint",
       },
       {
-        title: "Pond & Viewpoint",
-        subtitle: "3 km from the route",
-        image: mtp5,
+        title: "Kallar Waterfalls",
+        subtitle: "Refreshing stop on Ernakulam route",
+        image: ernakulamToMunnar,
+        link: "/kallar-waterfalls",
       },
       {
-        title: "Pond & Viewpoint",
-        subtitle: "3 km from the route",
-        image: mtp5,
+        title: "Karadippara Viewpoint",
+        subtitle: "Panoramic stop on Ernakulam route",
+        image: ernakulamToMunnar,
+        link: "/karadippara-viewpoint",
       },
       {
-        title: "Pond & Viewpoint",
-        subtitle: "3 km from the route",
-        image: mtp5,
+        title: "Anachal / Dreamland Adventure Park",
+        subtitle: "Fun stop on Ernakulam route",
+        image: ernakulamToMunnar,
+        link: "/anachal-dreamland-adventure-park",
+      },
+      {
+        title: "Attukad Waterfalls",
+        subtitle: "Scenic nature spot near Munnar",
+        image: ernakulamToMunnar,
+        link: "/attukad-waterfalls",
       },
     ],
     setfour: [
-      { title: "Tea Estate", subtitle: "5 km from the route", image: mtp6 },
-      { title: "Water Fall", subtitle: "6 km from the route", image: mtp7 },
+      {
+        title: "Ramakkalmedu",
+        subtitle: "Scenic viewpoint on Thekady route",
+        image: thekkadiToMunnar,
+        link: "/ramakkalmedu",
+      },
+      {
+        title: "Kalvari Mount (Calvary Mount)",
+        subtitle: "Panoramic stop on Thekady route",
+        image: thekkadiToMunnar,
+        link: "/kalvari-mount",
+      },
+      {
+        title: "Idukki Arch Dam Viewpoint",
+        subtitle: "Iconic stop on Thekady route",
+        image: thekkadiToMunnar,
+        link: "/idukki-arch-dam-viewpoint",
+      },
+      {
+        title: "Panchalimedu",
+        subtitle: "Misty hilltop on Thekady route",
+        image: thekkadiToMunnar,
+        link: "/panchalimedu",
+      },
+      {
+        title: "Parunthumpara Viewpoint",
+        subtitle: "Best hill view on Thekady route",
+        image: thekkadiToMunnar,
+        link: "/parunthumpara-viewpoint",
+      },
+      {
+        title: "Kuttikkanam Viewpoint",
+        subtitle: "Scenic stop on Thekady route",
+        image: thekkadiToMunnar,
+        link: "/kuttikkanam-viewpoint",
+      },
+      {
+        title: "Vagamon Pine Forest",
+        subtitle: "Nature spot on Thekady route",
+        image: thekkadiToMunnar,
+        link: "/vagamon-pine-forest",
+      },
     ],
   };
 
@@ -197,9 +286,8 @@ const TopAttractions = () => {
                       prev === item.set ? null : item.set
                     );
                 }}
-                className={`card relative w-full h-[60px] md:h-[160px] rounded-xl overflow-hidden cursor-pointer transition-all duration-300 ${
-                  isSelected ? "bg-[#114422]" : ""
-                }`}
+                className={`card relative w-full h-[60px] md:h-[160px] rounded-xl overflow-hidden cursor-pointer transition-all duration-300 ${isSelected ? "bg-[#114422]" : ""
+                  }`}
               >
                 {!isSelected && (
                   <>
