@@ -94,11 +94,11 @@ export default function GetAroundSection() {
         </div>
 
         {/* Cards Grid */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {transports.map((item, index) => (
             <div key={index} className="bg-[#EEEEEE] rounded-xl p-4">
               {/* Image */}
-              <div className="h-40 w-[100%] relative">
+              <div className="max-sm:h-20 sm:h-40 w-[100%] relative">
                 <Image
                   src={item.image}
                   alt={item.title}
@@ -110,7 +110,7 @@ export default function GetAroundSection() {
                     width={100}
                     height={100}
                     alt="car_icon"
-                    className="w-[40px] h-[40px]"
+                    className="max-sm:w-4 max-sm:h-4 sm:w-[40px] h-[40px]"
                   />
                 </div>
               </div>
@@ -119,10 +119,10 @@ export default function GetAroundSection() {
               <div className=" flex flex-col flex-grow mt-2">
                 {/* Icon Badge */}
 
-                <h3 className="text-lg font-semibold text-center mt-3">
+                <h3 className="max-sm:text-md text-lg font-semibold text-center mt-3">
                   {item.title}
                 </h3>
-                <p className="text-[#7e7e7e] max-sm:text-sm text-center mt-2 flex-grow">
+                <p className="text-[#7e7e7e] max-sm:text-xs text-center mt-2 flex-grow">
                   {item.description}
                 </p>
 
