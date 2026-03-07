@@ -13,7 +13,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Sidebar from "./Sidebar";
 import { useContext, useState, useEffect } from "react";
-import { X } from "lucide-react";
+import { CloudSun, X } from "lucide-react";
 import LoginModal from "./LoginModal";
 import SubNavbar from "./SubNavbar";
 const data = [
@@ -35,6 +35,8 @@ export default function Navbar() {
   const pathname = usePathname();
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [scrollY, setScrollY] = useState(0);
+  const [temperature, setTemperature] = useState(null);
+  const [weatherLoading, setWeatherLoading] = useState(false);
 
   // ( (pathname)
   useEffect(() => {
@@ -47,6 +49,29 @@ export default function Navbar() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+  }, []);
+
+  // Fetch weather data for Munnar
+  useEffect(() => {
+    const fetchWeather = async () => {
+      try {
+        setWeatherLoading(true);
+        const response = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?lat=10.0447&lon=77.0593&appid=fa326c0afa6b076f26ef0c3e3dede571&units=metric`
+        );
+        const data = await response.json();
+        console.log("Weather data:", data);
+        if (data.main) {
+          setTemperature(Math.round(data.main.temp));
+        }
+        setWeatherLoading(false);
+      } catch (error) {
+        console.error("Error fetching weather:", error);
+        setWeatherLoading(false);
+      }
+    };
+
+    fetchWeather();
   }, []);
 
   return (
@@ -95,11 +120,14 @@ export default function Navbar() {
           </nav>
 
           <div className="flex items-center space-x-4 ">
-            <Image src={heart} className="md:hidden" />
-            {/* Favourites */}
+            {/* <Image src={heart} className="md:hidden" /> */}
+
+            {/* weather section */}
             <div className="hidden items-center space-x-2 cursor-pointer md:flex">
-              <Image src={heart} alt="icon" />
-              <span className="text-lg font-medium">Favourites</span>
+              <CloudSun />
+              <span className="weather-data text-lg font-medium">
+                {weatherLoading ? "Loading..." : temperature ? `${temperature}°C` : "N/A"}
+              </span>
             </div>
 
             {/* Profile Avatar */}
@@ -166,11 +194,12 @@ export default function Navbar() {
               })}
             </nav>
             <div className="flex items-center space-x-1 ">
-              <Image src={heart} className="md:hidden" />
-              {/* Favourites */}
-              <div className="hidden items-center cursor-pointer md:flex">
-                <Image src={heart} alt="icon" />
-                {/* <span className="text-lg font-medium">Favourites</span> */}
+              {/* Weather */}
+              <div className="hidden items-center space-x-2 cursor-pointer md:flex">
+                <CloudSun />
+                <span className="text-lg font-medium">
+                  {weatherLoading ? "Loading..." : temperature ? `${temperature}°C` : "N/A"}
+                </span>
               </div>
 
               {/* Profile Avatar */}

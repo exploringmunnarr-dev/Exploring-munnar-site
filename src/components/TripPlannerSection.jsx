@@ -40,7 +40,7 @@ const TripPlannerSection = () => {
   };
   return (
     <>
-      <section className="bg-[#eeeeee] mx-4 md:mx-10 mt-8 md:mt-14 md:flex items-center gap-5 justify-between p-2 md:p-6 rounded-xl">
+      <section className="bg-[#eeeeee] mx-4 md:mx-10 mt-8 md:mt-14 flex flex-col-reverse md:flex-row items-center gap-5 justify-between p-2 md:p-6 rounded-xl">
         <div className="first-container w-[100%] md:w-[60%]">
           <section className="">
             <div className="w-[100%] md:w-[94%]">
@@ -86,28 +86,47 @@ const TripPlannerSection = () => {
             </div>
           </section>
         </div>
-        <div className="second-container mt-4 w-[100%] md:w-[40%] ">
-          <div className="first-section md:flex gap-2 ">
-            <div className="img-container md:w-[400px] overflow-hidden">
-              <Image src={img1} className="h-[95%] w-[100%]" />
+        <div className="second-container mt-0 md:mt-4 w-[100%] md:w-[40%]">
+          {/* Mobile Bento Grid */}
+          <div className="grid grid-cols-2 gap-2 md:hidden">
+            <div className="col-span-1 row-span-2 overflow-hidden rounded-xl">
+              <Image src={img1} className="w-[100%] h-[100%] object-cover" />
             </div>
-            <div className="second-img-section mt-2 md:mt-0 space-y-3">
-              <div className="img-container h-[46%]">
-                <Image
-                  src={img2}
-                  className="w-[100%] md:w-[240px] h-[100%] object-cover rounded-xl"
-                />
-              </div>
-              <div className="img-container h-[46%] ">
-                <Image
-                  src={img3}
-                  className="w-[100%] md:w-[240px]  object-cover rounded-xl h-[100%]"
-                />
-              </div>
+            <div className="col-span-1 overflow-hidden rounded-xl">
+              <Image src={img2} className="w-[100%] h-[100%] object-cover" />
+            </div>
+            <div className="col-span-1 overflow-hidden rounded-xl">
+              <Image src={img3} className="w-[100%] h-[100%] object-cover" />
+            </div>
+            <div className="col-span-2 overflow-hidden rounded-xl">
+              {/* <Image src={img4} className="w-[100%] h-[100%] object-cover" /> */}
             </div>
           </div>
-          <div className="second-section mt-2 md:mt-0 md:ml-2 w-[100%]">
-            <Image src={img4} width={100} className="w-[105%] " />
+
+          {/* Desktop Layout */}
+          <div className="hidden md:block">
+            <div className="first-section md:flex gap-2">
+              <div className="img-container md:w-[400px] overflow-hidden">
+                <Image src={img1} className="h-[95%] w-[100%]" />
+              </div>
+              <div className="second-img-section mt-2 md:mt-0 space-y-3">
+                <div className="img-container h-[46%]">
+                  <Image
+                    src={img2}
+                    className="w-[100%] md:w-[240px] h-[100%] object-cover rounded-xl"
+                  />
+                </div>
+                <div className="img-container h-[46%]">
+                  <Image
+                    src={img3}
+                    className="w-[100%] md:w-[240px] object-cover rounded-xl h-[100%]"
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="second-section mt-2 md:mt-0 md:ml-2 w-[100%]">
+              <Image src={img4} width={100} className="w-[105%]" />
+            </div>
           </div>
         </div>
       </section>
