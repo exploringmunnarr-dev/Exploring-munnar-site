@@ -55,7 +55,8 @@ const SignupForm = ({ setMode }) => {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/auth/signup", {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://munnar-backend.onrender.com';
+      const response = await fetch(`${apiUrl}/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -89,7 +90,8 @@ const SignupForm = ({ setMode }) => {
   // Send OTP
   const sendOTP = async (email) => {
     try {
-      const response = await fetch("/api/auth/email/send-otp", {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://munnar-backend.onrender.com';
+      const response = await fetch(`${apiUrl}/auth/email/send-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -127,7 +129,8 @@ const SignupForm = ({ setMode }) => {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/auth/email/verify", {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://munnar-backend.onrender.com';
+      const response = await fetch(`${apiUrl}/auth/email/verify`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
