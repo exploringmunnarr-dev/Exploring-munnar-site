@@ -21,6 +21,8 @@ const LoginModal = ({ setShowLoginForm }) => {
     newPassword: "",
     confirmPassword: "",
   });
+  const [loginOtpForm, setLoginOtpForm] = useState({ email: "", otp: "" });
+  const [loginData, setLoginData] = useState(null);
 
   const loginModalRef = useRef(null);
 
@@ -76,11 +78,60 @@ const LoginModal = ({ setShowLoginForm }) => {
         return;
       }
 
-      // Store JWT token
-      localStorage.setItem("authToken", data.token);
-      sessionStorage.setItem("user", JSON.stringify(data.user));
+      // Instead of storing token and redirecting immediately, go to OTP verification
+      setLoginData(data);
+      setLoginOtpForm({ email: loginForm.email, otp: "" });
+      setMode("loginOtpVerification");
+      setSuccess("Login successful! Please verify the OTP sent to your email.");
+    } catch (err) {
+      setError(err.message || "An error occurred");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-      setSuccess("Login successful! Redirecting...");
+  // Login OTP Handler
+  const handleLoginOtpSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    if (!loginOtpForm.otp || loginOtpForm.otp.length !== 6) {
+      setError("Please enter a valid 6-digit OTP");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://munnar-backend.onrender.com';
+      const response = await fetch(`${apiUrl}/auth/email/verify`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: loginOtpForm.email,
+          otp: loginOtpForm.otp,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message || "OTP verification failed");
+        setLoading(false);
+        return;
+      }
+
+      const tokenToStore = data.token || loginData?.token;
+      const userToStore = data.user || loginData?.user;
+
+      if (tokenToStore) {
+        localStorage.setItem("authToken", tokenToStore);
+      }
+      if (userToStore) {
+        sessionStorage.setItem("user", JSON.stringify(userToStore));
+      }
+
+      setSuccess("Verification successful! Redirecting...");
       setTimeout(() => {
         setShowLoginForm(false);
         window.location.reload();
@@ -373,6 +424,65 @@ const LoginModal = ({ setShowLoginForm }) => {
           {/* SIGNUP MODE */}
           {mode === "signup" && (
             <SignupForm setMode={setMode} />
+          )}
+
+          {/* LOGIN OTP VERIFICATION MODE */}
+          {mode === "loginOtpVerification" && (
+            <div>
+              <h1 className="text-[#333333] font-semibold text-xl md:text-3xl">
+                Verify Your Email
+              </h1>
+              <p className="text-gray-600 mt-2 text-sm">
+                Enter the 6-digit OTP sent to {loginOtpForm.email}
+              </p>
+
+              {error && (
+                <div className="mt-4 p-3 bg-red-100 border border-red-400 rounded flex items-center gap-2">
+                  <AlertCircle className="w-5 h-5 text-red-600" />
+                  <span className="text-red-700 text-sm">{error}</span>
+                </div>
+              )}
+
+              {success && (
+                <div className="mt-4 p-3 bg-green-100 border border-green-400 rounded flex items-center gap-2">
+                  <LogIn className="w-5 h-5 text-green-600" />
+                  <span className="text-green-700 text-sm">{success}</span>
+                </div>
+              )}
+
+              <form onSubmit={handleLoginOtpSubmit} className="mt-6 space-y-3">
+                <input
+                  type="text"
+                  placeholder="Enter 6-digit OTP"
+                  value={loginOtpForm.otp}
+                  onChange={(e) =>
+                    setLoginOtpForm({
+                      ...loginOtpForm,
+                      otp: e.target.value.replace(/\D/g, "").slice(0, 6),
+                    })
+                  }
+                  maxLength="6"
+                  className="border w-[100%] focus:ring-1 ring-green-900 text-lg text-center tracking-widest outline-none border-gray-400 rounded px-4 py-3 font-mono"
+                  required
+                />
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] disabled:opacity-50 text-white w-full py-3 cursor-pointer rounded text-lg font-medium transition"
+                >
+                  {loading ? "Verifying..." : "Verify OTP"}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setMode("login")}
+                  className="text-gray-600 hover:text-gray-800 text-center w-full text-sm font-medium mt-4"
+                >
+                  Back to Login
+                </button>
+              </form>
+            </div>
           )}
 
           {/* FORGOT PASSWORD MODE */}
