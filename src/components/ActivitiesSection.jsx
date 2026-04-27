@@ -21,7 +21,7 @@ const ActivitiesSection = () => {
             </h1>
           </div>
           <button>
-            <Link href={`/activities`} className="font-semibold text-[#333333] underline hover:text-green-600">
+            <Link href={`/activities`} className=" text-[#333333] underline hover:text-green-600">
               View all
             </Link>
           </button>

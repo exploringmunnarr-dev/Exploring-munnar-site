@@ -123,7 +123,7 @@ const HotelsStayType = () => {
             <button className="custom-prev py-4 flex items-center justify-center rounded bg-[#AF4300] cursor-pointer">
               <Image src={left} alt="Prev" />
             </button>
-            <button className="custom-next px-4 py-4 bg-white flex items-center justify-center rounded cursor-pointer">
+            <button className="custom-next px-4 py-4 bg-white hover:bg-[#AF4300] flex items-center justify-center rounded cursor-pointer">
               <Image src={right} alt="Next" />
             </button>
           </div>

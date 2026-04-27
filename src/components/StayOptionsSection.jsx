@@ -186,7 +186,7 @@ const StayOptionsSection = () => {
               for every kind of traveler.
             </h1>
           </div>
-          <Link href={`/hotels/hotel_listing`} className="font-semibold max-sm:text-[14px]  text-[#333333] underline hover:text-green-700">
+          <Link href={`/hotels/hotel_listing`} className=" max-sm:text-[14px]  text-[#333333] underline hover:text-green-700">
             View all
           </Link>
         </header>
