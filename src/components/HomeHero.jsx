@@ -19,12 +19,12 @@ import SubNavbar from './SubNavbar';
 const HomeHero = () => {
     return (
         <>
-            <div className="mx-2 h-[220px] md:h-auto md:mx-10 mt-2 md:mt-4 md:rounded-3xl relative ">
+            <div className="mx-2 h-[260px]  md:h-[560px] md:mx-10 mt-2 md:mt-4 md:rounded-3xl relative ">
                 <Swiper
                     spaceBetween={30}
                     centeredSlides={true}
                     autoplay={{
-                        delay: 2500,
+                        delay: 4000,
                         disableOnInteraction: false,
                     }}
                     modules={[Autoplay, Pagination, Navigation]}

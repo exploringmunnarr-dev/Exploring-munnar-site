@@ -49,7 +49,7 @@ const Testimonials = () => {
             prevEl: ".prev-btn",
           }}
           autoplay={{
-            delay: 2500, // autoplay speed
+            delay: 4000, // autoplay speed
             disableOnInteraction: false,
           }}
           centeredSlides={true}
@@ -98,8 +98,8 @@ const Testimonials = () => {
 
         {/* Navigation buttons */}
         <div className="absolute bottom-[-40px] left-0 right-0 flex items-center justify-center gap-3 bg-[#EEEEEE] w-fit m-auto py-2 px-3 rounded-lg">
-          <button className="prev-btn cursor-pointer">
-            <Image src={left_arrow} />
+          <button className="prev-btn cursor-pointer hover:bg-[#AF4300] hover:py-4 hover:px-4 hover:text-white rounded-lg">
+            <Image src={left_arrow}  />
           </button>
           <button className="next-btn bg-[#AF4300] text-white py-4 px-4 rounded-lg cursor-pointer">
             <Image src={right_arrow} />

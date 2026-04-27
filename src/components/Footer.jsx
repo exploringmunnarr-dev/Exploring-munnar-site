@@ -29,18 +29,28 @@ const Footer = () => {
                             <Link href="/our_company" className="">About Us</Link> <br />
                             <Link href="/contact_us" className="">Contact Us</Link>
                             <h1>Our Blogs </h1>
-                            <h1>Careers </h1>
                             <h1>FAQs </h1>
                         </div>
                     </div>
                     <div className="container-3">
                         <h1 className='font-medium text-2xl'>Explore</h1>
-                        <div className="list-container mt-6  ">
-                            <h1>Hotels </h1>
-                            <h1>Activities</h1>
-                            <h1>Attractions</h1>
-                            <h1>Transport</h1>
-                            <h1>Travel Packages</h1>
+                        <div className="list-container mt-6 ">
+                            <Link href="/hotels" className="">
+                                <h1 className='mb-1'>Hotels </h1>
+                            </Link>
+                            <Link href="/activities" className="">
+                                <h1>Activities</h1>
+                            </Link>
+                        
+                                <h1 className='mb-1 cursor-pointer'>Attractions</h1>
+                        
+                            <Link href="/transport" className="">
+                                <h1 className='mb-1'>Transport</h1>
+                            </Link>
+                            <Link href="/itneary" className="">
+                            <h1 className='mb-1'>Travel Packages</h1>
+                            </Link>
+
                         </div>
                     </div>
                     <div className="container-4">
@@ -64,7 +74,7 @@ const Footer = () => {
                 </section>
                 <div className="footer-container mt-16 w-[100%] border-t pt-8 border-[#D9D9D9] text-center  text-[#EEEEEE] ">
                     <h1>🌐 www.exploringmunnar.com</h1>
-                    <h1>© 2025 Wexoraa infotech. All rights reserved.</h1>
+                    <h1>© 2026 Wexoraa infotech. All rights reserved.</h1>
                 </div>
             </section>
         </>
