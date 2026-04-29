@@ -19,7 +19,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation, Autoplay } from "swiper/modules";
 import { useData } from "@/context/ThemeContext";
-import Link from "next/link";
 const cardData = [
   { img: hImg1, title: "Tents & Camping Grounds" },
   { img: hImg2, title: "Eco Cottages" },
@@ -73,9 +72,15 @@ const HotelsStayType = () => {
               </p>
             </div>
           </div>
-          <Link href={`/hotels/hotel_listing`} className="text-[#333333] underline cursor-pointer">
+          <span
+            onClick={() => {
+              setStayType([]);
+              window.location.href = '/hotels/hotel_listing';
+            }}
+            className="text-[#333333] underline cursor-pointer"
+          >
             View all
-          </Link>
+          </span>
         </header>
         <div className="relative mt-4">
           <Swiper
