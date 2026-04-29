@@ -14,7 +14,7 @@ export const metadata = {
 };
 
 const page = () => {
- 
+
   return (
     <>
       <Navbar />

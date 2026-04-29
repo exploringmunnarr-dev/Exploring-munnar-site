@@ -1,10 +1,97 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import { Sun } from "lucide-react";
 import sunIcon from "../assets/sunIcon.svg";
 import Image from "next/image";
 import lo from "../assets/lo.svg";
 import sun1 from "../assets/sun1.svg";
+
 const LiveInformationHero = () => {
+  const [weatherData, setWeatherData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  // Fetch weather data from OpenWeatherMap API
+  useEffect(() => {
+    const fetchWeather = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?lat=10.0447&lon=77.0593&appid=fa326c0afa6b076f26ef0c3e3dede571&units=metric`
+        );
+        const data = await response.json();
+        console.log("Weather data:", data);
+        setWeatherData(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching weather:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchWeather();
+  }, []);
+
+  // Update current time every minute
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 60000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  // Format date and time
+  const formatDate = (date) => {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const day = days[date.getDay()];
+    const formattedDate = date.toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric'
+    });
+    return { day, formattedDate };
+  };
+
+  const { day, formattedDate } = formatDate(currentTime);
+
+  // Get weather values with fallbacks
+  const temperature = weatherData?.main ? Math.round(weatherData.main.temp) : '--';
+  const feelsLike = weatherData?.main ? Math.round(weatherData.main.feels_like) : '--';
+  const tempMax = weatherData?.main ? Math.round(weatherData.main.temp_max) : '--';
+  const tempMin = weatherData?.main ? Math.round(weatherData.main.temp_min) : '--';
+  const weatherCondition = weatherData?.weather?.[0]?.main || '--';
+  const weatherDescription = weatherData?.weather?.[0]?.description || '--';
+
+  // Generate hourly forecast (next 6 hours) - using same temperature as approximation
+  const hourlyForecast = [];
+  for (let i = 1; i <= 6; i++) {
+    const hour = new Date();
+    hour.setHours(hour.getHours() + i);
+    hourlyForecast.push({
+      time: hour.toLocaleTimeString('en-US', { hour: 'numeric', hour12: true }),
+      temp: temperature !== '--' ? temperature : '--',
+    });
+  }
+
+  // Calculate sunrise and sunset times
+  const sunrise = weatherData?.sys?.sunrise
+    ? new Date(weatherData.sys.sunrise * 1000)
+    : null;
+  const sunset = weatherData?.sys?.sunset
+    ? new Date(weatherData.sys.sunset * 1000)
+    : null;
+
+  // Calculate day length
+  let dayLength = null;
+  if (sunrise && sunset) {
+    const diff = sunset - sunrise;
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    dayLength = `${hours}h ${minutes}m`;
+  }
+
   return (
     <>
       <section className="">
@@ -22,21 +109,21 @@ const LiveInformationHero = () => {
                   <button className="bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] flex items-center gap-2 text-white px-4 text-sm py-2 rounded-full">
                     <span>
                       {" "}
-                      <Image src={lo} className=""/>{" "}
+                      <Image src={lo} className="" />{" "}
                     </span>{" "}
                     Munnar
                   </button>
                   <div className="content-container mt-4 ">
                     <h1 className="text-[#333333] text-md sm:text-xl font-semibold md:text-4xl">
-                      Monday
+                      {loading ? '...' : day}
                     </h1>
-                    <h1 className="text-[#333333] text-sm sm:text-md">24 Dec, 2025</h1>
+                    <h1 className="text-[#333333] text-sm sm:text-md">{loading ? '...' : formattedDate}</h1>
                     <div className="content-2-container mt-4 sm:mt-16">
                       <h1 className="font-semibold text-xl sm:text-5xl text-[#333333]">
-                        26° C
+                        {loading ? '...' : `${temperature}° C`}
                       </h1>
                       <h1 className="text-[#333333] text-sm ">
-                        High: 27 Low: 10
+                        High: {loading ? '...' : tempMax} Low: {loading ? '...' : tempMin}
                       </h1>
                     </div>
                   </div>
@@ -46,8 +133,8 @@ const LiveInformationHero = () => {
                     src={sunIcon}
                     className="w-[70px] h-[70px] sm:w-[180px] sm:h-[140px] object-cover "
                   />
-                  <h1 className="text-2xl sm:text-3xl text-[#333333] mt-2">Cloudy</h1>
-                  <h1 className="text-sm text-[#333333] ">Feels Like 26</h1>
+                  <h1 className="text-2xl sm:text-3xl text-[#333333] mt-2">{loading ? '...' : weatherCondition}</h1>
+                  <h1 className="text-sm text-[#333333] ">{loading ? '...' : `Feels Like ${feelsLike}`}</h1>
                 </div>
               </div>
 
@@ -57,24 +144,37 @@ const LiveInformationHero = () => {
                   Today
                 </h3>
                 <div className="grid grid-cols-6 gap-2 ">
-                  {["1PM", "2PM", "3PM", "4PM", "5PM", "6PM"].map((hour, i) => (
-                    <div
-                      key={i}
-                      className="flex flex-col gap-2 border border-gray-100 items-center p-2 bg-white shadow-xl rounded-lg"
-                    >
-                      <p className="text-sm text-[#333333]">{hour}</p>
-                      <Image src={sun1} className="w-6 h-6" />
-                      <p className="text-sm text-[#333333]">32°</p>
-                    </div>
-                  ))}
+                  {loading ? (
+                    Array(6).fill(0).map((_, i) => (
+                      <div
+                        key={i}
+                        className="flex flex-col gap-2 border border-gray-100 items-center p-2 bg-white shadow-xl rounded-lg"
+                      >
+                        <p className="text-sm text-[#333333]">...</p>
+                        <Image src={sun1} className="w-6 h-6" />
+                        <p className="text-sm text-[#333333]">--°</p>
+                      </div>
+                    ))
+                  ) : (
+                    hourlyForecast.map((hour, i) => (
+                      <div
+                        key={i}
+                        className="flex flex-col gap-2 border border-gray-100 items-center p-2 bg-white shadow-xl rounded-lg"
+                      >
+                        <p className="text-sm text-[#333333]">{hour.time}</p>
+                        <Image src={sun1} className="w-6 h-6" />
+                        <p className="text-sm text-[#333333]">{hour.temp}°</p>
+                      </div>
+                    ))
+                  )}
                 </div>
                 <div className="bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)]   text-white rounded-xl mt-6 px-4 py-2 flex gap-3 items-center">
                   <div className="container-1 flex gap-5">
                     <div>
                       <p className="text-sm ">Tomorrow </p>
-                      <p className="text-sm">Thunder storm</p>
+                      <p className="text-sm">{loading ? '...' : weatherDescription}</p>
                     </div>
-                    <span className="text-2xl font-">14°</span>
+                    <span className="text-2xl font-">{loading ? '...' : `${tempMin}°`}</span>
                   </div>
                 </div>
               </div>
@@ -84,19 +184,19 @@ const LiveInformationHero = () => {
                 <div>
                   <p className=" text-lg">Sunrise</p>
                   <p className="text-2xl font-bold text-[#246132] mt-3">
-                    6:45 <span className="text-sm text-black">AM</span>
+                    {loading ? '...' : sunrise ? sunrise.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: false }).replace(':', ':') : '--'} <span className="text-sm text-black">{loading ? '...' : sunrise ? sunrise.getHours() < 12 ? 'AM' : 'PM' : '--'}</span>
                   </p>
                 </div>
                 <div>
                   <p className=" text-lg">Sunset</p>
                   <p className="text-2xl font-bold text-[#246132]  mt-3">
-                    5:30 <span className="text-sm text-black">PM</span>
+                    {loading ? '...' : sunset ? sunset.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: false }).replace(':', ':') : '--'} <span className="text-sm text-black">{loading ? '...' : sunset ? sunset.getHours() < 12 ? 'AM' : 'PM' : '--'}</span>
                   </p>
                 </div>
                 <div>
                   <p className="text-[#333333]">Length of day</p>
                   <p className="text-xl font-semibold mt-3 text-[#246132]">
-                    10h 23m
+                    {loading ? '...' : dayLength || '--'}
                   </p>
                 </div>
               </div>
