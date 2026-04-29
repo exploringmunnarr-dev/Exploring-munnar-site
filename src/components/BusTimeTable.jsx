@@ -203,7 +203,7 @@ const BusTimeTable = () => {
         </div>
         {/* -------------------------------- table-container  -------------------------------------------  */}
         <div className="table-container ">
-          <div className="overflow-auto hidden md:block">
+          <div className="overflow-auto hidden md:block ">
             <table className="w-full mt-4 max-sm:text-[10px]   overflow-auto ">
               <thead>
                 {tableHeadData.map((item, index) => {

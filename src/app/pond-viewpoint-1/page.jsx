@@ -4,6 +4,7 @@ import ernakulamToMunnar from "../../assets/Ernakulam to Munnar.jpg";
 import React from "react";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import MobileTab from "@/components/MobileTab";
 
 export const metadata = {
   title: "Pond & Viewpoint 1 – Scenic Nature Stop on Ernakulam Route",
@@ -74,6 +75,9 @@ const page = () => {
         </div>
       </section>
       <Footer />
+      <div className="tab-container w-full fixed bottom-0 md:hidden">
+        <MobileTab />
+      </div>
     </>
   );
 };

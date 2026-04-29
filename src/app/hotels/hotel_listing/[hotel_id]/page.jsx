@@ -130,7 +130,7 @@ const page = () => {
             className=" bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] 
             hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] text-white px-4 py-2 rounded-lg cursor-pointer"
           >
-            Reserve
+            Enquiry
           </button>
         </div>
       </header>
