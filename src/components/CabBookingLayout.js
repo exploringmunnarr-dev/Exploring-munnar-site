@@ -324,7 +324,7 @@ export default function CabBookingLayout() {
       </div>
 
       {/* Right image */}
-      <div className="relative bg-white rounded-xl  shadow-md overflow-hidden flex items-center justify-center w-full ">
+      <div className="relative bg-white rounded-xl hidden shadow-md overflow-hidden md:flex items-center justify-center w-full ">
         <div className="img-container border p-2">
           <Image
             src="/images/munnar.jpg"

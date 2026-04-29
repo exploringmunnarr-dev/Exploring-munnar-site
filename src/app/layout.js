@@ -34,7 +34,6 @@ export default function RootLayout({ children }) {
       <body className={poppins.className}>
         <DataProvider>
           {children}
-          <h1>hello</h1>
           <FloatingEmergencyButton />
         </DataProvider>
       </body>

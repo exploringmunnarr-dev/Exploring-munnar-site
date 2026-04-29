@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import logingImg from "../assets/loginImg.jpg";
-import { Eye, EyeOff, LogIn, Mail, Lock, AlertCircle } from "lucide-react";
+import { Eye, EyeOff, LogIn, Mail, Lock, AlertCircle, X } from "lucide-react";
 import SignupForm from "./SignupForm";
 
 const LoginModal = ({ setShowLoginForm }) => {
@@ -226,8 +226,13 @@ const LoginModal = ({ setShowLoginForm }) => {
           alt="Login"
         />
 
+       
+
         {/* Right Form Section */}
         <div className="w-[100%] md:w-[40%] overflow-y-auto max-h-[600px] md:max-h-full">
+           <button className="absolute top-4 right-8 bg-gray-100 rounded-full p-3" onClick={() => setShowLoginForm(false)}>
+            <X/>
+          </button>
           {/* LOGIN MODE */}
           {mode === "login" && (
             <div>
