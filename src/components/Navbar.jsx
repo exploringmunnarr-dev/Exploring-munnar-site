@@ -12,10 +12,11 @@ import profile from "../assets/profile.svg";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Sidebar from "./Sidebar";
-import { useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { CloudSun, X } from "lucide-react";
-import LoginModal from "./LoginModal";
+import { useAuth } from "@/context/AuthContext";
 import SubNavbar from "./SubNavbar";
+import LoginModal from "./LoginModal";
 const data = [
   { title: "Transports", icon: icon1, link: "transports" },
   { title: "Hotels & stays", icon: icon2, link: "hotels" },
@@ -29,11 +30,11 @@ const data = [
 ];
 export default function Navbar() {
   // Context Data ------------------------->
+  const { showLoginForm, setShowLoginForm } = useAuth();
 
   // states ----------------------------->
   const [isSidebar, setIsSidebar] = useState(false);
   const pathname = usePathname();
-  const [showLoginForm, setShowLoginForm] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const [temperature, setTemperature] = useState(null);
   const [weatherLoading, setWeatherLoading] = useState(false);
@@ -186,7 +187,7 @@ export default function Navbar() {
                       } font-medium text-[#333333] text-lg`}
                   >
                     <Link href={`/${item.link}`} className="flex gap-3">
-                      <Image src={item.icon} />
+                      <Image src={item.icon} alt={item.title} />
                       <h1>{item.title}</h1>
                     </Link>
                   </div>

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Eye, EyeOff, LogIn, Mail, Lock, AlertCircle, User } from "lucide-react";
+import { Eye, EyeOff, LogIn, Mail, Lock, AlertCircle, User, Phone } from "lucide-react";
 
 const SignupForm = ({ setMode }) => {
   // States for signup form
   const [signupForm, setSignupForm] = useState({
     name: "",
     email: "",
+    phoneNumber: "",
     password: "",
     confirmPassword: "",
   });
@@ -62,6 +63,7 @@ const SignupForm = ({ setMode }) => {
         body: JSON.stringify({
           name: signupForm.name,
           email: signupForm.email,
+          phoneNumber: signupForm.phoneNumber,
           password: signupForm.password,
         }),
       });
@@ -154,6 +156,7 @@ const SignupForm = ({ setMode }) => {
         setSignupForm({
           name: "",
           email: "",
+          phoneNumber: "",
           password: "",
           confirmPassword: "",
         });
@@ -228,6 +231,24 @@ const SignupForm = ({ setMode }) => {
                       setSignupForm({
                         ...signupForm,
                         email: e.target.value,
+                      })
+                    }
+                    className="border w-[100%] pl-10 focus:ring-1 ring-green-900 text-lg outline-none border-gray-400 rounded px-4 py-2"
+                    required
+                  />
+                </div>
+
+                {/* Mobile Number Input */}
+                <div className="relative">
+                  <Phone className="absolute left-4 top-[50%] translate-y-[-50%] w-5 h-5 text-gray-400" />
+                  <input
+                    type="tel"
+                    placeholder="Mobile number"
+                    value={signupForm.phoneNumber}
+                    onChange={(e) =>
+                      setSignupForm({
+                        ...signupForm,
+                        phoneNumber: e.target.value,
                       })
                     }
                     className="border w-[100%] pl-10 focus:ring-1 ring-green-900 text-lg outline-none border-gray-400 rounded px-4 py-2"

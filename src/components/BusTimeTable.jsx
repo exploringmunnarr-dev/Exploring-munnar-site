@@ -207,14 +207,14 @@ const BusTimeTable = () => {
             <table className="w-full mt-4 max-sm:text-[10px]   overflow-auto ">
               <thead>
                 {tableHeadData.map((item, index) => {
-                  return <td className="font-semibold pl-3 py-5">{item}</td>;
+                  return <td key={Math.random()} className="font-semibold pl-3 py-5">{item}</td>;
                 })}
               </thead>
               <tbody className="bg-[#EEEEEE] rounded-lg">
                 {filteredData.length > 0 ? (
                   filteredData.map((item, index) => {
                     return (
-                      <tr className="" key={index}>
+                      <tr  className="" key={index}>
                         <td className="font-semibold pt-2 pb-2 pl-3">
                           {item.from} - {item.to}
                         </td>

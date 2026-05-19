@@ -54,6 +54,7 @@ const SubCardNav = () => {
         {data.map((item, index) => {
           return (
             <div
+              key={item.location}
               className={`flex items-center gap-2 border-r pr-2 ${
                 data.length - 1 == index ? "border-none" : ""
               }  ${
