@@ -12,12 +12,16 @@ import eco from "../assets/eco.svg";
 import star from "../assets/star.svg";
 import wifi from "../assets/loc.svg";
 import fire from "../assets/loc.svg";
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Loader2 } from "lucide-react";
 import ResponsiveFilterComponent from "./ResponsiveFilterComponent";
 import ResponsivePriceComponent from "./ResponsivePriceComponent";
 import noData from "../assets/no_data.svg";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+import { useAuth } from "@/context/AuthContext";
+import Toast from "./Toast";
 const listings = [
   {
     id: "misty-hill-eco-retreat-1",
@@ -143,8 +147,95 @@ const ResponsiveHotelListingCard = ({
 }) => {
   // console.log("responsive data : ", listings);
 
+  const { isAuthenticated, setShowLoginForm } = useAuth();
+
   const [isFilter, setisFilter] = useState(false);
   const [ispriceRange, setispriceRange] = useState(false);
+  const [toast, setToast] = useState(null);
+  const [loadingFavorites, setLoadingFavorites] = useState({});
+  const [favorites, setFavorites] = useState(new Set());
+
+  // Initialize favorites from listings data
+  useEffect(() => {
+    const favSet = new Set();
+    listings.forEach((item) => {
+      if (item.favorite) {
+        favSet.add(item.id);
+      }
+    });
+    setFavorites(favSet);
+  }, [listings]);
+
+  const handleFavorite = useCallback(
+    async (index) => {
+      const item = listings[index];
+      if (!item) return;
+
+      // Check if user is authenticated
+      if (!isAuthenticated) {
+        setShowLoginForm(true);
+        return;
+      }
+
+      // Get token and decode userId
+      const token = localStorage.getItem("ExpMunnarToken");
+      if (!token) {
+        setShowLoginForm(true);
+        return;
+      }
+
+      try {
+        const decoded = jwtDecode(token);
+        const userId = decoded.id || decoded.userId || decoded.sub;
+
+        // Set loading state for this card
+        setLoadingFavorites((prev) => ({ ...prev, [item.id]: true }));
+
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+        const response = await axios.post(
+          `${apiUrl}/api/favorites/toggle`,
+          { userId, hotelId: item.id },
+          { headers: { authorization: `Bearer ${token}` } }
+        );
+
+        if (response.data.success) {
+          // Toggle local favorite state (inside updater to avoid stale closure)
+          setFavorites((prev) => {
+            const newFav = new Set(prev);
+            if (newFav.has(item.id)) {
+              newFav.delete(item.id);
+              setToast({
+                message: "Removed from favorites",
+                type: "success",
+              });
+            } else {
+              newFav.add(item.id);
+              setToast({
+                message: "Added to favorites",
+                type: "success",
+              });
+            }
+            return newFav;
+          });
+        } else {
+          setToast({
+            message: response.data.message || "Failed to toggle favorite",
+            type: "error",
+          });
+        }
+      } catch (err) {
+        setToast({
+          message: err.response?.data?.message || "Failed to toggle favorite",
+          type: "error",
+        });
+      } finally {
+        setLoadingFavorites((prev) => ({ ...prev, [item.id]: false }));
+      }
+    },
+    [listings, isAuthenticated, setShowLoginForm]
+  );
+
+  const closeToast = () => setToast(null);
   return (
     <>
       <div className="main-container mt-[-20px] sticky w-[100%] top-[65px] z-40">
@@ -182,9 +273,18 @@ const ResponsiveHotelListingCard = ({
                     height={1000}
                     className="w-[100%] h-[100%] rounded-lg object-cover"
                   />
-                  <div className="favorite-icon-container absolute top-4 right-4">
-                    <button className="cursor-pointer">
-                      {item.favorite ? (
+                  {loadingFavorites[item.id] && (
+                    <div className="absolute inset-0 bg-black/40 rounded-lg flex items-center justify-center z-10">
+                      <Loader2 className="w-8 h-8 text-white animate-spin" />
+                    </div>
+                  )}
+                  <div className="favorite-icon-container absolute top-4 right-4 z-20">
+                    <button
+                      onClick={() => handleFavorite(index)}
+                      className="cursor-pointer"
+                      disabled={loadingFavorites[item.id]}
+                    >
+                      {favorites.has(item.id) ? (
                         <Image src={redHeart} alt="red heart" />
                       ) : (
                         <Image src={greenHeart} alt="green heart" />
@@ -286,6 +386,13 @@ const ResponsiveHotelListingCard = ({
         <ResponsivePriceComponent
           setispriceRange={setispriceRange}
           ispriceRange={ispriceRange}
+        />
+      )}
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={closeToast}
         />
       )}
     </>

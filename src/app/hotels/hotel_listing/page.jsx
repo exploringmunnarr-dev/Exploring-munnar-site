@@ -160,7 +160,7 @@ const page = () => {
               </div>
             </div>
             <div className="hotel-listing-card hidden md:block">
-              <HotelListingCard listings={hotelData} loading={loading} />
+              <HotelListingCard listings={hotelData} loading={loading} /> 
 
               {hotelData.length !== 0 && (
                 <div className="flex items-center gap-3 justify-end mt-2">
@@ -171,11 +171,10 @@ const page = () => {
                     {pageNumberList.map((item, index) => {
                       return (
                         <button
-                          className={`${
-                            item == pageNumber
+                          className={`${item == pageNumber
                               ? "bg-amber-800 text-white px-2 py-1"
                               : ""
-                          } text-sm rounded w-7 h-7`}
+                            } text-sm rounded w-7 h-7`}
                         >
                           {item}
                         </button>
