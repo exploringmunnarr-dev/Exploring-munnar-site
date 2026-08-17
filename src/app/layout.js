@@ -34,12 +34,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={poppins.className}>
         <AuthProvider>
-          <DataProvider>{children}</DataProvider>
+          <DataProvider>
+            {children}
+            <FloatingEmergencyButton />
+          </DataProvider>
         </AuthProvider>
-        <DataProvider>
-          {children}
-          <FloatingEmergencyButton />
-        </DataProvider>
       </body>
     </html>
   );
