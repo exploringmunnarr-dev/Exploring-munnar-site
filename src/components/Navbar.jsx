@@ -151,7 +151,7 @@ export default function Navbar() {
                   />
                 )}
               </div>
-              {isSidebar && (
+              {isSidebar && scrollY <= 100 && (
                 <div className="sidebar-container absolute top-full right-4 z-20">
                   <Sidebar setIsSidebar={setIsSidebar} />
                 </div>
@@ -225,7 +225,7 @@ export default function Navbar() {
                     />
                   )}
                 </div>
-                {isSidebar && (
+                {isSidebar && scrollY > 100 && (
                   <div className="sidebar-container absolute top-full right-4">
                     <Sidebar setIsSidebar={setIsSidebar} />
                   </div>
