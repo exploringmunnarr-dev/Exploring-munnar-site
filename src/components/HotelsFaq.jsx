@@ -63,7 +63,9 @@ const HotelsFaq = () => {
               } pb-2 border-gray-300`}
               onClick={() => toggleAccordion(index)}
             >
-              <h2 className="text-md md:text-xl text-[#333333] md:font-semibold max-sm:w-[80%]">
+              <h2 className={`text-md md:text-xl md:font-semibold max-sm:w-[80%] ${
+                activeIndex === index ? "text-[#1a552b]" : "text-[#333333]"
+              }`}>
                 {item.question}
               </h2>
               <span className="w-8 h-8 bg-[#eeeeee] rounded-full cursor-pointer flex items-center justify-center">

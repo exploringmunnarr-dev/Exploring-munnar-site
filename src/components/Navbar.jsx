@@ -124,8 +124,10 @@ export default function Navbar() {
             {/* <Image src={heart} className="md:hidden" /> */}
 
             {/* weather section */}
-            <div className="hidden items-center space-x-2 cursor-pointer md:flex">
-              <CloudSun />
+            <div className="flex items-center space-x-2 cursor-pointer">
+              <Link href="/live_information">
+                <CloudSun />
+              </Link>
               <span className="weather-data text-lg font-medium">
                 {weatherLoading ? "Loading..." : temperature ? `${temperature}°C` : "N/A"}
               </span>
@@ -196,8 +198,10 @@ export default function Navbar() {
             </nav>
             <div className="flex items-center space-x-1 ">
               {/* Weather */}
-              <div className="hidden items-center space-x-2 cursor-pointer md:flex">
-                <CloudSun />
+              <div className="flex items-center space-x-2 cursor-pointer">
+                <Link href="/live_information">
+                  <CloudSun />
+                </Link>
                 <span className="text-lg font-medium">
                   {weatherLoading ? "Loading..." : temperature ? `${temperature}°C` : "N/A"}
                 </span>

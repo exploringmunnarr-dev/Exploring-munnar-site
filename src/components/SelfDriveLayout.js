@@ -371,7 +371,7 @@ export default function SelfDriveLayout() {
               )}
             </div>
 
-            <div>
+            {/* <div>
               <h3 className="text-md font-semibold mb-2 text-black">
                 Driver needed?
               </h3>
@@ -398,7 +398,7 @@ export default function SelfDriveLayout() {
                   {errors.driverNeeded}
                 </p>
               )}
-            </div>
+            </div> */}
           </div>
 
           {/* Vehicle Type */}

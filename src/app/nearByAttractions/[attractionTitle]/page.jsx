@@ -5,6 +5,7 @@ import img1 from "../../../assets/ai1.svg";
 import img2 from "../../../assets/attractionImg1.svg";
 import img3 from "../../../assets/attractionImg3.svg";
 import Footer from "@/components/Footer";
+import MobileTab from "@/components/MobileTab";
 
 export const metadata = {
   title: "Attraction Details – Location, Timings & Travel Guide",
@@ -101,6 +102,9 @@ const page = () => {
         </div>
       </section>
       <Footer />
+      <div className="tab-container w-full fixed bottom-0 md:hidden">
+        <MobileTab />
+      </div>
     </>
   );
 };

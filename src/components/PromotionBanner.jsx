@@ -47,7 +47,7 @@ const PromotionBanner = () => {
 
   return (
     <>
-      <section className="md:py-4   mx-4 md:mx-10 mt-8">
+      <section className="md:py-4  mx-4 md:mx-10 mt-8">
         <div className="w-[100%]">
           <Swiper
             className="w-[100%]"
@@ -64,13 +64,13 @@ const PromotionBanner = () => {
                 key={index}
                 className="transition-all duration-500 cursor-pointer"
               >
-                <Link href={`/hotels/hotel_listing/${slide.id}`} className="rounded-xl h-[250px] sm:h-[300px] md:h-[300px] w-full relative  bg-white">
+                <Link href={`/hotels/hotel_listing/${slide.id}`} className="rounded-xl h-[250px] sm:h-[300px] md:h-[400px] w-full relative  ">
                   <Image
                     src={slide.featuredImageUrl}
                     width={1000}                                        
                     height={1000}
                     alt={slide.title}
-                    className="md:h-[300px] w-full "
+                    className="md:h-[400px] object-cover rounded-lg w-full "
                   />
                 </Link>
               </SwiperSlide>

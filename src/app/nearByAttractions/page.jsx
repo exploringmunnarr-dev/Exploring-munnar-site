@@ -8,6 +8,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import NearByAttractionsFaq from "@/components/NearByAttractionsFaq";
 import NearByAttractionsTab from "@/components/NearByAttractionsTab";
+import MobileTab from "@/components/MobileTab";
 
 import { routes, attractionsByRoute } from "@/data/attractionsData";
 
@@ -67,6 +68,9 @@ const Page = () => {
 
       <NearByAttractionsFaq />
       <Footer />
+      <div className="tab-container w-full fixed bottom-0 md:hidden">
+        <MobileTab />
+      </div>
     </>
   );
 };

@@ -47,7 +47,7 @@ const TripPlannerSection = () => {
               {/* Heading */}
               <h2 className="text-lg md:text-2xl font-semibold text-[#000000]">
                 Plan Your Perfect Munnar Trip, Tell us your trip details and
-                interests, and we’ll generate a personalized itinerary
+                interests, and we’ll generate a personalized itneary
               </h2>
 
               {/* CTA Button */}

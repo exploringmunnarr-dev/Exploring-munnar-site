@@ -1,6 +1,7 @@
 "use client";
 import Home from "@/view/Home";
 import React, { useEffect, useState } from "react";
+import MobileTab from "@/components/MobileTab";
 
 
 
@@ -22,6 +23,9 @@ const Page = () => {
   return (
     <>
       <Home scroll={scrollY} />
+      <div className="tab-container w-full fixed bottom-0 md:hidden">
+        <MobileTab />
+      </div>
     </>
   );
 };
