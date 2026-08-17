@@ -25,6 +25,7 @@ import {
   Wifi,
   Wine,
   Loader2,
+  Check,
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -161,23 +162,37 @@ const HotelListingCard = ({ listings, loading }) => {
   // console.log("listings : ", listings)
   // Router Hooks
   const router = useRouter();
-  const { isAuthenticated, setShowLoginForm } = useAuth();
+  const { isAuthenticated, token, setShowLoginForm } = useAuth();
 
   // State
   const [toast, setToast] = useState(null);
   const [loadingFavorites, setLoadingFavorites] = useState({});
   const [favorites, setFavorites] = useState(new Set());
 
-  // Initialize favorites from listings data
+  // Fetch the user's favorite hotels from the API and mark matching listings
   useEffect(() => {
-    const favSet = new Set();
-    listings.forEach((item) => {
-      if (item.favorite) {
-        favSet.add(item.id);
+    if (!isAuthenticated || !token) {
+      setFavorites(new Set());
+      return;
+    }
+
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+    const fetchFavorites = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/api/favorites`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const favoriteHotels = response.data.data || [];
+        setFavorites(new Set(favoriteHotels.map((hotel) => hotel.id)));
+      } catch (err) {
+        console.error("Error while fetching favorites:", err);
+        setFavorites(new Set());
       }
-    });
-    setFavorites(favSet);
-  }, [listings]);
+    };
+
+    fetchFavorites();
+  }, [isAuthenticated, token]);
 
   // functions
   const handleNavigation = (id) => {
@@ -362,6 +377,9 @@ const HotelListingCard = ({ listings, loading }) => {
                         <h1 className="font-semibold text-[#246132] mt-2">
                           From {item.pricePerNight} / night
                         </h1>
+                        {item.isVerified && <div className="border bg-white/50 w-fit py-2 rounded-lg border-emerald-900/10 text-xs mt-1 px-2">
+                          <p className="flex items-center gap-2"> <span className="bg-emerald-800 rounded-sm w-4 h-4 flex items-center justify-center"><Check size={12} className="text-white" /></span> Verified</p>
+                        </div>}
                       </div>
                     </div>
                   </div>

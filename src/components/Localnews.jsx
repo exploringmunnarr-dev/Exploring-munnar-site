@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import c1 from "../assets/c1.svg";
 import e1 from "../assets/e1.svg";
+import noData from "../assets/no_data.svg";
 import { ChevronDown, ListFilter } from "lucide-react";
 import axios from "axios";
 
@@ -140,13 +141,13 @@ const Localnews = () => {
             <h1 className="text-lg md:text-3xl font-semibold text-[#333333]">
               Local news updates of munnar
             </h1>
-            <h1 className="text-[#777777] mt-1 max-sm:w-[250px] ">
+            {/* <h1 className="text-[#777777] mt-1 max-sm:w-[250px] ">
               Stay updated with latest news and events
-            </h1>
+            </h1> */}
           </div>
           <div
             onClick={() => setRespFilter(true)}
-            className="filter-container border rounded-lg px-4 py-2 flex items-center gap-2 cursor-pointer"
+            className="filter-container flex border rounded-lg px-4 py-2 md:hidden items-center gap-2 cursor-pointer"
           >
             <h1 className="text-green-800">Filter</h1>
             <ListFilter className="text-green-900 md:hidden" />
@@ -178,51 +179,67 @@ const Localnews = () => {
                   </div>
                 ))}
 
-                <button
+                {/* <button
                   onClick={fetchNews}
                   className="text-white bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] 
                  hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] cursor-pointer w-full rounded-lg py-2"
                 >
                   Apply Filter
-                </button>
+                </button> */}
               </div>
             </div>
           </div>
           <div className="content-container col-span-12 md:col-span-8 mt-4 ">
-            {groupedNews.map((item, index) => {
-              return (
-                <div className="main-container">
-                  <h1 className="text-[#333333] font-semibold text-xl mt-6">
-                    {item.title}
-                  </h1>
-                  {item?.data?.map((i) => {
-                    return (
-                      <div className="card-container mt-6 space-y-3">
-                        <div className="card bg-[#EEEEEE] md:flex items-start gap-4 rounded-lg p-3">
-                          <Image
-                            src={i?.imageUrl}
-                            width={1000}
-                            height={1000}
-                            className="w-[100%] md:w-[340px] rounded-xl h-[200px] object-cover"
-                          />
-                          <div className="content-container mt-4 md:mt-0">
-                            <h1 className="text-lg text-[#333333] font-semibold">
-                              {i?.heading}
-                            </h1>
-                            <h1 className="text-[#333333] mt-4 text-justify">
-                              {i?.detail}
-                            </h1>
-                            <h1 className="text-sm text-[#777777] mt-4">
-                              Last updated : {timeAgo(i.createdAt)}
-                            </h1>
+            {groupedNews.length > 0 ? (
+              groupedNews.map((item, index) => {
+                return (
+                  <div className="main-container" key={item.title ?? index}>
+                    <h1 className="text-[#333333] font-semibold text-xl mt-6">
+                      {item.title}
+                    </h1>
+                    {item?.data?.map((i, itemIndex) => {
+                      return (
+                        <div className="card-container mt-6 space-y-3" key={i?.id ?? itemIndex}>
+                          <div className="card bg-[#EEEEEE] md:flex items-start gap-4 rounded-lg p-3">
+                            <Image
+                              src={i?.imageUrl}
+                              alt={i?.heading ?? "news image"}
+                              width={1000}
+                              height={1000}
+                              className="w-[100%] md:w-[340px] rounded-xl h-[200px] object-cover"
+                            />
+                            <div className="content-container mt-4 md:mt-0">
+                              <h1 className="text-lg text-[#333333] font-semibold">
+                                {i?.heading}
+                              </h1>
+                              <h1 className="text-[#333333] mt-4 text-justify">
+                                {i?.detail}
+                              </h1>
+                              <h1 className="text-sm text-[#777777] mt-4">
+                                Last updated : {timeAgo(i.createdAt)}
+                              </h1>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              );
-            })}
+                      );
+                    })}
+                  </div>
+                );
+              })
+            ) : (
+              <div className="text-center py-16">
+                <Image
+                  alt="No data"
+                  src={noData}
+                  width={1000}
+                  height={1000}
+                  className="w-[300px] h-[300px] m-auto"
+                />
+                <h1 className="font-semibold text-center text-lg text-[#333333] mt-[-30px]">
+                  No data found!
+                </h1>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -260,13 +277,13 @@ const Localnews = () => {
                   </div>
                 ))}
 
-                <button
+                {/* <button
                   onClick={fetchNews}
                   className="text-white bg-[linear-gradient(90deg,#216432_0%,#114422_89.42%)] 
                  hover:bg-[linear-gradient(90deg,#AF4300_0%,#AF4300_100%)] cursor-pointer w-full rounded-lg py-2"
                 >
                   Apply Filter
-                </button>
+                </button> */}
               </div>
             </div>
           </div>

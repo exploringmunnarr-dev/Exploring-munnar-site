@@ -147,7 +147,7 @@ const page = () => {
           <AmenitiesSection data={data} />
         </div>
         <div id="reviews">
-          <ReviewsPage />
+          <ReviewsPage data={data} />
         </div>
 
         <HotelsRulesRegulation data={data} />

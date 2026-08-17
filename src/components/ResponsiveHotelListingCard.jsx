@@ -147,7 +147,7 @@ const ResponsiveHotelListingCard = ({
 }) => {
   // console.log("responsive data : ", listings);
 
-  const { isAuthenticated, setShowLoginForm } = useAuth();
+  const { isAuthenticated, token, setShowLoginForm } = useAuth();
 
   const [isFilter, setisFilter] = useState(false);
   const [ispriceRange, setispriceRange] = useState(false);
@@ -155,16 +155,30 @@ const ResponsiveHotelListingCard = ({
   const [loadingFavorites, setLoadingFavorites] = useState({});
   const [favorites, setFavorites] = useState(new Set());
 
-  // Initialize favorites from listings data
+  // Fetch the user's favorite hotels from the API and mark matching listings
   useEffect(() => {
-    const favSet = new Set();
-    listings.forEach((item) => {
-      if (item.favorite) {
-        favSet.add(item.id);
+    if (!isAuthenticated || !token) {
+      setFavorites(new Set());
+      return;
+    }
+
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+    const fetchFavorites = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/api/favorites`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const favoriteHotels = response.data.data || [];
+        setFavorites(new Set(favoriteHotels.map((hotel) => hotel.id)));
+      } catch (err) {
+        console.error("Error while fetching favorites:", err);
+        setFavorites(new Set());
       }
-    });
-    setFavorites(favSet);
-  }, [listings]);
+    };
+
+    fetchFavorites();
+  }, [isAuthenticated, token]);
 
   const handleFavorite = useCallback(
     async (index) => {
@@ -194,7 +208,7 @@ const ResponsiveHotelListingCard = ({
         const apiUrl = process.env.NEXT_PUBLIC_API_URL;
         const response = await axios.post(
           `${apiUrl}/api/favorites/toggle`,
-          { userId, hotelId: item.id },
+          { hotelId: item.id },
           { headers: { authorization: `Bearer ${token}` } }
         );
 
