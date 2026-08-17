@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { DataProvider } from "@/context/ThemeContext";
+import { AuthProvider } from "@/context/AuthContext";
 import FloatingEmergencyButton from "@/components/FloatingEmergencyButton";
 
 const poppins = Poppins({
@@ -32,6 +33,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={poppins.className}>
+        <AuthProvider>
+          <DataProvider>{children}</DataProvider>
+        </AuthProvider>
         <DataProvider>
           {children}
           <FloatingEmergencyButton />

@@ -12,6 +12,7 @@ import { ChevronRight } from "lucide-react";
 import { useFormData } from "@/context/FormProvider";
 import axios from "axios";
 import SuccessPopup from "./SuccessPopup";
+import { useAuth } from "@/context/AuthContext";
 
 const routes_data = [
   {
@@ -40,6 +41,9 @@ const ItnearyReviewForm = ({ setStep }) => {
   // Context Data's
   const { itnearyFormData, setItnearyFormData } = useFormData();
 
+  // Auth context
+  const { isAuthenticated, token, setShowLoginForm } = useAuth();
+
   // console.log("itneary form data : ", itnearyFormData)
   // states
   const [isModal, setIsModal] = useState(false);
@@ -47,6 +51,12 @@ const ItnearyReviewForm = ({ setStep }) => {
 
   // API call
   const handleSubmit = async () => {
+    // Check if user is logged in
+    if (!isAuthenticated || !token) {
+      setShowLoginForm(true);
+      return;
+    }
+
     try {
       // Convert values before sending
       const formattedPayload = {
@@ -69,7 +79,12 @@ const ItnearyReviewForm = ({ setStep }) => {
 
       const response = await axios.post(
         "https://munnar-backend.onrender.com/api/itinerary",
-        formattedPayload
+        formattedPayload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setItnearyFormData({
         fullName: "",

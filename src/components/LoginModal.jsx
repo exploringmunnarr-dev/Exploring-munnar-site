@@ -77,7 +77,7 @@ const LoginModal = ({ setShowLoginForm }) => {
       }
 
       // Store JWT token
-      localStorage.setItem("authToken", data.token);
+      localStorage.setItem("ExpMunnarToken", data.token);
       sessionStorage.setItem("user", JSON.stringify(data.user));
 
       setSuccess("Login successful! Redirecting...");

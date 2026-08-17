@@ -10,10 +10,14 @@ import kids from "../assets/kids_icon.svg";
 import adult from "../assets/adult_icon.svg";
 import { X } from "lucide-react";
 import axios from "axios";
+import { useAuth } from "@/context/AuthContext";
 const HotelEnquiryForm = ({ setIsForm, data, handleOpenSuccessPopup }) => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   // refs
   const modalRef = useRef(null);
+
+  // Auth context
+  const { isAuthenticated, token, setShowLoginForm } = useAuth();
 
   // states
   const [formData, setFormData] = useState({
@@ -54,8 +58,18 @@ const HotelEnquiryForm = ({ setIsForm, data, handleOpenSuccessPopup }) => {
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) return;
 
+    // Check if user is logged in
+    if (!isAuthenticated || !token) {
+      setShowLoginForm(true);
+      return;
+    }
+
     try {
-      const response = await axios.post(`${apiUrl}/api/hotel-booking`, formData);
+      const response = await axios.post(`${apiUrl}/api/hotel-booking`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       handleOpenSuccessPopup();
       setIsForm(false);
     } catch (err) {

@@ -5,6 +5,10 @@ import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import axios from "axios";
 import SuccessPopup from "./SuccessPopup";
+import Toast from "./Toast";
+import { useAuth } from "@/context/AuthContext";
+import person from "../assets/person_icon.svg";
+import mail from "../assets/mail_icon.svg";
 
 // Custom Dropdown Component
 function CustomDropdown({
@@ -61,6 +65,8 @@ export default function CabBookingLayout() {
   const [drop, setDrop] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
   const [passengers, setPassengers] = useState("");
   const [selectedVehicle, setSelectedVehicle] = useState("");
@@ -68,6 +74,12 @@ export default function CabBookingLayout() {
 
   // Error states
   const [errors, setErrors] = useState({});
+
+  // Auth context
+  const { isAuthenticated, token, setShowLoginForm } = useAuth();
+
+  // Toast state
+  const [toast, setToast] = useState(null);
 
   function onClose() {
     window.location.reload();
@@ -82,6 +94,8 @@ export default function CabBookingLayout() {
     if (!drop) newErrors.drop = "Drop point is required";
     if (!date) newErrors.date = "Date is required";
     if (!time) newErrors.time = "Time is required";
+    if (!name) newErrors.name = "Name is required";
+    if (!email) newErrors.email = "Email is required";
     if (!mobile) newErrors.mobile = "Mobile number is required";
     if (!passengers) newErrors.passengers = "Number of passengers is required";
     if (!selectedVehicle) newErrors.vehicle = "Please select a vehicle type";
@@ -90,11 +104,19 @@ export default function CabBookingLayout() {
 
     if (Object.keys(newErrors).length > 0) return;
 
+    // Check if user is logged in
+    if (!isAuthenticated || !token) {
+      setShowLoginForm(true);
+      return;
+    }
+
     const queryParams = new URLSearchParams({
       pickup,
       drop,
       date,
       time,
+      name,
+      email,
       mobile,
       passengers,
       vehicle: selectedVehicle,
@@ -106,6 +128,8 @@ export default function CabBookingLayout() {
       dropLocation: drop,
       date: date,
       time: time,
+      name: name,
+      email: email,
       mobileNumber: mobile,
       noOfPassengers: passengers,
       vehicleType: selectedVehicle,
@@ -120,15 +144,26 @@ export default function CabBookingLayout() {
           dropPoint: drop,
           date: date,
           time: time,
+          name: name,
+          email: email,
           mobileNumber: mobile,
           noOfPassengers: passengers,
           vehicleType: selectedVehicle,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
       );
       setIsModal(true);
     } catch (err) {
       console.error("error occred while posting cab booking form : ", err);
-      setIsModal(false);
+      const errorMessage =
+        err.response?.data?.message ||
+        err.message ||
+        "An error occurred while submitting your booking";
+      setToast({ type: "error", message: errorMessage });
     }
   };
 
@@ -215,6 +250,47 @@ export default function CabBookingLayout() {
               />
               {errors.time && (
                 <p className="text-red-500 text-xs mt-1">{errors.time}</p>
+              )}
+            </div>
+          </div>
+
+          {/* Name and Email */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+            <div className="relative">
+              <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-1">
+                <Image src={person} alt="name" width={18} height={18} />
+                Name
+              </label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Enter your name"
+                className={`w-full border rounded-lg pl-3 pr-4 py-2 outline-none placeholder-gray-400 text-black ${
+                  errors.name ? "border-red-500" : "border-gray-300"
+                }`}
+              />
+              {errors.name && (
+                <p className="text-red-500 text-xs mt-1">{errors.name}</p>
+              )}
+            </div>
+
+            <div className="relative">
+              <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-1">
+                <Image src={mail} alt="email" width={18} height={18} />
+                Email
+              </label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Eg: abc1234@gmail.com"
+                className={`w-full border rounded-lg pl-3 pr-4 py-2 outline-none placeholder-gray-400 text-black ${
+                  errors.email ? "border-red-500" : "border-gray-300"
+                }`}
+              />
+              {errors.email && (
+                <p className="text-red-500 text-xs mt-1">{errors.email}</p>
               )}
             </div>
           </div>
@@ -352,6 +428,13 @@ export default function CabBookingLayout() {
         </div>
       </div>
       {isModal && <SuccessPopup onClose={onClose} />}
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
     </form>
   );
 }

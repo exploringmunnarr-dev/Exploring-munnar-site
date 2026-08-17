@@ -55,9 +55,9 @@ const ResponsiveBusTimeTable = ({ data }) => {
     <>
       <section className="mt-4 md:hidden space-y-2 max-h-[360px] overflow-auto">
         {data.length > 0 ? (
-          data.map((item) => {
+          data.map((item, index) => {
             return (
-              <div className="time-table-card bg-gray-100 rounded-lg p-2">
+              <div key={index} className="time-table-card bg-gray-100 rounded-lg p-2">
                 <div className="header flex items-center justify-between">
                   <div className="container-1">
                     <h1 className="font-semibold">
@@ -95,7 +95,7 @@ const ResponsiveBusTimeTable = ({ data }) => {
           })
         ) : (
           <div className="w-[90%] m-auto text-center">
-            <Image src={noData} />
+            <Image alt="no-data" src={noData} />
             <h1 className="font-semibold text-xl text-[#333333] mt-[-20px]">
               No data found!
             </h1>
