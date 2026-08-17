@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { DataProvider } from "@/context/ThemeContext";
 import { AuthProvider } from "@/context/AuthContext";
+import FloatingEmergencyButton from "@/components/FloatingEmergencyButton";
 
 const poppins = Poppins({
   weight: "400",
@@ -35,6 +36,10 @@ export default function RootLayout({ children }) {
         <AuthProvider>
           <DataProvider>{children}</DataProvider>
         </AuthProvider>
+        <DataProvider>
+          {children}
+          <FloatingEmergencyButton />
+        </DataProvider>
       </body>
     </html>
   );

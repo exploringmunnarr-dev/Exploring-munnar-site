@@ -3,9 +3,7 @@ import React from "react";
 import Image from "next/image";
 import destinationImg from "../assets/destinationImg.svg";
 import locationImg from "../assets/locationImg.svg";
-import { useFormData } from "@/context/FormProvider";
 import { useData } from "@/context/ThemeContext";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import devikulamImg from '../assets/devikulamImg2.svg'
 import munnar from '../assets/munnarTown.svg'
@@ -66,12 +64,15 @@ const StayByDestination = () => {
               </p>
             </div>
           </div>
-          <Link
-            href={`/hotels/hotel_listing`}
+          <span
+            onClick={() => {
+              setLocation([]);
+              window.location.href = '/hotels/hotel_listing';
+            }}
             className="text-[#333333] underline cursor-pointer"
           >
             View hotels
-          </Link>
+          </span>
         </header>
         <div className="content-container h-[500px] mt-4">
           <div className="relative h-[500px] mt-3 rounded-xl overflow-hidden">

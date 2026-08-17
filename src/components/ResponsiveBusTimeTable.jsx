@@ -53,7 +53,7 @@ const ResponsiveBusTimeTable = ({ data }) => {
   console.log("responsive data:", data);
   return (
     <>
-      <section className="mt-4 md:hidden space-y-2">
+      <section className="mt-4 md:hidden space-y-2 max-h-[360px] overflow-auto">
         {data.length > 0 ? (
           data.map((item, index) => {
             return (

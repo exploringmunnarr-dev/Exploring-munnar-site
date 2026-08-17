@@ -4,6 +4,7 @@ import lockhartgapviewpoint from "../../assets/lockhart-gap-view-point.jpg";
 import React from "react";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import MobileTab from "@/components/MobileTab";
 
 export const metadata = {
   title: "Lockhart Gap Viewpoint – Must-Visit Scenic Spot Near Munnar",
@@ -76,6 +77,9 @@ const page = () => {
         </div>
       </section>
       <Footer />
+      <div className="tab-container w-full fixed bottom-0 md:hidden">
+        <MobileTab />
+      </div>
     </>
   );
 };
